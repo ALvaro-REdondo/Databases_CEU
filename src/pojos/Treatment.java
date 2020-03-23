@@ -14,6 +14,15 @@ public class Treatment implements Serializable{
 	private String medication;
 	private String description;
 
+	
+	public Treatment(Integer id, String name, String medication, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.medication = medication;
+		this.description = description;
+	}
+	
 	public Treatment() {
 		super();
 	}
