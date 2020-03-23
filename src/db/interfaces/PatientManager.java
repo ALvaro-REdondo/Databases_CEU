@@ -9,6 +9,6 @@ public interface PatientManager {
 		public void update(Patient patient);
 		public void delete(Patient patient);
 		public List<Patient> searchPatientById(Integer id);
-		public List<Patient> searchâtientByName(String name);
+		public List<Patient> searchPatientByName(String name);
 
 }
