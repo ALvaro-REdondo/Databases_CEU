@@ -49,7 +49,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 
 	@Override
 	public List<Treatment> searchTreatmentmById(Integer id) {
-		// TODO Auto-generated method stub
+		List<Treatment> treatmentsList = new ArrayList<Treatment>();
 		return null;
 	}
 

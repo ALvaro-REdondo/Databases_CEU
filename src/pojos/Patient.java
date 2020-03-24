@@ -16,10 +16,27 @@ public class Patient implements Serializable{
 	private String gender;
 	private String state;
 	private Date dob;
+	private Integer pathology_id;
 	
+	
+	
+	
+	public Patient(Integer id, String name, String gender, String state, Date dob, Integer pathology_id) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.state = state;
+		this.dob = dob;
+		this.pathology_id=pathology_id;
+	}
+
 	public Patient() {
 		super();
 	}
+	
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -60,6 +77,18 @@ public class Patient implements Serializable{
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
+	
+	public Integer getPathology_id() {
+		return pathology_id;
+	}
+	
+
+	public void setPathology_id(Integer pathology_id) {
+		this.pathology_id = pathology_id;
+	}
+
+	
+	
 
 	@Override
 	public String toString() {
