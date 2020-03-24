@@ -86,7 +86,7 @@ public class SQLitePathologyManager implements PathologyManager {
 			e.printStackTrace();
 			
 		};
-		return null;
+		return pathologyList;
 	}
 
 	@Override
