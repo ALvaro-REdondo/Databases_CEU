@@ -16,6 +16,16 @@ public class Pathology implements Serializable{
 	private Date startDate;
 	private Date endingDate;
 	
+	
+	public Pathology(Integer id, String name, Integer duration, Date startDate, Date endingDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.duration = duration;
+		this.startDate = startDate;
+		this.endingDate = endingDate;
+	}
+
 	public Pathology() {
 		
 		super();
