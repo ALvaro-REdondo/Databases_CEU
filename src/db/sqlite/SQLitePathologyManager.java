@@ -110,7 +110,11 @@ public class SQLitePathologyManager implements PathologyManager {
 				int duration = rs.getInt("duration");
 				Date startDate = rs.getDate("start date");
 				Date endingDate = rs.getDate("Ending Date");
+				
+				//Creates a new pathology
+				
 				Pathology pathology = new Pathology(id, pathologyName, duration, startDate, endingDate);
+				
 				
 				pathologyList.add(pathology);
 				
