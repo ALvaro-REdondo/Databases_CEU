@@ -13,6 +13,13 @@ public class Symptom implements Serializable{
 	private String manifestation;
 	
 	
+	public Symptom(Integer id, String manifestation) {
+		super();
+		this.id = id;
+		this.manifestation = manifestation;
+	}
+
+
 	public Symptom() {
 		super();
 	}
