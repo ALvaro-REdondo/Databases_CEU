@@ -48,6 +48,16 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 	@Override
 	public void update(MedicalPersonnel medicalPersonnel) {
 		// TODO Auto-generated method stub
+		
+		try {
+			
+			String sql = "UPDATE pathology"
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
 
 	}
 
