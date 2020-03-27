@@ -36,6 +36,7 @@ public class SQLitePatientManager implements PatientManager {
 		
 	}
 
+		// update
 	@Override
 	public void update(Patient patient) {
 		try {
