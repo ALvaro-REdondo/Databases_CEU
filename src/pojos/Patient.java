@@ -30,13 +30,21 @@ public class Patient implements Serializable{
 		this.dob = dob;
 		this.pathology_id=pathology_id;
 	}
-
+	
 	public Patient() {
 		super();
 	}
 	
-	
-	
+	//esto lo ha añadido Pablo*****************************************************
+	public Patient(String name, String gender, String state, Date dob, Integer pathology_id) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.state = state;
+		this.dob = dob;
+		this.pathology_id = pathology_id;
+	}
+	//hasta aqui *****************************************************************
 
 	public Integer getId() {
 		return id;
