@@ -35,15 +35,40 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 			e.printStackTrace();
 		}
 	}
+	
 	@Override
 	public void update(ClinicalHistory clinicalHistory) {
-		// TODO Auto-generated method stub
-
+		try {
+			//update every aspect of a particular clinical history
+			String sql = " UPDATE clinical history SET doe=?, dod=?, bloodType=?, extraInfo=? WHERE id=?"; 
+			PreparedStatement s = c.prepareStatement(sql);
+			s.setDate(1, clinicalHistory.getDoe());
+			s.setDate(2, clinicalHistory.getDod());
+			s.setString(3, clinicalHistory.getBloodType());
+			s.setString(4, clinicalHistory.getExtraInfo());
+			s.setInt(5, clinicalHistory.getId());
+			s.executeUpdate();
+			s.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
 	}
 
 	@Override
 	public void delete(ClinicalHistory clinicalHistory) {
-		// TODO Auto-generated method stub
+		try {
+			//delete a particular clinical history
+			String sql = "DELETE clinical history WHERE id=?"; 
+			PreparedStatement s = c.prepareStatement(sql);
+			s.setInt(1, clinicalHistory.getId());
+			s.executeUpdate();
+			s.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

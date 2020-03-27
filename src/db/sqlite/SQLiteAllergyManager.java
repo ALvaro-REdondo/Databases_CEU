@@ -8,6 +8,7 @@ import java.util.List;
 
 import db.interfaces.AllergyManager;
 import pojos.Allergy;
+import pojos.ClinicalHistory;
 
 public class SQLiteAllergyManager implements AllergyManager {
 
@@ -30,7 +31,7 @@ public class SQLiteAllergyManager implements AllergyManager {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public List<Allergy> searchAllergyById(Integer id) {
 		List<Allergy> allergyList = new ArrayList<Allergy>();
