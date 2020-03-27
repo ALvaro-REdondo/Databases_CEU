@@ -38,13 +38,33 @@ public class SQLitePatientManager implements PatientManager {
 
 	@Override
 	public void update(Patient patient) {
-		// TODO 
-
+		try {
+		String sql = " UPDATE patient  SET name=?, DOB=? , gender=?, pathology_id = ?\r\n"; 
+		 PreparedStatement s =c.prepareStatement(sql);
+		 s.setString(1,patient.getName());
+		 s.setDate(2,patient.getDob());
+		 s.setString(3,patient.getGender());
+		 s.setInt(4,patient.getPathology_id());
+		 s.executeUpdate();
+		 s.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void delete(Patient patient) {
-		// TODO 
+		try {
+			String sql = " DELETE patient WHERE id =?";
+			PreparedStatement s= c.prepareStatement(sql);
+			s.setInt(1, patient.getId());
+			s.executeUpdate();
+			s.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 
 	}
 
