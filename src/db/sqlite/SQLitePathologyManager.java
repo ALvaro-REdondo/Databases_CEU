@@ -47,12 +47,46 @@ public class SQLitePathologyManager implements PathologyManager {
 	@Override
 	public void update(Pathology pathology) {
 		// TODO Auto-generated method stub
-
+		try {
+			
+		String sql = "UPDATE pathology SET name =?, duration=?, startDate=?, endingDate=? WHERE id=?";
+		PreparedStatement s = c.prepareStatement(sql);
+		
+		s.setString(1, pathology.getName());
+		s.setInt(2, pathology.getDuration());
+		s.setDate(3,  pathology.getStartDate());
+		s.setDate(4,  pathology.getEndingDate());
+		s.setInt(5, pathology.getId());
+		
+		s.executeUpdate();
+		s.close();
+		
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
 	}
 
 	@Override
 	public void delete(Pathology pathology) {
 		// TODO Auto-generated method stub
+		
+		try {
+		String sql = "DELETE pathology SET name=?, duration=?, startDate=?, endingDate=?";
+		PreparedStatement d = c.prepareStatement(sql);
+		
+		d.setInt(1, pathology.getId());
+		d.executeUpdate();
+		d.close();
+		
+				
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
 
 	}
 
