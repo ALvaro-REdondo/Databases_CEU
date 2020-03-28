@@ -51,7 +51,18 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		
 		try {
 			
-			String sql = "UPDATE pathology"
+			String sql = "UPDATE medicalPersonnel SET name=?, department=?, position=?, pathologyId=? WHERE id=?";
+			PreparedStatement s = c.prepareStatement(sql);
+			
+			s.setString(1, medicalPersonnel.getName());
+			s.setString(2,  medicalPersonnel.getDepartment());
+			s.setString(3, medicalPersonnel.getPosition());
+			s.setInt(4,  medicalPersonnel.getPathologyId());
+			s.setInt(5,  medicalPersonnel.getId());
+			
+			s.executeUpdate();
+			s.close();
+			
 			
 		} catch(SQLException e) {
 			
@@ -65,6 +76,19 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 	public void delete(MedicalPersonnel medicalPersonnel) {
 		// TODO Auto-generated method stub
 
+		try {
+			
+			String sql = "DELETE medicalPersonnel WHERE id=?";
+			PreparedStatement d = c.prepareStatement(sql);
+			
+			d.executeUpdate();
+			d.close();
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
 	}
 
 	@Override

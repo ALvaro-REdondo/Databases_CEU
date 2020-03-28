@@ -74,7 +74,7 @@ public class SQLitePathologyManager implements PathologyManager {
 		// TODO Auto-generated method stub
 		
 		try {
-		String sql = "DELETE pathology SET name=?, duration=?, startDate=?, endingDate=?";
+		String sql = "DELETE pathology WHERE id=?";
 		PreparedStatement d = c.prepareStatement(sql);
 		
 		d.setInt(1, pathology.getId());
