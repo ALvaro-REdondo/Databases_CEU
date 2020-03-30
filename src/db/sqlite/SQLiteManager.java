@@ -19,7 +19,7 @@ public class SQLiteManager implements DBManager {
 		// Open database connection
 		try {
 			Class.forName("org.sqlite.JDBC");
-			this.c = DriverManager.getConnection("jdbc:sqlite:./db/Clinicaltrials.db");//asegurarse que esta bien puesto el nombre
+			this.c = DriverManager.getConnection("jdbc:sqlite:./db/Clinicaltrials.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			//create Managers
 			

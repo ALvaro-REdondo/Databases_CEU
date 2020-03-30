@@ -15,15 +15,17 @@ public class Pathology implements Serializable{
 	private Integer duration;
 	private Date startDate;
 	private Date endingDate;
+	private Integer treatmentId;
 	
 	
-	public Pathology(Integer id, String name, Integer duration, Date startDate, Date endingDate) {
+	public Pathology(Integer id, String name, Integer duration, Date startDate, Date endingDate, Integer treatmentId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.duration = duration;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
+		this.treatmentId = treatmentId;
 	}
 
 	public Pathology() {
@@ -71,11 +73,19 @@ public class Pathology implements Serializable{
 	public void setEndingDate(Date endingDate) {
 		this.endingDate = endingDate;
 	}
+	
+	public int getTreatmentId() {
+		return treatmentId;
+	}
+
+	public void setEndingDate(Integer treatmentId) {
+		this.treatmentId = treatmentId;
+	}
 
 	@Override
 	public String toString() {
 		return "Pathology [id=" + id + ", name=" + name + ", duration=" + duration + ", startDate=" + startDate
-				+ ", endingDate=" + endingDate + "]";
+				+ ", endingDate=" + endingDate + ", treatmentId=" + treatmentId + "]";
 	}
 
 	@Override
@@ -102,14 +112,5 @@ public class Pathology implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

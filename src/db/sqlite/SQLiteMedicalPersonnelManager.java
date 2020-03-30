@@ -90,6 +90,36 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 			
 		}
 	}
+	
+	public MedicalPersonnel getMedicalPersonnel(int medicalPersonnelId) {
+		
+		MedicalPersonnel medicalPersonnel = null;
+		
+		try {
+			
+			String sql = "SELECT * FROM medicalPersonnel WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  medicalPersonnelId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			String name = rs.getString("name");
+			String department = rs.getString("department");
+			String position = rs.getString("position");
+			int pathologyId = rs.getInt("pathology id");
+			
+			medicalPersonnel = new MedicalPersonnel(id, name, department, position, pathologyId);
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return medicalPersonnel;
+		
+	}
 
 	@Override
 	public List<MedicalPersonnel> searchMedicalPersonnelById(Integer id) {
