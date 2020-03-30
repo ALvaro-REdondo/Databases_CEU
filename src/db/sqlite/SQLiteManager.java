@@ -46,51 +46,51 @@ public class SQLiteManager implements DBManager {
 	public void createTables() {
 		try {
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE Pathologies "//asegurarse que esta bien puesto
+			String sql1 = "CREATE TABLE Pathology "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
-					   + " duration  INTEGER	 NOT NULL, "
+					   + " duration  INTEGER, "
 					   + " startDate DATE NOT NULL, "
-					   + " endingDate DATE NOT NULL)";
+					   + " endingDate DATE )";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
-			String sql2 = "CREATE TABLE Clinical_histories "//asegurarse que esta bien puesto
+			String sql2 = "CREATE TABLE ClinicalHistory "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " doe     DATE     NOT NULL, "
-					   + " dod  DATE	 NOT NULL, "
-					   + " bloodType STRING NOT NULL, "
-					   + " extraInfo STRING NOT NULL)";
+					   + " dod  DATE, "
+					   + " bloodType TEXT NOT NULL, "
+					   + " extraInfo TEXT)";
 			stmt1.executeUpdate(sql2);
 			stmt1.close();
-			String sql3 = "CREATE TABLE Symptoms "//asegurarse que esta bien puesto
+			String sql3 = "CREATE TABLE Symptom "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " manifestation     TEXT     NOT NULL)";
 			stmt1.executeUpdate(sql3);
 			stmt1.close();
-			String sql4 = "CREATE TABLE Treatments "//asegurarse que esta bien puesto
+			String sql4 = "CREATE TABLE Treatment "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " medication  TEXT	 NOT NULL, "
-					   + " description TEXT NOT NULL ";
+					   + " description TEXT )";
 			stmt1.executeUpdate(sql4);
 			stmt1.close();
-			String sql5 = "CREATE TABLE Patients "//asegurarse que esta bien puesto
+			String sql5 = "CREATE TABLE Allergy "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " allergy     TEXT     NOT NULL, "
 					   + " degree  INTEGER	 NOT NULL ";
 			stmt1.executeUpdate(sql5);
 			stmt1.close();
-			String sql6 = "CREATE TABLE Patients "//asegurarse que esta bien puesto
+			String sql6 = "CREATE TABLE Patient "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " gender  TEXT	 NOT NULL, "
 					   + " state TEXT NOT NULL, "
 					   + " dob INTEGER NOT NULL, "
-					   + " pathology_id INTEGER REFERENCES Pathologies(id),"//son references
+					   + " pathology_id INTEGER REFERENCES Pathologies(id),"
 					   + " clinical_history_id INTEGER REFERENCES Clinical_histories(id))";
 			stmt1.executeUpdate(sql6);
 			stmt1.close();
-			String sql7 = "CREATE TABLE Medical_personnel "//asegurarse que esta bien puesto
+			String sql7 = "CREATE TABLE MedicalPersonnel "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " department  TEXT	 NOT NULL, "
@@ -99,7 +99,6 @@ public class SQLiteManager implements DBManager {
 			stmt1.executeUpdate(sql7);
 			stmt1.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
