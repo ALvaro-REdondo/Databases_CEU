@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.TreatmentManager;
+import pojos.Patient;
 import pojos.Treatment;
 
 public class SQLiteTreatmentManager implements TreatmentManager {
@@ -37,20 +38,56 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 
 	@Override
 	public void update(Treatment treatment) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = " UPDATE patient  SET name=?, DOB=? , gender=?, pathology_id = ?\r\n"; 
+			 PreparedStatement s =c.prepareStatement(sql);
+			 s.setString(1,treatment.getName());
+			 s.setString(2,treatment.getMedication());
+			 s.setString(3,treatment.getDescription());
+			 s.executeUpdate();
+			 s.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 
 	}
 
 	@Override
 	public void delete(Treatment treatment) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = " DELETE treatment WHERE id =?";
+			PreparedStatement s= c.prepareStatement(sql);
+			s.setInt(1, treatment.getId());
+			s.executeUpdate();
+			s.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 
 	}
 
 	@Override
 	public List<Treatment> searchTreatmentmById(Integer id) {
 		List<Treatment> treatmentsList = new ArrayList<Treatment>();
-		return null;
+		try {
+			String sql ="SELECT * FROM patient WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1,"%" + id + "%");
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int Treatmentid = rs.getInt("id");
+				String TreatmentName = rs.getString("name");
+				String TreatmentMedication = rs.getString("medication");
+				String TreatmentDescription = rs.getString("description");
+				Treatment newTreatment = new Treatment(Treatmentid, TreatmentName, TreatmentMedication ,TreatmentDescription);
+				treatmentsList.add(newTreatment);
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return treatmentsList;
 	}
 
 	@Override
