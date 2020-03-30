@@ -39,7 +39,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 	@Override
 	public void update(Treatment treatment) {
 		try {
-			String sql = " UPDATE patient  SET name=?, DOB=? , gender=?, pathology_id = ?\r\n"; 
+			String sql = " UPDATE treatment  SET name=?, medication=? , description=? \r\n"; 
 			 PreparedStatement s =c.prepareStatement(sql);
 			 s.setString(1,treatment.getName());
 			 s.setString(2,treatment.getMedication());
