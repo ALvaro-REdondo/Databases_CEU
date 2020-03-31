@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.ClinicalHistoryManager;
 import pojos.ClinicalHistory;
+import pojos.MedicalPersonnel;
 
 public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 
@@ -72,6 +74,34 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 
 	}
 
+	public ClinicalHistory getClinicalHistory(int clinicalHistoryId) {
+		
+		ClinicalHistory clinicalHistory = null;
+		
+		try {
+			
+			String sql = "SELECT * FROM clinicalHistory WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  clinicalHistoryId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			Date doe = rs.getDate("doe");
+			Date dod = rs.getDate("dod");
+			String bloodType = rs.getString("bloodType");
+			String extraInfo = rs.getString("extraInfo");
+			
+			clinicalHistory = new ClinicalHistory(id, doe, dod, bloodType, extraInfo);
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		return clinicalHistory;
+	}
+	
 	@Override
 	public List<ClinicalHistory> searchClinicalHistoryById(Integer id) {
 		List<ClinicalHistory> clinicalHistoryList = new ArrayList<ClinicalHistory>();
@@ -97,4 +127,6 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 		return clinicalHistoryList;
 	}
 
+	
+	
 }
