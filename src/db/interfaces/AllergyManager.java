@@ -9,5 +9,6 @@ public interface AllergyManager {
 	public void add(Allergy allergy);
 	public List<Allergy> searchAllergyById(Integer id);
 	public List<Allergy> searchAllergyByAllergy(String allergy);
-	
+	public Allergy getAllergy(int allergyId);
+	public List<Allergy> showAllergies();
 }
