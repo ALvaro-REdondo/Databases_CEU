@@ -26,14 +26,15 @@ public class SQLitePathologyManager implements PathologyManager {
 	public void add(Pathology pathology) {
 		try {
 			// TODO Auto-generated method stub
-		String sql = " INSERT INTO Pathology (name, duration, startDate, endingDate)"
-				+ "VALUES(?, ?, ?, ?);";
+		String sql = " INSERT INTO Pathology (name, duration, startDate, endingDate, treatmentId)"
+				+ "VALUES(?, ?, ?, ?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setString(1, pathology.getName());
 		prep.setInt(2, pathology.getDuration());
 		prep.setDate(3, pathology.getStartDate());
 		prep.setDate(4, pathology.getEndingDate());
+		prep.setInt(5,  pathology.getTreatmentId());
 		prep.executeUpdate();
 		prep.close();
 			
@@ -49,15 +50,15 @@ public class SQLitePathologyManager implements PathologyManager {
 		// TODO Auto-generated method stub
 		try {
 			
-		String sql = "UPDATE pathology SET name =?, duration=?, startDate=?, endingDate=? WHERE id=?";
+		String sql = "UPDATE pathology SET name =?, duration=?, startDate=?, endingDate=?, treatmentId=? WHERE id=?";
 		PreparedStatement s = c.prepareStatement(sql);
 		
 		s.setString(1, pathology.getName());
 		s.setInt(2, pathology.getDuration());
 		s.setDate(3,  pathology.getStartDate());
 		s.setDate(4,  pathology.getEndingDate());
-		s.setInt(5, pathology.getId());
-		
+		s.setInt(5, pathology.getTreatmentId());
+		s.setInt(6, pathology.getId());
 		s.executeUpdate();
 		s.close();
 		
@@ -109,7 +110,8 @@ public class SQLitePathologyManager implements PathologyManager {
 				int duration = rs.getInt("duration");
 				Date startDate = rs.getDate("start date");
 				Date endingDate = rs.getDate("Ending Date");
-				Pathology pathology = new Pathology(pathologyId, name, duration, startDate, endingDate);
+				int treatmentId = rs.getInt("Treatment id");
+				Pathology pathology = new Pathology(pathologyId, name, duration, startDate, endingDate, treatmentId);
 				
 				pathologyList.add(pathology);
 				
@@ -144,10 +146,11 @@ public class SQLitePathologyManager implements PathologyManager {
 				int duration = rs.getInt("duration");
 				Date startDate = rs.getDate("start date");
 				Date endingDate = rs.getDate("Ending Date");
+				int treatmentId = rs.getInt("treatment id");
 				
 				//Creates a new pathology
 				
-				Pathology pathology = new Pathology(id, pathologyName, duration, startDate, endingDate);
+				Pathology pathology = new Pathology(id, pathologyName, duration, startDate, endingDate, treatmentId);
 				
 				
 				pathologyList.add(pathology);

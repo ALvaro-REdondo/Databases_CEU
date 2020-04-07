@@ -3,12 +3,14 @@ package db.sqlite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.AllergyManager;
 import pojos.Allergy;
 import pojos.ClinicalHistory;
+import pojos.MedicalPersonnel;
 
 public class SQLiteAllergyManager implements AllergyManager {
 
@@ -78,4 +80,54 @@ public class SQLiteAllergyManager implements AllergyManager {
 		return allergyList;
 	}
 
+	public Allergy getAllergy(int allergyId) {
+		
+		Allergy allergy = null;
+		
+		try {
+			
+			String sql = "SELECT * FROM allergy WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  allergyId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			String allergyName = rs.getString("allergy");
+			int degree = rs.getInt("degree");
+			
+			allergy = new Allergy(id, allergyName, degree);
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return allergy;
+	}
+	
+	public List<Allergy> showAllergies() {
+		//create empty list of allergies
+		List<Allergy> allergiesList = new ArrayList<Allergy>();
+		//get all allergies
+		try {
+			String sql = "SELECT * FROM allergy";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			//for each result...
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String allergyAllergy = rs.getString("allergy");
+				int allergyDegree = rs.getInt("degree"); 
+				//create a new allergy and...
+				Allergy newAllergy = new Allergy(id, allergyAllergy, allergyDegree);
+				//add it to the list
+				allergiesList.add(newAllergy);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//return the list
+		return allergiesList;
+	}
 }
