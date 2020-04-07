@@ -52,7 +52,7 @@ public class Menu {
 			medicalPersonnelSubMenu2();//añadir menus para pathology
 			break;
 		case 3:
-			medicalPersonnelSubMenu3();//acabar el menu de patient que pablo ya empezo
+			medicalPersonnelSubMenu3();//acabar el menu de patient que pablo ya empezo.
 			break;
 		case 4:
 			medicalPersonnelSubMenu4();//añadir menus para clinical history
