@@ -17,17 +17,17 @@ public class Menu {
 	public static void main(String[] args) throws Exception{
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		//Print welcome screen
-		System.out.println("Hi!");
-		System.out.println("What is your role?");
-		System.out.println("1. Treatment creator");
-		System.out.println("2. Medical personnel");
+		System.out.println("Hi! \n");
+		System.out.println("What is your role? \n");
+		System.out.println("1. Treatment creator \n");
+		System.out.println("2. Medical personnel \n");
 		int choice = Integer.parseInt(reader.readLine());
 		switch(choice) {
 		case 1:
-			//TODO
+			treatmentCreatorMenu();//hay que crearlo
 			break;
 		case 2:
-			medicalPersonnelMenu();
+			medicalPersonnelMenu();//hay que acabarlo
 			break;
 		default:
 			break;
@@ -35,20 +35,36 @@ public class Menu {
 	}
 
 	private static void medicalPersonnelMenu() throws Exception{
-		System.out.println("Select area");
-		System.out.println("1. Patient");
-		System.out.println("2. Pathology");
-		System.out.println("3. Treatment");
+		System.out.println("Select area \n");
+		System.out.println("1. Treatment \n");
+		System.out.println("2. Pathology \n");
+		System.out.println("3. Patient \n");
+		System.out.println("4. Clinical History \n");
+		System.out.println("5. Allergies \n");
+		System.out.println("6. Symptoms \n");
+		System.out.println("7. Medical Personnel \n");
 		int choice = Integer.parseInt(reader.readLine());
 		switch(choice) {
 		case 1:
-			medicalPersonnelSubMenu1();
+			medicalPersonnelSubMenu1();//añadir menus para treatment
 			break;
 		case 2:
-			//TODO
+			medicalPersonnelSubMenu2();//añadir menus para pathology
 			break;
 		case 3:
-			//TODO
+			medicalPersonnelSubMenu3();//acabar el menu de patient que pablo ya empezo
+			break;
+		case 4:
+			medicalPersonnelSubMenu4();//añadir menus para clinical history
+			break;
+		case 5:
+			medicalPersonnelSubMenu5();//añadir menus para allergies
+			break;
+		case 6:
+			medicalPersonnelSubMenu6();//añadir menus para symptoms
+			break;
+		case 7:
+			medicalPersonnelSubMenu7();//añadir menus para medical personnel
 			break;
 		default:
 			break;
@@ -57,6 +73,13 @@ public class Menu {
 	
 	private static void medicalPersonnelSubMenu1() throws Exception{
 
+	}
+	
+	private static void medicalPersonnelSubMenu2() throws Exception{
+		
+	}
+	
+	private static void medicalPersonnelSubMenu3() throws Exception{
 		System.out.println("Select action");
 		System.out.println("1. Add");
 		System.out.println("2. Update");
@@ -72,7 +95,53 @@ public class Menu {
 			//updatePatient();
 			break;
 		case 3:
-			//TODO
+			//falta el metodo
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private static void medicalPersonnelSubMenu4() throws Exception{
+		
+	}
+	
+	private static void medicalPersonnelSubMenu5() throws Exception{
+		
+	}
+	
+	private static void medicalPersonnelSubMenu6() throws Exception{
+		
+	}
+	
+	private static void medicalPersonnelSubMenu7() throws Exception{
+		
+	}
+	
+	private static void treatmentCreatorMenu() throws Exception{
+		System.out.println("Select area \n");
+		System.out.println("1. Treatment \n");
+		System.out.println("2. Pathology \n");
+		System.out.println("3. Clinical History \n");
+		System.out.println("4. Patient \n");
+		System.out.println("5. Allergies \n");
+		System.out.println("6. Symptoms \n");
+		System.out.println("7. Medical Personnel \n");
+		int choice = Integer.parseInt(reader.readLine());
+		switch(choice) {
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
 			break;
 		default:
 			break;
