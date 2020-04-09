@@ -25,6 +25,18 @@ public class MedicalPersonnel implements Serializable{
 		this.position = position;
 		this.pathologyId = pathologyId;
 	}
+	
+	
+
+	public MedicalPersonnel(String name, String department, String position, Integer pathologyId) {
+		super();
+		this.name = name;
+		this.department = department;
+		this.position = position;
+		this.pathologyId = pathologyId;
+	}
+
+
 
 	public MedicalPersonnel() {
 		

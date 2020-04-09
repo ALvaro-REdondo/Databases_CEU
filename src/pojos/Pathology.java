@@ -28,6 +28,24 @@ public class Pathology implements Serializable{
 		this.treatmentId = treatmentId;
 	}
 
+	/*public Pathology(String name, Integer duration, Date startDate, Date endingDate, Integer treatmentId) {
+		super();
+		this.name = name;
+		this.duration = duration;
+		this.startDate = startDate;
+		this.endingDate = endingDate;
+		this.treatmentId = treatmentId;
+	}*/
+
+	/*public Pathology(String name, Integer duration, Date startDate, Integer treatmentId) {
+		super();
+		this.name = name;
+		this.duration = duration; //Si no hay ending date, no se puede saber la duracion
+		this.startDate = startDate;
+		this.treatmentId = treatmentId;
+	}*/ 
+	
+
 	public Pathology() {
 		
 		super();
