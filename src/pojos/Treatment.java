@@ -23,6 +23,13 @@ public class Treatment implements Serializable{
 		this.description = description;
 	}
 	
+	public Treatment(String name, String medication, String description) {
+		super();
+		this.name = name;
+		this.medication = medication;
+		this.description = description;
+	}
+
 	public Treatment() {
 		super();
 	}

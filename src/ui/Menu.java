@@ -58,6 +58,7 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
+			treatmentCreatorSubMenu1();
 			break;
 		case 2:
 			break;
@@ -121,6 +122,9 @@ public class Menu {
 	
 	private static void medicalPersonnelSubMenu1() throws Exception{
 
+		System.out.println("Select action \n");
+		
+		System.out.println("1.Check \n");
 	}
 	
 	private static void medicalPersonnelSubMenu2() throws Exception{
@@ -129,12 +133,12 @@ public class Menu {
 	
 	private static void medicalPersonnelSubMenu3() throws Exception{
 		
-		System.out.println("Select action");
+		System.out.println("Select action \n");
 		
-		System.out.println("1. Add");
-		System.out.println("2. Update");
-		System.out.println("3. Check");
-		System.out.println("Delete");
+		System.out.println("1. Add \n");
+		System.out.println("2. Update \n");
+		System.out.println("3. Check \n");
+		System.out.println("4. Delete \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -173,22 +177,22 @@ public class Menu {
 	
 	private static void addPatient() throws Exception {
 		
-		System.out.println("So do it!");
+		System.out.println("So do it! \n");
 		
-		System.out.print("Name: ");
+		System.out.print("Name: \n");
 		String name = reader.readLine();
 		
-		System.out.println("Gender: ");
+		System.out.println("Gender: \n");
 		String gender = reader.readLine();
 		
-		System.out.println("State: ");
+		System.out.println("State: \n");
 		String state = reader.readLine();
 		
-		System.out.println("Date of birth (yyyy-MM-dd): ");
+		System.out.println("Date of birth (yyyy-MM-dd): \n");
 		String dob = reader.readLine();
 		LocalDate dateOfBirth = LocalDate.parse(dob, formatter);
 		
-		System.out.println("Pathology id: ");
+		System.out.println("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		
 		Patient patient = new Patient(name, gender, state, Date.valueOf(dateOfBirth), pathologyId);
@@ -225,11 +229,11 @@ public class Menu {
 	
 	private static void medicalPersonnelBossSubMenu1() throws Exception { //Pathology
 		
-		System.out.println("Select action");
+		System.out.println("Select action \n");
 		
-		System.out.println("1. Check pathology");
-		System.out.println("2. Search pathology by id");
-		System.out.println("3. Search pathology by name");
+		System.out.println("1. Check pathology \n");
+		System.out.println("2. Search pathology by id \n");
+		System.out.println("3. Search pathology by name \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -250,6 +254,37 @@ public class Menu {
 		
 	}
 	
+	private static void treatmentCreatorSubMenu1() throws Exception{
+		System.out.println("Select action \n");
+		
+		System.out.println("1. Add a treatment \n");
+		System.out.println("2. Update a treatment \n");
+		System.out.println("3. Check a  treatment \n");
+		System.out.println("4. Delete a treatment \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			addTreatment();//completar
+			break;
+		case 2: 
+			updateTreatment();//crear
+			break;
+		case 3: 
+			checkTreatment();//crear
+			break;
+		case 4:
+			deleteTreatment();//crear
+			break;
+		default:
+			break;
+		}
+		
+
+	}
+	
 	private static void checkPathology() throws Exception {
 		
 	}
@@ -264,12 +299,12 @@ public class Menu {
 	
 	private static void medicalPersonnelBossSubMenu2() throws Exception { //Medical Personnel
 		
-		System.out.println("Select action");
+		System.out.println("Select action \n");
 		
-		System.out.println("1. Add");
-		System.out.println("2. Update");
-		System.out.println("3. Check");
-		System.out.println("4. Delete");
+		System.out.println("1. Add \n");
+		System.out.println("2. Update \n");
+		System.out.println("3. Check \n");
+		System.out.println("4. Delete \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -280,11 +315,11 @@ public class Menu {
 			break;
 		case 2: 
 			
-			 System.out.println("Select an option");
+			 System.out.println("Select an option \n");
 			 
-			 System.out.println("1. Search medical personnel by id");
+			 System.out.println("1. Search medical personnel by id \n");
 			 
-			 System.out.println("2. Search medical personnel by name");
+			 System.out.println("2. Search medical personnel by name \n");
 			 
 			 int choice2 = Integer.parseInt(reader.readLine());
 			 
@@ -302,11 +337,11 @@ public class Menu {
 			break;
 		case 3: 
 			
-			System.out.println("Select an option");
+			System.out.println("Select an option \n");
 			 
-			 System.out.println("1. Search medical personnel by id");
+			 System.out.println("1. Search medical personnel by id \n");
 			 
-			 System.out.println("2. Search medical personnel by name");
+			 System.out.println("2. Search medical personnel by name \n");
 			 
 			 int choice3 = Integer.parseInt(reader.readLine());
 			 
@@ -324,11 +359,11 @@ public class Menu {
 			break;
 		case 4:
 			
-			System.out.println("Select an option");
+			System.out.println("Select an option \n");
 			 
-			 System.out.println("1. Search medical personnel by id");
+			 System.out.println("1. Search medical personnel by id \n");
 			 
-			 System.out.println("2. Search medical personnel by name");
+			 System.out.println("2. Search medical personnel by name \n");
 			 
 			 int choice4 = Integer.parseInt(reader.readLine());
 			 
@@ -364,18 +399,18 @@ public class Menu {
 	
 	private static void addMedicalPersonnel() throws Exception{
 		
-		System.out.println("So do it!");
+		System.out.println("So do it! \n");
 		
-		System.out.print("Name: ");
+		System.out.print("Name: \n");
 		String name = reader.readLine();
 		
-		System.out.print("Department: ");
+		System.out.print("Department: \n");
 		String department = reader.readLine();
 		
-		System.out.print("Position: ");
+		System.out.print("Position: \n");
 		String position = reader.readLine();
 		
-		System.out.print("Pathology id: ");
+		System.out.print("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		
 		MedicalPersonnel medicalPersonnel = new MedicalPersonnel(name, department, position, pathologyId);
@@ -383,7 +418,40 @@ public class Menu {
 		//Aqui hemos anadido un medical Personnel.
 		
 		}
+	
+	private static void addTreatment() throws Exception{
+		System.out.println("So do it! \n");
 		
+		System.out.print("Name: \n");
+		String name = reader.readLine();
+		
+		System.out.print("Medication: \n");
+		String medication = reader.readLine();
+		
+		System.out.print("Description: \n");
+		String description = reader.readLine();
+		
+		Treatment treatment = new Treatment(name,medication,description);
+		//añadimos un treatment, pero esta incompleto :c. Que triste
+	}
+	
+	private static void updateTreatment() throws Exception{
+		
+	}
+	
+	private static void checkTreatment() throws Exception{
+		
+	}
+	
+	private static void deleteTreatment() throws Exception{
+		
+	}
+	
+	private static void searchMenu() throws Exception{
+		System.out.println("Select an option \n");
+		System.out.println("1. Search by id \n");
+		System.out.println("2. Search by name \n");
+	}
 		
 	}
 	
