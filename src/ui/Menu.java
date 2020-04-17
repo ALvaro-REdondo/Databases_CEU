@@ -551,7 +551,7 @@ public class Menu {
 		
 		//para mostrar por pantalla:
 		for (Symptom symptom : symptoms) {
-			System.out.println(symptom);
+			System.out.println(symptom); 
 		}
 		*/
 	}

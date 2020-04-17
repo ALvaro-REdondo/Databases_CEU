@@ -37,7 +37,7 @@ public class Patient implements Serializable{
 	public Patient() {
 		super();
 	}
-	
+	 
 	
 	public Patient(String name, String gender, String state, Date dob, Integer pathology_id,Integer clinicalhistory_id) {
 		super();

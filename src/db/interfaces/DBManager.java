@@ -10,6 +10,6 @@ public interface DBManager {
 	public PatientManager getPatienManager();
 	public SymptomManager getSymptomManager();
 	// hasta aqui
-	 
+	  
 	 */
 }
