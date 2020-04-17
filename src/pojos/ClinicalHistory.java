@@ -27,6 +27,14 @@ public class ClinicalHistory implements Serializable{
 		this.extraInfo = extraInfo;
 	}
 
+	public ClinicalHistory(Date doe, Date dod, String bloodType, String extraInfo) {
+		super();
+		this.doe = doe;
+		this.dod = dod;
+		this.bloodType = bloodType;
+		this.extraInfo = extraInfo;
+	}
+
 	public ClinicalHistory() {
 		super();
 	}

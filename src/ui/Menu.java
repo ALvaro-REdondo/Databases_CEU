@@ -822,5 +822,42 @@ public class Menu {
 		
 	}
 		
+	//METHODS FOR CLINICAL HISTORY
+	
+	private static void addClinicalHistory() throws Exception{
+		System.out.println("Great, you seem nice, you can do it: \n");
+		
+		System.out.println("Date of entry (yyyy-MM-dd): \n");
+		String dateOfEntry = reader.readLine();
+		LocalDate doe = LocalDate.parse(dateOfEntry, formatter);
+		
+		System.out.println("Date of discharge (yyyy-MM-dd): \n");
+		String dateOfDischarge = reader.readLine();
+		LocalDate dod = LocalDate.parse(dateOfDischarge, formatter);
+		
+		System.out.println("Blood type: \n");
+		String bloodType = reader.readLine();
+		
+		System.out.println("Extra information: \n");
+		String extraInfo = reader.readLine();
+		
+		ClinicalHistory clinicalHistory = new ClinicalHistory(Date.valueOf(doe), Date.valueOf(dod), bloodType, extraInfo);
+		
 	}
+
+	//METHOS FOR ALLERGY
+	
+	private static void addAllergy() throws Exception{
+		System.out.println("Great, you seem nice, you can do it: \n");
+
+		System.out.println("Allergy: \n");
+		String allergyName = reader.readLine();
+		
+		System.out.println("Degree: \n");
+		int degree = Integer.parseInt(reader.readLine());
+		
+		Allergy allergy = new Allergy(allergyName, degree);
+		
+	}
+}
 	
