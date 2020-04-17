@@ -17,11 +17,12 @@ public class Patient implements Serializable{
 	private String state;
 	private Date dob;
 	private Integer pathology_id;
+	private Integer clinicalhistory_id;
 	
 	
 	
 	
-	public Patient(Integer id, String name, String gender, String state, Date dob, Integer pathology_id) {
+	public Patient(Integer id, String name, String gender, String state, Date dob, Integer pathology_id, Integer clinicalhistory_id) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,22 +30,27 @@ public class Patient implements Serializable{
 		this.state = state;
 		this.dob = dob;
 		this.pathology_id=pathology_id;
+		this.clinicalhistory_id=clinicalhistory_id;
+		
 	}
 	
 	public Patient() {
 		super();
 	}
 	
-	//esto lo ha añadido Pablo*****************************************************
-	public Patient(String name, String gender, String state, Date dob, Integer pathology_id) {
+	
+	public Patient(String name, String gender, String state, Date dob, Integer pathology_id,Integer clinicalhistory_id) {
 		super();
 		this.name = name;
 		this.gender = gender;
 		this.state = state;
 		this.dob = dob;
 		this.pathology_id = pathology_id;
+		this.clinicalhistory_id=clinicalhistory_id;
 	}
-	//hasta aqui *****************************************************************
+	
+
+	
 
 	public Integer getId() {
 		return id;
@@ -95,6 +101,13 @@ public class Patient implements Serializable{
 		this.pathology_id = pathology_id;
 	}
 
+	public Integer getClinicalhistory_id() {
+		return clinicalhistory_id;
+	}
+
+	public void setClinicalhistory_id(Integer clinicalhistory_id) {
+		this.clinicalhistory_id = clinicalhistory_id;
+	}
 	
 	
 

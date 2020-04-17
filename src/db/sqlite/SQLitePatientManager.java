@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import db.interfaces.PatientManager;
@@ -20,14 +21,15 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void add(Patient patient) {
 		try {
-		String sql = " INSERT patient (name , gender , state ,dob, pathology_id) "
-				+ "VALUES (?,?,?,? );"; 
+		String sql = " INSERT patient (name , gender , state ,dob, pathology_id, clinicalHistory_id) "
+				+ "VALUES (?,?,?,? ,?);"; 
 		PreparedStatement prep =c.prepareStatement(sql);
 		prep.setString(1,patient.getName());
 		prep.setString(2,patient.getGender());
 		prep.setString(3,patient.getState());
 		prep.setDate(4,patient.getDob());
-		prep.setInt(4,patient.getPathology_id());
+		prep.setInt(5,patient.getPathology_id());
+		prep.setInt(6, patient.getClinicalhistory_id());
 		prep.executeUpdate();
 		prep.close();
 		}catch (Exception ex) {
@@ -36,16 +38,18 @@ public class SQLitePatientManager implements PatientManager {
 		
 	}
 
-		// update
+	
 	@Override
 	public void update(Patient patient) {
 		try {
-		String sql = " UPDATE patient  SET name=?, DOB=? , gender=?, pathology_id = ?\r\n"; 
+		String sql = " UPDATE patient  SET name=?,  gender=?, state=?, DOB=? , pathology_id = ?, clinicalHistory_id=?\r\n"; 
 		 PreparedStatement s =c.prepareStatement(sql);
 		 s.setString(1,patient.getName());
-		 s.setDate(2,patient.getDob());
-		 s.setString(3,patient.getGender());
-		 s.setInt(4,patient.getPathology_id());
+		 s.setString(2,patient.getGender());
+		 s.setString(3,patient.getState());
+		 s.setDate(4,patient.getDob());
+		 s.setInt(5,patient.getPathology_id());
+		 s.setInt(6,patient.getClinicalhistory_id());
 		 s.executeUpdate();
 		 s.close();
 		}catch(Exception e) {
@@ -84,7 +88,8 @@ public class SQLitePatientManager implements PatientManager {
 				String PatientState = rs.getString("state");
 				Date PatientDOB =rs.getDate("dob");
 				int PatientPathology_id = rs.getInt("pathology_id");
-				Patient newPatient = new Patient(Patientid, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id);
+				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+				Patient newPatient = new Patient(Patientid, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);
 				patientsList.add(newPatient);
 			}
 		}catch(Exception ex) {
@@ -109,7 +114,8 @@ public class SQLitePatientManager implements PatientManager {
 				String PatientState = rs.getString("state");
 				Date PatientDOB =rs.getDate("dob");
 				int PatientPathology_id = rs.getInt("pathology_id");
-				Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id);//pathology_id
+				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+				Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);//pathology_id
 				patientsList.add(newPatient);
 			}
 		}catch(Exception ex) {
@@ -117,7 +123,70 @@ public class SQLitePatientManager implements PatientManager {
 		}
 		return patientsList;
 	}
+	
 
+	@Override
 
+	public Patient getPatient(int PatientId) {
+		
+		Patient patient = null;
+		
+		try {
+			
+			String sql = "SELECT * FROM patient WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  PatientId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			String PatientName = rs.getString("name");
+			String PatientGender = rs.getString("gender");
+			String PatientState = rs.getString("state");
+			Date PatientDOB =rs.getDate("dob");
+			int PatientPathology_id = rs.getInt("pathology_id");
+			int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+			Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return patient;
+	}
+	
+
+	@Override
+	
+	public List<Patient> showPatients() {
+		
+		List<Patient> patientsList = new ArrayList<Patient>();
+		
+		try {
+			String sql = "SELECT * FROM patient";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+		
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String PatientName = rs.getString("name");
+				String PatientGender = rs.getString("gender");
+				String PatientState = rs.getString("state");
+				Date PatientDOB =rs.getDate("dob");
+				int PatientPathology_id = rs.getInt("pathology_id");
+				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+				Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);//pathology_id
+				patientsList.add(newPatient);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return patientsList;
+	}
+
+	
 
 }

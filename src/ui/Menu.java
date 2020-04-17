@@ -5,16 +5,38 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import pojos.*;
+import db.interfaces.*;
+import db.sqlite.*;
 
 public class Menu {
-
+	/*alba:
+	//DB Managers
+	private static DBManager dbManager;
+	private static PatientManager patientManager;
+	private static SymptomManager symptomManager;
+	*/
+	//hasta aqui
+	
 	//for parsing dates
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	// BufferedReader for my whole code
 	private static BufferedReader reader;
 	
 	public static void main(String[] args) throws Exception{
+		
+		// esto puesto por alba:
+		
+		/*dbManager = new SQLiteManager();
+		patientManager= dbManager.getPatienManager();
+		symptomManager = dbManager.getSymptomManager();
+		dbManager.connect();*/
+		
+		//hasta aquí
+		
+		
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		//Print welcome screen
 		System.out.println("Hi! \n");
@@ -67,13 +89,13 @@ public class Menu {
 			treatmentCreatorSubMenu3();
 			break;
 		case 4:
-			treatmentCreatorSubMenu4();
+			treatmentCreatorSubMenu4Patient();
 			break;
 		case 5:
 			treatmentCreatorSubMenu5();
 			break;
 		case 6:
-			treatmentCreatorSubMenu6();
+			treatmentCreatorSubMenu6Symptom();
 			break;
 		case 7:
 			treatmentCreatorSubMenu7MedicalPersonnel();
@@ -152,7 +174,31 @@ public class Menu {
 		
 	}
 	
-	private static void treatmentCreatorSubMenu4() throws Exception {
+	private static void treatmentCreatorSubMenu4Patient() throws Exception {
+		
+		System.out.println("4. Patient \n");
+		
+		searchMenu();
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1: 
+			searchPatientById();
+			break;
+			
+		case 2:
+			
+			searchPatientByName();
+			break;
+			
+		default:
+			
+			break;
+		
+		}
+		
 		
 	}
 	
@@ -160,7 +206,29 @@ public class Menu {
 		
 	}
 	
-	private static void treatmentCreatorSubMenu6() throws Exception {
+	private static void treatmentCreatorSubMenu6Symptom() throws Exception {
+		System.out.println("6. Symptom \n");
+		
+		searchMenu();
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1: 
+			searchSymptomById();
+			break;
+			
+		case 2:
+			
+			searchSymptomByManifestation();
+			break;
+			
+		default:
+			
+			break;
+		
+		}
 		
 	}
 
@@ -212,7 +280,7 @@ public class Menu {
 			medicalPersonnelSubMenu2Pathology();
 			break;
 		case 3:
-			medicalPersonnelSubMenu3();//acabar el menu de patient que pablo ya empezo.
+			medicalPersonnelSubMenu3Patient();
 			break;
 		case 4:
 			medicalPersonnelSubMenu4();//añadir menus para clinical history
@@ -221,7 +289,7 @@ public class Menu {
 			medicalPersonnelSubMenu5();//añadir menus para allergies
 			break;
 		case 6:
-			medicalPersonnelSubMenu6();//añadir menus para symptoms
+			medicalPersonnelSubMenu6Symptom();
 			break;
 		case 7:
 			medicalPersonnelSubMenu7MedicalPersonnel();
@@ -286,7 +354,7 @@ public class Menu {
 	}
 
 	
-	private static void medicalPersonnelSubMenu3() throws Exception{
+	private static void medicalPersonnelSubMenu3Patient() throws Exception{
 		
 		System.out.println("Select action \n");
 		
@@ -304,10 +372,14 @@ public class Menu {
 			break;
 		case 2:
 			searchPatientById();
-			//updatePatient();
+			//updatePatient();-> TODO
 			break;
 		case 3:
-			//falta el metodo
+			//checkPatient();->TODO
+			break;
+			
+		case 4:
+			//deletePatient();->TODO
 			break;
 		default:
 			break;
@@ -322,7 +394,32 @@ public class Menu {
 		
 	}
 	
-	private static void medicalPersonnelSubMenu6() throws Exception{
+	private static void medicalPersonnelSubMenu6Symptom() throws Exception{
+		
+		System.out.println("6. Symptom \n");
+		
+		System.out.println("Select an action: \n");
+		System.out.println("1. Add \n");
+		System.out.println("1. CHeck \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1: 
+			addSymptom();
+			break;
+			
+		case 2:
+			
+			// checkPatient->TODO
+			break;
+			
+		default:
+			
+			break;
+		
+		}
 		
 	}
 	
@@ -370,14 +467,94 @@ public class Menu {
 		System.out.println("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		
-		Patient patient = new Patient(name, gender, state, Date.valueOf(dateOfBirth), pathologyId);
-		//ME HE QUEDADO CUANDO HA ACABADO EL VIDEO DEL 2020-03-13
-		//hay que insert patient aun
-		}
+		System.out.println("Clinical History id: \n");
+		int clinicalHistoryId = Integer.parseInt(reader.readLine());
+		
+		Patient patient = new Patient(name, gender, state, Date.valueOf(dateOfBirth), pathologyId, clinicalHistoryId);
+		
+		// Patient added
+		
+		// para insertarlo:
+		//patientManager.add(patient);
+		
+		//patient inserted
+		
+	}
 	
 	private static void searchPatientById() throws Exception {
-		//TODO
+		System.out.print("Insert the id: ");
+		int id=Integer.parseInt(reader.readLine());
+		
+		/*para buscar en la base de datos:
+		List<Patient> patients= patientManager.searchPatientById(id);
+		
+		// para mostrarlos por pantalla:
+		for (Patient patient : patients) {
+			System.out.println(patient);
 		}
+		*/
+		
+		
+	}
+	
+	private static void searchPatientByName() throws Exception {
+		
+		System.out.print("Insert the name: ");
+		String name=reader.readLine();
+		
+		/*para buscar en la base de datos:
+		List<Patient> patients= patientManager.searchPatientByName(name);
+		
+		//para mistrar por pantalla
+		for (Patient patient : patients) {
+			System.out.println(patient);
+		}
+		*/
+		
+	}
+	
+	private static void addSymptom() throws Exception{
+		
+		System.out.println("So do it!");
+		
+		System.out.print("Manifestation: ");
+		String manifestation =reader.readLine();
+		
+		Symptom symptom = new Symptom(manifestation);
+		// symptom added
+		
+		/*para insertar en base de datos:
+		symptomManager.add(symptom);
+		// symptom inserted*/
+	}
+	
+	private static void searchSymptomById () throws Exception{
+		System.out.print("Insert the id: ");
+		int id=Integer.parseInt(reader.readLine());
+		
+		/*para buscar en la base de datos:
+		List<Symptom> symptoms= symptomManager.searchSymptomById(id);
+		
+		// para mostrar por pantalla:
+		for (Symptom symptom : symptoms) {
+			System.out.println(symptom);
+		}
+		*/
+	}
+	
+	private static void searchSymptomByManifestation() throws Exception{
+		System.out.print("Insert the manifestation: ");
+		String manifestation =reader.readLine();
+		
+		/* para buscar en la base de datos:
+		List<Symptom> symptoms= symptomManager.searchASymptomByManifestation(manifestation);
+		
+		//para mostrar por pantalla:
+		for (Symptom symptom : symptoms) {
+			System.out.println(symptom);
+		}
+		*/
+	}
 	
 	private static void addPathology() throws Exception{
 		

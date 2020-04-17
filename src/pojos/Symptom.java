@@ -18,6 +18,11 @@ public class Symptom implements Serializable{
 		this.id = id;
 		this.manifestation = manifestation;
 	}
+	
+	public Symptom(String manifestation) {
+		super();
+		this.manifestation=manifestation;
+	}
 
 
 	public Symptom() {
