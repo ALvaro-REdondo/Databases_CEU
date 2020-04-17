@@ -21,6 +21,12 @@ public class Allergy implements Serializable{
 		this.degree = degree;
 	}
 
+	public Allergy(String allergy, Integer degree) {
+		super();
+		this.allergy = allergy;
+		this.degree = degree;
+	}
+
 	public Allergy() {
 		super();
 	}
