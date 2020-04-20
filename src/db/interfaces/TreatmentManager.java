@@ -11,4 +11,5 @@ public interface TreatmentManager {
 	public void delete(Treatment treatment);
 	public List<Treatment> searchTreatmentmById(Integer id);
 	public List<Treatment> searchTreatmentByName(String name);
+	public Treatment getTreatmentId(int treatmentId);
 }
