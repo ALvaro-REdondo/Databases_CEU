@@ -117,4 +117,10 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 		//return the list
 		return treatmentsList;
 	}
+
+	@Override
+	public Treatment getTreatmentId(int treatmentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -6,10 +6,11 @@ public interface DBManager {
 	public void disconnect();
 	public void createTables();
 	
-	/* puesto por alba:
-	public PatientManager getPatienManager();
+	public PathologyManager getPathologyManager();
+	public ClinicalHistoryManager getClinicalHistoryManager();
 	public SymptomManager getSymptomManager();
-	// hasta aqui
-	  
-	 */
+	public TreatmentManager getTreatmentManager();
+	public AllergyManager getAllergyManager();
+	public PatientManager getPatienManager();
+	public MedicalPersonnelManager getMedicalPersonnelManager();
 }

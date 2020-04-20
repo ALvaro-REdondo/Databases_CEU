@@ -5,7 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import db.interfaces.AllergyManager;
+import db.interfaces.ClinicalHistoryManager;
 import db.interfaces.DBManager;
+import db.interfaces.MedicalPersonnelManager;
+import db.interfaces.PathologyManager;
+import db.interfaces.PatientManager;
+import db.interfaces.SymptomManager;
+import db.interfaces.TreatmentManager;
 
 public class SQLiteManager implements DBManager {
 
@@ -101,6 +108,41 @@ public class SQLiteManager implements DBManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public PathologyManager getPathologyManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ClinicalHistoryManager getClinicalHistoryManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public SymptomManager getSymptomManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public TreatmentManager getTreatmentManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AllergyManager getAllergyManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PatientManager getPatienManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public MedicalPersonnelManager getMedicalPersonnelManager() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
