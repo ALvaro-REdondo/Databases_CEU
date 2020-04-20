@@ -33,11 +33,11 @@ public class Menu {
 		// esto puesto por alba:
 		
 		dbManager = new SQLiteManager();
+		dbManager.connect();
 		patientManager= dbManager.getPatienManager();
 		symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
-		dbManager.connect();
 		
 		//hasta aquí
 		
