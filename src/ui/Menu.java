@@ -32,16 +32,12 @@ public class Menu {
 		
 		// esto puesto por alba:
 		
-		dbManager = new SQLiteManager();
+		/*dbManager = new SQLiteManager();
 		patientManager= dbManager.getPatienManager();
 		symptomManager = dbManager.getSymptomManager();
-		pathologyManager = dbManager.getPathologyManager();
-		
-		dbManager.connect();
+		dbManager.connect();*/
 		
 		//hasta aquí
-		
-		
 		
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
