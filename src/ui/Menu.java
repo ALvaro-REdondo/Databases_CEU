@@ -12,13 +12,16 @@ import db.interfaces.*;
 import db.sqlite.*;
 
 public class Menu {
-	/*alba:
+	/*alba:*/
 	//DB Managers
 	private static DBManager dbManager;
 	private static PatientManager patientManager;
 	private static SymptomManager symptomManager;
-	*/
+	
 	//hasta aqui
+	
+	private static PathologyManager pathologyManager;
+	private static MedicalPersonnelManager medicalPersonnelManager;
 	
 	//for parsing dates
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -29,10 +32,12 @@ public class Menu {
 		
 		// esto puesto por alba:
 		
-		/*dbManager = new SQLiteManager();
+		dbManager = new SQLiteManager();
 		patientManager= dbManager.getPatienManager();
 		symptomManager = dbManager.getSymptomManager();
-		dbManager.connect();*/
+		pathologyManager = dbManager.getPathologyManager();
+		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
+		dbManager.connect();
 		
 		//hasta aquí
 		
@@ -579,7 +584,7 @@ public class Menu {
 		
 		Pathology pathology = new Pathology(name, duration, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
 		
-		//Aqui hemos creado una pathology y la añadimos.
+		pathologyManager.add(pathology);
 		
 		}
 	
@@ -782,7 +787,7 @@ public class Menu {
 		
 		MedicalPersonnel medicalPersonnel = new MedicalPersonnel(name, department, position, pathologyId);
 		
-		//Aqui hemos anadido un medical Personnel.
+		medicalPersonnelManager.add(medicalPersonnel);
 		
 		}
 	
