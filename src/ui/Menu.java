@@ -20,6 +20,9 @@ public class Menu {
 	*/
 	//hasta aqui
 	
+	private static PathologyManager pathologyManager;
+	private static MedicalPersonnelManager medicalPersonnelManager;
+	
 	//for parsing dates
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	// BufferedReader for my whole code
@@ -29,12 +32,16 @@ public class Menu {
 		
 		// esto puesto por alba:
 		
-		/*dbManager = new SQLiteManager();
+		dbManager = new SQLiteManager();
 		patientManager= dbManager.getPatienManager();
 		symptomManager = dbManager.getSymptomManager();
-		dbManager.connect();*/
+		pathologyManager = dbManager.getPathologyManager();
+		
+		dbManager.connect();
 		
 		//hasta aquí
+		
+		
 		
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
