@@ -33,11 +33,16 @@ public class Menu {
 		// esto puesto por alba:
 		
 		dbManager = new SQLiteManager();
+//<<<<<<< HEAD
 		//patientManager= dbManager.getPatienManager();
 		//symptomManager = dbManager.getSymptomManager();
+//=======
+		dbManager.connect();
+//		patientManager= dbManager.getPatienManager();
+//		symptomManager = dbManager.getSymptomManager();
+//>>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
-		dbManager.connect();
 		
 		//hasta aquí
 		
@@ -85,19 +90,19 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
-			treatmentCreatorSubMenu1();
+			treatmentCreatorSubMenu1Treatment();
 			break;
 		case 2:
 			treatmentCreatorSubMenu2Pathology();
 			break;
 		case 3:
-			treatmentCreatorSubMenu3();
+			treatmentCreatorSubMenu3ClinicalHistory();
 			break;
 		case 4:
 			treatmentCreatorSubMenu4Patient();
 			break;
 		case 5:
-			treatmentCreatorSubMenu5();
+			treatmentCreatorSubMenu5Allergy();
 			break;
 		case 6:
 			treatmentCreatorSubMenu6Symptom();
@@ -110,7 +115,7 @@ public class Menu {
 		}
 	}
 	
-	private static void treatmentCreatorSubMenu1() throws Exception{
+	private static void treatmentCreatorSubMenu1Treatment() throws Exception{
 		System.out.println("Select action \n");
 		
 		System.out.println("1. Add a treatment \n");
@@ -175,7 +180,7 @@ public class Menu {
 		
 	}
 	
-	private static void treatmentCreatorSubMenu3() throws Exception {
+	private static void treatmentCreatorSubMenu3ClinicalHistory() throws Exception {
 		
 	}
 	
@@ -207,7 +212,7 @@ public class Menu {
 		
 	}
 	
-	private static void treatmentCreatorSubMenu5() throws Exception {
+	private static void treatmentCreatorSubMenu5Allergy() throws Exception {
 		
 	}
 	
