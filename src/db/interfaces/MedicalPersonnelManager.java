@@ -9,6 +9,7 @@ public interface MedicalPersonnelManager {
 	public void update(MedicalPersonnel medicalPersonnel);
 	public void delete(MedicalPersonnel medicalPersonnel);
 	public List<MedicalPersonnel> searchMedicalPersonnelById(Integer id);
+	public List<MedicalPersonnel> searchMedicalPersonnelByName(String name);
 	public List<MedicalPersonnel> searchMedicalPersonnelByPathologyId (Integer pathologyId);
 	
 }

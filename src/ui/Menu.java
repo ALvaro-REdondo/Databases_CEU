@@ -15,8 +15,8 @@ public class Menu {
 	/*alba:*/
 	//DB Managers
 	private static DBManager dbManager;
-	private static PatientManager patientManager;
-	private static SymptomManager symptomManager;
+	//private static PatientManager patientManager;
+	//private static SymptomManager symptomManager;
 	
 	//hasta aqui
 	
@@ -33,8 +33,8 @@ public class Menu {
 		// esto puesto por alba:
 		
 		dbManager = new SQLiteManager();
-		patientManager= dbManager.getPatienManager();
-		symptomManager = dbManager.getSymptomManager();
+		//patientManager= dbManager.getPatienManager();
+		//symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
 		dbManager.connect();
@@ -256,6 +256,15 @@ public class Menu {
 			
 			searchMedicalPersonnelByName(); //metodo ya creado mas abajo
 			break;
+			
+		/*case 3: 
+			
+			searchMedicalPersonnelByPathologyId();
+			break;
+			*/
+			default:
+				
+				break;
 		
 		}
 		
@@ -447,6 +456,15 @@ public class Menu {
 			
 			searchMedicalPersonnelByName();
 			break;
+			
+		/*case 3: 
+			
+			searchMedicalPersonnelByPathologyId();
+			break;*/
+			
+			default:
+				break;
+
 		
 		}
 		
@@ -646,9 +664,35 @@ public class Menu {
 	
 	private static void searchPathologyById() throws Exception {
 		
+		System.out.println("Type! \n");
+		System.out.println("Id: \n");
+		int id=Integer.parseInt(reader.readLine());
+		
+		List<Pathology> pathologies = pathologyManager.searchPathologyById(id);
+		
+		for (Pathology pathology : pathologies) {
+			
+			System.out.println(pathology);
+			
+		}
+		
 	}
 	
 	private static void searchPathologyByName() throws Exception {
+		
+		System.out.println("Type! \n");
+		System.out.println("Name: \n");
+		String name = reader.readLine();
+		
+		List<Pathology> pathologies = pathologyManager.searchPathologyByName(name);
+		
+		for (Pathology pathology : pathologies) {
+			
+			System.out.println(pathology);
+			
+		}
+		
+		
 		
 	}
 	
@@ -690,11 +734,19 @@ public class Menu {
 			 switch(choice2) {
 			 
 			 	case 1: 
+			 		
 			 		searchMedicalPersonnelById();
 			 		break;
+			 		
 			 	case 2:
+			 		
 			 		searchMedicalPersonnelByName();
 			 		break;
+			 		
+			 	/*case 3: 
+			 		searchMedicalPersonnelByPathologyId();
+			 		break;*/
+			 	
 			 	default: 
 			 		break;
 			 }			 
@@ -721,6 +773,11 @@ public class Menu {
 			 	case 2:
 			 		searchMedicalPersonnelByName();
 			 		break;
+			 	/*case 3: 
+			 	
+			 		searchMedicalPersonnelByPathologyId();
+			 		break;*/
+			 	
 			 	default: 
 			 		break;
 			 }			
@@ -747,6 +804,10 @@ public class Menu {
 			 	case 2:
 			 		searchMedicalPersonnelByName();
 			 		break;
+			 		
+			 	/*case 3:
+			 		searchMedicalPersonnelByPathologyId();
+			 		break;*/
 			 	default: 
 			 		break;
 			 }			
@@ -759,15 +820,51 @@ public class Menu {
 	
 	private static void searchMedicalPersonnelById() throws Exception{
 		
-		//Creo que deberia de devolver el id para luego buscar el medical personnel y poder modificarlo, etc.
+		System.out.println("Type! \n");
+		System.out.println("Id: \n");
+		int id=Integer.parseInt(reader.readLine());
+		
+		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelById(id);
+		
+		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+			
+			System.out.println(medicalPersonnel);
+			
+		}
 		
 	}
 	
 	private static void searchMedicalPersonnelByName() throws Exception {
 		
-		//Creo que deberia de volver el id para luego buscar el medical personnel y poder modificarlo, etc.
+		System.out.println("Type! \n");
+		System.out.println("Name: \n");
+		String name = reader.readLine();
+		
+		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByName(name);
+		
+		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+			
+			System.out.println(medicalPersonnel);
+			
+		}
 		
 	}
+	
+	/*private static void searchMedicalPersonnelByPathologyId() throws Exception {
+		
+		System.out.println("Type! \n");
+		System.out.println("Pathology id: \n");
+		int pathologyId = Integer.parseInt(reader.readLine());
+		
+		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByPathologyId(pathologyId);
+		
+		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+			
+			System.out.println(medicalPersonnel);
+			
+		}
+		
+	}*/
 	
 	private static void addMedicalPersonnel() throws Exception{
 		
@@ -850,7 +947,7 @@ public class Menu {
 		
 	}
 
-	//METHOS FOR ALLERGY
+	//METHODS FOR ALLERGY
 	
 	private static void addAllergy() throws Exception{
 		System.out.println("Great, you seem nice, you can do it: \n");

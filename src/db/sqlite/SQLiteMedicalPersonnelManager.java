@@ -187,4 +187,46 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		return medicalPersonnelList;
 	}
 
+	@Override
+	public List<MedicalPersonnel> searchMedicalPersonnelByName(String name) {
+		
+		//Create empty list of medical personnel
+		
+		List<MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
+		
+		try {
+			
+			//Search medical personnel that has the same name as the one inserted by the user.
+			
+			String sql = "SELECT * FROM medicalPersonnel WHERE name LIKE ?";
+			
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) { 
+				
+				int id = rs.getInt("id");
+				String name1 = rs.getString("name");
+				String department = rs.getString("department");
+				String position = rs.getString("position");
+				int pathologyId = rs.getInt("pathology id");
+				
+				//Create a new medical personnel
+				
+				MedicalPersonnel medicalPersonnel = new MedicalPersonnel(id, name1, department, position, pathologyId);
+				
+				medicalPersonnelList.add(medicalPersonnel);
+				
+			}
+			
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return medicalPersonnelList;
+		
+	}
+
 }
