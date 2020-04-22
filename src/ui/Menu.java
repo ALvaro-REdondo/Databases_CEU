@@ -33,14 +33,9 @@ public class Menu {
 		// esto puesto por alba:
 		
 		dbManager = new SQLiteManager();
-//<<<<<<< HEAD
-		//patientManager= dbManager.getPatienManager();
-		//symptomManager = dbManager.getSymptomManager();
-//=======
 		dbManager.connect();
-//		patientManager= dbManager.getPatienManager();
-//		symptomManager = dbManager.getSymptomManager();
-//>>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
+        PatientManager	patientManager = dbManager.getPatientManager();
+        SymptomManager	symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
 		
