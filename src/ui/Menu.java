@@ -16,10 +16,7 @@ public class Menu {
 	//DB Managers
 	private static DBManager dbManager;
 	private static PatientManager patientManager;
-	private static SymptomManager symptomManager;
-	
-	//hasta aqui
-	
+	private static SymptomManager symptomManager;	
 	private static PathologyManager pathologyManager;
 	private static MedicalPersonnelManager medicalPersonnelManager;
 	
@@ -30,16 +27,12 @@ public class Menu {
 	
 	public static void main(String[] args) throws Exception{
 		
-		// esto puesto por alba:
-		
 		dbManager = new SQLiteManager();
 		dbManager.connect();
         PatientManager	patientManager = dbManager.getPatientManager();
         SymptomManager	symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
-		
-		//hasta aquí
 		
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
