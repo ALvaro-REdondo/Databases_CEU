@@ -15,8 +15,8 @@ public class Menu {
 	/*alba:*/
 	//DB Managers
 	private static DBManager dbManager;
-	//private static PatientManager patientManager;
-	//private static SymptomManager symptomManager;
+	private static PatientManager patientManager;
+	private static SymptomManager symptomManager;
 	
 	//hasta aqui
 	
@@ -546,37 +546,37 @@ public class Menu {
 		Symptom symptom = new Symptom(manifestation);
 		// symptom added
 		
-		/*para insertar en base de datos:
+		//para insertar en base de datos:
 		symptomManager.add(symptom);
-		// symptom inserted*/
+		// symptom inserted
 	}
 	
 	private static void searchSymptomById () throws Exception{
 		System.out.print("Insert the id: ");
 		int id=Integer.parseInt(reader.readLine());
 		
-		/*para buscar en la base de datos:
+		//para buscar en la base de datos:
 		List<Symptom> symptoms= symptomManager.searchSymptomById(id);
 		
 		// para mostrar por pantalla:
 		for (Symptom symptom : symptoms) {
 			System.out.println(symptom);
 		}
-		*/
+	
 	}
 	
 	private static void searchSymptomByManifestation() throws Exception{
 		System.out.print("Insert the manifestation: ");
 		String manifestation =reader.readLine();
 		
-		/* para buscar en la base de datos:
+		//para buscar en la base de datos:
 		List<Symptom> symptoms= symptomManager.searchASymptomByManifestation(manifestation);
 		
 		//para mostrar por pantalla:
 		for (Symptom symptom : symptoms) {
 			System.out.println(symptom); 
 		}
-		*/
+		
 	}
 	
 	private static void addPathology() throws Exception{
