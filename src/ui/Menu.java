@@ -23,6 +23,8 @@ public class Menu {
 	private static PathologyManager pathologyManager;
 	private static MedicalPersonnelManager medicalPersonnelManager;
 	private static TreatmentManager treatmentManager;
+	private static AllergyManager allergyManager;
+	private static ClinicalHistoryManager clinicalHistoryManager;
 	
 	//for parsing dates
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -39,6 +41,8 @@ public class Menu {
         SymptomManager	symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
+		allergyManager = dbManager.getAllergyManager();
+		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
 		
 		//hasta aquí
 		
@@ -982,6 +986,21 @@ public class Menu {
 		
 	}
 
+	private static void searchClinicalHistoryById() throws Exception {
+		System.out.println("Type! \n");
+		System.out.println("Clinical History id: \n");
+		int id=Integer.parseInt(reader.readLine());
+		
+		List<ClinicalHistory> clinicalHistories = clinicalHistoryManager.searchClinicalHistoryById(id);
+		
+		for (ClinicalHistory clinicalHistory : clinicalHistories) {
+			
+			System.out.println(clinicalHistory);
+			
+		}
+	}
+	
+	
 	//METHODS FOR ALLERGY
 	
 	private static void addAllergy() throws Exception{
@@ -996,5 +1015,33 @@ public class Menu {
 		Allergy allergy = new Allergy(allergyName, degree);
 		
 	}
-}
+
+	private static void searchAllergyById() throws Exception {
+		System.out.println("Type! \n");
+		System.out.println("Allergy id: \n");
+		int id=Integer.parseInt(reader.readLine());
+		
+		List<Allergy> allergies = allergyManager.searchAllergyById(id);
+		
+		for (Allergy allergy : allergies) {
+			
+			System.out.println(allergy);
+			
+		}
+	}
 	
+	private static void searchAllergyByName() throws Exception{
+		
+		System.out.println("Type! \n");
+		System.out.println("Name: \n");
+		String name = reader.readLine();
+		
+		List<Allergy> allergies = allergyManager.searchAllergyByName(name);
+		
+		for (Allergy allergy : allergies) {
+			
+			System.out.println(allergy);
+		}
+				
+	}
+}

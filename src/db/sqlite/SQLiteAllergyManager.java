@@ -41,7 +41,6 @@ public class SQLiteAllergyManager implements AllergyManager {
 			String sql = "SELECT * FROM allergy WHERE allergy LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + id + "%");
-			// HAY QUE HACER EL SEARCHALLERGY(???)********************************************************************************************************************
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int allergyId = rs.getInt("id");
@@ -58,13 +57,12 @@ public class SQLiteAllergyManager implements AllergyManager {
 	}
 
 	@Override
-	public List<Allergy> searchAllergyByAllergy(String allergy) {
+	public List<Allergy> searchAllergyByName(String allergy) {
 		List<Allergy> allergyList = new ArrayList<Allergy>();
 		try {
 			String sql = "SELECT * FROM allergy WHERE allergy LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + allergy + "%");
-			// HAY QUE HACER EL SEARCHALLERGY(???)********************************************************************************************************************
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
