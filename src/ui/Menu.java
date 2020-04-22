@@ -498,7 +498,7 @@ public class Menu {
 		// Patient added
 		
 		// para insertarlo:
-		//patientManager.add(patient);
+		patientManager.add(patient);
 		
 		//patient inserted
 		
@@ -508,14 +508,14 @@ public class Menu {
 		System.out.print("Insert the id: ");
 		int id=Integer.parseInt(reader.readLine());
 		
-		/*para buscar en la base de datos:
+		//para buscar en la base de datos:
 		List<Patient> patients= patientManager.searchPatientById(id);
 		
 		// para mostrarlos por pantalla:
 		for (Patient patient : patients) {
 			System.out.println(patient);
 		}
-		*/
+		
 		
 		
 	}
@@ -525,14 +525,14 @@ public class Menu {
 		System.out.print("Insert the name: ");
 		String name=reader.readLine();
 		
-		/*para buscar en la base de datos:
+		//para buscar en la base de datos:
 		List<Patient> patients= patientManager.searchPatientByName(name);
 		
 		//para mistrar por pantalla
 		for (Patient patient : patients) {
 			System.out.println(patient);
 		}
-		*/
+		
 		
 	}
 	

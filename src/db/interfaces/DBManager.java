@@ -11,6 +11,6 @@ public interface DBManager {
 	public SymptomManager getSymptomManager();
 	public TreatmentManager getTreatmentManager();
 	public AllergyManager getAllergyManager();
-	public PatientManager getPatienManager();
+	public PatientManager getPatientManager();
 	public MedicalPersonnelManager getMedicalPersonnelManager();
 }
