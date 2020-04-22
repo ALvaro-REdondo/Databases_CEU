@@ -139,11 +139,9 @@ public class Menu {
 			}
 			if(choice2 == 1) {
 				searchTreatmentById();
-				break;
 			}
 			if(choice == 2) {
 				searchTreatmentByName();
-				break;
 			}
 			break;
 		case 4:
