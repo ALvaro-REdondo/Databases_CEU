@@ -19,6 +19,7 @@ public class Menu {
 	private static SymptomManager symptomManager;	
 	private static PathologyManager pathologyManager;
 	private static MedicalPersonnelManager medicalPersonnelManager;
+	private static TreatmentManager treatmentManager;
 	
 	//for parsing dates
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -122,7 +123,21 @@ public class Menu {
 			updateTreatment();//crear
 			break;
 		case 3: 
-			checkTreatment();//crear
+			System.out.println("Select action \\n");
+			System.out.println("1. Search by id \n");
+			System.out.println("2. Search by name \n");
+			int choice2 = Integer.parseInt(reader.readLine());
+			while(choice2 != 1 || choice2 !=2) {
+			System.out.println("Select a valid option, please");
+			}
+			if(choice2 == 1) {
+				searchTreatmentById();
+				break;
+			}
+			if(choice == 2) {
+				searchTreatmentByName();
+				break;
+			}
 			break;
 		case 4:
 			deleteTreatment();//crear
@@ -813,34 +828,30 @@ public class Menu {
 	
 	private static void searchMedicalPersonnelById() throws Exception{
 		
-		System.out.println("Type! \n");
-		System.out.println("Id: \n");
+		System.out.println("Instert the id: \n");
 		int id=Integer.parseInt(reader.readLine());
-		
 		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelById(id);
 		
-		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
-			
-			System.out.println(medicalPersonnel);
-			
-		}
+		//we search in our database for all the treatments which correspond to the id specified by the user
 		
+		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+			System.out.println(medicalPersonnel);
+		}
+		//we show the treatments who matched the required id
 	}
 	
 	private static void searchMedicalPersonnelByName() throws Exception {
 		
-		System.out.println("Type! \n");
-		System.out.println("Name: \n");
+		System.out.println("Insert the name: \n");
 		String name = reader.readLine();
-		
 		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByName(name);
 		
-		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
-			
-			System.out.println(medicalPersonnel);
-			
-		}
+		//we search in our database for all the treatments which have the same name as the one specified
 		
+		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+			System.out.println(medicalPersonnel);
+		}
+		//we show the treatments who matched the required name
 	}
 	
 	/*private static void searchMedicalPersonnelByPathologyId() throws Exception {
@@ -894,15 +905,41 @@ public class Menu {
 		String description = reader.readLine();
 		
 		Treatment treatment = new Treatment(name,medication,description);
-		//añadimos un treatment, pero esta incompleto :c. Que triste
+		treatmentManager.add(treatment);
 	}
 	
 	private static void updateTreatment() throws Exception{
 		
 	}
 	
-	private static void checkTreatment() throws Exception{
+	private static void searchTreatmentByName() throws Exception{
 		
+		System.out.println("Type! \n");
+		System.out.println("Name: \n");
+		String name = reader.readLine();
+		
+		List<Treatment> treatments = treatmentManager.searchTreatmentByName(name);
+		
+		for (Treatment treatment : treatments) {
+			
+			System.out.println(treatment);
+		}
+				
+	}
+	
+	private static void searchTreatmentById() throws Exception {
+		
+		System.out.println("Type! \n");
+		System.out.println("Name: \n");
+		int id=Integer.parseInt(reader.readLine());
+		
+		List<Treatment> treatments = treatmentManager.searchTreatmentById(id);
+		
+		for (Treatment treatment : treatments) {
+			
+			System.out.println(treatment);
+			
+		}
 	}
 	
 	private static void deleteTreatment() throws Exception{

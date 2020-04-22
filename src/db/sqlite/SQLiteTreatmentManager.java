@@ -9,6 +9,7 @@ import java.util.List;
 
 import db.interfaces.TreatmentManager;
 import pojos.Patient;
+import pojos.Symptom;
 import pojos.Treatment;
 
 public class SQLiteTreatmentManager implements TreatmentManager {
@@ -69,7 +70,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 	}
 
 	@Override
-	public List<Treatment> searchTreatmentmById(Integer id) {
+	public List<Treatment> searchTreatmentById(Integer id) {
 		List<Treatment> treatmentsList = new ArrayList<Treatment>();
 		try {
 			String sql ="SELECT * FROM patient WHERE name LIKE ?";
@@ -117,6 +118,34 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 		//return the list
 		return treatmentsList;
 	}
+	
+
+	public List<Treatment> showTreatments() {
+		
+		List<Treatment> treatmentsList = new ArrayList<Treatment>();
+		
+		try {
+			String sql = "SELECT * FROM treatment";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+		
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String treatmentName = rs.getString("name");
+				String treatmentMedication = rs.getString("medication");
+				String treatmentDescription = rs.getString("description");
+				Treatment newTreatment = new Treatment(id, treatmentName, treatmentMedication, treatmentDescription);
+				treatmentsList.add(newTreatment);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return treatmentsList;
+	}
+
+	
 
 	@Override
 	public Treatment getTreatmentId(int treatmentId) {
