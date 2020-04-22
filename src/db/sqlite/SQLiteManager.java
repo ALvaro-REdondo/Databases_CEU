@@ -135,7 +135,7 @@ public class SQLiteManager implements DBManager {
 		return null;
 	}
 	@Override
-	public PatientManager getPatienManager() {
+	public PatientManager getPatientManager() {
 		// TODO Auto-generated method stub
 		return null;
 	}
