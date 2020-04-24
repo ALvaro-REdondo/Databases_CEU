@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,5 +152,31 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 	public Treatment getTreatmentId(int treatmentId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Treatment getTreatment(int TreatmentId) {
+        Treatment newTreatment = null;
+		
+		try {
+			
+			String sql = "SELECT * FROM treatment WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  TreatmentId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			String TreatmentName = rs.getString("name");
+			String TreatmentMedication = rs.getString("medication");
+			String TreatmentDescription = rs.getString("description");
+			newTreatment = new Treatment(id, TreatmentName, TreatmentMedication, TreatmentDescription);
+			
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return newTreatment;
 	}
 }

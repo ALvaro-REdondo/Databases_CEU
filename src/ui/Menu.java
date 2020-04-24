@@ -128,24 +128,45 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
-			addTreatment();//completar
+			addTreatment();//completado,o eso creo
 			break;
 		case 2: 
-			updateTreatment();//crear
-			break;
-		case 3: 
-			System.out.println("Select action \\n");
-			System.out.println("1. Search by id \n");
-			System.out.println("2. Search by name \n");
+			searchMenu();
+			Treatment treatment2;
 			int choice2 = Integer.parseInt(reader.readLine());
 			while(choice2 != 1 || choice2 !=2) {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice2 == 1) {
-				searchTreatmentById();
+				treatment2 = searchTreatmentById();
 			}
-			if(choice == 2) {
+			if(choice2 == 2) {
 				searchTreatmentByName();
+			}
+			break;
+		case 3: 
+			//mostrar todos los treatments primero
+		    searchMenu();
+		    List<Treatment> treatments;
+			int choice3 = Integer.parseInt(reader.readLine());
+			while(choice3 != 1 || choice3 !=2) {
+			System.out.println("Select a valid option, please");
+			}
+			if(choice3 == 1) {
+				searchTreatmentById();
+				for (Treatment treatment : treatments) {
+					
+					System.out.println(treatment);
+				}
+				
+			}
+			if(choice3 == 2) {
+				searchTreatmentByName();
+				for (Treatment treatment : treatments) {
+					
+					System.out.println(treatment);
+				}
+				
 			}
 			break;
 		case 4:
@@ -919,36 +940,27 @@ public class Menu {
 	
 	private static void updateTreatment() throws Exception{
 		
+		
 	}
 	
-	private static void searchTreatmentByName() throws Exception{
+	private static  List<Treatment> searchTreatmentByName() throws Exception{
 		
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		String name = reader.readLine();
 		
 		List<Treatment> treatments = treatmentManager.searchTreatmentByName(name);
-		
-		for (Treatment treatment : treatments) {
-			
-			System.out.println(treatment);
-		}
-				
+		return treatments;		
 	}
 	
-	private static void searchTreatmentById() throws Exception {
+	private static List<Treatment> searchTreatmentById() throws Exception {
 		
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
 		List<Treatment> treatments = treatmentManager.searchTreatmentById(id);
-		
-		for (Treatment treatment : treatments) {
-			
-			System.out.println(treatment);
-			
-		}
+		return treatments;
 	}
 	
 	private static void deleteTreatment() throws Exception{
@@ -957,7 +969,6 @@ public class Menu {
 	
 	private static void searchMenu() throws Exception{
 		System.out.println("Select an option \n");
-		
 		System.out.println("1. Search by id \n");
 		System.out.println("2. Search by name \n");
 		
