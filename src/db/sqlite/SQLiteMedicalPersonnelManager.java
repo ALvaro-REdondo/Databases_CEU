@@ -11,6 +11,7 @@ import java.util.List;
 import db.interfaces.MedicalPersonnelManager;
 import pojos.MedicalPersonnel;
 import pojos.Pathology;
+import pojos.Symptom;
 
 public class SQLiteMedicalPersonnelManager implements MedicalPersonnelManager {
 	
@@ -227,6 +228,35 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		
 		return medicalPersonnelList;
 		
+	}
+
+	@Override
+	
+	public List<MedicalPersonnel> showMedicalPersonnel() {
+		
+		List<MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
+		
+		try {
+			String sql = "SELECT * FROM MedicalPersonnel";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+		
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String department = rs.getString("department");
+				String position = rs.getString("position");
+				Integer pathologyId = rs.getInt("pathology id");
+				MedicalPersonnel newMedicalPersonnel = new MedicalPersonnel(id, name, department, position, pathologyId);
+				
+				medicalPersonnelList.add(newMedicalPersonnel);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return medicalPersonnelList;
 	}
 
 }
