@@ -1000,6 +1000,52 @@ public class Menu {
 		}
 	}
 	
+	private static void updateClinicalHistory(int clinicalHistoryId) throws Exception {
+		//get the clinical history
+		ClinicalHistory toBeModified = clinicalHistoryManager.getClinicalHistory(clinicalHistoryId);
+		
+		//REVISA BIEN Y PIENSA FUERTEMENTE QUE ESTA PASANDO AQUI PORQUE NO ME FIO*****************************************************************************
+		System.out.println("Actual date of entry: " + toBeModified.getDoe());
+		System.out.println("Type the new date of entry (yyyy-MM-dd) or press enter to leave it as is:");
+		String newDateOfEntry = reader.readLine();
+		Date newDoe;
+		//if the user does not type anything, the doe stays the same
+		if (newDateOfEntry.equals("")) {
+			newDoe = toBeModified.getDoe();
+		} else {
+			newDoe = Date.valueOf(LocalDate.parse(newDateOfEntry, formatter));
+		}
+		
+		System.out.println("Actual date of discharge: " + toBeModified.getDod());
+		System.out.println("Type the new date of entry (yyyy-MM-dd) or press enter to leave it as is:");
+		String newDateOfDischarge = reader.readLine();
+		Date newDod;
+		//if the user does not type anything, the dod stays the same
+		if (newDateOfDischarge.equals("")) {
+			newDod = toBeModified.getDod();
+		} else {
+			newDod = Date.valueOf(LocalDate.parse(newDateOfDischarge, formatter));
+		}
+		
+		System.out.println("Actual blood type: " + toBeModified.getBloodType());
+		System.out.println("Type the new blood type or press enter to leave it as is:");
+		String newBloodType = reader.readLine();
+		//if the user does not type anything, the doe stays the same
+		if (newBloodType.equals("")) {
+			newBloodType = toBeModified.getBloodType();
+		} 
+		
+		System.out.println("Actual extra information: " + toBeModified.getExtraInfo());
+		System.out.println("Type the new extra information or press enter to leave it as is:");
+		String newExtraInfo = reader.readLine();
+		//if the user does not type anything, the doe stays the same
+		if (newExtraInfo.equals("")) {
+			newExtraInfo = toBeModified.getExtraInfo();
+		} 
+		
+		ClinicalHistory updatedClinicalHistory = new ClinicalHistory(newDoe, newDod, newBloodType, newExtraInfo);
+		clinicalHistoryManager.update(updatedClinicalHistory);
+}
 	
 	//METHODS FOR ALLERGY
 	
@@ -1044,4 +1090,6 @@ public class Menu {
 		}
 				
 	}
+
+	
 }
