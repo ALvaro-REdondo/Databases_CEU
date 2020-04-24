@@ -371,6 +371,8 @@ public class Menu {
 
 	private static void updatePathology() throws Exception {
 		
+		//first we show the pathology and then they decide what to modify 
+		
 	}
 	
 	private static void deletePathology() throws Exception {

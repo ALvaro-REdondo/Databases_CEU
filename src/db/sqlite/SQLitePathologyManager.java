@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.PathologyManager;
+import pojos.MedicalPersonnel;
 import pojos.Pathology;
 import java.sql.Connection;
 import java.sql.Date;
@@ -162,6 +163,37 @@ public class SQLitePathologyManager implements PathologyManager {
 			e.printStackTrace();
 			
 		};
+		return pathologyList;
+	}
+	
+	@Override
+	
+	public List<Pathology> showPathologies() {
+		
+		List<Pathology> pathologyList = new ArrayList<Pathology>();
+		
+		try {
+			String sql = "SELECT * FROM Pathology";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+		
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				Integer duration = rs.getInt("duration");
+				Date startDate = rs.getDate("Start Date");
+				Date endingDate = rs.getDate("Ending Date");
+				Integer treatmentId = rs.getInt("Treatment id");
+				
+				Pathology pathology = new Pathology(id, name, duration, startDate, endingDate, treatmentId);
+				
+				pathologyList.add(pathology);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return pathologyList;
 	}
 

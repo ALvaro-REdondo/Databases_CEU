@@ -11,5 +11,5 @@ public interface PathologyManager {
 	public void delete(Pathology pathology);
 	public List<Pathology> searchPathologyById(Integer id);
 	public List<Pathology> searchPathologyByName(String name);
-	
+	public List<Pathology> showPathologies();
 }
