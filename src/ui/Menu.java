@@ -16,10 +16,7 @@ public class Menu {
 	//DB Managers
 	private static DBManager dbManager;
 	private static PatientManager patientManager;
-	private static SymptomManager symptomManager;
-	
-	//hasta aqui
-	
+	private static SymptomManager symptomManager;	
 	private static PathologyManager pathologyManager;
 	private static MedicalPersonnelManager medicalPersonnelManager;
 	private static TreatmentManager treatmentManager;
@@ -33,8 +30,6 @@ public class Menu {
 	
 	public static void main(String[] args) throws Exception{
 		
-		// esto puesto por alba:
-		
 		dbManager = new SQLiteManager();
 		dbManager.connect();
         PatientManager	patientManager = dbManager.getPatientManager();
@@ -43,8 +38,6 @@ public class Menu {
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
-		
-		//hasta aquí
 		
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
@@ -398,6 +391,8 @@ public class Menu {
 	}
 
 	private static void updatePathology() throws Exception {
+		
+		//first we show the pathology and then they decide what to modify 
 		
 	}
 	
