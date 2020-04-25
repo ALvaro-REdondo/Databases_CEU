@@ -749,13 +749,8 @@ public class Menu {
 			
 			System.out.println("2. Update Medical Personnel \n");
 			
-			 /*System.out.println("Select an option \n");
-			 
-			 System.out.println("1. Search medical personnel by id \n");
-			 
-			 System.out.println("2. Search medical personnel by name \n");*/
-			
 			searchMenu();
+			System.out.println("3. Search by Pathology Id \n");
 			 
 			 int choice2 = Integer.parseInt(reader.readLine());
 			 
@@ -771,9 +766,9 @@ public class Menu {
 			 		searchMedicalPersonnelByName();
 			 		break;
 			 		
-			 	/*case 3: 
+			 	case 3: 
 			 		searchMedicalPersonnelByPathologyId();
-			 		break;*/
+			 		break;
 			 	
 			 	default: 
 			 		break;
@@ -782,14 +777,9 @@ public class Menu {
 			
 		
 		case 3: 
-			
-			/*System.out.println("Select an option \n");
-			 
-			 System.out.println("1. Search medical personnel by id \n");
-			 
-			 System.out.println("2. Search medical personnel by name \n");*/
-			
+						
 			searchMenu();
+			System.out.println("3. Search by pathology Id \n");
 			 
 			 int choice3 = Integer.parseInt(reader.readLine());
 			 
@@ -801,10 +791,10 @@ public class Menu {
 			 	case 2:
 			 		searchMedicalPersonnelByName();
 			 		break;
-			 	/*case 3: 
+			 	case 3: 
 			 	
 			 		searchMedicalPersonnelByPathologyId();
-			 		break;*/
+			 		break;
 			 	
 			 	default: 
 			 		break;
@@ -814,13 +804,8 @@ public class Menu {
 			
 			System.out.println("4. Medical Personnel \n");
 			
-			/*System.out.println("Select an option \n");
-			 
-			 System.out.println("1. Search medical personnel by id \n");
-			 
-			 System.out.println("2. Search medical personnel by name \n");*/
-			
 			searchMenu();
+			System.out.println("3. Search by PathologyId \n");
 			 
 			 int choice4 = Integer.parseInt(reader.readLine());
 			 
@@ -833,9 +818,10 @@ public class Menu {
 			 		searchMedicalPersonnelByName();
 			 		break;
 			 		
-			 	/*case 3:
+			 	case 3:
 			 		searchMedicalPersonnelByPathologyId();
-			 		break;*/
+			 		break;
+			 		
 			 	default: 
 			 		break;
 			 }			
@@ -874,7 +860,7 @@ public class Menu {
 		//we show the treatments who matched the required name
 	}
 	
-	/*private static void searchMedicalPersonnelByPathologyId() throws Exception {
+	private static void searchMedicalPersonnelByPathologyId() throws Exception {
 		
 		System.out.println("Type! \n");
 		System.out.println("Pathology id: \n");
@@ -888,7 +874,7 @@ public class Menu {
 			
 		}
 		
-	}*/
+	}
 	
 	private static void addMedicalPersonnel() throws Exception{
 		
