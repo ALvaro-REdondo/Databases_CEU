@@ -177,11 +177,6 @@ public class Menu {
 		
 		System.out.println("2. Pathology \n");
 		
-		/*System.out.println("Select an option \n");
-		
-		System.out.println("1. Search by Id \n");
-		System.out.println("2. Search by Name \n");*/
-		
 		searchMenu();
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -273,6 +268,7 @@ public class Menu {
 		System.out.println("7. Medical Personnel \n");
 		
 		searchMenu();
+		System.out.println("3. Search by Pathology Id \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -288,11 +284,11 @@ public class Menu {
 			searchMedicalPersonnelByName(); //metodo ya creado mas abajo
 			break;
 			
-		/*case 3: 
+		case 3: 
 			
-			searchMedicalPersonnelByPathologyId();
+			searchMedicalPersonnelByPathologyId(); //metodo ya creado mas abajo
 			break;
-			*/
+			
 			default:
 				
 				break;
@@ -350,8 +346,6 @@ public class Menu {
 		
 		System.out.println("1.Check \n");
 	}
-	
-	//creo el submenu para pathology
 	
 	private static void medicalPersonnelSubMenu2Pathology() throws Exception{
 		
@@ -475,6 +469,7 @@ public class Menu {
 		System.out.println("7. Medical Personnel");
 		
 		searchMenu();
+		System.out.println("Search by Pathology id");
 		
 		int choice = Integer.parseInt(reader.readLine()); 
 		
@@ -490,10 +485,10 @@ public class Menu {
 			searchMedicalPersonnelByName();
 			break;
 			
-		/*case 3: 
+		case 3: 
 			
 			searchMedicalPersonnelByPathologyId();
-			break;*/
+			break;
 			
 			default:
 				break;
