@@ -94,10 +94,8 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 			
 			clinicalHistory = new ClinicalHistory(id, doe, dod, bloodType, extraInfo);
 			
-		} catch(SQLException e) {
-			
-			e.printStackTrace();
-			
+		} catch(SQLException e) {	
+			e.printStackTrace();	
 		}
 		return clinicalHistory;
 	}
