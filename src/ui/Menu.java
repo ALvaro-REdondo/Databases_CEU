@@ -569,6 +569,71 @@ public class Menu {
 		
 	}
 	
+	private static void updatePatient ( int patientId) throws Exception{
+		
+		Patient toBeModified = patientManager.getPatient(patientId);
+		
+		// name, gender, state , DOB, pathid, clinhistid
+		
+		System.out.println("Actual name: " + toBeModified.getName());
+		System.out.println("Type the new name or press enter to leave it as it is");
+		String newName = reader.readLine();
+		if ( newName.equals("")) {
+				newName=toBeModified.getName();
+		}
+		
+		System.out.println("Actual gender: " + toBeModified.getGender());
+		System.out.println("Type the new gender or press enter to leave it as it is");
+		String newGender = reader.readLine();
+		if ( newGender.equals("")) {
+				newGender=toBeModified.getGender();
+		}
+		
+		System.out.println("Actual state: " + toBeModified.getState());
+		System.out.println("Type the new state or press enter to leave it as it is");
+		String newState = reader.readLine();
+		if ( newState.equals("")) {
+				newState=toBeModified.getState();
+		}
+		
+		System.out.println("Actual date of birth: " + toBeModified.getDob());
+		System.out.println("Type the new date of birth or press enter to leave it as it is");
+		String newDob = reader.readLine();
+		Date newDOB;
+		if ( newDob.equals("")) {
+				newDOB=toBeModified.getDob();
+		}else {
+				newDOB= Date.valueOf(LocalDate.parse(newDob, formatter));
+		}
+		
+		System.out.println("Actual pathology id: " + toBeModified.getName());
+		System.out.println("Type the new pathology id or press enter to leave it as it is");
+		String newPathologyId = reader.readLine();
+		int newPathology_id;
+		if ( newPathologyId.equals("")) {
+				newPathology_id=toBeModified.getPathology_id();
+		}else {
+			newPathology_id= Integer.parseInt(newPathologyId);
+		}
+		
+		System.out.println("Actual clinical history id: " + toBeModified.getName());
+		System.out.println("Type the new clinical history id or press enter to leave it as it is");
+		String newCHId = reader.readLine();
+		int newClinicalHistory_id;
+		if ( newCHId.equals("")) {
+				newClinicalHistory_id=toBeModified.getClinicalhistory_id();
+		}else {
+			newClinicalHistory_id= Integer.parseInt(newCHId);
+		}
+		
+		Patient updatedPatient = new Patient (newName, newGender,newState,newDOB,newPathology_id,newClinicalHistory_id);
+		
+		patientManager.update(updatedPatient);
+		
+		
+		
+	}
+	
 	private static void addSymptom() throws Exception{
 		
 		System.out.println("So do it!");
