@@ -131,7 +131,7 @@ public class Menu {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice2 == 1) {
-				treatment2 = searchTreatmentById();
+				//treatment2 = searchTreatmentById();
 			}
 			if(choice2 == 2) {
 				searchTreatmentByName();
@@ -146,20 +146,10 @@ public class Menu {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice3 == 1) {
-				searchTreatmentById();
-				for (Treatment treatment : treatments) {
-					
-					System.out.println(treatment);
-				}
-				
+				searchTreatmentById();	
 			}
 			if(choice3 == 2) {
 				searchTreatmentByName();
-				for (Treatment treatment : treatments) {
-					
-					System.out.println(treatment);
-				}
-				
 			}
 			break;
 		case 4:
@@ -170,8 +160,8 @@ public class Menu {
 			
 		}
 		
-
 	}
+	
 	
 	private static void treatmentCreatorSubMenu2Pathology() throws Exception {
 		

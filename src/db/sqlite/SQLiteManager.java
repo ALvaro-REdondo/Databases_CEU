@@ -17,6 +17,13 @@ import db.interfaces.TreatmentManager;
 public class SQLiteManager implements DBManager {
 
 	private Connection c;
+	private PatientManager patient;
+	private TreatmentManager treatment;
+	private MedicalPersonnelManager medicalPersonnel;
+	private SymptomManager symptom;
+	private PathologyManager pathology;
+	private ClinicalHistoryManager clinicalHistory;
+	private AllergyManager allergy;
 
 	public SQLiteManager() {
 		super();
@@ -29,6 +36,14 @@ public class SQLiteManager implements DBManager {
 			this.c = DriverManager.getConnection("jdbc:sqlite:./db/Clinicaltrials.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			//create Managers
+			patient = new SQLitePatientManager(c);
+			treatment = new SQLiteTreatmentManager(c);
+			medicalPersonnel = new SQLiteMedicalPersonnelManager(c);
+			symptom = new SQLiteSymptomManager(c);
+			pathology = new SQLitePathologyManager(c);
+			clinicalHistory = new SQLiteClinicalHistoryManager(c);
+			allergy = new SQLiteAllergyManager(c);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,37 +127,37 @@ public class SQLiteManager implements DBManager {
 	@Override
 	public PathologyManager getPathologyManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return pathology;
 	}
 	@Override
 	public ClinicalHistoryManager getClinicalHistoryManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return clinicalHistory;
 	}
 	@Override
 	public SymptomManager getSymptomManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return symptom;
 	}
 	@Override
 	public TreatmentManager getTreatmentManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return treatment;
 	}
 	@Override
 	public AllergyManager getAllergyManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return allergy;
 	}
 	@Override
 	public PatientManager getPatientManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return patient;
 	}
 	@Override
 	public MedicalPersonnelManager getMedicalPersonnelManager() {
 		// TODO Auto-generated method stub
-		return null;
+		return medicalPersonnel;
 	}
 
 }
