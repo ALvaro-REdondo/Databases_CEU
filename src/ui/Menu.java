@@ -31,13 +31,15 @@ public class Menu {
 		
 		dbManager = new SQLiteManager();
 		dbManager.connect();
-        PatientManager	patientManager = dbManager.getPatientManager();
-        SymptomManager	symptomManager = dbManager.getSymptomManager();
+        patientManager = dbManager.getPatientManager();
+        symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
+		treatmentManager = dbManager.getTreatmentManager();		
 		
+		dbManager.createTables();
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		//Print welcome screen
@@ -120,7 +122,7 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
-			addTreatment();//completado,o eso creo
+			addTreatment();
 			break;
 		case 2: 
 			searchMenu();
@@ -141,8 +143,9 @@ public class Menu {
 		    searchMenu();
 		    List<Treatment> treatments;
 			int choice3 = Integer.parseInt(reader.readLine());
-			while(choice3 != 1 || choice3 !=2) {
+			while(choice3 != 1 && choice3 !=2) {
 			System.out.println("Select a valid option, please");
+			choice3 = Integer.parseInt(reader.readLine());
 			}
 			if(choice3 == 1) {
 				searchTreatmentById();	
@@ -1051,6 +1054,11 @@ public class Menu {
 		String name = reader.readLine();
 		
 		List<Treatment> treatments = treatmentManager.searchTreatmentByName(name);
+		for (Treatment treatment : treatments) {
+			
+			System.out.println(treatment);
+			
+		}
 		return treatments;		
 	}
 	
@@ -1061,6 +1069,11 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		List<Treatment> treatments = treatmentManager.searchTreatmentById(id);
+		for (Treatment treatment : treatments) {
+			
+			System.out.println(treatment);
+			
+		}
 		return treatments;
 	}
 	
@@ -1202,6 +1215,7 @@ public class Menu {
 		}
 				
 	}
-
 	
 }
+
+	

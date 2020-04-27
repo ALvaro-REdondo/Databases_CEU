@@ -25,7 +25,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 	public void add(Treatment treatment) {
 		//insert the provided treatment
 		try {
-			String sql = "INSERT INTO treatments (name, medication, description) " + "VALUES (?,?,?);";
+			String sql = "INSERT INTO Treatment (name, medication, description) " + "VALUES (?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, treatment.getName());
 			prep.setString(2, treatment.getMedication());
@@ -74,7 +74,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 	public List<Treatment> searchTreatmentById(Integer id) {
 		List<Treatment> treatmentsList = new ArrayList<Treatment>();
 		try {
-			String sql ="SELECT * FROM patient WHERE name LIKE ?";
+			String sql ="SELECT * FROM Treatment WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1,"%" + id + "%");
 			ResultSet rs = prep.executeQuery();
@@ -98,7 +98,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 		List<Treatment> treatmentsList = new ArrayList<Treatment>();
 		//search for all treatments that fit the name
 		try {
-			String sql = "SELECT * FROM treatments WHERE name LIKE ?";
+			String sql = "SELECT * FROM Treatment WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
