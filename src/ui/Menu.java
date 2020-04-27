@@ -12,7 +12,6 @@ import db.interfaces.*;
 import db.sqlite.*;
 
 public class Menu {
-	/*alba:*/
 	//DB Managers
 	private static DBManager dbManager;
 	private static PatientManager patientManager;
@@ -167,11 +166,6 @@ public class Menu {
 		
 		System.out.println("2. Pathology \n");
 		
-		/*System.out.println("Select an option \n");
-		
-		System.out.println("1. Search by Id \n");
-		System.out.println("2. Search by Name \n");*/
-		
 		searchMenu();
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -179,13 +173,17 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
-
-			searchPathologyById();// este metodo ya esta creado mas abajo
+			
+			System.out.println("1. Search Pathology by Id \n");
+			
+			searchPathologyById();
 			break;
 			
 		case 2: 
 			
-			searchPathologyByName();// este metodo ya esta creado mas abajo
+			System.out.println("2. Search Pathology by Name \n");
+			
+			searchPathologyByName();
 			break;
 			
 		default:
@@ -263,6 +261,7 @@ public class Menu {
 		System.out.println("7. Medical Personnel \n");
 		
 		searchMenu();
+		System.out.println("3. Search by Pathology Id \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -270,19 +269,27 @@ public class Menu {
 		
 		case 1:
 			
-			searchMedicalPersonnelById(); //metodo ya creado mas abajo
+			System.out.println("1. Search Medical Personnel by Id \n");
+			
+			searchMedicalPersonnelById();
+
+			
 			break;
 		
 		case 2: 
 			
+			System.out.println("2. Search Medical Personnel by Name \n");
+			
 			searchMedicalPersonnelByName(); //metodo ya creado mas abajo
 			break;
 			
-		/*case 3: 
+		case 3: 
 			
-			searchMedicalPersonnelByPathologyId();
+			System.out.println("3. Search Medical Personnel by Pathology Id \n");
+			
+			searchMedicalPersonnelByPathologyId(); //metodo ya creado mas abajo
 			break;
-			*/
+			
 			default:
 				
 				break;
@@ -312,6 +319,7 @@ public class Menu {
 			medicalPersonnelSubMenu1();//añadir menus para treatment
 			break;
 		case 2:
+
 			medicalPersonnelSubMenu2Pathology();
 			break;
 		case 3:
@@ -327,6 +335,7 @@ public class Menu {
 			medicalPersonnelSubMenu6Symptom();
 			break;
 		case 7:
+
 			medicalPersonnelSubMenu7MedicalPersonnel();
 			break;
 		default:
@@ -340,8 +349,6 @@ public class Menu {
 		
 		System.out.println("1.Check \n");
 	}
-	
-	//creo el submenu para pathology
 	
 	private static void medicalPersonnelSubMenu2Pathology() throws Exception{
 		
@@ -359,20 +366,28 @@ public class Menu {
 		
 		case 1:
 			
+			System.out.println("1. Add Pathology \n");
+			
 			addPathology();
 			break;
 			
 		case 2:
+			
+			System.out.println("2. Update Pathology \n");
 			
 			updatePathology();
 			break;
 			
 		case 3: 
 			
+			System.out.println("3. Check Pathology \n");
+			
 			checkPathology();
 			break;
 			
 		case 4: 
+			
+			System.out.println("4. Delete Pathology \n");
 			
 			deletePathology();
 			break;
@@ -465,6 +480,7 @@ public class Menu {
 		System.out.println("7. Medical Personnel");
 		
 		searchMenu();
+		System.out.println("Search by Pathology Id \n");
 		
 		int choice = Integer.parseInt(reader.readLine()); 
 		
@@ -472,18 +488,26 @@ public class Menu {
 		
 		case 1:
 			
+			System.out.println("Search Medical Personnel by Id \n");
+			
 			searchMedicalPersonnelById();
+
+			
 			break;
 			
 		case 2:
 			
+			System.out.println("Search Medical Personnel by Name \n");
+			
 			searchMedicalPersonnelByName();
 			break;
 			
-		/*case 3: 
+		case 3: 
+			
+			System.out.println("Search Medical Personnel by Pathology Id \n");
 			
 			searchMedicalPersonnelByPathologyId();
-			break;*/
+			break;
 			
 			default:
 				break;
@@ -707,11 +731,19 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
+			
+			System.out.println("1. Pathology \n");
+			
 			medicalPersonnelBossSubMenu1Pathology(); //Menu para pathology
 			break;
+			
 		case 2: 
+			
+			System.out.println("2. Medical Personnel \n");
+			
 			medicalPersonnelBossSubMenu2MedicalPersonnel(); //Menu para medical personnel
 			break;
+			
 		default:
 			break;
 		}
@@ -719,25 +751,26 @@ public class Menu {
 	
 	private static void medicalPersonnelBossSubMenu1Pathology() throws Exception { //Pathology
 		
-		System.out.println("Select action \n");
-		
-		System.out.println("1. Check pathology \n");
-		System.out.println("2. Search pathology by id \n");
-		System.out.println("3. Search pathology by name \n");
+		searchMenu();
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
 		
-		case 1:
-			checkPathology();
-			break;
-		case 2: 
+		case 1: 
+			
+			System.out.println("2. Search Pathology by Id \n");
+			
 			searchPathologyById();
 			break;
-		case 3: 
+			
+		case 2: 
+			
+			System.out.println("3. Search Pathology by Name \n");
+			
 			searchPathologyByName();
 			break;
+			
 		default:
 			break;
 		}
@@ -802,20 +835,14 @@ public class Menu {
 			System.out.println("1. Add Medical Personnel \n");
 			
 			addMedicalPersonnel();
-			
 			break;
 			
 		case 2: 
 			
 			System.out.println("2. Update Medical Personnel \n");
 			
-			 /*System.out.println("Select an option \n");
-			 
-			 System.out.println("1. Search medical personnel by id \n");
-			 
-			 System.out.println("2. Search medical personnel by name \n");*/
-			
 			searchMenu();
+			System.out.println("3. Search by Pathology Id \n");
 			 
 			 int choice2 = Integer.parseInt(reader.readLine());
 			 
@@ -823,48 +850,63 @@ public class Menu {
 			 
 			 	case 1: 
 			 		
+			 		System.out.println("1. Search Medical Personnel by Id \n");
+			 		
 			 		searchMedicalPersonnelById();
+			 		
 			 		break;
 			 		
 			 	case 2:
 			 		
+			 		System.out.println("2. Search Medical Personnel by Name \n");
+			 		
 			 		searchMedicalPersonnelByName();
 			 		break;
 			 		
-			 	/*case 3: 
+			 	case 3: 
+			 		
+			 		System.out.println("3. Search Medical Personnel by Pathology Id \n");
+			 		
 			 		searchMedicalPersonnelByPathologyId();
-			 		break;*/
+			 		break;
 			 	
 			 	default: 
 			 		break;
+			 		
 			 }			 
 			break;
 			
 		
 		case 3: 
-			
-			/*System.out.println("Select an option \n");
-			 
-			 System.out.println("1. Search medical personnel by id \n");
-			 
-			 System.out.println("2. Search medical personnel by name \n");*/
-			
+						
 			searchMenu();
+			System.out.println("3. Search by Pathology Id \n");
 			 
 			 int choice3 = Integer.parseInt(reader.readLine());
 			 
 			 switch(choice3) {
 			 
 			 	case 1: 
+			 		
+			 		System.out.println("1. Search Medical Personnel by Id \n");
+			 		
 			 		searchMedicalPersonnelById();
+			 		
 			 		break;
+			 		
 			 	case 2:
+			 		
+			 		System.out.println("2. Search Medical Personnel by Name \n");
+			 		
 			 		searchMedicalPersonnelByName();
 			 		break;
-			 	/*case 3: 
+			 		
+			 	case 3: 
 			 	
+			 		System.out.println("3. Search Medical Personnel by Pathology Id \n");
+			 		
 			 		searchMedicalPersonnelByPathologyId();
-			 		break;*/
+			 		break;
 			 	
 			 	default: 
 			 		break;
@@ -874,28 +916,36 @@ public class Menu {
 			
 			System.out.println("4. Medical Personnel \n");
 			
-			/*System.out.println("Select an option \n");
-			 
-			 System.out.println("1. Search medical personnel by id \n");
-			 
-			 System.out.println("2. Search medical personnel by name \n");*/
-			
 			searchMenu();
+			System.out.println("3. Search by PathologyId \n");
 			 
 			 int choice4 = Integer.parseInt(reader.readLine());
 			 
 			 switch(choice4) {
 			 
 			 	case 1: 
+			 		
+			 		System.out.println("1. Search Medical Personnel by Id \n");
+			 		
 			 		searchMedicalPersonnelById();
+
+			 		
 			 		break;
+			 		
 			 	case 2:
+			 		
+			 		System.out.println("1. Search Medical Personnel by Name \n");
+			 		
 			 		searchMedicalPersonnelByName();
 			 		break;
 			 		
-			 	/*case 3:
+			 	case 3:
+			 		
+			 		System.out.println("1. Search Medical Personnel by Pathology Id \n");
+			 		
 			 		searchMedicalPersonnelByPathologyId();
-			 		break;*/
+			 		break;
+			 		
 			 	default: 
 			 		break;
 			 }			
@@ -910,14 +960,15 @@ public class Menu {
 		
 		System.out.println("Instert the id: \n");
 		int id=Integer.parseInt(reader.readLine());
-		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelById(id);
 		
-		//we search in our database for all the treatments which correspond to the id specified by the user
+		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByPathologyId(id);
 		
 		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+			
 			System.out.println(medicalPersonnel);
+			
 		}
-		//we show the treatments who matched the required id
+		
 	}
 	
 	private static void searchMedicalPersonnelByName() throws Exception {
@@ -934,7 +985,7 @@ public class Menu {
 		//we show the treatments who matched the required name
 	}
 	
-	/*private static void searchMedicalPersonnelByPathologyId() throws Exception {
+	private static void searchMedicalPersonnelByPathologyId() throws Exception {
 		
 		System.out.println("Type! \n");
 		System.out.println("Pathology id: \n");
@@ -948,7 +999,7 @@ public class Menu {
 			
 		}
 		
-	}*/
+	}
 	
 	private static void addMedicalPersonnel() throws Exception{
 		

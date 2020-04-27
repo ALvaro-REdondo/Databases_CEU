@@ -152,7 +152,9 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 			e.printStackTrace();
 			
 		};
+		
 		return medicalPersonnelList;
+
 	}
 
 	@Override
