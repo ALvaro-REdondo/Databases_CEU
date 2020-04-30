@@ -104,7 +104,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public List<ClinicalHistory> searchClinicalHistoryById(Integer id) {
 		List<ClinicalHistory> clinicalHistoryList = new ArrayList<ClinicalHistory>();
 		try {
-			String sql = "SELECT * FROM clinical history WHERE id LIKE ?";
+			String sql = "SELECT * FROM ClinicalHistory WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + id + "%");
 			// HAY QUE HACER EL SEARCHCLINICHIST(???)********************************************************************************************************************
