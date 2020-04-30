@@ -198,7 +198,21 @@ public class Menu {
 	}
 	
 	private static void treatmentCreatorSubMenu3ClinicalHistory() throws Exception {
+		System.out.println("You can only check clinical histories: \n");
 		
+		System.out.println("1. Check \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			//checkClinicalHistory();->TODO
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	private static void treatmentCreatorSubMenu4Patient() throws Exception {
@@ -230,7 +244,24 @@ public class Menu {
 	}
 	
 	private static void treatmentCreatorSubMenu5Allergy() throws Exception {
+		System.out.println("Select action \n");
 		
+		System.out.println("1. Search \n");
+		System.out.println("2. Check \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			searchAllergyById();
+			break;
+		case 2:
+			//checkAllergy();->TODO
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private static void treatmentCreatorSubMenu6Symptom() throws Exception {
@@ -442,11 +473,58 @@ public class Menu {
 	}
 	
 	private static void medicalPersonnelSubMenu4() throws Exception{
+		System.out.println("Select action \n");
 		
+		System.out.println("1. Add \n");
+		System.out.println("2. Update \n");
+		System.out.println("3. Check \n");
+		System.out.println("4. Delete \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			addClinicalHistory();
+			break;
+		case 2:
+			searchClinicalHistoryById();
+			//updateClinicalHistory(clinicalHistoryId);-> TODO
+			break;
+		case 3:
+			//checkClinicalHistory();->TODO
+			break;
+			
+		case 4:
+			//deleteClinicalHistory();->TODO
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private static void medicalPersonnelSubMenu5() throws Exception{
+		System.out.println("Select action \n");
 		
+		System.out.println("1. Add \n");
+		System.out.println("3. Check \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			addAllergy();
+			break;
+		case 2:
+			searchAllergyById();
+			break;
+		case 3:
+			//checkAllergy();->TODO
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private static void medicalPersonnelSubMenu6Symptom() throws Exception{
@@ -1172,6 +1250,9 @@ public class Menu {
 		clinicalHistoryManager.update(updatedClinicalHistory);
 }
 	
+	private static void deleteClinicalHistory() throws Exception{
+		
+	}
 	//METHODS FOR ALLERGY
 	
 	private static void addAllergy() throws Exception{
