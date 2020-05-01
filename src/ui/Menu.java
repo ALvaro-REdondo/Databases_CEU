@@ -375,7 +375,12 @@ public class Menu {
 			
 			System.out.println("2. Update Pathology \n");
 			
-			updatePathology();
+			//searchPathologyByName();
+			
+			System.out.println("Write pathology id");
+			int pathologyId = Integer.parseInt(reader.readLine());
+			
+			updatePathology(pathologyId);
 			break;
 			
 		case 3: 
@@ -395,9 +400,12 @@ public class Menu {
 		}
 	}
 
-	private static void updatePathology() throws Exception {
+	private static void updatePathology(int pathologyId) throws Exception {
 		
-		//first we show the pathology and then they decide what to modify 
+		//first we show the pathology and then the user decides what to modify 
+		
+		
+		
 		
 	}
 	

@@ -127,6 +127,42 @@ public class SQLitePathologyManager implements PathologyManager {
 	}
 
 	@Override
+	public Pathology getPathology(int pathologyId) {
+		
+		Pathology newPathology = null;
+		
+		try {
+		
+		String sql = "SELECT * FROM pathology WHERE id = ?";
+		PreparedStatement p = c.prepareStatement(sql);
+		
+		p.setInt(1, pathologyId);
+		
+		ResultSet rs = p.executeQuery();
+		rs.next();
+			
+			int id = rs.getInt("id");
+			String name = rs.getString("name");
+			int duration = rs.getInt("duration");
+			Date startDate = rs.getDate("start date");
+			Date endingDate = rs.getDate("Ending Date");
+			int treatmentId = rs.getInt("treatment id");
+		
+			newPathology = new Pathology(id, name, duration, startDate, endingDate, treatmentId);
+			
+			
+		
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+			return newPathology;
+				
+	}
+	
+	@Override
 	public List<Pathology> searchPathologyByName(String name) {
 		// TODO Auto-generated method stub
 		
