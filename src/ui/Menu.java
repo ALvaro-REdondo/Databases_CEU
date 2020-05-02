@@ -30,7 +30,7 @@ public class Menu {
 	public static void main(String[] args) throws Exception{
 		
 		dbManager = new SQLiteManager();
-		dbManager.connect();
+ 
         PatientManager	patientManager = dbManager.getPatientManager();
         SymptomManager	symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
@@ -144,12 +144,22 @@ public class Menu {
 			while(choice3 != 1 || choice3 !=2) {
 			System.out.println("Select a valid option, please");
 			}
-			if(choice3 == 1) {
-				searchTreatmentById();	
+			/*if(choice3 == 1) {
+				searchTreatmentById();
+				for (Treatment treatment : treatments) {
+					
+					System.out.println(treatment);
+				}
+				
 			}
 			if(choice3 == 2) {
 				searchTreatmentByName();
-			}
+				for (Treatment treatment : treatments) {
+					
+					System.out.println(treatment);
+				}
+				
+			}*/
 			break;
 		case 4:
 			deleteTreatment();//crear
@@ -159,8 +169,8 @@ public class Menu {
 			
 		}
 		
+
 	}
-	
 	
 	private static void treatmentCreatorSubMenu2Pathology() throws Exception {
 		
@@ -423,8 +433,10 @@ public class Menu {
 			addPatient();
 			break;
 		case 2:
+			patientManager.showPatients();
 			searchPatientById();
-			//updatePatient();-> TODO
+			int id = Integer.parseInt(reader.readLine());
+			updatePatient(id);
 			break;
 		case 3:
 			//checkPatient();->TODO
