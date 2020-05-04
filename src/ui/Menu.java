@@ -492,6 +492,7 @@ public class Menu {
 			//updateClinicalHistory(clinicalHistoryId);-> TODO
 			break;
 		case 3:
+			searchClinicalHistoryById();
 			//checkClinicalHistory();->TODO
 			break;
 			
@@ -507,7 +508,7 @@ public class Menu {
 		System.out.println("Select action \n");
 		
 		System.out.println("1. Add \n");
-		System.out.println("3. Check \n");
+		System.out.println("2. Check \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
