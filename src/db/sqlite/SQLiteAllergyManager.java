@@ -38,7 +38,7 @@ public class SQLiteAllergyManager implements AllergyManager {
 	public List<Allergy> searchAllergyById(Integer id) {
 		List<Allergy> allergyList = new ArrayList<Allergy>();
 		try {
-			String sql = "SELECT * FROM allergy WHERE allergy LIKE ?";
+			String sql = "SELECT * FROM Allergy WHERE id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + id + "%");
 			ResultSet rs = prep.executeQuery();
