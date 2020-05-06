@@ -1189,7 +1189,7 @@ public class Menu {
 		String extraInfo = reader.readLine();
 		
 		ClinicalHistory clinicalHistory = new ClinicalHistory(Date.valueOf(doe), Date.valueOf(dod), bloodType, extraInfo);
-		
+		clinicalHistoryManager.add(clinicalHistory);
 	}
 
 	private static void searchClinicalHistoryById() throws Exception {
