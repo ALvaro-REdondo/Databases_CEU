@@ -21,7 +21,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void add(Patient patient) {
 		try {
-		String sql = " INSERT patient (name , gender , state ,dob, pathology_id, clinicalHistory_id) "
+		String sql = " INSERT Patient (name , gender , state ,dob, pathology_id, clinicalHistory_id) "
 				+ "VALUES (?,?,?,? ,?);"; 
 		PreparedStatement prep =c.prepareStatement(sql);
 		prep.setString(1,patient.getName());
@@ -42,7 +42,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void update(Patient patient) {
 		try {
-		String sql = " UPDATE patient  SET name=?,  gender=?, state=?, DOB=? , pathology_id = ?, clinicalHistory_id=?\r\n"; 
+		String sql = " UPDATE Patient  SET name=?,  gender=?, state=?, DOB=? , pathology_id = ?, clinicalHistory_id=?\r\n"; 
 		 PreparedStatement s =c.prepareStatement(sql);
 		 s.setString(1,patient.getName());
 		 s.setString(2,patient.getGender());
@@ -60,7 +60,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void delete(Patient patient) {
 		try {
-			String sql = " DELETE patient WHERE id =?";
+			String sql = " DELETE Patient WHERE id =?";
 			PreparedStatement s= c.prepareStatement(sql);
 			s.setInt(1, patient.getId());
 			s.executeUpdate();
@@ -77,7 +77,7 @@ public class SQLitePatientManager implements PatientManager {
 	public List<Patient> searchPatientById(Integer id) {
 		List<Patient> patientsList= new ArrayList<Patient>();
 		try {
-			String sql ="SELECT * FROM patient WHERE name LIKE ?";
+			String sql ="SELECT * FROM Patient WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1,"%" + id + "%");
 			ResultSet rs = prep.executeQuery();
@@ -103,7 +103,7 @@ public class SQLitePatientManager implements PatientManager {
 		
 		List<Patient> patientsList= new ArrayList<Patient>();
 		try {
-			String sql ="SELECT * FROM patient WHERE name LIKE ?";
+			String sql ="SELECT * FROM Patient WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1,"%" + name + "%");
 			ResultSet rs = prep.executeQuery();
@@ -133,7 +133,7 @@ public class SQLitePatientManager implements PatientManager {
 		
 		try {
 			
-			String sql = "SELECT * FROM patient WHERE id=?";
+			String sql = "SELECT * FROM Patient WHERE id=?";
 			PreparedStatement g = c.prepareStatement(sql);
 			g.setInt(1,  PatientId);
 			ResultSet rs = g.executeQuery();
