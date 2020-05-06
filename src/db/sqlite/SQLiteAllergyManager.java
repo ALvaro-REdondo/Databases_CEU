@@ -23,7 +23,7 @@ public class SQLiteAllergyManager implements AllergyManager {
 	@Override
 	public void add(Allergy allergy) {
 		try {
-			String sql = "INSERT INTO allergy (allergy, degree) VALUES (?, ?);";
+			String sql = "INSERT INTO Allergy (allergy, degree) VALUES (?, ?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, allergy.getAllergy());
 			prep.setInt(2, allergy.getDegree());
@@ -60,7 +60,7 @@ public class SQLiteAllergyManager implements AllergyManager {
 	public List<Allergy> searchAllergyByName(String allergy) {
 		List<Allergy> allergyList = new ArrayList<Allergy>();
 		try {
-			String sql = "SELECT * FROM allergy WHERE allergy LIKE ?";
+			String sql = "SELECT * FROM Allergy WHERE allergy LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + allergy + "%");
 			ResultSet rs = prep.executeQuery();
@@ -84,7 +84,7 @@ public class SQLiteAllergyManager implements AllergyManager {
 		
 		try {
 			
-			String sql = "SELECT * FROM allergy WHERE id=?";
+			String sql = "SELECT * FROM Allergy WHERE id=?";
 			PreparedStatement g = c.prepareStatement(sql);
 			g.setInt(1,  allergyId);
 			ResultSet rs = g.executeQuery();
@@ -109,7 +109,7 @@ public class SQLiteAllergyManager implements AllergyManager {
 		List<Allergy> allergiesList = new ArrayList<Allergy>();
 		//get all allergies
 		try {
-			String sql = "SELECT * FROM allergy";
+			String sql = "SELECT * FROM Allergy";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			//for each result...

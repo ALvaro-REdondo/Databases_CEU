@@ -516,7 +516,9 @@ public class Menu {
 		System.out.println("Select action \n");
 		
 		System.out.println("1. Add \n");
-		System.out.println("2. Check \n");
+		System.out.println("2. search by id \n");
+		System.out.println("3. search by name \n");
+
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -529,7 +531,7 @@ public class Menu {
 			searchAllergyById();
 			break;
 		case 3:
-			//checkAllergy();->TODO
+			searchAllergyByName(); //***********************************
 			break;
 		default:
 			break;
@@ -1274,7 +1276,9 @@ public class Menu {
 		int degree = Integer.parseInt(reader.readLine());
 		
 		Allergy allergy = new Allergy(allergyName, degree);
+		allergyManager.add(allergy);
 		
+		System.out.println(allergy);
 	}
 
 	private static void searchAllergyById() throws Exception {
