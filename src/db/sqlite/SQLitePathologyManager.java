@@ -101,7 +101,7 @@ public class SQLitePathologyManager implements PathologyManager {
 			
 			//Search pathology that has the same id as the one inserted by the user.
 			
-			String sql = "SELECT * FROM pathology WHERE name LIKE ?";
+			String sql = "SELECT * FROM Pathology WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
