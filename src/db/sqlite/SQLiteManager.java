@@ -109,8 +109,8 @@ public class SQLiteManager implements DBManager {
 					   + " gender  TEXT	 NOT NULL, "
 					   + " state TEXT NOT NULL, "
 					   + " dob INTEGER NOT NULL, "
-					   + " pathology_id INTEGER REFERENCES Pathologies(id),"
-					   + " clinical_history_id INTEGER REFERENCES Clinical_histories(id))";
+					   + " pathology_id INTEGER REFERENCES Pathology(id),"
+					   + " clinical_history_id INTEGER REFERENCES ClinicalHistory(id))";
 			stmt1.executeUpdate(sql6);
 			stmt1 = c.createStatement();
 			String sql7 = "CREATE TABLE MedicalPersonnel "
@@ -118,7 +118,7 @@ public class SQLiteManager implements DBManager {
 					   + " name     TEXT     NOT NULL, "
 					   + " department  TEXT	 NOT NULL, "
 					   + " position TEXT NOT NULL, "
-					   + " pathology_id INTEGER REFERENCES Pathologies(id))";
+					   + " pathology_id INTEGER REFERENCES Pathology(id))";
 			stmt1.executeUpdate(sql7);
 			stmt1 = c.createStatement();
 			stmt1.close();

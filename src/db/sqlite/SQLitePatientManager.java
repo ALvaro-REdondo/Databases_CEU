@@ -21,7 +21,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void add(Patient patient) {
 		try {
-		String sql = " INSERT Patient (name , gender , state ,dob, pathology_id, clinicalHistory_id) "
+		String sql = " INSERT Patient (name , gender , state , dob , pathology_id , clinical_history_id) "
 				+ "VALUES (?,?,?,? ,?);"; 
 		PreparedStatement prep =c.prepareStatement(sql);
 		prep.setString(1,patient.getName());
@@ -42,7 +42,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void update(Patient patient) {
 		try {
-		String sql = " UPDATE Patient  SET name=?,  gender=?, state=?, DOB=? , pathology_id = ?, clinicalHistory_id=?\r\n"; 
+		String sql = " UPDATE Patient  SET name=?,  gender=?, state=?, DOB=? , pathology_id = ?, clinical_history_id=?\r\n"; 
 		 PreparedStatement s =c.prepareStatement(sql);
 		 s.setString(1,patient.getName());
 		 s.setString(2,patient.getGender());

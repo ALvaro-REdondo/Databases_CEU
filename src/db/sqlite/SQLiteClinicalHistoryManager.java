@@ -23,14 +23,13 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	@Override
 	public void add(ClinicalHistory clinicalHistory) {
 		try {
-			String sql = "INSERT INTO clinical history (id, date_of_entry, date_of_discharge, "
-					+ "blood_type, extra_info) VALUES (?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO ClinicalHistory (doe, dod, "
+					+ "bloodType, extraInfo) VALUES (?, ?, ?, ?);";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, clinicalHistory.getId());
-			prep.setDate(2, clinicalHistory.getDoe());
-			prep.setDate(3, clinicalHistory.getDod()); //EL NO HA PUESTO ESTA FECHA EN SU PERRO, NO SE SI HAY QUE DEJARLA O NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-			prep.setString(4, clinicalHistory.getBloodType());
-			prep.setString(5, clinicalHistory.getExtraInfo());
+			prep.setDate(1, clinicalHistory.getDoe());
+			prep.setDate(2, clinicalHistory.getDod()); //EL NO HA PUESTO ESTA FECHA EN SU PERRO, NO SE SI HAY QUE DEJARLA O NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+			prep.setString(3, clinicalHistory.getBloodType());
+			prep.setString(4, clinicalHistory.getExtraInfo());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -42,7 +41,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public void update(ClinicalHistory clinicalHistory) {
 		try {
 			//update every aspect of a particular clinical history
-			String sql = " UPDATE clinical history SET doe=?, dod=?, bloodType=?, extraInfo=? WHERE id=?"; 
+			String sql = " UPDATE ClinicalHistory SET doe=?, dod=?, bloodType=?, extraInfo=? WHERE id=?"; 
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setDate(1, clinicalHistory.getDoe());
 			s.setDate(2, clinicalHistory.getDod());
@@ -62,7 +61,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public void delete(ClinicalHistory clinicalHistory) {
 		try {
 			//delete a particular clinical history
-			String sql = "DELETE clinical history WHERE id=?"; 
+			String sql = "DELETE ClinicalHistory WHERE id=?"; 
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setInt(1, clinicalHistory.getId());
 			s.executeUpdate();
@@ -80,7 +79,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 		
 		try {
 			
-			String sql = "SELECT * FROM clinicalHistory WHERE id=?";
+			String sql = "SELECT * FROM ClinicalHistory WHERE id=?";
 			PreparedStatement g = c.prepareStatement(sql);
 			g.setInt(1,  clinicalHistoryId);
 			ResultSet rs = g.executeQuery();
