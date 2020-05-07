@@ -25,8 +25,6 @@ public class MedicalPersonnel implements Serializable{
 		this.position = position;
 		this.pathologyId = pathologyId;
 	}
-	
-	
 
 	public MedicalPersonnel(String name, String department, String position, Integer pathologyId) {
 		super();
@@ -35,8 +33,6 @@ public class MedicalPersonnel implements Serializable{
 		this.position = position;
 		this.pathologyId = pathologyId;
 	}
-
-
 
 	public MedicalPersonnel() {
 		

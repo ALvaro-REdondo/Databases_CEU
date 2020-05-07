@@ -149,8 +149,6 @@ public class SQLitePathologyManager implements PathologyManager {
 			int treatmentId = rs.getInt("treatment id");
 		
 			newPathology = new Pathology(id, name, duration, startDate, endingDate, treatmentId);
-			
-			
 		
 		}catch(SQLException e) {
 			

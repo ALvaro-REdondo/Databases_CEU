@@ -436,10 +436,77 @@ public class Menu {
 
 	private static void updatePathology(int pathologyId) throws Exception {
 		
-		//first we show the pathology and then the user decides what to modify 
+		//We get the pathology		
+		Pathology modifiedPathology = pathologyManager.getPathology(pathologyId);
 		
+		System.out.println("Actual Name" + modifiedPathology.getName());
+		System.out.println("Type the new Name or press enter to leave it as it is");
+		String newName = reader.readLine();
+		if(newName.equals("")) {
+			
+			newName = modifiedPathology.getName();			
+			
+		} 
 		
+		System.out.println("Actual Duration" + modifiedPathology.getDuration());
+		System.out.println("Type the new Duration or press enter to leave it as it is");
+		String newDuration = reader.readLine();
+		int intNewDuration = 0;		
+		if(newDuration.equals("")) {
+			
+			intNewDuration = modifiedPathology.getDuration();			
+			
+		} else {
+			
+			intNewDuration = Integer.parseInt(newDuration);
+			
+		}
 		
+		System.out.println("Actual Start Date" + modifiedPathology.getStartDate());
+		System.out.println("Type the new Start Date or press enter to leave it as it is");
+		String newStartDate = reader.readLine();
+		Date dateNewStartDate = null;		
+		if(newStartDate.equals("")) {
+			
+			 dateNewStartDate = modifiedPathology.getStartDate();			
+			
+		} else {
+			
+			dateNewStartDate = Date.valueOf(LocalDate.parse(newStartDate, formatter));
+			
+		}
+		
+		System.out.println("Actual Ending Date" + modifiedPathology.getEndingDate());
+		System.out.println("Type the new Ending Date or press enter to leave it as it is");
+		String newEndingDate = reader.readLine();
+		Date dateNewEndingDate = null;		
+		if(newEndingDate.equals("")) {
+			
+			 dateNewEndingDate = modifiedPathology.getEndingDate();			
+			
+		} else {
+			
+			dateNewEndingDate = Date.valueOf(LocalDate.parse(newEndingDate, formatter));
+			
+		}
+		
+		System.out.println("Actual Treatmetnt Id" + modifiedPathology.getTreatmentId());
+		System.out.println("Type the new Treatment Id or press enter to leave it as it is");
+		String newTreatmentId = reader.readLine();
+		int intNewTreatmentId = 0;		
+		if(newTreatmentId.equals("")) {
+			
+			intNewTreatmentId = modifiedPathology.getTreatmentId();			
+			
+		} else {
+			
+			intNewTreatmentId = Integer.parseInt(newTreatmentId);
+			
+		}
+		
+		Pathology updatedPathology = new Pathology(pathologyId, newName, intNewDuration, dateNewStartDate, dateNewEndingDate, intNewTreatmentId);
+		
+		pathologyManager.update(updatedPathology);
 		
 	}
 	
@@ -933,39 +1000,11 @@ public class Menu {
 			
 			System.out.println("2. Update Medical Personnel \n");
 			
-			searchMenu();
-			System.out.println("3. Search by Pathology Id \n");
-			 
-			 int choice2 = Integer.parseInt(reader.readLine());
-			 
-			 switch(choice2) {
-			 
-			 	case 1: 
-			 		
-			 		System.out.println("1. Search Medical Personnel by Id \n");
-			 		
-			 		searchMedicalPersonnelById();
-			 		
-			 		break;
-			 		
-			 	case 2:
-			 		
-			 		System.out.println("2. Search Medical Personnel by Name \n");
-			 		
-			 		searchMedicalPersonnelByName();
-			 		break;
-			 		
-			 	case 3: 
-			 		
-			 		System.out.println("3. Search Medical Personnel by Pathology Id \n");
-			 		
-			 		searchMedicalPersonnelByPathologyId();
-			 		break;
-			 	
-			 	default: 
-			 		break;
-			 		
-			 }			 
+			System.out.println("Write pathology id");
+			int medicalPersonnelId = Integer.parseInt(reader.readLine());
+			
+			updateMedicalPersonnel(medicalPersonnelId);
+			
 			break;
 			
 		
@@ -1114,6 +1153,58 @@ public class Menu {
 		medicalPersonnelManager.add(medicalPersonnel);
 		
 		}
+	
+	private static void updateMedicalPersonnel(int medicalPersonnelId) throws Exception {
+		
+		//We get the pathology		
+				MedicalPersonnel modifiedMedicalPersonnel = medicalPersonnelManager.getMedicalPersonnel(medicalPersonnelId);
+				
+				System.out.println("Actual Name" + modifiedMedicalPersonnel.getName());
+				System.out.println("Type the new Name or press enter to leave it as it is");
+				String newName = reader.readLine();
+				if(newName.equals("")) {
+					
+					newName = modifiedMedicalPersonnel.getName();			
+					
+				} 
+				
+				System.out.println("Actual Department" + modifiedMedicalPersonnel.getDepartment());
+				System.out.println("Type the new Department or press enter to leave it as it is");
+				String newDepartment = reader.readLine();	
+				if(newDepartment.equals("")) {
+					
+					newDepartment =  modifiedMedicalPersonnel.getDepartment();			
+					
+				} 
+				
+				System.out.println("Actual Position" +  modifiedMedicalPersonnel.getPosition());
+				System.out.println("Type the new Position or press enter to leave it as it is");
+				String newPosition = reader.readLine();
+				if(newPosition.equals("")) {
+					
+					newPosition = modifiedMedicalPersonnel.getPosition();			
+					
+				} 
+				
+				System.out.println("Actual Pathology Id" +  modifiedMedicalPersonnel.getPathologyId());
+				System.out.println("Type the new Pathology Id or press enter to leave it as it is");
+				String newPathologyId = reader.readLine();
+				int intNewPathologyId = 0;		
+				if(newPathologyId.equals("")) {
+					
+					intNewPathologyId =  modifiedMedicalPersonnel.getPathologyId();			
+					
+				} else {
+					
+					intNewPathologyId = Integer.parseInt(newPathologyId);
+					
+				}
+				
+				MedicalPersonnel newMedicalPersonnel = new MedicalPersonnel(medicalPersonnelId, newName, newDepartment, newPosition, intNewPathologyId);
+				
+				medicalPersonnelManager.update(newMedicalPersonnel);
+		
+	}
 	
 	private static void addTreatment() throws Exception{
 		System.out.println("So do it! \n");
