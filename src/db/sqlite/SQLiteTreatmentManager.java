@@ -70,27 +70,6 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 
 	}
 
-	@Override
-	public List<Treatment> searchTreatmentById(Integer id) {
-		List<Treatment> treatmentsList = new ArrayList<Treatment>();
-		try {
-			String sql ="SELECT * FROM Treatment WHERE id LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1,"%" + id + "%");
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-				int Treatmentid = rs.getInt("id");
-				String TreatmentName = rs.getString("name");
-				String TreatmentMedication = rs.getString("medication");
-				String TreatmentDescription = rs.getString("description");
-				Treatment newTreatment = new Treatment(Treatmentid, TreatmentName, TreatmentMedication ,TreatmentDescription);
-				treatmentsList.add(newTreatment);
-			}
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		return treatmentsList;
-	}
 
 	@Override
 	public List<Treatment> searchTreatmentByName(String name) {
@@ -145,38 +124,32 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 		
 		return treatmentsList;
 	}
-
 	
-
+	
 	@Override
-	public Treatment getTreatmentId(int treatmentId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public Treatment getTreatment(int TreatmentId) {
-        Treatment newTreatment = null;
-		
-		try {
+	public Treatment searchTreatmentById(Integer id) {
+		 Treatment newTreatment = null;
 			
-			String sql = "SELECT * FROM treatment WHERE id=?";
-			PreparedStatement g = c.prepareStatement(sql);
-			g.setInt(1,  TreatmentId);
-			ResultSet rs = g.executeQuery();
-			rs.next();
+			try {
+				
+				String sql = "SELECT * FROM treatment WHERE id=?";
+				PreparedStatement g = c.prepareStatement(sql);
+				g.setInt(1,  id);
+				ResultSet rs = g.executeQuery();
+				rs.next();
+				
+				int Id = rs.getInt("id");
+				String TreatmentName = rs.getString("name");
+				String TreatmentMedication = rs.getString("medication");
+				String TreatmentDescription = rs.getString("description");
+				newTreatment = new Treatment(Id, TreatmentName, TreatmentMedication, TreatmentDescription);
+				
+				
+			} catch(SQLException e) {
+				
+				e.printStackTrace();
+			}
 			
-			int id = rs.getInt("id");
-			String TreatmentName = rs.getString("name");
-			String TreatmentMedication = rs.getString("medication");
-			String TreatmentDescription = rs.getString("description");
-			newTreatment = new Treatment(id, TreatmentName, TreatmentMedication, TreatmentDescription);
-			
-			
-		} catch(SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return newTreatment;
+			return newTreatment;
 	}
 }
