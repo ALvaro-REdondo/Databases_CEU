@@ -69,34 +69,34 @@ public class SQLiteManager implements DBManager {
 		Statement stmt1;
 		try {
 			stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE Pathology "
-					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " name     TEXT     NOT NULL, "
-					   + " duration  INTEGER, "
-					   + " startDate DATE NOT NULL, "
-					   + " endingDate DATE )";
-			stmt1.executeUpdate(sql1);
-			stmt1 = c.createStatement();
-			String sql2 = "CREATE TABLE ClinicalHistory "
+			String sql1 = "CREATE TABLE ClinicalHistory "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " doe     DATE     NOT NULL, "
 					   + " dod  DATE, "
 					   + " bloodType TEXT NOT NULL, "
 					   + " extraInfo TEXT)";
-			stmt1.executeUpdate(sql2);
+			stmt1.executeUpdate(sql1);
 			stmt1 = c.createStatement();
-			String sql3 = "CREATE TABLE Symptom "
+			String sql2 = "CREATE TABLE Symptom "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " manifestation     TEXT     NOT NULL)";
-			stmt1.executeUpdate(sql3);
+			stmt1.executeUpdate(sql2);
 			stmt1 = c.createStatement();
-			String sql4 = "CREATE TABLE Treatment "
+			String sql3 = "CREATE TABLE Treatment "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " medication  TEXT	 NOT NULL, "
 					   + " description TEXT )";
-			stmt1.executeUpdate(sql4);
+			stmt1.executeUpdate(sql3);
 			stmt1 = c.createStatement();
+			String sql4 = "CREATE TABLE Pathology "
+					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " name     TEXT     NOT NULL, "
+					   + " duration  INTEGER, "
+					   + " startDate DATE NOT NULL, "
+					   + " endingDate DATE "
+					   + " treatmentId INTEGER REFERENCES Treatment(id))";
+			stmt1.executeUpdate(sql4);
 			String sql5 = "CREATE TABLE Allergy "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " allergy     TEXT     NOT NULL, "
