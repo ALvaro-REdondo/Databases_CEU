@@ -314,14 +314,14 @@ public class Menu {
 			
 			System.out.println("2. Search Medical Personnel by Name \n");
 			
-			searchMedicalPersonnelByName(); //metodo ya creado mas abajo
+			searchMedicalPersonnelByName(); 
 			break;
 			
 		case 3: 
 			
 			System.out.println("3. Search Medical Personnel by Pathology Id \n");
 			
-			searchMedicalPersonnelByPathologyId(); //metodo ya creado mas abajo
+			searchMedicalPersonnelByPathologyId(); 
 			break;
 			
 			default:
@@ -649,9 +649,7 @@ public class Menu {
 			
 			System.out.println("Search Medical Personnel by Id \n");
 			
-			searchMedicalPersonnelById();
-
-			
+			searchMedicalPersonnelById();			
 			break;
 			
 		case 2:
