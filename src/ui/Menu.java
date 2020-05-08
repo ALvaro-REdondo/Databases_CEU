@@ -200,19 +200,8 @@ public class Menu {
 	private static void treatmentCreatorSubMenu3ClinicalHistory() throws Exception {
 		System.out.println("You can only check clinical histories: \n");
 		
-		System.out.println("1. Check \n");
-		
-		int choice = Integer.parseInt(reader.readLine());
-		
-		switch(choice) {
-		
-		case 1:
-			//checkClinicalHistory();->TODO
-			break;
-			
-		default:
-			break;
-		}
+		searchClinicalHistoryById();
+
 	}
 	
 	private static void treatmentCreatorSubMenu4Patient() throws Exception {
@@ -254,8 +243,19 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
-			searchAllergyById();
-			break;
+			searchMenu();
+			int choiceSearch = Integer.parseInt(reader.readLine());
+			while(choiceSearch != 1 || choiceSearch !=2) {
+			System.out.println("Select a valid option, please");
+			}
+			if(choiceSearch == 1) {
+				searchAllergyById();
+			}
+			if(choiceSearch == 2) {
+				searchAllergyByName();
+			}
+			break;		
+			
 		case 2:
 			//checkAllergy();->TODO
 			break;
@@ -562,17 +562,19 @@ public class Menu {
 		case 1:
 			addClinicalHistory();
 			break;
-		case 2:
-			searchClinicalHistoryById();
-			//updateClinicalHistory(clinicalHistoryId);-> TODO
+		case 2:			
+			System.out.println("Introduce the Clinical History's id: ");
+			int clinicalHistoryToUpdateId = Integer.parseInt(reader.readLine());
+			updateClinicalHistory(clinicalHistoryToUpdateId);
 			break;
 		case 3:
 			searchClinicalHistoryById();
-			//checkClinicalHistory();->TODO
 			break;
 			
 		case 4:
-			//deleteClinicalHistory();->TODO
+			System.out.println("Introduce the Clinical History's id: ");
+			int clinicalHistoryToDeleteId = Integer.parseInt(reader.readLine());
+			deleteClinicalHistory(clinicalHistoryToDeleteId);
 			break;
 		default:
 			break;
@@ -583,8 +585,7 @@ public class Menu {
 		System.out.println("Select action \n");
 		
 		System.out.println("1. Add \n");
-		System.out.println("2. search by id \n");
-		System.out.println("3. search by name \n");
+		System.out.println("2. Search \n");
 
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -595,10 +596,17 @@ public class Menu {
 			addAllergy();
 			break;
 		case 2:
-			searchAllergyById();
-			break;
-		case 3:
-			searchAllergyByName(); //***********************************
+			searchMenu();
+			int choiceSearch = Integer.parseInt(reader.readLine());
+			while(choiceSearch != 1 || choiceSearch !=2) {
+			System.out.println("Select a valid option, please");
+			}
+			if(choiceSearch == 1) {
+				searchAllergyById();
+			}
+			if(choiceSearch == 2) {
+				searchAllergyByName();
+			}
 			break;
 		default:
 			break;
@@ -1294,22 +1302,18 @@ public class Menu {
 	private static void searchClinicalHistoryById() throws Exception {
 		System.out.println("Type! \n");
 		System.out.println("Clinical History id: \n");
-		int id=Integer.parseInt(reader.readLine());
+		int clinicalHistoryId=Integer.parseInt(reader.readLine());
 		
-		List<ClinicalHistory> clinicalHistories = clinicalHistoryManager.searchClinicalHistoryById(id);
-		
-		for (ClinicalHistory clinicalHistory : clinicalHistories) {
+		ClinicalHistory clinicalHistoryFound = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryId);
 			
-			System.out.println(clinicalHistory);
+			System.out.println(clinicalHistoryFound);
 			
-		}
 	}
 	
-	private static void updateClinicalHistory(int clinicalHistoryId) throws Exception {
+	private static void updateClinicalHistory(int clinicalHistoryToUpdateId) throws Exception {
 		//get the clinical history
-		ClinicalHistory toBeModified = clinicalHistoryManager.getClinicalHistory(clinicalHistoryId);
+		ClinicalHistory toBeModified = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryToUpdateId);
 		
-		//REVISA BIEN Y PIENSA FUERTEMENTE QUE ESTA PASANDO AQUI PORQUE NO ME FIO*****************************************************************************
 		System.out.println("Actual date of entry: " + toBeModified.getDoe());
 		System.out.println("Type the new date of entry (yyyy-MM-dd) or press enter to leave it as is:");
 		String newDateOfEntry = reader.readLine();
@@ -1352,8 +1356,11 @@ public class Menu {
 		clinicalHistoryManager.update(updatedClinicalHistory);
 }
 	
-	private static void deleteClinicalHistory() throws Exception{
+	private static void deleteClinicalHistory(int clinicalHistoryToDeleteId) throws Exception{
+		//first I get the clinical history
+		ClinicalHistory clinicalHistoryToDelete = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryToDeleteId);
 		
+		clinicalHistoryManager.delete(clinicalHistoryToDelete);
 	}
 	//METHODS FOR ALLERGY
 	

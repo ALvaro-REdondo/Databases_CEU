@@ -73,7 +73,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 
 	}
 
-	public ClinicalHistory getClinicalHistory(int clinicalHistoryId) {
+	public ClinicalHistory searchClinicalHistoryById(int clinicalHistoryId) {
 		
 		ClinicalHistory clinicalHistory = null;
 		
@@ -98,32 +98,6 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 		}
 		return clinicalHistory;
 	}
-	
-	@Override
-	public List<ClinicalHistory> searchClinicalHistoryById(Integer id) {
-		List<ClinicalHistory> clinicalHistoryList = new ArrayList<ClinicalHistory>();
-		try {
-			String sql = "SELECT * FROM ClinicalHistory WHERE id LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "%" + id + "%");
-			// HAY QUE HACER EL SEARCHCLINICHIST(???)********************************************************************************************************************
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-				int clinicalhistoryId = rs.getInt("id");
-				Date doe = rs.getDate("doe");
-				Date dod = rs.getDate("dod");
-				String bloodType = rs.getString("bloodType");
-				String extraInfo = rs.getString("extraInfo");
-				ClinicalHistory newClinicalHistory = new ClinicalHistory(clinicalhistoryId, doe, dod, bloodType, extraInfo);
-				clinicalHistoryList.add(newClinicalHistory);
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();;
-		}
-		return clinicalHistoryList;
-	}
-
 	
 	
 }

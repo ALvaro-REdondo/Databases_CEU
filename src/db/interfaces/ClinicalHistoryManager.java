@@ -8,6 +8,5 @@ public interface ClinicalHistoryManager {
 	public void add(ClinicalHistory clinicalHistory);
 	public void update(ClinicalHistory clinicalHistory);
 	public void delete(ClinicalHistory clinicalHistory);
-	public ClinicalHistory getClinicalHistory(int clinicalHistoryId); 
-	public List<ClinicalHistory> searchClinicalHistoryById(Integer id);
+	public ClinicalHistory searchClinicalHistoryById(int clinicalHistoryId); 
 }
