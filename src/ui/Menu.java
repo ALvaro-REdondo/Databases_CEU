@@ -110,12 +110,14 @@ public class Menu {
 	}
 	
 	private static void treatmentCreatorSubMenu1Treatment() throws Exception{
+		int exitSubmenu1Treatment=0;
+		while(exitSubmenu1Treatment == 0) {
 		System.out.println("Select action \n");
-		
 		System.out.println("1. Add a treatment \n");
 		System.out.println("2. Update a treatment \n");
 		System.out.println("3. Check a  treatment \n");
 		System.out.println("4. Delete a treatment \n");
+		System.out.println("5. Exit the Submenu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -124,15 +126,17 @@ public class Menu {
 		case 1:
 			addTreatment();
 			break;
-		case 2: 
+		case 2:
 			searchMenu();
-			Treatment treatment2;
 			int choice2 = Integer.parseInt(reader.readLine());
 			while(choice2 != 1 || choice2 !=2) {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice2 == 1) {
-				//treatment2 = searchTreatmentById();
+				searchTreatmentById();
+				System.out.println("Type the id of the treatment you want to update \n");
+				int choice3 = Integer.parseInt(reader.readLine());
+				updateTreatment(choice3);
 			}
 			if(choice2 == 2) {
 				searchTreatmentByName();
@@ -141,7 +145,6 @@ public class Menu {
 		case 3: 
 			//mostrar todos los treatments primero
 		    searchMenu();
-		    List<Treatment> treatments;
 			int choice3 = Integer.parseInt(reader.readLine());
 			while(choice3 != 1 && choice3 !=2) {
 			System.out.println("Select a valid option, please");
@@ -157,12 +160,14 @@ public class Menu {
 		case 4:
 			deleteTreatment();//crear
 			break;
+		case 5:
+			exitSubmenu1Treatment = 1;
 		default:
 			break;
 			
 		}
-		
 	}
+}
 	
 	
 	private static void treatmentCreatorSubMenu2Pathology() throws Exception {
@@ -1224,7 +1229,7 @@ public class Menu {
 	
 	private static void updateTreatment(int treatmentId) throws Exception{
 		
-		Treatment oldTreatment = treatmentManager.getTreatmentId(treatmentId);
+		Treatment oldTreatment = treatmentManager.searchTreatmentById(treatmentId);
 		
 		System.out.println("Current name of the treatment: " + oldTreatment.getName());
 		System.out.println("Press enter to maintain the current name, or type the new name of the treatment");
@@ -1270,19 +1275,14 @@ public class Menu {
 		return treatments;		
 	}
 	
-	private static List<Treatment> searchTreatmentById() throws Exception {
+	private static void searchTreatmentById() throws Exception {
 		
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
-		List<Treatment> treatments = treatmentManager.searchTreatmentById(id);
-		for (Treatment treatment : treatments) {
-			
+		Treatment treatment = treatmentManager.searchTreatmentById(id);
 			System.out.println(treatment);
-			
-		}
-		return treatments;
 	}
 	
 	private static void deleteTreatment() throws Exception{
