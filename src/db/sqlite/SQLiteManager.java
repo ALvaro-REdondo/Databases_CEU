@@ -89,7 +89,6 @@ public class SQLiteManager implements DBManager {
 					   + " description TEXT )";
 			stmt1.executeUpdate(sql3);
 			stmt1 = c.createStatement();
-			stmt1 = c.createStatement();
 			String sql4 = "CREATE TABLE Pathology "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
