@@ -439,8 +439,20 @@ public class Menu {
 			updatePatient(id);
 			break;
 		case 3:
-			//checkPatient();->TODO
-			break;
+			searchMenu();
+			int option;
+			do {
+				System.out.println("choose an option:");
+				option = Integer.parseInt(reader.readLine());
+			}while(option!=1||option!=2);
+			if (option==1) {
+				searchPatientByName();
+				break;
+			}else {
+				searchPatientById();
+				break;
+			}
+			
 			
 		case 4:
 			//deletePatient();->TODO
@@ -592,6 +604,12 @@ public class Menu {
 			System.out.println(patient);
 		}
 		
+		
+	}
+	
+	private static void deletePatient (Patient patient) throws Exception{
+		
+		patientManager.delete(patient);
 		
 	}
 	
