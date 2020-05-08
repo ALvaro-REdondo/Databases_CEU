@@ -1222,9 +1222,37 @@ public class Menu {
 		treatmentManager.add(treatment);
 	}
 	
-	private static void updateTreatment() throws Exception{
+	private static void updateTreatment(int treatmentId) throws Exception{
 		
+		Treatment oldTreatment = treatmentManager.getTreatmentId(treatmentId);
 		
+		System.out.println("Current name of the treatment: " + oldTreatment.getName());
+		System.out.println("Press enter to maintain the current name, or type the new name of the treatment");
+		String updatedName = reader.readLine();
+		
+		if(updatedName.equals("")) {
+			updatedName = oldTreatment.getName();		
+		} 
+		
+		System.out.println("Current medication of the treatment: " + oldTreatment.getMedication());
+		System.out.println("Press enter to maintain the current medication, or type the new medication of the treatment");
+		String updatedMedication = reader.readLine();	
+		
+		if(updatedMedication.equals("")) {
+			updatedMedication =  oldTreatment.getMedication();				
+		} 
+		
+		System.out.println("Current description: " +  oldTreatment.getDescription());
+		System.out.println("Press enter to maintain the current description, or type the new description of the treatment");
+		String updatedDescription = reader.readLine();
+		
+		if(updatedDescription.equals("")) {
+			updatedDescription = oldTreatment.getDescription();			
+		} 
+		
+		Treatment newTreatment = new Treatment(updatedName, updatedMedication, updatedDescription);
+		treatmentManager.update(newTreatment);
+	
 	}
 	
 	private static  List<Treatment> searchTreatmentByName() throws Exception{
