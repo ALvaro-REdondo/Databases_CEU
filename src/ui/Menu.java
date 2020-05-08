@@ -30,9 +30,9 @@ public class Menu {
 	public static void main(String[] args) throws Exception{
 		
 		dbManager = new SQLiteManager();
- 
-        PatientManager	patientManager = dbManager.getPatientManager();
-        SymptomManager	symptomManager = dbManager.getSymptomManager();
+		dbManager.connect(); 
+        patientManager = dbManager.getPatientManager();
+        symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
 		allergyManager = dbManager.getAllergyManager();
@@ -599,7 +599,6 @@ public class Menu {
 		
 		Patient toBeModified = patientManager.getPatient(patientId);
 		
-		// name, gender, state , DOB, pathid, clinhistid
 		
 		System.out.println("Actual name: " + toBeModified.getName());
 		System.out.println("Type the new name or press enter to leave it as it is");
