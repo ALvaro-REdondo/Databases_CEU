@@ -34,26 +34,6 @@ public class SQLiteSymptomManager implements SymptomManager {
 	
 
 	@Override
-	public List<Symptom> searchSymptomById(Integer id) {
-		List<Symptom> symptomsList= new ArrayList<Symptom>();
-		try {
-			String sql ="SELECT * FROM symptom WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1,"%" + id + "%");
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-				int Symptomid = rs.getInt("id");
-				String SymptomManifestation = rs.getString("manifestation");
-				Symptom newSymptom = new Symptom(Symptomid, SymptomManifestation);
-				symptomsList.add(newSymptom);
-			}
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		return symptomsList;
-	}
-
-	@Override
 	public List<Symptom> searchASymptomByManifestation(String manifestation) {
 		List<Symptom> symptomsList= new ArrayList<Symptom>();
 		try {
@@ -75,7 +55,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 	}
 
 	@Override
-	public Symptom getSymptom(int SymptomId) {
+	public Symptom searchSymptomById(int SymptomId) {
 		
 		Symptom symptom = null;
 		

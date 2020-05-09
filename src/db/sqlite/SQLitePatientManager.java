@@ -73,30 +73,8 @@ public class SQLitePatientManager implements PatientManager {
 
 	}
 
-	@Override
-	public List<Patient> searchPatientById(Integer id) {
-		List<Patient> patientsList= new ArrayList<Patient>();
-		try {
-			String sql ="SELECT * FROM patient WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1,"%" + id + "%");
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-				int Patientid = rs.getInt("id");
-				String PatientName = rs.getString("name");
-				String PatientGender = rs.getString("gender");
-				String PatientState = rs.getString("state");
-				Date PatientDOB =rs.getDate("dob");
-				int PatientPathology_id = rs.getInt("pathology_id");
-				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
-				Patient newPatient = new Patient(Patientid, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);
-				patientsList.add(newPatient);
-			}
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		return patientsList;
-	}
+	
+	
 
 	@Override
 	public List<Patient> searchPatientByName(String name) {
@@ -127,7 +105,7 @@ public class SQLitePatientManager implements PatientManager {
 
 	@Override
 
-	public Patient getPatient(int PatientId) {
+	public Patient searchPatientById(int PatientId) {
 		
 		Patient patient = null;
 		

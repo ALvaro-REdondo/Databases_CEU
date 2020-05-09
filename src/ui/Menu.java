@@ -580,14 +580,9 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		//para buscar en la base de datos:
-		List<Patient> patients= patientManager.searchPatientById(id);
+		Patient patient= patientManager.searchPatientById(id);
 		
-		// para mostrarlos por pantalla:
-		for (Patient patient : patients) {
-			System.out.println(patient);
-		}
-		
-		
+		System.out.println(patient);
 		
 	}
 	
@@ -615,7 +610,7 @@ public class Menu {
 	
 	private static void updatePatient ( int patientId) throws Exception{
 		
-		Patient toBeModified = patientManager.getPatient(patientId);
+		Patient toBeModified = patientManager.searchPatientById(patientId);
 		
 		
 		System.out.println("Actual name: " + toBeModified.getName());
@@ -697,12 +692,10 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		//para buscar en la base de datos:
-		List<Symptom> symptoms= symptomManager.searchSymptomById(id);
+		Symptom symptom= symptomManager.searchSymptomById(id);
 		
-		// para mostrar por pantalla:
-		for (Symptom symptom : symptoms) {
-			System.out.println(symptom);
-		}
+		System.out.println(symptom);
+		
 	
 	}
 	
