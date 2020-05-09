@@ -27,9 +27,9 @@ public class SQLitePathologyManager implements PathologyManager {
 	public void add(Pathology pathology) {
 		try {
 			// TODO Auto-generated method stub
-		String sql = " INSERT INTO Pathology (name, duration, startDate, endingDate, treatmentId)"
+		String sql4 = " INSERT INTO Pathology (name, duration, startDate, endingDate, treatmentId)"
 				+ "VALUES(?, ?, ?, ?, ?);";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = c.prepareStatement(sql4);
 		
 		prep.setString(1, pathology.getName());
 		prep.setInt(2, pathology.getDuration());
