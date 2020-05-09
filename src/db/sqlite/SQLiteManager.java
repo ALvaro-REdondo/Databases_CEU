@@ -97,6 +97,7 @@ public class SQLiteManager implements DBManager {
 					   + " endingDate DATE "
 					   + " treatmentId INTEGER REFERENCES Treatment(id))";
 			stmt1.executeUpdate(sql4);
+			stmt1 = c.createStatement();
 			String sql5 = "CREATE TABLE Allergy "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " allergy     TEXT     NOT NULL, "
