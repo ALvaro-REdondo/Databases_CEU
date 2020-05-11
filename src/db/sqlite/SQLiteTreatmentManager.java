@@ -92,8 +92,8 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 				//add it to the list
 				treatmentsList.add(newTreatment);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			return null;
 		}
 		//return the list
 		return treatmentsList;
@@ -118,8 +118,8 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 				treatmentsList.add(newTreatment);
 				
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			return null;
 		}
 		
 		return treatmentsList;

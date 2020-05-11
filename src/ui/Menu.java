@@ -1390,21 +1390,22 @@ public class Menu {
 	
 	}
 	
-	private static  List<Treatment> searchTreatmentByName() throws Exception{
+	private static  void searchTreatmentByName() throws Exception{
 		
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		String name = reader.readLine();
-		
+		if(treatmentManager.searchTreatmentByName(name) != null) {
 		List<Treatment> treatments = treatmentManager.searchTreatmentByName(name);
 		for (Treatment treatment : treatments) {
-			
 			System.out.println(treatment);
-			
 		}
-		return treatments;		
+		
+	}else {
+		System.out.println("The treatment does not exist \n");
 	}
-	
+		
+}	
 	private static void searchTreatmentById() throws Exception {
 		
 		System.out.println("Type! \n");
