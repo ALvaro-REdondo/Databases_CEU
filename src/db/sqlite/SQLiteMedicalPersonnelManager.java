@@ -93,41 +93,6 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 	}
 
 	@Override
-	public List<MedicalPersonnel> searchMedicalPersonnelById(Integer id) {
-		// TODO Auto-generated method stub
-		
-		List <MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
-		try {
-			
-			//Search medical personnel that has the same id as the one inserted by the user.
-			
-			String sql = "SELECT * FROM pathology WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			while(rs.next()) {
-				
-				int medicalPersonnelId = rs.getInt("id");
-				String name = rs.getString("name");
-				String department = rs.getString("department");
-				String position = rs.getString("position");
-				int pathologyId = rs.getInt("pathology Id");
-				MedicalPersonnel medicalPersonnel = new MedicalPersonnel(medicalPersonnelId, name, department, position, pathologyId);
-				
-				medicalPersonnelList.add(medicalPersonnel);
-				
-			}
-		} catch(SQLException e) {
-			
-			
-			e.printStackTrace();
-			
-		};
-		
-		return medicalPersonnelList;
-
-	}
-
-	@Override
 	public List<MedicalPersonnel> searchMedicalPersonnelByPathologyId(Integer pathologyId) {
 		// TODO Auto-generated method stub
 		
@@ -232,7 +197,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 	}
 
 	@Override
-	public MedicalPersonnel getMedicalPersonnel(Integer medicalPersonnelId) {
+	public MedicalPersonnel searchMedicalPersonnelById(Integer medicalPersonnelId) {
 		// TODO Auto-generated method stub
 
 		MedicalPersonnel newMedicalPersonnel = null;

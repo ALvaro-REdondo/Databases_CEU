@@ -310,6 +310,7 @@ public class Menu {
 		
 		searchMenu();
 		System.out.println("3. Search by Pathology Id \n");
+		System.out.println("4. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -344,7 +345,6 @@ public class Menu {
 			exitSubmenu1MedicalPersonnel = 1;
 			
 			default:
-				
 				break;
 		
 		}
@@ -433,7 +433,6 @@ public class Menu {
 			
 			System.out.println("2. Update Pathology \n");
 			
-			//searchPathologyByName();
 			
 			System.out.println("Write pathology id");
 			int pathologyId = Integer.parseInt(reader.readLine());
@@ -474,7 +473,7 @@ public class Menu {
 	private static void updatePathology(int pathologyId) throws Exception {
 		
 		//We get the pathology		
-		Pathology modifiedPathology = pathologyManager.getPathology(pathologyId);
+		Pathology modifiedPathology = pathologyManager.searchPathologyById(pathologyId);
 		
 		System.out.println("Actual Name" + modifiedPathology.getName());
 		System.out.println("Type the new Name or press enter to leave it as it is");
@@ -991,14 +990,10 @@ public class Menu {
 		System.out.println("Id: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
-		List<Pathology> pathologies = pathologyManager.searchPathologyById(id);
-		
-		for (Pathology pathology : pathologies) {
+		Pathology pathology = pathologyManager.searchPathologyById(id);
 			
 			System.out.println(pathology);
-			
-		}
-		
+
 	}
 	
 	private static void searchPathologyByName() throws Exception {
@@ -1023,12 +1018,16 @@ public class Menu {
 		
 		System.out.println("Select action \n");
 		
-		System.out.println("1. Add    \n");
-		System.out.println("2. Update \n");
-		System.out.println("3. Check  \n");
-		System.out.println("4. Delete \n");
+		System.out.println("1. Add Medical Personnel \n");
+		System.out.println("2. Update Medical Personnel\n");
+		System.out.println("3. Check Medical Personnel \n");
+		System.out.println("4. Delete Medical Personnel \n");
+		System.out.println("5. Exit");
 		
 		int choice = Integer.parseInt(reader.readLine());
+		
+		int exitSubmenu2MedicalPersonnel=0;
+		while(exitSubmenu2MedicalPersonnel == 0) {
 		
 		switch(choice) {
 		
@@ -1053,79 +1052,22 @@ public class Menu {
 		
 		case 3: 
 						
-			searchMenu();
-			System.out.println("3. Search by Pathology Id \n");
-			 
-			 int choice3 = Integer.parseInt(reader.readLine());
-			 
-			 switch(choice3) {
-			 
-			 	case 1: 
-			 		
-			 		System.out.println("1. Search Medical Personnel by Id \n");
-			 		
-			 		searchMedicalPersonnelById();
-			 		
-			 		break;
-			 		
-			 	case 2:
-			 		
-			 		System.out.println("2. Search Medical Personnel by Name \n");
-			 		
-			 		searchMedicalPersonnelByName();
-			 		break;
-			 		
-			 	case 3: 
-			 	
-			 		System.out.println("3. Search Medical Personnel by Pathology Id \n");
-			 		
-			 		searchMedicalPersonnelByPathologyId();
-			 		break;
-			 	
-			 	default: 
-			 		break;
-			 }			
+			System.out.println("3. Check Medical Personnel \n");
+			
 			break;
 		case 4:
 			
 			System.out.println("4. Medical Personnel \n");
 			
-			searchMenu();
-			System.out.println("3. Search by PathologyId \n");
-			 
-			 int choice4 = Integer.parseInt(reader.readLine());
-			 
-			 switch(choice4) {
-			 
-			 	case 1: 
-			 		
-			 		System.out.println("1. Search Medical Personnel by Id \n");
-			 		
-			 		searchMedicalPersonnelById();
-
-			 		
-			 		break;
-			 		
-			 	case 2:
-			 		
-			 		System.out.println("1. Search Medical Personnel by Name \n");
-			 		
-			 		searchMedicalPersonnelByName();
-			 		break;
-			 		
-			 	case 3:
-			 		
-			 		System.out.println("1. Search Medical Personnel by Pathology Id \n");
-			 		
-			 		searchMedicalPersonnelByPathologyId();
-			 		break;
-			 		
-			 	default: 
-			 		break;
-			 }			
+				
 			break;
+			
+		case 5: 
+			
+			System.out.println("5. Exit");
 		default:
-			break;
+		 break;
+		}
 		}
 		
 	}
@@ -1200,7 +1142,7 @@ public class Menu {
 	private static void updateMedicalPersonnel(int medicalPersonnelId) throws Exception {
 		
 		//We get the pathology		
-				MedicalPersonnel modifiedMedicalPersonnel = medicalPersonnelManager.getMedicalPersonnel(medicalPersonnelId);
+				MedicalPersonnel modifiedMedicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
 				
 				System.out.println("Actual Name" + modifiedMedicalPersonnel.getName());
 				System.out.println("Type the new Name or press enter to leave it as it is");

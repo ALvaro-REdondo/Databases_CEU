@@ -93,41 +93,7 @@ public class SQLitePathologyManager implements PathologyManager {
 	}
 
 	@Override
-	public List<Pathology> searchPathologyById(Integer id) {
-		// TODO Auto-generated method stub
-		
-		List <Pathology> pathologyList = new ArrayList<Pathology>();
-		try {
-			
-			//Search pathology that has the same id as the one inserted by the user.
-			
-			String sql = "SELECT * FROM Pathology WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			while(rs.next()) {
-				
-				int pathologyId = rs.getInt("id");
-				String name = rs.getString("name");
-				int duration = rs.getInt("duration");
-				Date startDate = rs.getDate("start date");
-				Date endingDate = rs.getDate("Ending Date");
-				int treatmentId = rs.getInt("Treatment id");
-				Pathology pathology = new Pathology(pathologyId, name, duration, startDate, endingDate, treatmentId);
-				
-				pathologyList.add(pathology);
-				
-			}
-		} catch(SQLException e) {
-			
-			
-			e.printStackTrace();
-			
-		};
-		return pathologyList;
-	}
-
-	@Override
-	public Pathology getPathology(int pathologyId) {
+	public Pathology searchPathologyById(int pathologyId) {
 		
 		Pathology newPathology = null;
 		
