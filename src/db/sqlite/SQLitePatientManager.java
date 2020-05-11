@@ -22,7 +22,7 @@ public class SQLitePatientManager implements PatientManager {
 	public void add(Patient patient) {
 		try {
 		String sql = " INSERT Patient (name , gender , state , dob , pathology_id , clinical_history_id) "
-				+ "VALUES (?,?,?,? ,?);"; 
+				+ "VALUES (?,?,?,?,? ,?);"; 
 		PreparedStatement prep =c.prepareStatement(sql);
 		prep.setString(1,patient.getName());
 		prep.setString(2,patient.getGender());
@@ -60,7 +60,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void delete(Patient patient) {
 		try {
-			String sql = " DELETE Patient WHERE id =?";
+			String sql = " DELETE FROM Patient WHERE id =?";
 			PreparedStatement s= c.prepareStatement(sql);
 			s.setInt(1, patient.getId());
 			s.executeUpdate();
@@ -73,30 +73,7 @@ public class SQLitePatientManager implements PatientManager {
 
 	}
 
-	@Override
-	public List<Patient> searchPatientById(Integer id) {
-		List<Patient> patientsList= new ArrayList<Patient>();
-		try {
-			String sql ="SELECT * FROM Patient WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1,"%" + id + "%");
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-				int Patientid = rs.getInt("id");
-				String PatientName = rs.getString("name");
-				String PatientGender = rs.getString("gender");
-				String PatientState = rs.getString("state");
-				Date PatientDOB =rs.getDate("dob");
-				int PatientPathology_id = rs.getInt("pathology_id");
-				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
-				Patient newPatient = new Patient(Patientid, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);
-				patientsList.add(newPatient);
-			}
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		return patientsList;
-	}
+
 
 	@Override
 	public List<Patient> searchPatientByName(String name) {
@@ -127,7 +104,7 @@ public class SQLitePatientManager implements PatientManager {
 
 	@Override
 
-	public Patient getPatient(int PatientId) {
+	public Patient searchPatientById(int PatientId) {
 		
 		Patient patient = null;
 		
@@ -146,7 +123,7 @@ public class SQLitePatientManager implements PatientManager {
 			Date PatientDOB =rs.getDate("dob");
 			int PatientPathology_id = rs.getInt("pathology_id");
 			int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
-			Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
+			patient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
 			
 		} catch(SQLException e) {
 			

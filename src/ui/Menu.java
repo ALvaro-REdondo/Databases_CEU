@@ -30,6 +30,7 @@ public class Menu {
 	public static void main(String[] args) throws Exception{
 		
 		dbManager = new SQLiteManager();
+		dbManager.connect(); 
 		dbManager.connect();
         patientManager = dbManager.getPatientManager();
         symptomManager = dbManager.getSymptomManager();
@@ -166,6 +167,8 @@ public class Menu {
 			System.out.println("Select a valid option, please");
 			choice3 = Integer.parseInt(reader.readLine());
 			}
+				
+
 			if(choice3 == 1) {
 				System.out.println("Type the id of the treatment you want to delete \n");
 				choice3 = Integer.parseInt(reader.readLine());
@@ -177,6 +180,7 @@ public class Menu {
 				choice3 = Integer.parseInt(reader.readLine());
 				deleteTreatment(choice3);
 			}
+
 			break;
 		case 4:
 			searchMenu();
@@ -198,9 +202,9 @@ public class Menu {
 			break;
 			
 		}
+
 	}
 }
-	
 	
 	private static void treatmentCreatorSubMenu2Pathology() throws Exception {
 		
@@ -591,12 +595,26 @@ public class Menu {
 			addPatient();
 			break;
 		case 2:
+			
 			searchPatientById();
-			//updatePatient();-> TODO
+			int id = Integer.parseInt(reader.readLine());
+			updatePatient(id);
 			break;
 		case 3:
-			//checkPatient();->TODO
-			break;
+			searchMenu();
+			int option;
+			do {
+				System.out.println("choose an option:");
+				option = Integer.parseInt(reader.readLine());
+			}while(option!=1||option!=2);
+			if (option==1) {
+				searchPatientByName();
+				break;
+			}else {
+				searchPatientById();
+				break;
+			}
+			
 			
 		case 4:
 			//deletePatient();->TODO
@@ -767,6 +785,7 @@ public class Menu {
 		String dob = reader.readLine();
 		LocalDate dateOfBirth = LocalDate.parse(dob, formatter);
 		
+		pathologyManager.showPathologies();
 		System.out.println("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		
@@ -789,14 +808,9 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		//para buscar en la base de datos:
-		List<Patient> patients= patientManager.searchPatientById(id);
+		Patient patient= patientManager.searchPatientById(id);
 		
-		// para mostrarlos por pantalla:
-		for (Patient patient : patients) {
-			System.out.println(patient);
-		}
-		
-		
+		System.out.println(patient);
 		
 	}
 	
@@ -816,11 +830,16 @@ public class Menu {
 		
 	}
 	
+	private static void deletePatient (int patientId) throws Exception{
+		Patient patient= patientManager.searchPatientById(patientId);
+		patientManager.delete(patient);
+		
+	}
+	
 	private static void updatePatient ( int patientId) throws Exception{
 		
-		Patient toBeModified = patientManager.getPatient(patientId);
+		Patient toBeModified = patientManager.searchPatientById(patientId);
 		
-		// name, gender, state , DOB, pathid, clinhistid
 		
 		System.out.println("Actual name: " + toBeModified.getName());
 		System.out.println("Type the new name or press enter to leave it as it is");
@@ -901,12 +920,10 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		//para buscar en la base de datos:
-		List<Symptom> symptoms= symptomManager.searchSymptomById(id);
+		Symptom symptom= symptomManager.searchSymptomById(id);
 		
-		// para mostrar por pantalla:
-		for (Symptom symptom : symptoms) {
-			System.out.println(symptom);
-		}
+		System.out.println(symptom);
+		
 	
 	}
 	
