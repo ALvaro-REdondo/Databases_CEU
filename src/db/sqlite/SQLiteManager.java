@@ -94,7 +94,7 @@ public class SQLiteManager implements DBManager {
 					   + " name     TEXT     NOT NULL, "
 					   + " duration  INTEGER, "
 					   + " startDate DATE NOT NULL, "
-					   + " endingDate DATE "
+					   + " endingDate DATE, "
 					   + " treatmentId INTEGER REFERENCES Treatment(id))";
 			stmt1.executeUpdate(sql4);
 			stmt1 = c.createStatement();
