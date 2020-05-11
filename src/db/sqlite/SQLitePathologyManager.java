@@ -107,9 +107,9 @@ public class SQLitePathologyManager implements PathologyManager {
 			
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
-			Date startDate = rs.getDate("start date");
-			Date endingDate = rs.getDate("Ending Date");
-			int treatmentId = rs.getInt("treatment id");
+			Date startDate = rs.getDate("startDate");
+			Date endingDate = rs.getDate("endingDate");
+			int treatmentId = rs.getInt("treatmentId");
 		
 			newPathology = new Pathology(id, name, startDate, endingDate, treatmentId);
 		
@@ -141,9 +141,9 @@ public class SQLitePathologyManager implements PathologyManager {
 				
 				int id = rs.getInt("id");
 				String pathologyName = rs.getString("name");
-				Date startDate = rs.getDate("start date");
-				Date endingDate = rs.getDate("Ending Date");
-				int treatmentId = rs.getInt("treatment id");
+				Date startDate = rs.getDate("startDate");
+				Date endingDate = rs.getDate("endingDate");
+				int treatmentId = rs.getInt("treatmentId");
 				
 				//Creates a new pathology
 				
@@ -176,9 +176,9 @@ public class SQLitePathologyManager implements PathologyManager {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				Date startDate = rs.getDate("Start Date");
-				Date endingDate = rs.getDate("Ending Date");
-				Integer treatmentId = rs.getInt("Treatment id");
+				Date startDate = rs.getDate("startDate");
+				Date endingDate = rs.getDate("endingDate");
+				Integer treatmentId = rs.getInt("treatmentId");
 				
 				Pathology pathology = new Pathology(id, name, startDate, endingDate, treatmentId);
 				
