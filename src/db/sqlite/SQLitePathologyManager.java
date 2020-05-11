@@ -32,9 +32,9 @@ public class SQLitePathologyManager implements PathologyManager {
 		PreparedStatement prep = c.prepareStatement(sql4);
 		
 		prep.setString(1, pathology.getName());
-		prep.setDate(3, pathology.getStartDate());
-		prep.setDate(4, pathology.getEndingDate());
-		prep.setInt(5,  pathology.getTreatmentId());
+		prep.setDate(2, pathology.getStartDate());
+		prep.setDate(3, pathology.getEndingDate());
+		prep.setInt(4,  pathology.getTreatmentId());
 		prep.executeUpdate();
 		prep.close();
 			
@@ -54,10 +54,10 @@ public class SQLitePathologyManager implements PathologyManager {
 		PreparedStatement s = c.prepareStatement(sql);
 		
 		s.setString(1, pathology.getName());
-		s.setDate(3,  pathology.getStartDate());
-		s.setDate(4,  pathology.getEndingDate());
-		s.setInt(5, pathology.getTreatmentId());
-		s.setInt(6, pathology.getId());
+		s.setDate(2,  pathology.getStartDate());
+		s.setDate(3,  pathology.getEndingDate());
+		s.setInt(4, pathology.getTreatmentId());
+		s.setInt(5, pathology.getId());
 		s.executeUpdate();
 		s.close();
 		
