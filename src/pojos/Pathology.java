@@ -13,17 +13,15 @@ public class Pathology implements Serializable{
 
 	private Integer id;
 	private String name;
-	private Integer duration;
 	private Date startDate;
 	private Date endingDate;
 	private Integer treatmentId;
 	
 	
-	public Pathology(Integer id, String name, Integer duration, Date startDate, Date endingDate, Integer treatmentId) {
+	public Pathology(Integer id, String name, Date startDate, Date endingDate, Integer treatmentId) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.duration = duration;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatmentId = treatmentId;
@@ -31,10 +29,9 @@ public class Pathology implements Serializable{
 
 	//he creado constructor con todas las variables	
 	
-	public Pathology(String name, Integer duration, Date startDate, Date endingDate, Integer treatmentId) {
+	public Pathology(String name, Date startDate, Date endingDate, Integer treatmentId) {
 		super();
 		this.name = name;
-		this.duration = duration;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatmentId = treatmentId;
@@ -73,14 +70,6 @@ public class Pathology implements Serializable{
 		this.name = name;
 	}
 
-	public Integer getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Integer duration) {
-		this.duration = duration;
-	}
-
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -107,7 +96,7 @@ public class Pathology implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Pathology [id=" + id + ", name=" + name + ", duration=" + duration + ", startDate=" + startDate
+		return "Pathology [id=" + id + ", name=" + name + ", startDate=" + startDate
 				+ ", endingDate=" + endingDate + ", treatmentId=" + treatmentId + "]";
 	}
 

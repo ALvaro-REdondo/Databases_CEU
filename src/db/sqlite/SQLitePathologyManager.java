@@ -27,12 +27,11 @@ public class SQLitePathologyManager implements PathologyManager {
 	public void add(Pathology pathology) {
 		try {
 			// TODO Auto-generated method stub
-		String sql4 = " INSERT INTO Pathology (name, duration, startDate, endingDate, treatmentId)"
-				+ "VALUES(?, ?, ?, ?, ?);";
+		String sql4 = " INSERT INTO Pathology (name, startDate, endingDate, treatmentId)"
+				+ "VALUES(?, ?, ?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql4);
 		
 		prep.setString(1, pathology.getName());
-		prep.setInt(2, pathology.getDuration());
 		prep.setDate(3, pathology.getStartDate());
 		prep.setDate(4, pathology.getEndingDate());
 		prep.setInt(5,  pathology.getTreatmentId());
@@ -51,11 +50,10 @@ public class SQLitePathologyManager implements PathologyManager {
 		// TODO Auto-generated method stub
 		try {
 			
-		String sql = "UPDATE Pathology SET name =?, duration=?, startDate=?, endingDate=?, treatmentId=? WHERE id=?";
+		String sql = "UPDATE Pathology SET name =?, startDate=?, endingDate=?, treatmentId=? WHERE id=?";
 		PreparedStatement s = c.prepareStatement(sql);
 		
 		s.setString(1, pathology.getName());
-		s.setInt(2, pathology.getDuration());
 		s.setDate(3,  pathology.getStartDate());
 		s.setDate(4,  pathology.getEndingDate());
 		s.setInt(5, pathology.getTreatmentId());
@@ -93,41 +91,7 @@ public class SQLitePathologyManager implements PathologyManager {
 	}
 
 	@Override
-	public List<Pathology> searchPathologyById(Integer id) {
-		// TODO Auto-generated method stub
-		
-		List <Pathology> pathologyList = new ArrayList<Pathology>();
-		try {
-			
-			//Search pathology that has the same id as the one inserted by the user.
-			
-			String sql = "SELECT * FROM Pathology WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			while(rs.next()) {
-				
-				int pathologyId = rs.getInt("id");
-				String name = rs.getString("name");
-				int duration = rs.getInt("duration");
-				Date startDate = rs.getDate("start date");
-				Date endingDate = rs.getDate("Ending Date");
-				int treatmentId = rs.getInt("Treatment id");
-				Pathology pathology = new Pathology(pathologyId, name, duration, startDate, endingDate, treatmentId);
-				
-				pathologyList.add(pathology);
-				
-			}
-		} catch(SQLException e) {
-			
-			
-			e.printStackTrace();
-			
-		};
-		return pathologyList;
-	}
-
-	@Override
-	public Pathology getPathology(int pathologyId) {
+	public Pathology searchPathologyById(int pathologyId) {
 		
 		Pathology newPathology = null;
 		
@@ -143,12 +107,11 @@ public class SQLitePathologyManager implements PathologyManager {
 			
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
-			int duration = rs.getInt("duration");
 			Date startDate = rs.getDate("start date");
 			Date endingDate = rs.getDate("Ending Date");
 			int treatmentId = rs.getInt("treatment id");
 		
-			newPathology = new Pathology(id, name, duration, startDate, endingDate, treatmentId);
+			newPathology = new Pathology(id, name, startDate, endingDate, treatmentId);
 		
 		}catch(SQLException e) {
 			
@@ -178,14 +141,13 @@ public class SQLitePathologyManager implements PathologyManager {
 				
 				int id = rs.getInt("id");
 				String pathologyName = rs.getString("name");
-				int duration = rs.getInt("duration");
 				Date startDate = rs.getDate("start date");
 				Date endingDate = rs.getDate("Ending Date");
 				int treatmentId = rs.getInt("treatment id");
 				
 				//Creates a new pathology
 				
-				Pathology pathology = new Pathology(id, pathologyName, duration, startDate, endingDate, treatmentId);
+				Pathology pathology = new Pathology(id, pathologyName, startDate, endingDate, treatmentId);
 				
 				
 				pathologyList.add(pathology);
@@ -214,12 +176,11 @@ public class SQLitePathologyManager implements PathologyManager {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				Integer duration = rs.getInt("duration");
 				Date startDate = rs.getDate("Start Date");
 				Date endingDate = rs.getDate("Ending Date");
 				Integer treatmentId = rs.getInt("Treatment id");
 				
-				Pathology pathology = new Pathology(id, name, duration, startDate, endingDate, treatmentId);
+				Pathology pathology = new Pathology(id, name, startDate, endingDate, treatmentId);
 				
 				pathologyList.add(pathology);
 				
