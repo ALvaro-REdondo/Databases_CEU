@@ -115,8 +115,8 @@ public class Menu {
 		System.out.println("Select action \n");
 		System.out.println("1. Add a treatment \n");
 		System.out.println("2. Update a treatment \n");
-		System.out.println("3. Check a  treatment \n");
-		System.out.println("4. Delete a treatment \n");
+		System.out.println("3. Delete a  treatment \n");
+		System.out.println("4. Check a treatment \n");
 		System.out.println("5. Exit the Submenu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -133,17 +133,18 @@ public class Menu {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice2 == 1) {
-				searchTreatmentById();
 				System.out.println("Type the id of the treatment you want to update \n");
 				int choice3 = Integer.parseInt(reader.readLine());
 				updateTreatment(choice3);
 			}
 			if(choice2 == 2) {
 				searchTreatmentByName();
+				System.out.println("Type the id of the treatment you want to update \n");
+				int choice3 = Integer.parseInt(reader.readLine());
+				updateTreatment(choice3);
 			}
 			break;
 		case 3: 
-			//mostrar todos los treatments primero
 		    searchMenu();
 			int choice3 = Integer.parseInt(reader.readLine());
 			while(choice3 != 1 && choice3 !=2) {
@@ -151,14 +152,30 @@ public class Menu {
 			choice3 = Integer.parseInt(reader.readLine());
 			}
 			if(choice3 == 1) {
-				searchTreatmentById();	
+				System.out.println("Type the id of the treatment you want to delete \n");
+				choice3 = Integer.parseInt(reader.readLine());
+				deleteTreatment(choice3);
 			}
 			if(choice3 == 2) {
 				searchTreatmentByName();
+				System.out.println("Type the id of the treatment you want to delete \n");
+				choice3 = Integer.parseInt(reader.readLine());
+				deleteTreatment(choice3);
 			}
 			break;
 		case 4:
-			deleteTreatment();//crear
+			searchMenu();
+			int choice4 = Integer.parseInt(reader.readLine());
+			while(choice4 != 1 && choice4 !=2) {
+			System.out.println("Select a valid option, please");
+			choice3 = Integer.parseInt(reader.readLine());
+			}
+			if(choice4 == 1) {
+				searchTreatmentById();	
+			}
+			if(choice4 == 2) {
+				searchTreatmentByName();
+			}
 			break;
 		case 5:
 			exitSubmenu1Treatment = 1;
@@ -461,7 +478,7 @@ public class Menu {
 			
 		case 5: 
 			
-			System.out.println("Exit");
+			System.out.println("5. Exit");
 			
 			exitSubmenu2Pathology = 1;
 			
@@ -1278,15 +1295,19 @@ public class Menu {
 	private static void searchTreatmentById() throws Exception {
 		
 		System.out.println("Type! \n");
-		System.out.println("Name: \n");
+		System.out.println("Id: \n");
 		int id=Integer.parseInt(reader.readLine());
-		
+		if(treatmentManager.searchTreatmentById(id) != null) {
 		Treatment treatment = treatmentManager.searchTreatmentById(id);
 			System.out.println(treatment);
+	}else {
+		System.out.println("The treatment does not exist \n");
 	}
+}
 	
-	private static void deleteTreatment() throws Exception{
-		
+	private static void deleteTreatment(int treatmentid) throws Exception{
+		Treatment treatmentToDelete = treatmentManager.searchTreatmentById(treatmentid);
+		treatmentManager.delete(treatmentToDelete);
 	}
 	
 	private static void searchMenu() throws Exception{

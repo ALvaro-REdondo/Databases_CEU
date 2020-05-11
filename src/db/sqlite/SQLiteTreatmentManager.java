@@ -57,7 +57,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 	@Override
 	public void delete(Treatment treatment) {
 		try {
-			String sql = " DELETE treatment WHERE id =?";
+			String sql = " DELETE FROM treatment WHERE id =?";
 			PreparedStatement s= c.prepareStatement(sql);
 			s.setInt(1, treatment.getId());
 			s.executeUpdate();
@@ -147,7 +147,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 				
 			} catch(SQLException e) {
 				
-				e.printStackTrace();
+				return null;
 			}
 			
 			return newTreatment;
