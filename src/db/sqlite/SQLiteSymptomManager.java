@@ -69,7 +69,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 			
 			int id = rs.getInt("id");
 			String SymptomManifestation = rs.getString("manifestation");
-			Symptom newSymptom = new Symptom(id, SymptomManifestation);
+			symptom = new Symptom(id, SymptomManifestation);
 			
 			
 		} catch(SQLException e) {

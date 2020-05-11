@@ -27,9 +27,9 @@ public class SQLitePathologyManager implements PathologyManager {
 	public void add(Pathology pathology) {
 		try {
 			// TODO Auto-generated method stub
-		String sql = " INSERT INTO Pathology (name, duration, startDate, endingDate, treatmentId)"
+		String sql4 = " INSERT INTO Pathology (name, duration, startDate, endingDate, treatmentId)"
 				+ "VALUES(?, ?, ?, ?, ?);";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = c.prepareStatement(sql4);
 		
 		prep.setString(1, pathology.getName());
 		prep.setInt(2, pathology.getDuration());
@@ -51,7 +51,7 @@ public class SQLitePathologyManager implements PathologyManager {
 		// TODO Auto-generated method stub
 		try {
 			
-		String sql = "UPDATE pathology SET name =?, duration=?, startDate=?, endingDate=?, treatmentId=? WHERE id=?";
+		String sql = "UPDATE Pathology SET name =?, duration=?, startDate=?, endingDate=?, treatmentId=? WHERE id=?";
 		PreparedStatement s = c.prepareStatement(sql);
 		
 		s.setString(1, pathology.getName());
@@ -76,7 +76,7 @@ public class SQLitePathologyManager implements PathologyManager {
 		// TODO Auto-generated method stub
 		
 		try {
-		String sql = "DELETE pathology WHERE id=?";
+		String sql = "DELETE Pathology WHERE id=?";
 		PreparedStatement d = c.prepareStatement(sql);
 		
 		d.setInt(1, pathology.getId());
@@ -101,7 +101,7 @@ public class SQLitePathologyManager implements PathologyManager {
 			
 			//Search pathology that has the same id as the one inserted by the user.
 			
-			String sql = "SELECT * FROM pathology WHERE name LIKE ?";
+			String sql = "SELECT * FROM Pathology WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
@@ -127,6 +127,40 @@ public class SQLitePathologyManager implements PathologyManager {
 	}
 
 	@Override
+	public Pathology getPathology(int pathologyId) {
+		
+		Pathology newPathology = null;
+		
+		try {
+		
+		String sql = "SELECT * FROM Pathology WHERE id = ?";
+		PreparedStatement p = c.prepareStatement(sql);
+		
+		p.setInt(1, pathologyId);
+		
+		ResultSet rs = p.executeQuery();
+		rs.next();
+			
+			int id = rs.getInt("id");
+			String name = rs.getString("name");
+			int duration = rs.getInt("duration");
+			Date startDate = rs.getDate("start date");
+			Date endingDate = rs.getDate("Ending Date");
+			int treatmentId = rs.getInt("treatment id");
+		
+			newPathology = new Pathology(id, name, duration, startDate, endingDate, treatmentId);
+		
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+			return newPathology;
+				
+	}
+	
+	@Override
 	public List<Pathology> searchPathologyByName(String name) {
 		// TODO Auto-generated method stub
 		
@@ -137,7 +171,7 @@ public class SQLitePathologyManager implements PathologyManager {
 			
 			//Search pathology that has the same name as the one inserted by the user.
 			
-			String sql = "SELECT * FROM pathology WHERE name LIKE ?";
+			String sql = "SELECT * FROM Pathology WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {

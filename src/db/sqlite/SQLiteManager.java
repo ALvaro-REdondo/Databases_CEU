@@ -66,62 +66,68 @@ public class SQLiteManager implements DBManager {
 
 	@Override
 	public void createTables() {
+		Statement stmt1;
 		try {
-			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE Pathology "
-					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " name     TEXT     NOT NULL, "
-					   + " duration  INTEGER, "
-					   + " startDate DATE NOT NULL, "
-					   + " endingDate DATE )";
-			stmt1.executeUpdate(sql1);
-			stmt1.close();
-			String sql2 = "CREATE TABLE ClinicalHistory "
+			stmt1 = c.createStatement();
+			String sql1 = "CREATE TABLE ClinicalHistory "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " doe     DATE     NOT NULL, "
 					   + " dod  DATE, "
 					   + " bloodType TEXT NOT NULL, "
 					   + " extraInfo TEXT)";
-			stmt1.executeUpdate(sql2);
-			stmt1.close();
-			String sql3 = "CREATE TABLE Symptom "
+			stmt1.executeUpdate(sql1);
+			stmt1 = c.createStatement();
+			String sql2 = "CREATE TABLE Symptom "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " manifestation     TEXT     NOT NULL)";
-			stmt1.executeUpdate(sql3);
-			stmt1.close();
-			String sql4 = "CREATE TABLE Treatment "
+			stmt1.executeUpdate(sql2);
+			stmt1 = c.createStatement();
+			String sql3 = "CREATE TABLE Treatment "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " medication  TEXT	 NOT NULL, "
 					   + " description TEXT )";
+			stmt1.executeUpdate(sql3);
+			stmt1 = c.createStatement();
+			String sql4 = "CREATE TABLE Pathology "
+					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " name     TEXT     NOT NULL, "
+					   + " duration  INTEGER, "
+					   + " startDate DATE NOT NULL, "
+					   + " endingDate DATE "
+					   + " treatmentId INTEGER REFERENCES Treatment(id))";
 			stmt1.executeUpdate(sql4);
-			stmt1.close();
+			stmt1 = c.createStatement();
 			String sql5 = "CREATE TABLE Allergy "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " allergy     TEXT     NOT NULL, "
-					   + " degree  INTEGER	 NOT NULL ";
+					   + " degree  INTEGER	 NOT NULL )";
 			stmt1.executeUpdate(sql5);
-			stmt1.close();
+			stmt1 = c.createStatement();
 			String sql6 = "CREATE TABLE Patient "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " gender  TEXT	 NOT NULL, "
 					   + " state TEXT NOT NULL, "
 					   + " dob INTEGER NOT NULL, "
-					   + " pathology_id INTEGER REFERENCES Pathologies(id),"
-					   + " clinical_history_id INTEGER REFERENCES Clinical_histories(id))";
+					   + " pathology_id INTEGER REFERENCES Pathology(id),"
+					   + " clinical_history_id INTEGER REFERENCES ClinicalHistory(id))";
 			stmt1.executeUpdate(sql6);
-			stmt1.close();
+			stmt1 = c.createStatement();
 			String sql7 = "CREATE TABLE MedicalPersonnel "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " department  TEXT	 NOT NULL, "
 					   + " position TEXT NOT NULL, "
-					   + " pathology_id INTEGER REFERENCES Pathologies(id))";
+					   + " pathology_id INTEGER REFERENCES Pathology(id))";
 			stmt1.executeUpdate(sql7);
+			stmt1 = c.createStatement();
 			stmt1.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (e.getMessage().contains("already exists")) {
+			} else {
+				e.printStackTrace();
+			}
 		}
 	}
 	@Override
