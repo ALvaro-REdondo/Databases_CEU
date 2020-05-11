@@ -489,20 +489,6 @@ public class Menu {
 			
 		} 
 		
-		System.out.println("Actual Duration" + modifiedPathology.getDuration());
-		System.out.println("Type the new Duration or press enter to leave it as it is");
-		String newDuration = reader.readLine();
-		int intNewDuration = 0;		
-		if(newDuration.equals("")) {
-			
-			intNewDuration = modifiedPathology.getDuration();			
-			
-		} else {
-			
-			intNewDuration = Integer.parseInt(newDuration);
-			
-		}
-		
 		System.out.println("Actual Start Date" + modifiedPathology.getStartDate());
 		System.out.println("Type the new Start Date or press enter to leave it as it is");
 		String newStartDate = reader.readLine();
@@ -545,7 +531,7 @@ public class Menu {
 			
 		}
 		
-		Pathology updatedPathology = new Pathology(pathologyId, newName, intNewDuration, dateNewStartDate, dateNewEndingDate, intNewTreatmentId);
+		Pathology updatedPathology = new Pathology(pathologyId, newName, dateNewStartDate, dateNewEndingDate, intNewTreatmentId);
 		
 		pathologyManager.update(updatedPathology);
 		
@@ -913,9 +899,6 @@ public class Menu {
 		System.out.print("Name: \n");
 		String name = reader.readLine();
 		
-		System.out.print("Duration: \n");
-		int duration = Integer.parseInt(reader.readLine());
-		
 		System.out.print("Start Date (yyyy-MM-dd): \n");
 		String startdate = reader.readLine();
 		LocalDate startDate = LocalDate.parse(startdate, formatter);
@@ -927,7 +910,7 @@ public class Menu {
 		System.out.print("Treatment id: \n");
 		int treatmentId = Integer.parseInt(reader.readLine());
 		
-		Pathology pathology = new Pathology(name, duration, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
+		Pathology pathology = new Pathology(name, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
 		
 		pathologyManager.add(pathology);
 		
