@@ -55,10 +55,10 @@ public class Menu {
 		switch(choice) {
 		
 		case 1:
-			treatmentCreatorMenu();//hay que crearlo
+			treatmentCreatorMenu();
 			break;
 		case 2:
-			medicalPersonnelMenu();//hay que acabarlo
+			medicalPersonnelMenu();
 			break;
 		case 3:
 			medicalPersonnelBossMenu(); 

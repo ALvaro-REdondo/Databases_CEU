@@ -136,14 +136,18 @@ public class SQLitePathologyManager implements PathologyManager {
 			
 			String sql = "SELECT * FROM Pathology WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			while(rs.next()) {
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs2 = prep.executeQuery();
+			
+			
+			
+			while(rs2.next()) {
 				
-				int id = rs.getInt("id");
-				String pathologyName = rs.getString("name");
-				Date startDate = rs.getDate("startDate");
-				Date endingDate = rs.getDate("endingDate");
-				int treatmentId = rs.getInt("treatmentId");
+				int id = rs2.getInt("id");
+				String pathologyName = rs2.getString("name");
+				Date startDate = rs2.getDate("startDate");
+				Date endingDate = rs2.getDate("endingDate");
+				int treatmentId = rs2.getInt("treatmentId");
 				
 				//Creates a new pathology
 				
