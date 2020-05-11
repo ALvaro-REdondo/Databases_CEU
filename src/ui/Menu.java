@@ -43,11 +43,14 @@ public class Menu {
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		//Print welcome screen
+		int menuKey=0;
+		while(menuKey==0) {
 		System.out.println("Hi! \n");
 		System.out.println("What is your role? \n");
 		System.out.println("1. Treatment creator \n");
 		System.out.println("2. Medical personnel \n");
 		System.out.println("3. Medical personnel boss \n");
+		System.out.println("4. Exit the menu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -61,16 +64,22 @@ public class Menu {
 			break;
 		case 3:
 			medicalPersonnelBossMenu(); 
-			break;			
+			break;	
+		case 4:
+			System.out.println("See you soon! \n");
+			menuKey=1;
+			break;
 		default:
 			break;
 		}
 	}
-	
+}
+		
 	private static void treatmentCreatorMenu() throws Exception{
+		int exitTreatmentCreatorMenu=0;
 		
+		while(exitTreatmentCreatorMenu==0) {
 		System.out.println("Select area \n");
-		
 		System.out.println("1. Treatment \n");
 		System.out.println("2. Pathology \n");
 		System.out.println("3. Clinical History \n");
@@ -78,6 +87,7 @@ public class Menu {
 		System.out.println("5. Allergies \n");
 		System.out.println("6. Symptoms \n");
 		System.out.println("7. Medical Personnel \n");
+		System.out.println("8. Exit the menu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -104,10 +114,15 @@ public class Menu {
 		case 7:
 			treatmentCreatorSubMenu7MedicalPersonnel();
 			break;
+		case 8:
+			System.out.println("See you soon, Treatment Creator! \n");
+			exitTreatmentCreatorMenu=1;
+			break;
 		default:
 			break;
 		}
 	}
+}
 	
 	private static void treatmentCreatorSubMenu1Treatment() throws Exception{
 		int exitSubmenu1Treatment=0;
