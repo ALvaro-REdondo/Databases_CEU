@@ -28,7 +28,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		// TODO Auto-generated method stub
 		try {
 			// TODO Auto-generated method stub
-		String sql = " INSERT INTO MedicalPersonnel (name, department, position, pathologyId)"
+		String sql = " INSERT INTO MedicalPersonnel (name, department, position, pathology_id)"
 				+ "VALUES(?, ?, ?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -52,7 +52,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		
 		try {
 			
-			String sql = "UPDATE medicalPersonnel SET name=?, department=?, position=?, pathologyId=? WHERE id=?";
+			String sql = "UPDATE medicalPersonnel SET name=?, department=?, position=?, pathology_id=? WHERE id=?";
 			PreparedStatement s = c.prepareStatement(sql);
 			
 			s.setString(1, medicalPersonnel.getName());
@@ -92,80 +92,9 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		}
 	}
 
-	@Override
-	public List<MedicalPersonnel> searchMedicalPersonnelByPathologyId(Integer pathologyId) {
-		// TODO Auto-generated method stub
-		
-		List <MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
-		try {
-			
-			//Search medical personnel that has the same id as the one inserted by the user.
-			
-			String sql = "SELECT * FROM pathology WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			while(rs.next()) {
-				
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String department = rs.getString("department");
-				String position = rs.getString("position");
-				int medicalPersonnelPathologyId = rs.getInt("pathology Id");
-				MedicalPersonnel medicalPersonnel = new MedicalPersonnel(id, name, department, position, medicalPersonnelPathologyId);
-				
-				medicalPersonnelList.add(medicalPersonnel);
-				
-			}
-		} catch(SQLException e) {
-			
-			
-			e.printStackTrace();
-			
-		};
-		return medicalPersonnelList;
-	}
+	
 
-	@Override
-	public List<MedicalPersonnel> searchMedicalPersonnelByName(String name) {
-		
-		//Create empty list of medical personnel
-		
-		List<MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
-		
-		try {
-			
-			//Search medical personnel that has the same name as the one inserted by the user.
-			
-			String sql = "SELECT * FROM medicalPersonnel WHERE name LIKE ?";
-			
-			PreparedStatement prep = c.prepareStatement(sql);
-			ResultSet rs = prep.executeQuery();
-			while(rs.next()) { 
-				
-				int id = rs.getInt("id");
-				String name1 = rs.getString("name");
-				String department = rs.getString("department");
-				String position = rs.getString("position");
-				int pathologyId = rs.getInt("pathology id");
-				
-				//Create a new medical personnel
-				
-				MedicalPersonnel medicalPersonnel = new MedicalPersonnel(id, name1, department, position, pathologyId);
-				
-				medicalPersonnelList.add(medicalPersonnel);
-				
-			}
-			
-			
-		} catch(SQLException e) {
-			
-			e.printStackTrace();
-			
-		}
-		
-		return medicalPersonnelList;
-		
-	}
+	
 
 	@Override
 	
@@ -183,7 +112,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 				String name = rs.getString("name");
 				String department = rs.getString("department");
 				String position = rs.getString("position");
-				Integer pathologyId = rs.getInt("pathology id");
+				Integer pathologyId = rs.getInt("pathology_id");
 				MedicalPersonnel newMedicalPersonnel = new MedicalPersonnel(id, name, department, position, pathologyId);
 				
 				medicalPersonnelList.add(newMedicalPersonnel);
@@ -216,7 +145,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 			String name = rs.getString("name");
 			String department = rs.getString("department");
 			String position = rs.getString("position");
-			int pathologyId = rs.getInt("pathology id");
+			int pathologyId = rs.getInt("pathology_id");
 			
 			newMedicalPersonnel = new MedicalPersonnel(id, name, department, position, pathologyId);
 			
@@ -228,6 +157,83 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		
 		return newMedicalPersonnel;
 		
+	}
+	
+	@Override
+	public List<MedicalPersonnel> searchMedicalPersonnelByName(String name) {
+		
+		//Create empty list of medical personnel
+		
+		List<MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
+		
+		try {
+			
+			//Search medical personnel that has the same name as the one inserted by the user.
+			
+			String sql = "SELECT * FROM medicalPersonnel WHERE name LIKE ?";
+			
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) { 
+				
+				int id = rs.getInt("id");
+				String name1 = rs.getString("name");
+				String department = rs.getString("department");
+				String position = rs.getString("position");
+				int pathologyId = rs.getInt("pathology_id");
+				
+				//Create a new medical personnel
+				
+				MedicalPersonnel medicalPersonnel = new MedicalPersonnel(id, name1, department, position, pathologyId);
+				
+				medicalPersonnelList.add(medicalPersonnel);
+				
+			}
+			
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		return medicalPersonnelList;
+		
+	}
+	
+	@Override
+	public List<MedicalPersonnel> searchMedicalPersonnelByPathologyId(Integer pathologyId) {
+		// TODO Auto-generated method stub
+		
+		List <MedicalPersonnel> medicalPersonnelList = new ArrayList<MedicalPersonnel>();
+		try {
+			
+			//Search medical personnel that has the same id as the one inserted by the user.
+			
+			String sql = "SELECT * FROM pathology WHERE pathology_id LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			//FALLO.
+			ResultSet rs2 = prep.executeQuery();
+			while(rs2.next()) {
+				
+				int id = rs2.getInt("id");
+				String name = rs2.getString("name");
+				String department = rs2.getString("department");
+				String position = rs2.getString("position");
+				int medicalPersonnelPathologyId = rs2.getInt("pathology_id");
+				MedicalPersonnel medicalPersonnel = new MedicalPersonnel(id, name, department, position, medicalPersonnelPathologyId);
+				
+				medicalPersonnelList.add(medicalPersonnel);
+				
+			}
+		} catch(SQLException e) {
+			
+			
+			e.printStackTrace();
+			
+		};
+		return medicalPersonnelList;
 	}
 
 }
