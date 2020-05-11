@@ -224,6 +224,8 @@ public class Menu {
 			System.out.println("3. Exit");
 			exitSubmenu1Pathology = 1;
 			
+			break;
+			
 		default:
 			
 			break;
@@ -342,23 +344,18 @@ public class Menu {
 		case 1:
 			
 			System.out.println("1. Search Medical Personnel by Id \n");
-			
 			searchMedicalPersonnelById();
-
-			
 			break;
 		
 		case 2: 
 			
 			System.out.println("2. Search Medical Personnel by Name \n");
-			
 			searchMedicalPersonnelByName(); 
 			break;
 			
 		case 3: 
 			
 			System.out.println("3. Search Medical Personnel by Pathology Id \n");
-			
 			searchMedicalPersonnelByPathologyId(); 
 			break;
 			
@@ -366,6 +363,8 @@ public class Menu {
 			
 			System.out.println("4. Exit");
 			exitSubmenu1MedicalPersonnel = 1;
+			
+			break;
 			
 			default:
 				break;
@@ -483,7 +482,6 @@ public class Menu {
 		case 5: 
 			
 			System.out.println("5. Exit");
-			
 			exitSubmenu2Pathology = 1;
 			
 			break;
@@ -1075,9 +1073,6 @@ public class Menu {
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
-		int exitSubmenu2MedicalPersonnel=0;
-		while(exitSubmenu2MedicalPersonnel == 0) {
-		
 		switch(choice) {
 		
 		case 1:
@@ -1114,30 +1109,26 @@ public class Menu {
 		case 5: 
 			
 			System.out.println("5. Exit");
-			
 			subMenu2MedicalPersonnel = 1;
+			
+			break;
 			
 		default:
 		 break;
 		 
 		}
-		}
-		}
-		
+	   }
 	}
+
 	
 	private static void searchMedicalPersonnelById() throws Exception{
 		
 		System.out.println("Instert the id: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
-		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByPathologyId(id);
-		
-		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(id);
 			
 			System.out.println(medicalPersonnel);
-			
-		}
 		
 	}
 	
