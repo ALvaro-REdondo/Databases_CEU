@@ -31,13 +31,16 @@ public class Menu {
 		
 		dbManager = new SQLiteManager();
 		dbManager.connect(); 
+		dbManager.connect();
         patientManager = dbManager.getPatientManager();
         symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
 		medicalPersonnelManager = dbManager.getMedicalPersonnelManager();
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
+		treatmentManager = dbManager.getTreatmentManager();		
 		
+		dbManager.createTables();
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		//Print welcome screen
@@ -108,29 +111,33 @@ public class Menu {
 	}
 	
 	private static void treatmentCreatorSubMenu1Treatment() throws Exception{
+		int exitSubmenu1Treatment=0;
+		while(exitSubmenu1Treatment == 0) {
 		System.out.println("Select action \n");
-		
 		System.out.println("1. Add a treatment \n");
 		System.out.println("2. Update a treatment \n");
 		System.out.println("3. Check a  treatment \n");
 		System.out.println("4. Delete a treatment \n");
+		System.out.println("5. Exit the Submenu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
 		
 		case 1:
-			addTreatment();//completado,o eso creo
+			addTreatment();
 			break;
-		case 2: 
+		case 2:
 			searchMenu();
-			Treatment treatment2;
 			int choice2 = Integer.parseInt(reader.readLine());
 			while(choice2 != 1 || choice2 !=2) {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice2 == 1) {
-				//treatment2 = searchTreatmentById();
+				searchTreatmentById();
+				System.out.println("Type the id of the treatment you want to update \n");
+				int choice3 = Integer.parseInt(reader.readLine());
+				updateTreatment(choice3);
 			}
 			if(choice2 == 2) {
 				searchTreatmentByName();
@@ -139,10 +146,10 @@ public class Menu {
 		case 3: 
 			//mostrar todos los treatments primero
 		    searchMenu();
-		    List<Treatment> treatments;
 			int choice3 = Integer.parseInt(reader.readLine());
-			while(choice3 != 1 || choice3 !=2) {
+			while(choice3 != 1 && choice3 !=2) {
 			System.out.println("Select a valid option, please");
+			choice3 = Integer.parseInt(reader.readLine());
 			}
 			/*if(choice3 == 1) {
 				searchTreatmentById();
@@ -164,13 +171,15 @@ public class Menu {
 		case 4:
 			deleteTreatment();//crear
 			break;
+		case 5:
+			exitSubmenu1Treatment = 1;
 		default:
 			break;
 			
 		}
-		
 
 	}
+}
 	
 	private static void treatmentCreatorSubMenu2Pathology() throws Exception {
 		
@@ -205,7 +214,10 @@ public class Menu {
 	}
 	
 	private static void treatmentCreatorSubMenu3ClinicalHistory() throws Exception {
+		System.out.println("You can only check clinical histories: \n");
 		
+		searchClinicalHistoryById();
+
 	}
 	
 	private static void treatmentCreatorSubMenu4Patient() throws Exception {
@@ -237,7 +249,35 @@ public class Menu {
 	}
 	
 	private static void treatmentCreatorSubMenu5Allergy() throws Exception {
+		System.out.println("Select action \n");
 		
+		System.out.println("1. Search \n");
+		System.out.println("2. Check \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			searchMenu();
+			int choiceSearch = Integer.parseInt(reader.readLine());
+			while(choiceSearch != 1 || choiceSearch !=2) {
+			System.out.println("Select a valid option, please");
+			}
+			if(choiceSearch == 1) {
+				searchAllergyById();
+			}
+			if(choiceSearch == 2) {
+				searchAllergyByName();
+			}
+			break;		
+			
+		case 2:
+			//checkAllergy();->TODO
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private static void treatmentCreatorSubMenu6Symptom() throws Exception {
@@ -290,14 +330,14 @@ public class Menu {
 			
 			System.out.println("2. Search Medical Personnel by Name \n");
 			
-			searchMedicalPersonnelByName(); //metodo ya creado mas abajo
+			searchMedicalPersonnelByName(); 
 			break;
 			
 		case 3: 
 			
 			System.out.println("3. Search Medical Personnel by Pathology Id \n");
 			
-			searchMedicalPersonnelByPathologyId(); //metodo ya creado mas abajo
+			searchMedicalPersonnelByPathologyId(); 
 			break;
 			
 			default:
@@ -385,7 +425,12 @@ public class Menu {
 			
 			System.out.println("2. Update Pathology \n");
 			
-			updatePathology();
+			//searchPathologyByName();
+			
+			System.out.println("Write pathology id");
+			int pathologyId = Integer.parseInt(reader.readLine());
+			
+			updatePathology(pathologyId);
 			break;
 			
 		case 3: 
@@ -405,9 +450,79 @@ public class Menu {
 		}
 	}
 
-	private static void updatePathology() throws Exception {
+	private static void updatePathology(int pathologyId) throws Exception {
 		
-		//first we show the pathology and then they decide what to modify 
+		//We get the pathology		
+		Pathology modifiedPathology = pathologyManager.getPathology(pathologyId);
+		
+		System.out.println("Actual Name" + modifiedPathology.getName());
+		System.out.println("Type the new Name or press enter to leave it as it is");
+		String newName = reader.readLine();
+		if(newName.equals("")) {
+			
+			newName = modifiedPathology.getName();			
+			
+		} 
+		
+		System.out.println("Actual Duration" + modifiedPathology.getDuration());
+		System.out.println("Type the new Duration or press enter to leave it as it is");
+		String newDuration = reader.readLine();
+		int intNewDuration = 0;		
+		if(newDuration.equals("")) {
+			
+			intNewDuration = modifiedPathology.getDuration();			
+			
+		} else {
+			
+			intNewDuration = Integer.parseInt(newDuration);
+			
+		}
+		
+		System.out.println("Actual Start Date" + modifiedPathology.getStartDate());
+		System.out.println("Type the new Start Date or press enter to leave it as it is");
+		String newStartDate = reader.readLine();
+		Date dateNewStartDate = null;		
+		if(newStartDate.equals("")) {
+			
+			 dateNewStartDate = modifiedPathology.getStartDate();			
+			
+		} else {
+			
+			dateNewStartDate = Date.valueOf(LocalDate.parse(newStartDate, formatter));
+			
+		}
+		
+		System.out.println("Actual Ending Date" + modifiedPathology.getEndingDate());
+		System.out.println("Type the new Ending Date or press enter to leave it as it is");
+		String newEndingDate = reader.readLine();
+		Date dateNewEndingDate = null;		
+		if(newEndingDate.equals("")) {
+			
+			 dateNewEndingDate = modifiedPathology.getEndingDate();			
+			
+		} else {
+			
+			dateNewEndingDate = Date.valueOf(LocalDate.parse(newEndingDate, formatter));
+			
+		}
+		
+		System.out.println("Actual Treatmetnt Id" + modifiedPathology.getTreatmentId());
+		System.out.println("Type the new Treatment Id or press enter to leave it as it is");
+		String newTreatmentId = reader.readLine();
+		int intNewTreatmentId = 0;		
+		if(newTreatmentId.equals("")) {
+			
+			intNewTreatmentId = modifiedPathology.getTreatmentId();			
+			
+		} else {
+			
+			intNewTreatmentId = Integer.parseInt(newTreatmentId);
+			
+		}
+		
+		Pathology updatedPathology = new Pathology(pathologyId, newName, intNewDuration, dateNewStartDate, dateNewEndingDate, intNewTreatmentId);
+		
+		pathologyManager.update(updatedPathology);
 		
 	}
 	
@@ -433,7 +548,7 @@ public class Menu {
 			addPatient();
 			break;
 		case 2:
-			patientManager.showPatients();
+			
 			searchPatientById();
 			int id = Integer.parseInt(reader.readLine());
 			updatePatient(id);
@@ -463,11 +578,69 @@ public class Menu {
 	}
 	
 	private static void medicalPersonnelSubMenu4() throws Exception{
+		System.out.println("Select action \n");
 		
+		System.out.println("1. Add \n");
+		System.out.println("2. Update \n");
+		System.out.println("3. Check \n");
+		System.out.println("4. Delete \n");
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			addClinicalHistory();
+			break;
+		case 2:			
+			System.out.println("Introduce the Clinical History's id: ");
+			int clinicalHistoryToUpdateId = Integer.parseInt(reader.readLine());
+			updateClinicalHistory(clinicalHistoryToUpdateId);
+			break;
+		case 3:
+			searchClinicalHistoryById();
+			break;
+			
+		case 4:
+			System.out.println("Introduce the Clinical History's id: ");
+			int clinicalHistoryToDeleteId = Integer.parseInt(reader.readLine());
+			deleteClinicalHistory(clinicalHistoryToDeleteId);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private static void medicalPersonnelSubMenu5() throws Exception{
+		System.out.println("Select action \n");
 		
+		System.out.println("1. Add \n");
+		System.out.println("2. Search \n");
+
+		
+		int choice = Integer.parseInt(reader.readLine());
+		
+		switch(choice) {
+		
+		case 1:
+			addAllergy();
+			break;
+		case 2:
+			searchMenu();
+			int choiceSearch = Integer.parseInt(reader.readLine());
+			while(choiceSearch != 1 || choiceSearch !=2) {
+			System.out.println("Select a valid option, please");
+			}
+			if(choiceSearch == 1) {
+				searchAllergyById();
+			}
+			if(choiceSearch == 2) {
+				searchAllergyByName();
+			}
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private static void medicalPersonnelSubMenu6Symptom() throws Exception{
@@ -514,9 +687,7 @@ public class Menu {
 			
 			System.out.println("Search Medical Personnel by Id \n");
 			
-			searchMedicalPersonnelById();
-
-			
+			searchMedicalPersonnelById();			
 			break;
 			
 		case 2:
@@ -558,6 +729,7 @@ public class Menu {
 		String dob = reader.readLine();
 		LocalDate dateOfBirth = LocalDate.parse(dob, formatter);
 		
+		pathologyManager.showPathologies();
 		System.out.println("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		
@@ -602,8 +774,8 @@ public class Menu {
 		
 	}
 	
-	private static void deletePatient (Patient patient) throws Exception{
-		
+	private static void deletePatient (int patientId) throws Exception{
+		Patient patient= patientManager.searchPatientById(patientId);
 		patientManager.delete(patient);
 		
 	}
@@ -863,39 +1035,11 @@ public class Menu {
 			
 			System.out.println("2. Update Medical Personnel \n");
 			
-			searchMenu();
-			System.out.println("3. Search by Pathology Id \n");
-			 
-			 int choice2 = Integer.parseInt(reader.readLine());
-			 
-			 switch(choice2) {
-			 
-			 	case 1: 
-			 		
-			 		System.out.println("1. Search Medical Personnel by Id \n");
-			 		
-			 		searchMedicalPersonnelById();
-			 		
-			 		break;
-			 		
-			 	case 2:
-			 		
-			 		System.out.println("2. Search Medical Personnel by Name \n");
-			 		
-			 		searchMedicalPersonnelByName();
-			 		break;
-			 		
-			 	case 3: 
-			 		
-			 		System.out.println("3. Search Medical Personnel by Pathology Id \n");
-			 		
-			 		searchMedicalPersonnelByPathologyId();
-			 		break;
-			 	
-			 	default: 
-			 		break;
-			 		
-			 }			 
+			System.out.println("Write pathology id");
+			int medicalPersonnelId = Integer.parseInt(reader.readLine());
+			
+			updateMedicalPersonnel(medicalPersonnelId);
+			
 			break;
 			
 		
@@ -1045,6 +1189,58 @@ public class Menu {
 		
 		}
 	
+	private static void updateMedicalPersonnel(int medicalPersonnelId) throws Exception {
+		
+		//We get the pathology		
+				MedicalPersonnel modifiedMedicalPersonnel = medicalPersonnelManager.getMedicalPersonnel(medicalPersonnelId);
+				
+				System.out.println("Actual Name" + modifiedMedicalPersonnel.getName());
+				System.out.println("Type the new Name or press enter to leave it as it is");
+				String newName = reader.readLine();
+				if(newName.equals("")) {
+					
+					newName = modifiedMedicalPersonnel.getName();			
+					
+				} 
+				
+				System.out.println("Actual Department" + modifiedMedicalPersonnel.getDepartment());
+				System.out.println("Type the new Department or press enter to leave it as it is");
+				String newDepartment = reader.readLine();	
+				if(newDepartment.equals("")) {
+					
+					newDepartment =  modifiedMedicalPersonnel.getDepartment();			
+					
+				} 
+				
+				System.out.println("Actual Position" +  modifiedMedicalPersonnel.getPosition());
+				System.out.println("Type the new Position or press enter to leave it as it is");
+				String newPosition = reader.readLine();
+				if(newPosition.equals("")) {
+					
+					newPosition = modifiedMedicalPersonnel.getPosition();			
+					
+				} 
+				
+				System.out.println("Actual Pathology Id" +  modifiedMedicalPersonnel.getPathologyId());
+				System.out.println("Type the new Pathology Id or press enter to leave it as it is");
+				String newPathologyId = reader.readLine();
+				int intNewPathologyId = 0;		
+				if(newPathologyId.equals("")) {
+					
+					intNewPathologyId =  modifiedMedicalPersonnel.getPathologyId();			
+					
+				} else {
+					
+					intNewPathologyId = Integer.parseInt(newPathologyId);
+					
+				}
+				
+				MedicalPersonnel newMedicalPersonnel = new MedicalPersonnel(medicalPersonnelId, newName, newDepartment, newPosition, intNewPathologyId);
+				
+				medicalPersonnelManager.update(newMedicalPersonnel);
+		
+	}
+	
 	private static void addTreatment() throws Exception{
 		System.out.println("So do it! \n");
 		
@@ -1061,9 +1257,37 @@ public class Menu {
 		treatmentManager.add(treatment);
 	}
 	
-	private static void updateTreatment() throws Exception{
+	private static void updateTreatment(int treatmentId) throws Exception{
 		
+		Treatment oldTreatment = treatmentManager.searchTreatmentById(treatmentId);
 		
+		System.out.println("Current name of the treatment: " + oldTreatment.getName());
+		System.out.println("Press enter to maintain the current name, or type the new name of the treatment");
+		String updatedName = reader.readLine();
+		
+		if(updatedName.equals("")) {
+			updatedName = oldTreatment.getName();		
+		} 
+		
+		System.out.println("Current medication of the treatment: " + oldTreatment.getMedication());
+		System.out.println("Press enter to maintain the current medication, or type the new medication of the treatment");
+		String updatedMedication = reader.readLine();	
+		
+		if(updatedMedication.equals("")) {
+			updatedMedication =  oldTreatment.getMedication();				
+		} 
+		
+		System.out.println("Current description: " +  oldTreatment.getDescription());
+		System.out.println("Press enter to maintain the current description, or type the new description of the treatment");
+		String updatedDescription = reader.readLine();
+		
+		if(updatedDescription.equals("")) {
+			updatedDescription = oldTreatment.getDescription();			
+		} 
+		
+		Treatment newTreatment = new Treatment(updatedName, updatedMedication, updatedDescription);
+		treatmentManager.update(newTreatment);
+	
 	}
 	
 	private static  List<Treatment> searchTreatmentByName() throws Exception{
@@ -1073,17 +1297,22 @@ public class Menu {
 		String name = reader.readLine();
 		
 		List<Treatment> treatments = treatmentManager.searchTreatmentByName(name);
+		for (Treatment treatment : treatments) {
+			
+			System.out.println(treatment);
+			
+		}
 		return treatments;		
 	}
 	
-	private static List<Treatment> searchTreatmentById() throws Exception {
+	private static void searchTreatmentById() throws Exception {
 		
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
-		List<Treatment> treatments = treatmentManager.searchTreatmentById(id);
-		return treatments;
+		Treatment treatment = treatmentManager.searchTreatmentById(id);
+			System.out.println(treatment);
 	}
 	
 	private static void deleteTreatment() throws Exception{
@@ -1117,28 +1346,24 @@ public class Menu {
 		String extraInfo = reader.readLine();
 		
 		ClinicalHistory clinicalHistory = new ClinicalHistory(Date.valueOf(doe), Date.valueOf(dod), bloodType, extraInfo);
-		
+		clinicalHistoryManager.add(clinicalHistory);
 	}
 
 	private static void searchClinicalHistoryById() throws Exception {
 		System.out.println("Type! \n");
 		System.out.println("Clinical History id: \n");
-		int id=Integer.parseInt(reader.readLine());
+		int clinicalHistoryId=Integer.parseInt(reader.readLine());
 		
-		List<ClinicalHistory> clinicalHistories = clinicalHistoryManager.searchClinicalHistoryById(id);
-		
-		for (ClinicalHistory clinicalHistory : clinicalHistories) {
+		ClinicalHistory clinicalHistoryFound = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryId);
 			
-			System.out.println(clinicalHistory);
+			System.out.println(clinicalHistoryFound);
 			
-		}
 	}
 	
-	private static void updateClinicalHistory(int clinicalHistoryId) throws Exception {
+	private static void updateClinicalHistory(int clinicalHistoryToUpdateId) throws Exception {
 		//get the clinical history
-		ClinicalHistory toBeModified = clinicalHistoryManager.getClinicalHistory(clinicalHistoryId);
+		ClinicalHistory toBeModified = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryToUpdateId);
 		
-		//REVISA BIEN Y PIENSA FUERTEMENTE QUE ESTA PASANDO AQUI PORQUE NO ME FIO*****************************************************************************
 		System.out.println("Actual date of entry: " + toBeModified.getDoe());
 		System.out.println("Type the new date of entry (yyyy-MM-dd) or press enter to leave it as is:");
 		String newDateOfEntry = reader.readLine();
@@ -1181,6 +1406,12 @@ public class Menu {
 		clinicalHistoryManager.update(updatedClinicalHistory);
 }
 	
+	private static void deleteClinicalHistory(int clinicalHistoryToDeleteId) throws Exception{
+		//first I get the clinical history
+		ClinicalHistory clinicalHistoryToDelete = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryToDeleteId);
+		
+		clinicalHistoryManager.delete(clinicalHistoryToDelete);
+	}
 	//METHODS FOR ALLERGY
 	
 	private static void addAllergy() throws Exception{
@@ -1193,7 +1424,9 @@ public class Menu {
 		int degree = Integer.parseInt(reader.readLine());
 		
 		Allergy allergy = new Allergy(allergyName, degree);
+		allergyManager.add(allergy);
 		
+		System.out.println(allergy);
 	}
 
 	private static void searchAllergyById() throws Exception {
@@ -1224,6 +1457,7 @@ public class Menu {
 		}
 				
 	}
-
 	
 }
+
+	
