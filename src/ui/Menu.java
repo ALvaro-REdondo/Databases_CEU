@@ -516,8 +516,6 @@ public class Menu {
 		System.out.println("4. Delete Pathology \n");
 		System.out.println("5. Exit");
 		
-		
-		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
@@ -544,8 +542,44 @@ public class Menu {
 			
 			System.out.println("3. Check Pathology \n");
 			
-			checkPathology();
+			int exitSubmenu2Treatment2=0;
+			while(exitSubmenu2Treatment2==0) {
+				
+				searchMenu();
+				System.out.println("3. Exit \n");
+				
+				int choice2  = Integer.parseInt(reader.readLine());
+				
+				switch(choice2) {
+				
+				case 1: 
+					
+					System.out.println("1. Search Pathology By Id \n");
+					searchPathologyById();
+					break;
+					
+				case 2:
+					
+					System.out.println("Search Pathology By Name \n");
+					searchPathologyByName();
+					break;
+					
+				case 3: 
+					
+					System.out.println("3. Exit \n");
+					exitSubmenu2Treatment2 = 1;
+					break;
+				
+					default:
+						break;
+				}
+				
+				break;
+		}
+			
 			break;
+						
+			
 			
 		case 4: 
 			
