@@ -61,7 +61,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public void delete(ClinicalHistory clinicalHistory) {
 		try {
 			//delete a particular clinical history
-			String sql = "DELETE ClinicalHistory WHERE id=?"; 
+			String sql = "DELETE FROM ClinicalHistory WHERE id=?"; 
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setInt(1, clinicalHistory.getId());
 			s.executeUpdate();
