@@ -30,6 +30,7 @@ public class Menu {
 	public static void main(String[] args) throws Exception{
 		
 		dbManager = new SQLiteManager();
+		dbManager.connect(); 
 		dbManager.connect();
         patientManager = dbManager.getPatientManager();
         symptomManager = dbManager.getSymptomManager();
@@ -43,34 +44,43 @@ public class Menu {
 		
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		//Print welcome screen
+		int menuKey=0;
+		while(menuKey==0) {
 		System.out.println("Hi! \n");
 		System.out.println("What is your role? \n");
 		System.out.println("1. Treatment creator \n");
 		System.out.println("2. Medical personnel \n");
 		System.out.println("3. Medical personnel boss \n");
+		System.out.println("4. Exit the menu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
 		
 		case 1:
-			treatmentCreatorMenu();//hay que crearlo
+			treatmentCreatorMenu();
 			break;
 		case 2:
-			medicalPersonnelMenu();//hay que acabarlo
+			medicalPersonnelMenu();
 			break;
 		case 3:
 			medicalPersonnelBossMenu(); 
-			break;			
+			break;	
+		case 4:
+			System.out.println("See you soon! \n");
+			menuKey=1;
+			break;
 		default:
 			break;
 		}
 	}
-	
+}
+		
 	private static void treatmentCreatorMenu() throws Exception{
+		int exitTreatmentCreatorMenu=0;
 		
+		while(exitTreatmentCreatorMenu==0) {
 		System.out.println("Select area \n");
-		
 		System.out.println("1. Treatment \n");
 		System.out.println("2. Pathology \n");
 		System.out.println("3. Clinical History \n");
@@ -78,6 +88,7 @@ public class Menu {
 		System.out.println("5. Allergies \n");
 		System.out.println("6. Symptoms \n");
 		System.out.println("7. Medical Personnel \n");
+		System.out.println("8. Exit the menu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -104,10 +115,15 @@ public class Menu {
 		case 7:
 			treatmentCreatorSubMenu7MedicalPersonnel();
 			break;
+		case 8:
+			System.out.println("See you soon, Treatment Creator! \n");
+			exitTreatmentCreatorMenu=1;
+			break;
 		default:
 			break;
 		}
 	}
+}
 	
 	private static void treatmentCreatorSubMenu1Treatment() throws Exception{
 		int exitSubmenu1Treatment=0;
@@ -115,8 +131,8 @@ public class Menu {
 		System.out.println("Select action \n");
 		System.out.println("1. Add a treatment \n");
 		System.out.println("2. Update a treatment \n");
-		System.out.println("3. Check a  treatment \n");
-		System.out.println("4. Delete a treatment \n");
+		System.out.println("3. Delete a  treatment \n");
+		System.out.println("4. Check a treatment \n");
 		System.out.println("5. Exit the Submenu \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -133,47 +149,72 @@ public class Menu {
 			System.out.println("Select a valid option, please");
 			}
 			if(choice2 == 1) {
-				searchTreatmentById();
 				System.out.println("Type the id of the treatment you want to update \n");
 				int choice3 = Integer.parseInt(reader.readLine());
 				updateTreatment(choice3);
 			}
 			if(choice2 == 2) {
 				searchTreatmentByName();
+				System.out.println("Type the id of the treatment you want to update \n");
+				int choice3 = Integer.parseInt(reader.readLine());
+				updateTreatment(choice3);
 			}
 			break;
 		case 3: 
-			//mostrar todos los treatments primero
 		    searchMenu();
 			int choice3 = Integer.parseInt(reader.readLine());
 			while(choice3 != 1 && choice3 !=2) {
 			System.out.println("Select a valid option, please");
 			choice3 = Integer.parseInt(reader.readLine());
 			}
+				
+
 			if(choice3 == 1) {
-				searchTreatmentById();	
+				System.out.println("Type the id of the treatment you want to delete \n");
+				choice3 = Integer.parseInt(reader.readLine());
+				deleteTreatment(choice3);
 			}
 			if(choice3 == 2) {
 				searchTreatmentByName();
+				System.out.println("Type the id of the treatment you want to delete \n");
+				choice3 = Integer.parseInt(reader.readLine());
+				deleteTreatment(choice3);
 			}
+
 			break;
 		case 4:
-			deleteTreatment();//crear
+			searchMenu();
+			int choice4 = Integer.parseInt(reader.readLine());
+			while(choice4 != 1 && choice4 !=2) {
+			System.out.println("Select a valid option, please");
+			choice4 = Integer.parseInt(reader.readLine());
+			}
+			if(choice4 == 1) {
+				searchTreatmentById();	
+			}
+			if(choice4 == 2) {
+				searchTreatmentByName();
+			}
 			break;
 		case 5:
+			System.out.println("Treatment operations ended \n");
 			exitSubmenu1Treatment = 1;
 		default:
 			break;
 			
 		}
+
 	}
 }
 	
-	
 	private static void treatmentCreatorSubMenu2Pathology() throws Exception {
+		
 		
 		System.out.println("2. Pathology \n");
 		
+		int exitSubmenu2Pathology=0;
+		while(exitSubmenu2Pathology == 0) {
+			
 		searchMenu();
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -194,23 +235,43 @@ public class Menu {
 			searchPathologyByName();
 			break;
 			
-		default:
+		case 3: 
+			
+			System.out.println("3. Exit");
+			exitSubmenu2Pathology = 1;
 			
 			break;
 			
+		default:
+			
+			break;
 		}
-		
+	  }
 	}
 	
 	private static void treatmentCreatorSubMenu3ClinicalHistory() throws Exception {
-		System.out.println("You can only check clinical histories: \n");
-		
-		searchClinicalHistoryById();
-
+		int exitSubmenu3ClinicalHistory=0;
+		while(exitSubmenu3ClinicalHistory==0) {
+		System.out.println("1.Check clinical histories \n");
+		System.out.println("2. Exit \n");
+		int choice = Integer.parseInt(reader.readLine());
+		switch(choice) {
+		case 1:
+			searchClinicalHistoryById();
+			break;
+		case 2:
+			System.out.println("Clinical History operations terminated \n");
+			exitSubmenu3ClinicalHistory=1;
+			break;
+		default:
+			break;
+		}
+		}
 	}
 	
 	private static void treatmentCreatorSubMenu4Patient() throws Exception {
-		
+		int exitSubmenu4Patient=0;
+		while(exitSubmenu4Patient==0) {
 		System.out.println("4. Patient \n");
 		
 		searchMenu();
@@ -227,17 +288,21 @@ public class Menu {
 			
 			searchPatientByName();
 			break;
-			
+		case 3:
+			System.out.println("Patient operations terminated \n");
+			exitSubmenu4Patient=1;
+			break;
 		default:
 			
 			break;
 		
 		}
-		
-		
 	}
+}
 	
 	private static void treatmentCreatorSubMenu5Allergy() throws Exception {
+		int exitSubmenu5Allergy=0;
+		while(exitSubmenu5Allergy==0) {
 		System.out.println("Select action \n");
 		
 		System.out.println("1. Search \n");
@@ -264,14 +329,21 @@ public class Menu {
 		case 2:
 			//checkAllergy();->TODO
 			break;
+		case 3:
+			System.out.println("Allergy operations terminated \n");
+			exitSubmenu5Allergy=1;
+			break;
 		default:
 			break;
 		}
 	}
-	
-	private static void treatmentCreatorSubMenu6Symptom() throws Exception {
-		System.out.println("6. Symptom \n");
+}	
 		
+	private static void treatmentCreatorSubMenu6Symptom() throws Exception {
+		int exitSubmenu6Symptom=0;
+		while(exitSubmenu6Symptom==0) {
+		System.out.println("6. Symptom \n");
+		System.out.println("3.Exit \n");
 		searchMenu();
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -287,6 +359,10 @@ public class Menu {
 			searchSymptomByManifestation();
 			break;
 			
+		case 3:
+			System.out.println("Symptom operations terminated \n");
+			exitSubmenu6Symptom=1;
+			break;
 		default:
 			
 			break;
@@ -294,13 +370,19 @@ public class Menu {
 		}
 		
 	}
-
+}
+	
+	
 	private static void treatmentCreatorSubMenu7MedicalPersonnel() throws Exception {
 		
 		System.out.println("7. Medical Personnel \n");
 		
+		int exitSubmenu1MedicalPersonnel =0;
+		while(exitSubmenu1MedicalPersonnel == 0) {
+		
 		searchMenu();
 		System.out.println("3. Search by Pathology Id \n");
+		System.out.println("4. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -309,39 +391,38 @@ public class Menu {
 		case 1:
 			
 			System.out.println("1. Search Medical Personnel by Id \n");
-			
 			searchMedicalPersonnelById();
-
-			
 			break;
 		
 		case 2: 
 			
 			System.out.println("2. Search Medical Personnel by Name \n");
-			
 			searchMedicalPersonnelByName(); 
 			break;
 			
 		case 3: 
 			
 			System.out.println("3. Search Medical Personnel by Pathology Id \n");
-			
 			searchMedicalPersonnelByPathologyId(); 
 			break;
 			
+		case 4: 
+			System.out.println("Medical Personnel operations terminated \n");
+			exitSubmenu1MedicalPersonnel = 1;
+			break;
 			default:
-				
 				break;
 		
+		}
 		}
 		
 		
 	}
 
 	private static void medicalPersonnelMenu() throws Exception{
-		
+		int exitSubmenuMedicalPersonnel=0;
+		while(exitSubmenuMedicalPersonnel==0) {
 		System.out.println("Select area \n");
-		
 		System.out.println("1. Treatment \n");
 		System.out.println("2. Pathology \n");
 		System.out.println("3. Patient \n");
@@ -349,13 +430,14 @@ public class Menu {
 		System.out.println("5. Allergies \n");
 		System.out.println("6. Symptoms \n");
 		System.out.println("7. Medical Personnel \n");
+		System.out.println("8. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
 		
 		case 1:
-			medicalPersonnelSubMenu1();//añadir menus para treatment
+			medicalPersonnelSubMenu1Treatment();
 			break;
 		case 2:
 
@@ -365,7 +447,7 @@ public class Menu {
 			medicalPersonnelSubMenu3Patient();
 			break;
 		case 4:
-			medicalPersonnelSubMenu4();//añadir menus para clinical history
+			medicalPersonnelSubMenu4ClinicalHistory();//añadir menus para clinical history
 			break;
 		case 5:
 			medicalPersonnelSubMenu5();//añadir menus para allergies
@@ -377,27 +459,62 @@ public class Menu {
 
 			medicalPersonnelSubMenu7MedicalPersonnel();
 			break;
+		case 8:
+			System.out.println("See you soon, Medical Personnel! \n");
+			exitSubmenuMedicalPersonnel=1;
+			break;
 		default:
 			break;
 		}
-	}
-	
-	private static void medicalPersonnelSubMenu1() throws Exception{
-
-		System.out.println("Select action \n");
+	}	
+}
 		
-		System.out.println("1.Check \n");
+	private static void medicalPersonnelSubMenu1Treatment() throws Exception{
+		int exitSubmenu1Treatment=0;
+		while(exitSubmenu1Treatment==0) {
+		System.out.println("Select action \n");
+		System.out.println("1.Check treatment \n");
+		System.out.println("2.Exit \n");
+		int choice = Integer.parseInt(reader.readLine());
+		switch(choice) {
+		case 1:
+			searchMenu();
+			int choice2 = Integer.parseInt(reader.readLine());
+			while(choice2 != 1 && choice2 !=2) {
+			System.out.println("Select a valid option, please");
+			choice2 = Integer.parseInt(reader.readLine());
+			}
+			if(choice2 == 1) {
+				searchTreatmentById();	
+			}
+			if(choice2 == 2) {
+				searchTreatmentByName();
+			}
+			break;
+		case 2:
+			System.out.println("Treatment operations terminated \n");
+			break;
+		default:
+			break;
+		}
+		}
+		
 	}
 	
 	private static void medicalPersonnelSubMenu2Pathology() throws Exception{
 		
 		System.out.println("2. Pathology \n"); 
+		
+		int exitSubmenu2Pathology=0;
+		while(exitSubmenu2Pathology == 0) {
+		
 		System.out.println("Select an option \n");
 		
-		System.out.println("1. Add \n");
-		System.out.println("2. Update \n");
-		System.out.println("3. Check \n");
-		System.out.println("4. Delete \n");
+		System.out.println("1. Add Pathology \n");
+		System.out.println("2. Update Pathology \n");
+		System.out.println("3. Check Pathology\n");
+		System.out.println("4. Delete Pathology \n");
+		System.out.println("5. Exit");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -414,7 +531,6 @@ public class Menu {
 			
 			System.out.println("2. Update Pathology \n");
 			
-			//searchPathologyByName();
 			
 			System.out.println("Write pathology id");
 			int pathologyId = Integer.parseInt(reader.readLine());
@@ -426,8 +542,44 @@ public class Menu {
 			
 			System.out.println("3. Check Pathology \n");
 			
-			checkPathology();
+			int exitSubmenu2Treatment2=0;
+			while(exitSubmenu2Treatment2==0) {
+				
+				searchMenu();
+				System.out.println("3. Exit \n");
+				
+				int choice2  = Integer.parseInt(reader.readLine());
+				
+				switch(choice2) {
+				
+				case 1: 
+					
+					System.out.println("1. Search Pathology By Id \n");
+					searchPathologyById();
+					break;
+					
+				case 2:
+					
+					System.out.println("Search Pathology By Name \n");
+					searchPathologyByName();
+					break;
+					
+				case 3: 
+					
+					System.out.println("3. Exit \n");
+					exitSubmenu2Treatment2 = 1;
+					break;
+				
+					default:
+						break;
+				}
+				
+				break;
+		}
+			
 			break;
+						
+			
 			
 		case 4: 
 			
@@ -435,14 +587,26 @@ public class Menu {
 			
 			deletePathology();
 			break;
-		
+			
+		case 5: 
+			
+			System.out.println("5. Exit");
+			exitSubmenu2Pathology = 1;
+			
+			break;
+			
+			default:
+				
+				break;
+				
+		}		
 		}
 	}
 
 	private static void updatePathology(int pathologyId) throws Exception {
 		
 		//We get the pathology		
-		Pathology modifiedPathology = pathologyManager.getPathology(pathologyId);
+		Pathology modifiedPathology = pathologyManager.searchPathologyById(pathologyId);
 		
 		System.out.println("Actual Name" + modifiedPathology.getName());
 		System.out.println("Type the new Name or press enter to leave it as it is");
@@ -452,20 +616,6 @@ public class Menu {
 			newName = modifiedPathology.getName();			
 			
 		} 
-		
-		System.out.println("Actual Duration" + modifiedPathology.getDuration());
-		System.out.println("Type the new Duration or press enter to leave it as it is");
-		String newDuration = reader.readLine();
-		int intNewDuration = 0;		
-		if(newDuration.equals("")) {
-			
-			intNewDuration = modifiedPathology.getDuration();			
-			
-		} else {
-			
-			intNewDuration = Integer.parseInt(newDuration);
-			
-		}
 		
 		System.out.println("Actual Start Date" + modifiedPathology.getStartDate());
 		System.out.println("Type the new Start Date or press enter to leave it as it is");
@@ -509,7 +659,7 @@ public class Menu {
 			
 		}
 		
-		Pathology updatedPathology = new Pathology(pathologyId, newName, intNewDuration, dateNewStartDate, dateNewEndingDate, intNewTreatmentId);
+		Pathology updatedPathology = new Pathology(pathologyId, newName, dateNewStartDate, dateNewEndingDate, intNewTreatmentId);
 		
 		pathologyManager.update(updatedPathology);
 		
@@ -521,13 +671,14 @@ public class Menu {
 
 	
 	private static void medicalPersonnelSubMenu3Patient() throws Exception{
-		
+		int exitSubmenu3Patient=0;
+		while(exitSubmenu3Patient==0) {
 		System.out.println("Select action \n");
-		
 		System.out.println("1. Add \n");
 		System.out.println("2. Update \n");
 		System.out.println("3. Check \n");
 		System.out.println("4. Delete \n");
+		System.out.println("5. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -537,24 +688,45 @@ public class Menu {
 			addPatient();
 			break;
 		case 2:
+			
 			searchPatientById();
-			//updatePatient();-> TODO
+			int id = Integer.parseInt(reader.readLine());
+			updatePatient(id);
 			break;
 		case 3:
-			//checkPatient();->TODO
-			break;
+			searchMenu();
+			int option;
+			do {
+				System.out.println("choose an option:");
+				option = Integer.parseInt(reader.readLine());
+			}while(option!=1||option!=2);
+			if (option==1) {
+				searchPatientByName();
+				break;
+			}else {
+				searchPatientById();
+				break;
+			}
+			
 			
 		case 4:
 			//deletePatient();->TODO
+			break;
+		case 5:
+			System.out.println("Patient operations terminated \n");
+			exitSubmenu3Patient=1;
 			break;
 		default:
 			break;
 		}
 	}
-	
-	private static void medicalPersonnelSubMenu4() throws Exception{
-		System.out.println("Select action \n");
+}
 		
+		
+	private static void medicalPersonnelSubMenu4ClinicalHistory() throws Exception{
+		int exitSubmenu4ClinicalHistory=0;
+		while(exitSubmenu4ClinicalHistory==0) {
+		System.out.println("Select action \n");
 		System.out.println("1. Add \n");
 		System.out.println("2. Update \n");
 		System.out.println("3. Check \n");
@@ -581,17 +753,23 @@ public class Menu {
 			int clinicalHistoryToDeleteId = Integer.parseInt(reader.readLine());
 			deleteClinicalHistory(clinicalHistoryToDeleteId);
 			break;
+		case 5:
+			System.out.println("Clinical History operations terminated \n");
+			exitSubmenu4ClinicalHistory=1;
+			break;
 		default:
 			break;
 		}
 	}
-	
+}
+			
 	private static void medicalPersonnelSubMenu5() throws Exception{
+		int exitSubmenu5MedicalPersonnel=0;
+		while(exitSubmenu5MedicalPersonnel==0) {
 		System.out.println("Select action \n");
-		
 		System.out.println("1. Add \n");
 		System.out.println("2. Search \n");
-
+		System.out.println("3. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -613,18 +791,25 @@ public class Menu {
 				searchAllergyByName();
 			}
 			break;
+		case 3:
+			System.out.println("Allergy operations terminated \n");
+			exitSubmenu5MedicalPersonnel=1;
+			break;
 		default:
 			break;
 		}
 	}
-	
-	private static void medicalPersonnelSubMenu6Symptom() throws Exception{
+}
 		
+	private static void medicalPersonnelSubMenu6Symptom() throws Exception{
+		int exitSubmenu6Symptom=0;
 		System.out.println("6. Symptom \n");
+		while(exitSubmenu6Symptom==0) {
 		
 		System.out.println("Select an action: \n");
 		System.out.println("1. Add \n");
-		System.out.println("1. CHeck \n");
+		System.out.println("2. CHeck \n");
+		System.out.println("3. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -638,7 +823,10 @@ public class Menu {
 			
 			// checkPatient->TODO
 			break;
-			
+		case 3:	
+			System.out.println("Symptom operations terminated \n");
+			exitSubmenu6Symptom=1;
+			break;
 		default:
 			
 			break;
@@ -646,13 +834,18 @@ public class Menu {
 		}
 		
 	}
+}
 	
 	private static void medicalPersonnelSubMenu7MedicalPersonnel() throws Exception{
 		
 		System.out.println("7. Medical Personnel");
 		
+		int exitSubmenu7MedicalPersonnel=0;
+		while(exitSubmenu7MedicalPersonnel == 0) {
+		
 		searchMenu();
-		System.out.println("Search by Pathology Id \n");
+		System.out.println("3. Search by Pathology Id \n");
+		System.out.println("4. Exit");
 		
 		int choice = Integer.parseInt(reader.readLine()); 
 		
@@ -660,28 +853,33 @@ public class Menu {
 		
 		case 1:
 			
-			System.out.println("Search Medical Personnel by Id \n");
+			System.out.println("1. Search Medical Personnel by Id \n");
 			
 			searchMedicalPersonnelById();			
 			break;
 			
 		case 2:
 			
-			System.out.println("Search Medical Personnel by Name \n");
+			System.out.println("2. Search Medical Personnel by Name \n");
 			
 			searchMedicalPersonnelByName();
 			break;
 			
 		case 3: 
 			
-			System.out.println("Search Medical Personnel by Pathology Id \n");
+			System.out.println("3. Search Medical Personnel by Pathology Id \n");
 			
 			searchMedicalPersonnelByPathologyId();
 			break;
 			
+		case 4: 
+			
+			System.out.println("4. Exit");
+			exitSubmenu7MedicalPersonnel = 1;
+			
 			default:
 				break;
-
+		}
 		
 		}
 		
@@ -704,6 +902,7 @@ public class Menu {
 		String dob = reader.readLine();
 		LocalDate dateOfBirth = LocalDate.parse(dob, formatter);
 		
+		pathologyManager.showPathologies();
 		System.out.println("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		
@@ -726,14 +925,9 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		//para buscar en la base de datos:
-		List<Patient> patients= patientManager.searchPatientById(id);
+		Patient patient= patientManager.searchPatientById(id);
 		
-		// para mostrarlos por pantalla:
-		for (Patient patient : patients) {
-			System.out.println(patient);
-		}
-		
-		
+		System.out.println(patient);
 		
 	}
 	
@@ -753,11 +947,16 @@ public class Menu {
 		
 	}
 	
+	private static void deletePatient (int patientId) throws Exception{
+		Patient patient= patientManager.searchPatientById(patientId);
+		patientManager.delete(patient);
+		
+	}
+	
 	private static void updatePatient ( int patientId) throws Exception{
 		
-		Patient toBeModified = patientManager.getPatient(patientId);
+		Patient toBeModified = patientManager.searchPatientById(patientId);
 		
-		// name, gender, state , DOB, pathid, clinhistid
 		
 		System.out.println("Actual name: " + toBeModified.getName());
 		System.out.println("Type the new name or press enter to leave it as it is");
@@ -838,12 +1037,10 @@ public class Menu {
 		int id=Integer.parseInt(reader.readLine());
 		
 		//para buscar en la base de datos:
-		List<Symptom> symptoms= symptomManager.searchSymptomById(id);
+		Symptom symptom= symptomManager.searchSymptomById(id);
 		
-		// para mostrar por pantalla:
-		for (Symptom symptom : symptoms) {
-			System.out.println(symptom);
-		}
+		System.out.println(symptom);
+		
 	
 	}
 	
@@ -868,9 +1065,6 @@ public class Menu {
 		System.out.print("Name: \n");
 		String name = reader.readLine();
 		
-		System.out.print("Duration: \n");
-		int duration = Integer.parseInt(reader.readLine());
-		
 		System.out.print("Start Date (yyyy-MM-dd): \n");
 		String startdate = reader.readLine();
 		LocalDate startDate = LocalDate.parse(startdate, formatter);
@@ -882,7 +1076,7 @@ public class Menu {
 		System.out.print("Treatment id: \n");
 		int treatmentId = Integer.parseInt(reader.readLine());
 		
-		Pathology pathology = new Pathology(name, duration, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
+		Pathology pathology = new Pathology(name, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
 		
 		pathologyManager.add(pathology);
 		
@@ -890,11 +1084,12 @@ public class Menu {
 	
 	
 	private static void medicalPersonnelBossMenu() throws Exception {
-		
+		int exitSubmenuMedicalPersonnelBoss=0;
+		while(exitSubmenuMedicalPersonnelBoss==0) {
 		System.out.println("Select area \n");
-		
 		System.out.println("1. Pathology \n");
 		System.out.println("2. Medical Personnel \n");
+		System.out.println("3. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -913,15 +1108,25 @@ public class Menu {
 			
 			medicalPersonnelBossSubMenu2MedicalPersonnel(); //Menu para medical personnel
 			break;
-			
+		case 3:
+			System.out.println("See you soon, Boss! \n");
+			exitSubmenuMedicalPersonnelBoss=1;
+			break;
 		default:
 			break;
 		}
 	}
-	
+}
+		
 	private static void medicalPersonnelBossSubMenu1Pathology() throws Exception { //Pathology
 		
+		System.out.println("1. Pathology");
+		
+		int submenu1Pathology = 0;
+		while(submenu1Pathology == 0) {
+		
 		searchMenu();
+		System.out.println("3. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -929,20 +1134,27 @@ public class Menu {
 		
 		case 1: 
 			
-			System.out.println("2. Search Pathology by Id \n");
+			System.out.println("1. Search Pathology by Id \n");
 			
 			searchPathologyById();
 			break;
 			
 		case 2: 
 			
-			System.out.println("3. Search Pathology by Name \n");
+			System.out.println("2. Search Pathology by Name \n");
 			
 			searchPathologyByName();
 			break;
 			
+		case 3: 
+			
+			System.out.println("3. Exit");
+			
+			submenu1Pathology = 1;
+			
 		default:
 			break;
+		}
 		}
 		
 	}
@@ -959,14 +1171,10 @@ public class Menu {
 		System.out.println("Id: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
-		List<Pathology> pathologies = pathologyManager.searchPathologyById(id);
-		
-		for (Pathology pathology : pathologies) {
+		Pathology pathology = pathologyManager.searchPathologyById(id);
 			
 			System.out.println(pathology);
-			
-		}
-		
+
 	}
 	
 	private static void searchPathologyByName() throws Exception {
@@ -989,12 +1197,18 @@ public class Menu {
 	
 	private static void medicalPersonnelBossSubMenu2MedicalPersonnel() throws Exception { //Medical Personnel
 		
+		System.out.println("2. Medical Personnel \n");
+		
+		int subMenu2MedicalPersonnel = 0;
+		while(subMenu2MedicalPersonnel == 0) {
+		
 		System.out.println("Select action \n");
 		
-		System.out.println("1. Add    \n");
-		System.out.println("2. Update \n");
-		System.out.println("3. Check  \n");
-		System.out.println("4. Delete \n");
+		System.out.println("1. Add Medical Personnel \n");
+		System.out.println("2. Update Medical Personnel\n");
+		System.out.println("3. Check Medical Personnel \n");
+		System.out.println("4. Delete Medical Personnel \n");
+		System.out.println("5. Exit");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -1021,95 +1235,39 @@ public class Menu {
 		
 		case 3: 
 						
-			searchMenu();
-			System.out.println("3. Search by Pathology Id \n");
-			 
-			 int choice3 = Integer.parseInt(reader.readLine());
-			 
-			 switch(choice3) {
-			 
-			 	case 1: 
-			 		
-			 		System.out.println("1. Search Medical Personnel by Id \n");
-			 		
-			 		searchMedicalPersonnelById();
-			 		
-			 		break;
-			 		
-			 	case 2:
-			 		
-			 		System.out.println("2. Search Medical Personnel by Name \n");
-			 		
-			 		searchMedicalPersonnelByName();
-			 		break;
-			 		
-			 	case 3: 
-			 	
-			 		System.out.println("3. Search Medical Personnel by Pathology Id \n");
-			 		
-			 		searchMedicalPersonnelByPathologyId();
-			 		break;
-			 	
-			 	default: 
-			 		break;
-			 }			
+			System.out.println("3. Check Medical Personnel \n");
+			
 			break;
 		case 4:
 			
 			System.out.println("4. Medical Personnel \n");
 			
-			searchMenu();
-			System.out.println("3. Search by PathologyId \n");
-			 
-			 int choice4 = Integer.parseInt(reader.readLine());
-			 
-			 switch(choice4) {
-			 
-			 	case 1: 
-			 		
-			 		System.out.println("1. Search Medical Personnel by Id \n");
-			 		
-			 		searchMedicalPersonnelById();
-
-			 		
-			 		break;
-			 		
-			 	case 2:
-			 		
-			 		System.out.println("1. Search Medical Personnel by Name \n");
-			 		
-			 		searchMedicalPersonnelByName();
-			 		break;
-			 		
-			 	case 3:
-			 		
-			 		System.out.println("1. Search Medical Personnel by Pathology Id \n");
-			 		
-			 		searchMedicalPersonnelByPathologyId();
-			 		break;
-			 		
-			 	default: 
-			 		break;
-			 }			
+				
 			break;
+			
+		case 5: 
+			
+			System.out.println("5. Exit");
+			subMenu2MedicalPersonnel = 1;
+			
+			break;
+			
 		default:
-			break;
+		 break;
+		 
 		}
-		
+	   }
 	}
+
 	
 	private static void searchMedicalPersonnelById() throws Exception{
 		
 		System.out.println("Instert the id: \n");
 		int id=Integer.parseInt(reader.readLine());
 		
-		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByPathologyId(id);
-		
-		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(id);
 			
 			System.out.println(medicalPersonnel);
-			
-		}
 		
 	}
 	
@@ -1168,7 +1326,7 @@ public class Menu {
 	private static void updateMedicalPersonnel(int medicalPersonnelId) throws Exception {
 		
 		//We get the pathology		
-				MedicalPersonnel modifiedMedicalPersonnel = medicalPersonnelManager.getMedicalPersonnel(medicalPersonnelId);
+				MedicalPersonnel modifiedMedicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
 				
 				System.out.println("Actual Name" + modifiedMedicalPersonnel.getName());
 				System.out.println("Type the new Name or press enter to leave it as it is");
@@ -1266,33 +1424,38 @@ public class Menu {
 	
 	}
 	
-	private static  List<Treatment> searchTreatmentByName() throws Exception{
+	private static  void searchTreatmentByName() throws Exception{
 		
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		String name = reader.readLine();
-		
+		if(treatmentManager.searchTreatmentByName(name) != null) {
 		List<Treatment> treatments = treatmentManager.searchTreatmentByName(name);
 		for (Treatment treatment : treatments) {
-			
 			System.out.println(treatment);
-			
 		}
-		return treatments;		
+		
+	}else {
+		System.out.println("The treatment does not exist \n");
 	}
-	
+		
+}	
 	private static void searchTreatmentById() throws Exception {
 		
 		System.out.println("Type! \n");
-		System.out.println("Name: \n");
+		System.out.println("Id: \n");
 		int id=Integer.parseInt(reader.readLine());
-		
+		if(treatmentManager.searchTreatmentById(id) != null) {
 		Treatment treatment = treatmentManager.searchTreatmentById(id);
 			System.out.println(treatment);
+	}else {
+		System.out.println("The treatment does not exist \n");
 	}
+}
 	
-	private static void deleteTreatment() throws Exception{
-		
+	private static void deleteTreatment(int treatmentid) throws Exception{
+		Treatment treatmentToDelete = treatmentManager.searchTreatmentById(treatmentid);
+		treatmentManager.delete(treatmentToDelete);
 	}
 	
 	private static void searchMenu() throws Exception{
