@@ -133,6 +133,37 @@ public class SQLitePatientManager implements PatientManager {
 		return patient;
 	}
 	
+	@Override
+
+	public List<Patient> searchPatientByPathologyId (int pathologyId) {
+		
+		List<Patient> patientsList= new ArrayList<Patient>();
+		try {
+			
+			String sql = "SELECT * FROM Patient WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  pathologyId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			String PatientName = rs.getString("name");
+			String PatientGender = rs.getString("gender");
+			String PatientState = rs.getString("state");
+			Date PatientDOB =rs.getDate("dob");
+			int PatientPathology_id = rs.getInt("pathology_id");
+			int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+			Patient newpatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
+			patientsList.add(newpatient);
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return patientsList;
+	}
+	
 
 	@Override
 	
