@@ -91,7 +91,7 @@ public class SQLitePatientManager implements PatientManager {
 				String PatientState = rs.getString("state");
 				Date PatientDOB =rs.getDate("dob");
 				int PatientPathology_id = rs.getInt("pathology_id");
-				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+				int PatientClinicalHistory_id = rs.getInt("clinical_history_id");
 				Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);//pathology_id
 				patientsList.add(newPatient);
 			}
@@ -122,7 +122,7 @@ public class SQLitePatientManager implements PatientManager {
 			String PatientState = rs.getString("state");
 			Date PatientDOB =rs.getDate("dob");
 			int PatientPathology_id = rs.getInt("pathology_id");
-			int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+			int PatientClinicalHistory_id = rs.getInt("clinical_history_id");
 			patient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
 			
 		} catch(SQLException e) {
