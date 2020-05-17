@@ -701,17 +701,22 @@ public class Menu {
 			break;
 		case 3:
 			searchMenu();
+			System.out.println("search by pathology id");
 			int option;
-			do {
+			
 				System.out.println("choose an option:");
 				option = Integer.parseInt(reader.readLine());
-			}while(option!=1||option!=2);
+			
 			if (option==1) {
 				searchPatientByName();
 				break;
 			}else {
+				if(option==2) {
 				searchPatientById();
 				break;
+				}else {
+					searchPatientByPathologyId();
+				}
 			}
 			
 			
@@ -1023,6 +1028,19 @@ public class Menu {
 		
 	}
 	
+	private static void searchPatientByPathologyId() throws Exception{
+		
+		System.out.print("Insert the pathology id: ");
+		int pathologyId=Integer.parseInt(reader.readLine());
+		//para buscar en la base de datos:
+				List<Patient> patients= patientManager.searchPatientByPathologyId(pathologyId);
+				
+				//para mistrar por pantalla
+				for (Patient patient : patients) {
+					System.out.println(patient);
+				}
+				
+	}
 	private static void addSymptom() throws Exception{
 		
 		System.out.println("So do it!");
@@ -1598,5 +1616,6 @@ public class Menu {
 	}
 	
 }
+
 
 	
