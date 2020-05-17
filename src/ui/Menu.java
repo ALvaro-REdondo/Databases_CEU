@@ -307,6 +307,8 @@ public class Menu {
 		
 		System.out.println("1. Search \n");
 		System.out.println("2. Check \n");
+		System.out.println("3. Exit \n");
+
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -315,7 +317,7 @@ public class Menu {
 		case 1:
 			searchMenu();
 			int choiceSearch = Integer.parseInt(reader.readLine());
-			while(choiceSearch != 1 || choiceSearch !=2) {
+			while(choiceSearch != 1 || choiceSearch !=3) {
 			System.out.println("Select a valid option, please");
 			}
 			if(choiceSearch == 1) {
@@ -327,7 +329,18 @@ public class Menu {
 			break;		
 			
 		case 2:
-			//checkAllergy();->TODO
+			searchMenu();
+			int choice4 = Integer.parseInt(reader.readLine());
+			while(choice4 != 1 && choice4 !=2) {
+			System.out.println("Select a valid option, please");
+			choice4 = Integer.parseInt(reader.readLine());
+			}
+			if(choice4 == 1) {
+				searchAllergyById();	
+			}
+			if(choice4 == 2) {
+				searchAllergyByName();
+			}
 			break;
 		case 3:
 			System.out.println("Allergy operations terminated \n");
