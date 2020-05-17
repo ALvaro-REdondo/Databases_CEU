@@ -598,7 +598,10 @@ public class Menu {
 			
 			System.out.println("4. Delete Pathology \n");
 			
-			deletePathology();
+			System.out.println("Write pathology Id");
+			int pathology_id = Integer.parseInt(reader.readLine());
+			
+			deletePathology(pathology_id);
 			break;
 			
 		case 5: 
@@ -678,7 +681,10 @@ public class Menu {
 		
 	}
 	
-	private static void deletePathology() throws Exception {
+	private static void deletePathology(int pathologyId) throws Exception {
+		
+		Pathology pathologyToDelete = pathologyManager.searchPathologyById(pathologyId);
+		pathologyManager.delete(pathologyToDelete);
 		
 	}
 
@@ -1171,13 +1177,7 @@ public class Menu {
 		}
 		
 	}
-	
-	
-	
-	private static void checkPathology() throws Exception {
-		
-	}
-	
+
 	private static void searchPathologyById() throws Exception {
 		
 		System.out.println("Type! \n");
