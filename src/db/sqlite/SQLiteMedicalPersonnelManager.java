@@ -211,9 +211,9 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 			
 			//Search medical personnel that has the same id as the one inserted by the user.
 			
-			String sql = "SELECT * FROM pathology WHERE pathology_id LIKE ?";
+			String sql = "SELECT * FROM MedicalPersonnel WHERE pathology_id LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			//FALLO.
+			prep.setInt(1,  pathologyId);
 			ResultSet rs2 = prep.executeQuery();
 			while(rs2.next()) {
 				
