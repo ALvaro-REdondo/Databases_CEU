@@ -78,7 +78,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 
 		try {
 			
-			String sql = "DELETE MedicalPersonnel WHERE id=?";
+			String sql = "DELETE FROM MedicalPersonnel WHERE id=?";
 			PreparedStatement d2 = c.prepareStatement(sql);
 			
 			d2.setInt(1, medicalPersonnel.getId());
