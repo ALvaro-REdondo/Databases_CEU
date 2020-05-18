@@ -21,7 +21,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 	@Override
 	public void add(Symptom symptom) {
 		try {
-			String sql = "INSERT symptom ( manifestation)"+" VALUES (?)"; 
+			String sql = "INSERT INTO symptom ( manifestation)"+" VALUES (?)"; 
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1,symptom.getManifestation());
 			prep.executeUpdate();
@@ -37,7 +37,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 	public List<Symptom> searchASymptomByManifestation(String manifestation) {
 		List<Symptom> symptomsList= new ArrayList<Symptom>();
 		try {
-			String sql ="SELECT * FROM symptom WHERE name LIKE ?";
+			String sql ="SELECT * FROM symptom WHERE manifestation LIKE ?";
 			PreparedStatement prep =  c.prepareStatement(sql);
 			prep.setString(1,"%" + manifestation + "%");
 			ResultSet rs = prep.executeQuery();
