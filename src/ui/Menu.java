@@ -216,6 +216,7 @@ public class Menu {
 		while(exitSubmenu2Pathology == 0) {
 			
 		searchMenu();
+		System.out.println("3. Exit");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -275,6 +276,8 @@ public class Menu {
 		System.out.println("4. Patient \n");
 		
 		searchMenu();
+		System.out.println("3. Search by pathology id");
+		System.out.println("4. Exit");
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -288,7 +291,12 @@ public class Menu {
 			
 			searchPatientByName();
 			break;
+			
 		case 3:
+			
+			searchPatientByPathologyId();
+			break;
+		case 4:
 			System.out.println("Patient operations terminated \n");
 			exitSubmenu4Patient=1;
 			break;
@@ -303,31 +311,24 @@ public class Menu {
 	private static void treatmentCreatorSubMenu5Allergy() throws Exception {
 		int exitSubmenu5Allergy=0;
 		while(exitSubmenu5Allergy==0) {
+			
 		System.out.println("Select action \n");
 		
-		System.out.println("1. Search \n");
-		System.out.println("2. Check \n");
+		searchMenu();
+		System.out.println("3. Exit");
+		
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
 		
 		case 1:
-			searchMenu();
-			int choiceSearch = Integer.parseInt(reader.readLine());
-			while(choiceSearch != 1 || choiceSearch !=2) {
-			System.out.println("Select a valid option, please");
-			}
-			if(choiceSearch == 1) {
-				searchAllergyById();
-			}
-			if(choiceSearch == 2) {
-				searchAllergyByName();
-			}
+			searchAllergyById();
+			
 			break;		
 			
 		case 2:
-			//checkAllergy();->TODO
+			searchAllergyByName();
 			break;
 		case 3:
 			System.out.println("Allergy operations terminated \n");
@@ -343,8 +344,9 @@ public class Menu {
 		int exitSubmenu6Symptom=0;
 		while(exitSubmenu6Symptom==0) {
 		System.out.println("6. Symptom \n");
-		System.out.println("3.Exit \n");
 		searchMenu();
+		System.out.println("3.Exit \n");
+		
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
@@ -419,6 +421,9 @@ public class Menu {
 		
 	}
 
+	
+	
+	
 	private static void medicalPersonnelMenu() throws Exception{
 		int exitSubmenuMedicalPersonnel=0;
 		while(exitSubmenuMedicalPersonnel==0) {
@@ -447,10 +452,10 @@ public class Menu {
 			medicalPersonnelSubMenu3Patient();
 			break;
 		case 4:
-			medicalPersonnelSubMenu4ClinicalHistory();//añadir menus para clinical history
+			medicalPersonnelSubMenu4ClinicalHistory();
 			break;
 		case 5:
-			medicalPersonnelSubMenu5();//añadir menus para allergies
+			medicalPersonnelSubMenu5();
 			break;
 		case 6:
 			medicalPersonnelSubMenu6Symptom();
@@ -677,6 +682,8 @@ public class Menu {
 
 	
 	private static void medicalPersonnelSubMenu3Patient() throws Exception{
+		
+		System.out.println("3. Patient: \n");
 		int exitSubmenu3Patient=0;
 		while(exitSubmenu3Patient==0) {
 		System.out.println("Select action \n");
@@ -695,7 +702,7 @@ public class Menu {
 			break;
 		case 2:
 			
-			searchPatientById();
+			System.out.println("Introduce the patient's id: ");
 			int id = Integer.parseInt(reader.readLine());
 			updatePatient(id);
 			break;
@@ -703,26 +710,31 @@ public class Menu {
 			searchMenu();
 			System.out.println("search by pathology id");
 			int option;
-			
+			do {
 				System.out.println("choose an option:");
 				option = Integer.parseInt(reader.readLine());
+			}while(option>3|| option<=0);
 			
 			if (option==1) {
-				searchPatientByName();
+					searchPatientById();
 				break;
 			}else {
 				if(option==2) {
-				searchPatientById();
+					searchPatientByName();
 				break;
 				}else {
 					searchPatientByPathologyId();
+					break;
 				}
 			}
 			
 			
 		case 4:
-			//deletePatient();->TODO
+			System.out.println("Introduce the patient's id: ");
+			int patientid = Integer.parseInt(reader.readLine());
+			deletePatient(patientid);
 			break;
+			
 		case 5:
 			System.out.println("Patient operations terminated \n");
 			exitSubmenu3Patient=1;
@@ -779,7 +791,7 @@ public class Menu {
 		while(exitSubmenu5MedicalPersonnel==0) {
 		System.out.println("Select action \n");
 		System.out.println("1. Add \n");
-		System.out.println("2. Search \n");
+		System.out.println("2. Check \n");
 		System.out.println("3. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -819,7 +831,7 @@ public class Menu {
 		
 		System.out.println("Select an action: \n");
 		System.out.println("1. Add \n");
-		System.out.println("2. CHeck \n");
+		System.out.println("2. Check \n");
 		System.out.println("3. Exit \n");
 		
 		int choice = Integer.parseInt(reader.readLine());
@@ -831,9 +843,23 @@ public class Menu {
 			break;
 			
 		case 2:
+			System.out.println("Search by id:");
+			System.out.println("Search by manifestation:");
+			int option;
+			do {
+				System.out.println("choose an option:");
+				option = Integer.parseInt(reader.readLine());
+			}while(option>2|| option<=0);
 			
-			// checkPatient->TODO
-			break;
+			if (option==1) {
+					searchSymptomById();
+				break;
+			}else {
+				
+					searchSymptomByManifestation();
+				break;
+				}
+			
 		case 3:	
 			System.out.println("Symptom operations terminated \n");
 			exitSubmenu6Symptom=1;
