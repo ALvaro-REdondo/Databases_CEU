@@ -79,11 +79,12 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 
 		try {
 			
-			String sql = "DELETE medicalPersonnel WHERE id=?";
-			PreparedStatement d = c.prepareStatement(sql);
+			String sql = "DELETE MedicalPersonnel WHERE id=?";
+			PreparedStatement d2 = c.prepareStatement(sql);
 			
-			d.executeUpdate();
-			d.close();
+			d2.setInt(1, medicalPersonnel.getId());
+			d2.executeUpdate();
+			d2.close();
 			
 		} catch(SQLException e) {
 			

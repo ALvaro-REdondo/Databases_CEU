@@ -1243,7 +1243,7 @@ public class Menu {
 			
 			System.out.println("2. Update Medical Personnel \n");
 			
-			System.out.println("Write pathology id");
+			System.out.println("Write Medical Personnel id");
 			int medicalPersonnelId = Integer.parseInt(reader.readLine());
 			
 			updateMedicalPersonnel(medicalPersonnelId);
@@ -1258,8 +1258,11 @@ public class Menu {
 			break;
 		case 4:
 			
-			System.out.println("4. Medical Personnel \n");
+			System.out.println("4. Delete Medical Personnel \n");
+			System.out.println("Write MedicalP Personnel Id");
+			int medicalPersonnel_Id = Integer.parseInt(reader.readLine());
 			
+			deleteMedicalPersonnel(medicalPersonnel_Id);
 				
 			break;
 			
@@ -1390,6 +1393,13 @@ public class Menu {
 				MedicalPersonnel newMedicalPersonnel = new MedicalPersonnel(medicalPersonnelId, newName, newDepartment, newPosition, intNewPathologyId);
 				
 				medicalPersonnelManager.update(newMedicalPersonnel);
+		
+	}
+	
+	private static void deleteMedicalPersonnel(int medicalPersonnel_id) throws Exception {
+		
+		MedicalPersonnel medicalPersonnelToDelete = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnel_id);
+		medicalPersonnelManager.delete(medicalPersonnelToDelete);
 		
 	}
 	
