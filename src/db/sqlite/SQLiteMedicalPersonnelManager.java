@@ -1,7 +1,6 @@
 package db.sqlite;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,7 +51,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		
 		try {
 			
-			String sql = "UPDATE medicalPersonnel SET name=?, department=?, position=?, pathology_id=? WHERE id=?";
+			String sql = "UPDATE MedicalPersonnel SET name=?, department=?, position=?, pathology_id=? WHERE id=?";
 			PreparedStatement s = c.prepareStatement(sql);
 			
 			s.setString(1, medicalPersonnel.getName());
@@ -134,7 +133,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 		
 		try {
 			
-			String sql = "SELECT * FROM medicalPersonnel WHERE id=?";
+			String sql = "SELECT * FROM MedicalPersonnel WHERE id=?";
 			PreparedStatement g = c.prepareStatement(sql);
 			
 			g.setInt(1,  medicalPersonnelId);
@@ -171,7 +170,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 			
 			//Search medical personnel that has the same name as the one inserted by the user.
 			
-			String sql = "SELECT * FROM medicalPersonnel WHERE name LIKE ?";
+			String sql = "SELECT * FROM MedicalPersonnel WHERE name LIKE ?";
 			
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
