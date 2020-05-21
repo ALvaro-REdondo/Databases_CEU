@@ -21,7 +21,7 @@ public class SQLitePatientManager implements PatientManager {
 	@Override
 	public void add(Patient patient) {
 		try {
-		String sql = " INSERT Patient (name , gender , state , dob , pathology_id , clinical_history_id) "
+		String sql = " INSERT INTO Patient (name , gender , state , dob , pathology_id , clinical_history_id) "
 				+ "VALUES (?,?,?,?,? ,?);"; 
 		PreparedStatement prep =c.prepareStatement(sql);
 		prep.setString(1,patient.getName());
@@ -91,7 +91,7 @@ public class SQLitePatientManager implements PatientManager {
 				String PatientState = rs.getString("state");
 				Date PatientDOB =rs.getDate("dob");
 				int PatientPathology_id = rs.getInt("pathology_id");
-				int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+				int PatientClinicalHistory_id = rs.getInt("clinical_history_id");
 				Patient newPatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id);//pathology_id
 				patientsList.add(newPatient);
 			}
@@ -122,7 +122,7 @@ public class SQLitePatientManager implements PatientManager {
 			String PatientState = rs.getString("state");
 			Date PatientDOB =rs.getDate("dob");
 			int PatientPathology_id = rs.getInt("pathology_id");
-			int PatientClinicalHistory_id = rs.getInt("cliniclaHistory_id");
+			int PatientClinicalHistory_id = rs.getInt("clinical_history_id");
 			patient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
 			
 		} catch(SQLException e) {
@@ -131,6 +131,37 @@ public class SQLitePatientManager implements PatientManager {
 		}
 		
 		return patient;
+	}
+	
+	@Override
+
+	public List<Patient> searchPatientByPathologyId (int pathologyId) {
+		
+		List<Patient> patientsList= new ArrayList<Patient>();
+		try {
+			
+			String sql = "SELECT * FROM Patient WHERE id=?";
+			PreparedStatement g = c.prepareStatement(sql);
+			g.setInt(1,  pathologyId);
+			ResultSet rs = g.executeQuery();
+			rs.next();
+			
+			int id = rs.getInt("id");
+			String PatientName = rs.getString("name");
+			String PatientGender = rs.getString("gender");
+			String PatientState = rs.getString("state");
+			Date PatientDOB =rs.getDate("dob");
+			int PatientPathology_id = rs.getInt("pathology_id");
+			int PatientClinicalHistory_id = rs.getInt("clinical_history_id");
+			Patient newpatient = new Patient(id, PatientName, PatientGender ,PatientState,PatientDOB,PatientPathology_id,PatientClinicalHistory_id );//pathology_id
+			patientsList.add(newpatient);
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return patientsList;
 	}
 	
 
