@@ -1053,7 +1053,7 @@ public class Menu {
 		
 		//para insertar en base de datos:
 		symptomManager.add(symptom);
-		// symptom inserted
+		// symptom inserted :)
 	}
 	
 	private static void searchSymptomById () throws Exception{
