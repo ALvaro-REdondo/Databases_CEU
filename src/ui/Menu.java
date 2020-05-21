@@ -10,7 +10,7 @@ import java.util.List;
 import pojos.*;
 import db.interfaces.*;
 import db.sqlite.*;
-//this is our menu
+//this is our menu.
 public class Menu {
 	//DB Managers
 	private static DBManager dbManager;
