@@ -314,23 +314,18 @@ public class Menu {
 			
 		System.out.println("Select action \n");
 		
-<<<<<<< HEAD
 		System.out.println("1. Search \n");
 		System.out.println("2. Check \n");
 		System.out.println("3. Exit \n");
 
-=======
 		searchMenu();
 		System.out.println("3. Exit");
-		
->>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 		
 		int choice = Integer.parseInt(reader.readLine());
 		
 		switch(choice) {
 		
 		case 1:
-<<<<<<< HEAD
 			searchMenu();
 			int choiceSearch = Integer.parseInt(reader.readLine());
 			while(choiceSearch != 1 || choiceSearch !=3) {
@@ -342,14 +337,11 @@ public class Menu {
 			if(choiceSearch == 2) {
 				searchAllergyByName();
 			}
-=======
 			searchAllergyById();
 			
->>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 			break;		
 			
 		case 2:
-<<<<<<< HEAD
 			searchMenu();
 			int choice4 = Integer.parseInt(reader.readLine());
 			while(choice4 != 1 && choice4 !=2) {
@@ -362,9 +354,7 @@ public class Menu {
 			if(choice4 == 2) {
 				searchAllergyByName();
 			}
-=======
 			searchAllergyByName();
->>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 			break;
 		case 3:
 			System.out.println("Allergy operations terminated \n");
