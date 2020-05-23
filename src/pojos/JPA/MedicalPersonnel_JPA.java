@@ -3,10 +3,15 @@ package pojos.JPA;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+
+import pojos.Pathology;
 
 @Entity
 @Table(name = "MedicalPersonnel")
@@ -25,27 +30,29 @@ public class MedicalPersonnel_JPA implements Serializable{
 	private String name;
 	private String department;
 	private String position;
-	private Integer pathologyId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pathologyId")
+	private Pathology pathology;
 	
 	public MedicalPersonnel_JPA() {
 		super();
 	}
-	
-	public MedicalPersonnel_JPA(Integer id, String name, String department, String position, Integer pathologyId) {
+
+	public MedicalPersonnel_JPA(Integer id, String name, String department, String position, Pathology pathology) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.department = department;
 		this.position = position;
-		this.pathologyId = pathologyId;
+		this.pathology = pathology;
 	}
 
-	public MedicalPersonnel_JPA(String name, String department, String position, Integer pathologyId) {
+	public MedicalPersonnel_JPA(String name, String department, String position, Pathology pathology) {
 		super();
 		this.name = name;
 		this.department = department;
 		this.position = position;
-		this.pathologyId = pathologyId;
+		this.pathology = pathology;
 	}
 
 	public Integer getId() {
@@ -71,13 +78,15 @@ public class MedicalPersonnel_JPA implements Serializable{
 	}
 	public void setPosition(String position) {
 		this.position = position;
+	}	
+	public Pathology getPathology() {
+		return pathology;
 	}
-	public Integer getPathologyId() {
-		return pathologyId;
+
+	public void setPathology(Pathology pathology) {
+		this.pathology = pathology;
 	}
-	public void setPathologyId(Integer pathologyId) {
-		this.pathologyId = pathologyId;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,11 +110,12 @@ public class MedicalPersonnel_JPA implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "MedicalPersonnel_JPA [id=" + id + ", name=" + name + ", department=" + department + ", position="
-				+ position + ", pathologyId=" + pathologyId + "]";
+				+ position + ", pathology=" + pathology + "]";
 	}
-		
+	
+	
 }
