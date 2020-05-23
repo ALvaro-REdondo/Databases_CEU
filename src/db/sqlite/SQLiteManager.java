@@ -92,7 +92,6 @@ public class SQLiteManager implements DBManager {
 			String sql4 = "CREATE TABLE Pathology "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
-					   + " duration  INTEGER, "
 					   + " startDate DATE NOT NULL, "
 					   + " endingDate DATE, "
 					   + " treatmentId INTEGER REFERENCES Treatment(id))";
