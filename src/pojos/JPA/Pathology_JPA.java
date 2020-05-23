@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+
+import pojos.Treatment;
 
 @Entity
 @Table(name = "Pathology")
@@ -26,27 +31,29 @@ public class Pathology_JPA implements Serializable{
 	private String name;
 	private Date startDate;
 	private Date endingDate;
-	private Integer treatmentId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "treatmentId")
+	private Treatment treatment;
 		
 	public Pathology_JPA() {
 		super();
 	}
-	
-	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Integer treatmentId) {
+
+	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Treatment treatment) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
-		this.treatmentId = treatmentId;
+		this.treatment = treatment;
 	}
 
-	public Pathology_JPA(String name, Date startDate, Date endingDate, Integer treatmentId) {
+	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment treatment) {
 		super();
 		this.name = name;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
-		this.treatmentId = treatmentId;
+		this.treatment = treatment;
 	}
 
 	public Integer getId() {
@@ -73,12 +80,15 @@ public class Pathology_JPA implements Serializable{
 	public void setEndingDate(Date endingDate) {
 		this.endingDate = endingDate;
 	}
-	public Integer getTreatmentId() {
-		return treatmentId;
+	
+	public Treatment getTreatment() {
+		return treatment;
 	}
-	public void setTreatmentId(Integer treatmentId) {
-		this.treatmentId = treatmentId;
+
+	public void setTreatment(Treatment treatment) {
+		this.treatment = treatment;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,11 +112,11 @@ public class Pathology_JPA implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Pathology_JPA [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endingDate=" + endingDate
-				+ ", treatmentId=" + treatmentId + "]";
+				+ ", treatment=" + treatment + "]";
 	}
 	
 }
