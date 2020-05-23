@@ -31,6 +31,24 @@ public class Pathology_JPA implements Serializable{
 	public Pathology_JPA() {
 		super();
 	}
+	
+	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Integer treatmentId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.startDate = startDate;
+		this.endingDate = endingDate;
+		this.treatmentId = treatmentId;
+	}
+
+	public Pathology_JPA(String name, Date startDate, Date endingDate, Integer treatmentId) {
+		super();
+		this.name = name;
+		this.startDate = startDate;
+		this.endingDate = endingDate;
+		this.treatmentId = treatmentId;
+	}
+
 	public Integer getId() {
 		return id;
 	}

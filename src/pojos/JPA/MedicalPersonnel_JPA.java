@@ -30,6 +30,24 @@ public class MedicalPersonnel_JPA implements Serializable{
 	public MedicalPersonnel_JPA() {
 		super();
 	}
+	
+	public MedicalPersonnel_JPA(Integer id, String name, String department, String position, Integer pathologyId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.department = department;
+		this.position = position;
+		this.pathologyId = pathologyId;
+	}
+
+	public MedicalPersonnel_JPA(String name, String department, String position, Integer pathologyId) {
+		super();
+		this.name = name;
+		this.department = department;
+		this.position = position;
+		this.pathologyId = pathologyId;
+	}
+
 	public Integer getId() {
 		return id;
 	}
