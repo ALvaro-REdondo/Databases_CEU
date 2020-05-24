@@ -1,6 +1,7 @@
 package pojos.JPA;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import pojos.Pathology;
@@ -27,6 +28,7 @@ public class Treatment_JPA implements Serializable{
 	
 	public Treatment_JPA() {
 		super();
+		this.pathologies=new ArrayList<Pathology>();
 	}
 	
 	public Treatment_JPA(Integer id, String name, String medication, String description, List<Pathology> pathologies) {
