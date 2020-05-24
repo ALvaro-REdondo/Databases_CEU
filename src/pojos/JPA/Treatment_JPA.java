@@ -22,7 +22,7 @@ public class Treatment_JPA implements Serializable{
 	private String name;
 	private String medication;
 	private String description;
-	@OneToMany(mappedBy="Pathology")
+	@OneToMany(mappedBy="Treatment")
 	private List<Pathology> pathologies;
 	
 	public Treatment_JPA() {
