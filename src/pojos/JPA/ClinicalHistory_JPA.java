@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -30,27 +34,16 @@ public class ClinicalHistory_JPA implements Serializable{
 	private Date dod;
 	private String bloodType;
 	private String extraInfo;
-	@OneToMany(mappedBy = "clinicalHistory_JPA")
-	private List<Allergy_JPA> allergies;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AllergyId")
+	private Allergy_JPA allergy;
+	@OneToOne(mappedBy = "patient")
+	private Patient_JPA patient;
 	
 	
 	public ClinicalHistory_JPA() {
 		super();
-		this.allergies = new ArrayList<Allergy_JPA>();
 	}
-	
-	public ClinicalHistory_JPA(Date doe, Date dod, String bloodType, String extraInfo, List<Allergy_JPA> allergies) {
-		super();
-		this.doe = doe;
-		this.dod = dod;
-		this.bloodType = bloodType;
-		this.extraInfo = extraInfo;
-		this.allergies = allergies;
-		this.allergies = new ArrayList<Allergy_JPA>();
-
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -81,17 +74,23 @@ public class ClinicalHistory_JPA implements Serializable{
 	public void setExtraInfo(String extraInfo) {
 		this.extraInfo = extraInfo;
 	}
-	public List<Allergy_JPA> getAllergies() {
-		return allergies;
+	public Allergy_JPA getAllergy() {
+		return allergy;
 	}
-	public void setAllergies(List<Allergy_JPA> allergies) {
-		this.allergies = allergies;
+	public void setAllergy(Allergy_JPA allergy) {
+		this.allergy = allergy;
+	}
+	public Patient_JPA getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient_JPA patient) {
+		this.patient = patient;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((allergies == null) ? 0 : allergies.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -103,18 +102,25 @@ public class ClinicalHistory_JPA implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ClinicalHistory_JPA other = (ClinicalHistory_JPA) obj;
-		if (allergies == null) {
-			if (other.allergies != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!allergies.equals(other.allergies))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "ClinicalHistory_JPA [id=" + id + ", doe=" + doe + ", dod=" + dod + ", bloodType=" + bloodType
-				+ ", extraInfo=" + extraInfo + "]";
+				+ ", extraInfo=" + extraInfo + ", allergy=" + allergy + "]";
 	}
+	
+	
+	
+	
+	
+	
+	
 
 
 

@@ -1,13 +1,13 @@
 package pojos.JPA;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -27,21 +27,14 @@ public class Allergy_JPA implements Serializable{
 	private Integer id;
 	private String allergy;
 	private Integer degree;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ClinicalHistoryId")
-	private ClinicalHistory_JPA clinicalHistory_JPA;
+	@OneToMany(mappedBy = "allergy")
+	private List<ClinicalHistory_JPA> clinicalHistories;
+		
 	
 	public Allergy_JPA() {
 		super();
+		this.clinicalHistories = new ArrayList<ClinicalHistory_JPA>();
 	}
-	
-	public Allergy_JPA(String allergy, Integer degree, ClinicalHistory_JPA clinicalHistory_JPA) {
-		super();
-		this.allergy = allergy;
-		this.degree = degree;
-		this.clinicalHistory_JPA = clinicalHistory_JPA;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -60,13 +53,12 @@ public class Allergy_JPA implements Serializable{
 	public void setDegree(Integer degree) {
 		this.degree = degree;
 	}
-	public ClinicalHistory_JPA getClinicalHistory_JPA() {
-		return clinicalHistory_JPA;
+	public List<ClinicalHistory_JPA> getClinicalHistories() {
+		return clinicalHistories;
 	}
-	public void setClinicalHistory_JPA(ClinicalHistory_JPA clinicalHistory_JPA) {
-		this.clinicalHistory_JPA = clinicalHistory_JPA;
+	public void setClinicalHistories(List<ClinicalHistory_JPA> clinicalHistories) {
+		this.clinicalHistories = clinicalHistories;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,7 +66,6 @@ public class Allergy_JPA implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -91,12 +82,12 @@ public class Allergy_JPA implements Serializable{
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "Allergy_JPA [id=" + id + ", allergy=" + allergy + ", degree=" + degree + ", clinicalHistory_JPA="
-				+ clinicalHistory_JPA + "]";
+		return "Allergy_JPA [id=" + id + ", allergy=" + allergy + ", degree=" + degree + "]";
 	}
+	
+	
 
 	
 	
