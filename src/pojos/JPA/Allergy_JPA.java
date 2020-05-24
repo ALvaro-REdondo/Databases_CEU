@@ -35,6 +35,22 @@ public class Allergy_JPA implements Serializable{
 		super();
 		this.clinicalHistories = new ArrayList<ClinicalHistory_JPA>();
 	}
+	
+	public Allergy_JPA(String allergy, Integer degree, List<ClinicalHistory_JPA> clinicalHistories) {
+		super();
+		this.allergy = allergy;
+		this.degree = degree;
+		this.clinicalHistories = clinicalHistories;
+	}
+
+	public Allergy_JPA(Integer id, String allergy, Integer degree, List<ClinicalHistory_JPA> clinicalHistories) {
+		super();
+		this.id = id;
+		this.allergy = allergy;
+		this.degree = degree;
+		this.clinicalHistories = clinicalHistories;
+	}
+
 	public Integer getId() {
 		return id;
 	}
