@@ -44,6 +44,30 @@ public class ClinicalHistory_JPA implements Serializable{
 	public ClinicalHistory_JPA() {
 		super();
 	}
+	
+	public ClinicalHistory_JPA(Date doe, Date dod, String bloodType, String extraInfo, Allergy_JPA allergy,
+			Patient_JPA patient) {
+		super();
+		this.doe = doe;
+		this.dod = dod;
+		this.bloodType = bloodType;
+		this.extraInfo = extraInfo;
+		this.allergy = allergy;
+		this.patient = patient;
+	}
+
+	public ClinicalHistory_JPA(Integer id, Date doe, Date dod, String bloodType, String extraInfo, Allergy_JPA allergy,
+			Patient_JPA patient) {
+		super();
+		this.id = id;
+		this.doe = doe;
+		this.dod = dod;
+		this.bloodType = bloodType;
+		this.extraInfo = extraInfo;
+		this.allergy = allergy;
+		this.patient = patient;
+	}
+
 	public Integer getId() {
 		return id;
 	}
