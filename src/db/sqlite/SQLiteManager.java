@@ -120,7 +120,6 @@ public class SQLiteManager implements DBManager {
 					   + " position TEXT NOT NULL, "
 					   + " pathology_id INTEGER REFERENCES Pathology(id))";
 			stmt1.executeUpdate(sql7);
-			stmt1 = c.createStatement();
 			stmt1.close();
 		} catch (SQLException e) {
 			if (e.getMessage().contains("already exists")) {
