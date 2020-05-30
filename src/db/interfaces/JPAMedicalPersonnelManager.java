@@ -72,6 +72,5 @@ public class JPAMedicalPersonnelManager implements MedicalPersonnelJPAManager {
 		// TODO Auto-generated method stub
 
 	}
-
-
+	
 }
