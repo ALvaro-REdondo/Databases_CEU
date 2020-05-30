@@ -6,7 +6,7 @@
 	<!-- Persistence Provider -->
 	<!-- RESOURCE-LOCAL: Application-managed transactions -->
 	<!-- JTA: Container-managed transactions -->
-	<persistence-unit name="Clinicaltrials-provider" transaction-type="RESOURCE_LOCAL"> <!--Para nosotro seria, clinical trials provider  -->
+	<persistence-unit name="provider-Clinicaltrials" transaction-type="RESOURCE_LOCAL"> <!--Para nosotro seria, clinical trials provider  -->
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->

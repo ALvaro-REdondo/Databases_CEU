@@ -18,7 +18,7 @@ public class JPAAllergyManager implements AllergyJPAManager {
 	public void connect() {
 		// HAY QUE CAMBIAR LO DE COMPANY-PROVIDER
 		// REALMENTE NO SE SI TENGO QUE HACER LO DE CONNECT Y DISCONNECT
-		em = Persistence.createEntityManagerFactory("Clinicaltrials-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("provider-Clinicaltrials").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
