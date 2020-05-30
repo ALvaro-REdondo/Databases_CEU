@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
 import pojos.*;
 import org.eclipse.persistence.jaxb.*;
 import pojos_users.Role;
@@ -478,7 +480,8 @@ public class Menu {
 			searchMenu();
 			System.out.println("3. Search by Pathology Id \n");
 			System.out.println("4. Generate XML");
-			System.out.println("5. Exit \n");
+			System.out.println("5. Admit Medical Personnel through XML");
+			System.out.println("6. Exit \n");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -512,6 +515,9 @@ public class Menu {
 				generateXMLMedicalPersonnel(medicalPersonnelId);
 
 			case 5:
+				admitMedicalPersonnelXML();
+				break;
+			case 6:
 				System.out.println("5. Medical Personnel operations terminated \n");
 				exitSubmenu1MedicalPersonnel = 1;
 				break;
@@ -521,6 +527,22 @@ public class Menu {
 			}
 		}
 
+	}
+
+	public static void admitMedicalPersonnelXML() throws Exception {
+		// Create JAXB Context
+		JAXBContext context = (JAXBContext) JAXBContext.newInstance(MedicalPersonnel.class);
+		// Get the unmarshaller
+		Unmarshaller unmarshal = context.createUnmarshaller();
+		//Unmarshall the dog from a file
+		System.out.println("ype the file name for the XML document (expected in the xmls folder):");
+		String fileName = reader.readLine();
+		File file = new File("./xmls/" + fileName);
+		MedicalPersonnel medicalPersonnel = (MedicalPersonnel) unmarshal.unmarshal(file);
+		//Print the Medical Personnel
+		System.out.println("Added to the database: " + medicalPersonnel);
+		medicalPersonnelManager.add(medicalPersonnel);
+		
 	}
 
 	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception {
