@@ -1254,6 +1254,7 @@ public class Menu {
 		System.out.print("Ending Date (yyyy-MM-dd): \n");
 		String endingdate = reader.readLine();
 		LocalDate endingDate = LocalDate.parse(endingdate, formatter);
+		//We use a LocalDate because depending on where you are on the globe, the date might vary.
 
 		System.out.print("Treatment id: \n");
 		int treatmentId = Integer.parseInt(reader.readLine());
@@ -1359,6 +1360,7 @@ public class Menu {
 		String name = reader.readLine();
 
 		List<Pathology> pathologies = pathologyManager.searchPathologyByName(name);
+		//Different pathologies may have the same name 
 
 		for (Pathology pathology : pathologies) {
 
