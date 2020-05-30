@@ -2,6 +2,8 @@ package db.interfaces;
 
 import java.util.List;
 import javax.persistence.*;
+
+import pojos.JPA.ClinicalHistory_JPA;
 import pojos.JPA.Treatment_JPA;
 
 
@@ -17,7 +19,13 @@ public class JPATreatmentManager implements TreatmentManagerJPA{
 
 	@Override
 	public void update(Treatment_JPA treatment) {
+		Query q = em.createNativeQuery("SELECT * FROM Treatment WHERE id = ?", Treatment_JPA.class);
+		q.setParameter(1, treatment.getId());
+		Treatment_JPA toUpdate = (Treatment_JPA) q.getSingleResult();
 		em.getTransaction().begin();
+		toUpdate.setName(treatment.getName());
+		toUpdate.setMedication(treatment.getMedication());
+		toUpdate.setDescription(treatment.getDescription());
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -40,7 +48,8 @@ public class JPATreatmentManager implements TreatmentManagerJPA{
 
 	@Override
 	public List<Treatment_JPA> searchTreatmentByName(String name) {
-		Query q = em.createNativeQuery("SELECT * FROM Treatment", Treatment_JPA.class);
+		Query q = em.createNativeQuery("SELECT * FROM Treatment WHERE name LIKE ?", Treatment_JPA.class);
+		q.setParameter(1, "%" + name + "%");
 		List<Treatment_JPA> treatments = (List<Treatment_JPA>) q.getResultList();
 		return treatments;
 	}
