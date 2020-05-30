@@ -70,7 +70,14 @@ private EntityManager em;
 
 	@Override
 	public void updateMedicalPersonnel(MedicalPersonnel_JPA medicalPersonnel) {
-		// TODO Auto-generated method stub
+		
+		Query q = em.createNativeQuery("SELECT * FROM MedicalPersonnel", MedicalPersonnel_JPA.class);
+		q.setParameter(1, medicalPersonnel.getId());
+		MedicalPersonnel_JPA medicalPersonnelToUpdate = (MedicalPersonnel_JPA)q.getSingleResult();
+		medicalPersonnelToUpdate.setName(medicalPersonnel.getName());
+		medicalPersonnelToUpdate.setDepartment(medicalPersonnel.getDepartment());
+		medicalPersonnelToUpdate.setPosition(medicalPersonnel.getPosition());
+		//medicalPersonnelToUpdate.setPathology(medicalPersonnel.getPathology());
 
 	}
 
