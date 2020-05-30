@@ -1,8 +1,9 @@
-package db.interfaces_JPA;
+package db.jpa;
 
 import java.util.List;
 import javax.persistence.*;
 
+import db.interfaces_JPA.TreatmentManagerJPA;
 import pojos.JPA.ClinicalHistory_JPA;
 import pojos.JPA.Treatment_JPA;
 
