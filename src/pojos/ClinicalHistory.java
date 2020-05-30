@@ -2,8 +2,10 @@ package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
-
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "clinicalHistory")
@@ -17,9 +19,9 @@ public class ClinicalHistory implements Serializable{
 	
 	@XmlTransient
 	private Integer id;
-	@XmlJavatypeadapter(SQLDateAdapter.class)
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date doe;
-	@XmlJavatypeadapter(SQLDateAdapter.class)
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dod;
 	@XmlElement
 	private String bloodType;

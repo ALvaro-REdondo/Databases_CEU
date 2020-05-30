@@ -6,16 +6,21 @@ import javax.xml.bind.annotation.*;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "treatment")
+@XmlType(propOrder = {"name", "medication", "description"})
 public class Treatment implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 9161173435855282694L;
-
+    @XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String medication;
+	@XmlElement
 	private String description;
 
 	

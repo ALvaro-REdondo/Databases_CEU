@@ -82,7 +82,7 @@ public class JPAUserManager implements UserManager {
 			md.update(password.getBytes()); //this tells the system to do the digest with the password.
 			byte[] hash = md.digest();
 			//Create query
-			Query q = em.createNamedQuery("SELECT * FROM users WHERE username = ? AND password = ?", User.class);
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?", User.class);
 			q.setParameter(1, username);
 			q.setParameter(2, hash);
 			
