@@ -4,12 +4,25 @@ import java.util.List;
 import javax.persistence.*;
 
 import db.interfaces_JPA.TreatmentManagerJPA;
-import pojos_JPA.ClinicalHistory_JPA;
 import pojos_JPA.Treatment_JPA;
 
 
 public class JPATreatmentManager implements TreatmentManagerJPA{
 	private EntityManager em;
+	
+
+	public void connect() {
+		// Get the entity manager
+		em = Persistence.createEntityManagerFactory("Clinicaltrials-provider").createEntityManager();
+		em.getTransaction().begin();
+		em.createNativeQuery("PRAGMA foreign_keys = ON").executeUpdate();
+		em.getTransaction().commit();
+	}
+
+	public void disconnect() {
+		em.close();
+	}
+
 	
 	@Override
 	public void add(Treatment_JPA treatment) {
@@ -28,7 +41,6 @@ public class JPATreatmentManager implements TreatmentManagerJPA{
 		toUpdate.setMedication(treatment.getMedication());
 		toUpdate.setDescription(treatment.getDescription());
 		em.getTransaction().commit();
-		em.close();
 	}
 
 	@Override
@@ -36,7 +48,6 @@ public class JPATreatmentManager implements TreatmentManagerJPA{
 		em.getTransaction().begin();
 		em.remove(treatment);
 		em.getTransaction().commit();
-		em.close();
 	}
 
 	@Override
