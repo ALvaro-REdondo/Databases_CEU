@@ -7,9 +7,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+<<<<<<< HEAD
 import pojos.*;
 
 
+=======
+import org.eclipse.persistence.jaxb.*;
+
+import pojos.*;
+
+>>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 import pojos_users.Role;
 import pojos_users.User;
 
@@ -240,7 +247,7 @@ public class Menu {
 				searchPathologyByName();
 				break;
 
-			case 3:
+			case 4:
 
 				System.out.println("3. Exit");
 				exitSubmenu2Pathology = 1;
@@ -412,7 +419,8 @@ public class Menu {
 
 			searchMenu();
 			System.out.println("3. Search by Pathology Id \n");
-			System.out.println("4. Exit \n");
+			System.out.println("4. Generate XML");
+			System.out.println("5. Exit \n");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -435,9 +443,18 @@ public class Menu {
 				System.out.println("3. Search Medical Personnel by Pathology Id \n");
 				searchMedicalPersonnelByPathologyId();
 				break;
+				
+			case 4: 
+				
+				System.out.println("4. Generate XML");
+				
+				System.out.println("Write Medical Personnel Id: ");
+				int medicalPersonnelId = Integer.parseInt(reader.readLine());
+				
+				generateXMLMedicalPersonnel(medicalPersonnelId);
 
-			case 4:
-				System.out.println("Medical Personnel operations terminated \n");
+			case 5:
+				System.out.println("5. Medical Personnel operations terminated \n");
 				exitSubmenu1MedicalPersonnel = 1;
 				break;
 			default:
@@ -446,6 +463,23 @@ public class Menu {
 			}
 		}
 
+	}
+	
+	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception{
+		
+		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
+		//Create JAXB Context
+		JAXBContext context = JAXBContext.newInstance(MedicalPersonnel.class);
+		//Get the marshaller
+		Marshaller marshal = context.createMarshaller();
+		//Pretty formating
+		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		//Marshall the dog to a file
+		File file = new File("./xmls/Output-MedicalPersonnel");
+		marshal.marshal(medicalPersonnel, file);
+		//Marshall the dog to the screen
+		marshal.marshal(medicalPersonnel, System.out);
+		
 	}
 
 	private static void medicalPersonnelMenu() throws Exception {
@@ -1556,7 +1590,7 @@ public class Menu {
 
 		System.out.println("Extra information: \n");
 		String extraInfo = reader.readLine();
-		
+
 		System.out.println("Allergy id: \n");
 		int allergyId = Integer.parseInt(reader.readLine());
 
@@ -1617,7 +1651,7 @@ public class Menu {
 		if (newExtraInfo.equals("")) {
 			newExtraInfo = toBeModified.getExtraInfo();
 		}
-		
+
 		System.out.println("Actual allergy id: " + toBeModified.getExtraInfo());
 		System.out.println("Type the new allergy id or press enter to leave it as is:");
 		String newAllergyId = reader.readLine();
@@ -1633,7 +1667,8 @@ public class Menu {
 
 		}
 
-		ClinicalHistory updatedClinicalHistory = new ClinicalHistory(newDoe, newDod, newBloodType, newExtraInfo, intNewAllergyId);
+		ClinicalHistory updatedClinicalHistory = new ClinicalHistory(newDoe, newDod, newBloodType, newExtraInfo,
+				intNewAllergyId);
 		clinicalHistoryManager.update(updatedClinicalHistory);
 	}
 
