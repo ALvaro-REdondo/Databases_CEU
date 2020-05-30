@@ -2,7 +2,7 @@ package db.interfaces_JPA;
 
 import java.util.List;
 
-import pojos.JPA.MedicalPersonnel_JPA;
+import pojos_JPA.MedicalPersonnel_JPA;
 
 public interface MedicalPersonnelJPAManager {
 	

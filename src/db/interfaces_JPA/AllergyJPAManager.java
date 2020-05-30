@@ -2,7 +2,7 @@ package db.interfaces_JPA;
 
 import java.util.List;
 
-import pojos.JPA.Allergy_JPA;
+import pojos_JPA.Allergy_JPA;
 
 public interface AllergyJPAManager {
 	

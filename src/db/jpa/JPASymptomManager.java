@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import db.interfaces_JPA.SymptomJPAManager;
 import pojos.Patient;
 import pojos.Symptom;
-import pojos.JPA.Symptom_JPA;
+import pojos_JPA.Symptom_JPA;
 
 public class JPASymptomManager implements SymptomJPAManager {
 	

@@ -1,4 +1,4 @@
-package pojos.JPA;
+package pojos_JPA;
 
 import java.io.Serializable;
 import java.sql.Date;

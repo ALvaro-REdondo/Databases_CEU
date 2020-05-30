@@ -9,8 +9,8 @@ import javax.persistence.Query;
 
 import db.interfaces_JPA.ClinicalHistoryJPAManager;
 import pojos.Patient;
-import pojos.JPA.Allergy_JPA;
-import pojos.JPA.ClinicalHistory_JPA;
+import pojos_JPA.Allergy_JPA;
+import pojos_JPA.ClinicalHistory_JPA;
 
 public class JPAClinicalHistoryManager implements ClinicalHistoryJPAManager {
 

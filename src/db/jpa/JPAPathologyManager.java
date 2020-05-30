@@ -2,11 +2,11 @@ package db.jpa;
 
 import java.util.List;
 
-import pojos.JPA.Pathology_JPA;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import db.interfaces_JPA.*;
+import pojos_JPA.Pathology_JPA;
 
 
 public class JPAPathologyManager implements PathologyJPAManager {

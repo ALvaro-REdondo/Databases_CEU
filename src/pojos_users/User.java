@@ -1,4 +1,4 @@
-package pojos.users;
+package pojos_users;
 
 import java.util.Arrays;
 import javax.persistence.*;

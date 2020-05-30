@@ -8,7 +8,7 @@ import javax.persistence.Query;
 
 import db.interfaces.PatientJPAManager;
 import pojos.Patient;
-import pojos.JPA.Patient_JPA;
+import pojos_JPA.Patient_JPA;
 
 public class JPAPatientManager implements PatientJPAManager {
 	

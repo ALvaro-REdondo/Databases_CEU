@@ -2,7 +2,7 @@ package db.interfaces_JPA;
 
 import java.util.List;
 
-import pojos.JPA.Pathology_JPA;
+import pojos_JPA.Pathology_JPA;
 
 public interface PathologyJPAManager {
 	

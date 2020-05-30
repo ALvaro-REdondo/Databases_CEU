@@ -2,8 +2,8 @@ package db.interfaces_JPA;
 
 import java.util.List;
 
-import pojos.users.Role;
-import pojos.users.User;
+import pojos_users.Role;
+import pojos_users.User;
 
 public interface UserManager {
 	

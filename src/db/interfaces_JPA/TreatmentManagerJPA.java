@@ -2,7 +2,7 @@ package db.interfaces_JPA;
 
 import java.util.List;
 
-import pojos.JPA.Treatment_JPA;
+import pojos_JPA.Treatment_JPA;
 
 
 public interface TreatmentManagerJPA {

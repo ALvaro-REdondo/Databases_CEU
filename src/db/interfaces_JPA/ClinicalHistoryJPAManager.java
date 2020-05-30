@@ -3,7 +3,7 @@ package db.interfaces_JPA;
 import java.sql.Date;
 import java.util.List;
 
-import pojos.JPA.ClinicalHistory_JPA;
+import pojos_JPA.ClinicalHistory_JPA;
 
 
 public interface ClinicalHistoryJPAManager {

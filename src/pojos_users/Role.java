@@ -1,4 +1,4 @@
-package pojos.users;
+package pojos_users;
 
 import java.io.Serializable;
 import java.util.ArrayList;

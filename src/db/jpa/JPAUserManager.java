@@ -9,8 +9,8 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import db.interfaces_JPA.UserManager;
-import pojos.users.Role;
-import pojos.users.User;
+import pojos_users.Role;
+import pojos_users.User;
 
 public class JPAUserManager implements UserManager {
 	

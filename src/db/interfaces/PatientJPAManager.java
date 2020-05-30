@@ -2,7 +2,7 @@ package db.interfaces;
 
 import java.util.List;
 
-import pojos.JPA.Patient_JPA;
+import pojos_JPA.Patient_JPA;
 
 public interface PatientJPAManager {
 	public void connect();

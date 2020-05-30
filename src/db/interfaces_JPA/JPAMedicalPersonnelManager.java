@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import pojos.JPA.MedicalPersonnel_JPA;
+import pojos_JPA.MedicalPersonnel_JPA;
 
 public class JPAMedicalPersonnelManager implements MedicalPersonnelJPAManager {
 

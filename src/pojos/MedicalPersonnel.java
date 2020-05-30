@@ -2,6 +2,8 @@ package pojos;
 
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD);
+
 public class MedicalPersonnel implements Serializable {
 
 	/**

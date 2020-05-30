@@ -3,7 +3,7 @@ package db.interfaces_JPA;
 import java.util.List;
 
 import pojos.Symptom;
-import pojos.JPA.Symptom_JPA;
+import pojos_JPA.Symptom_JPA;
 
 public interface SymptomJPAManager {
 	public void connect();

@@ -4,8 +4,8 @@ import java.util.List;
 import javax.persistence.*;
 
 import db.interfaces_JPA.TreatmentManagerJPA;
-import pojos.JPA.ClinicalHistory_JPA;
-import pojos.JPA.Treatment_JPA;
+import pojos_JPA.ClinicalHistory_JPA;
+import pojos_JPA.Treatment_JPA;
 
 
 public class JPATreatmentManager implements TreatmentManagerJPA{

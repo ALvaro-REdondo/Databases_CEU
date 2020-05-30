@@ -8,7 +8,7 @@ import javax.persistence.Query;
 
 import db.interfaces_JPA.AllergyJPAManager;
 import pojos.Allergy;
-import pojos.JPA.Allergy_JPA;
+import pojos_JPA.Allergy_JPA;
 
 public class JPAAllergyManager implements AllergyJPAManager {
 
