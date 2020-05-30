@@ -3,6 +3,7 @@ package pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import xml.utils.SQLDateAdapter;
 
@@ -21,15 +22,15 @@ public class Patient implements Serializable{
 	private Integer id;
 	@XmlAttribute
 	private String name;
-	@XmlELelment
+	@XmlElement
 	private String gender;
-	@XmlELelment
+	@XmlElement
 	private String state;
-	@XmlJavaTypAdapter(SQLDateAdapter.class)
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
-	@XmlELelment
+	@XmlElement
 	private Integer pathology_id;
-	@XmlELelment
+	@XmlElement
 	private Integer clinicalhistory_id;
 	
 	

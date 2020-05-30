@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "roles")
@@ -17,7 +18,7 @@ public class Role implements Serializable{
 	@Id
 	@GeneratedValue(generator="roles")
 	@TableGenerator(name="roles", table="sqlite_sequence",
-	pkColumnName = "name",valueColumnName = "seq", pkColumnValue = "roles" )
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="roles")
 	private Integer id;
 	private String role;
 	@OneToMany(mappedBy = "role")
@@ -26,6 +27,11 @@ public class Role implements Serializable{
 	
 	public Role() {
 		super();
+		this.users = new ArrayList<User>();
+	}
+	public Role(String roleName) {
+		super();
+		this.role = roleName;
 		this.users = new ArrayList<User>();
 	}
 	public Integer getId() {
