@@ -2,12 +2,13 @@ package db.interfaces;
 
 import java.util.List;
 
-import pojos.*;
+import pojos.JPA.Treatment_JPA;
+
 
 public interface JPATreatmentManager {
-	public void add(Treatment treatment);
-	public void update(Treatment treatment);
-	public void delete(Treatment treatment);
-	public Treatment searchTreatmentById(Integer id);
-	public List<Treatment> searchTreatmentByName(String name);
+	public void add(Treatment_JPA treatment);
+	public void update(Treatment_JPA treatment);
+	public void delete(Treatment_JPA treatment);
+	public Treatment_JPA searchTreatmentById(Integer id);
+	public List<Treatment_JPA> searchTreatmentByName(String name);
 }
