@@ -150,9 +150,7 @@ public SQLiteMedicalPersonnelManager(Connection c) {
 			newMedicalPersonnel = new MedicalPersonnel(id, name, department, position, pathologyId);
 			
 		} catch(SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 		
 		return newMedicalPersonnel;

@@ -49,8 +49,8 @@ public class Menu {
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
 		treatmentManager = dbManager.getTreatmentManager();
-		userManager = new JPAUserManager();
-		userManager.connect();
+		//userManager = new JPAUserManager();
+		//userManager.connect();
 		dbManager.createTables();
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
@@ -69,7 +69,9 @@ public class Menu {
 		switch (choice) {
 
 		case 1:// Create a new Role
-			newRole();
+			//newRole();
+			System.out.println("dame el puto id");
+			generateXMLMedicalPersonnel(Integer.parseInt(reader.readLine()));
 			break;
 		case 2:// Create a new User
 			newUser();
