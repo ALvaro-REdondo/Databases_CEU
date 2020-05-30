@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
 import pojos.*;
 import org.eclipse.persistence.jaxb.*;
 import pojos_users.Role;
@@ -88,68 +90,64 @@ public class Menu {
 		}
 	}
 
-
-private static void newRole() throws Exception{
-	System.out.println("Please, type the new role information \n");
-	System.out.println("Role name: \n");
-	String roleName = reader.readLine();
-	Role role = new Role(roleName);
-	System.out.println(role);
-	userManager.createRole(role);
-}
-
-private static void newUser() throws Exception{
-	System.out.println("Please, type the new user information \n");
-	System.out.println("Username: \n");
-	String username = reader.readLine();
-	System.out.println("Password: \n");
-	String password = reader.readLine();
-	//Create the password's hash
-	MessageDigest md = MessageDigest.getInstance("MD5");
-	md.update(password.getBytes()); 
-	byte[] hash = md.digest();
-	//Show all the roles and let the user choose one 
-	List<Role> roles = userManager.getRoles();
-    for (Role role : roles) {
+	private static void newRole() throws Exception {
+		System.out.println("Please, type the new role information \n");
+		System.out.println("Role name: \n");
+		String roleName = reader.readLine();
+		Role role = new Role(roleName);
 		System.out.println(role);
+		userManager.createRole(role);
 	}
-    System.out.println("Type the chosen role id: \n");
-    int roleId = Integer.parseInt(reader.readLine());
-    //get the chosen role from the database
-    Role chosenRole = userManager.getRole(roleId);
-    //Create the user and store it in the database
-    User user = new User(username, hash, chosenRole);
-    userManager.createUser(user);
-}
 
-private static void login() throws Exception{
-	System.out.println("Please input your credentials: \n");
-	System.out.println("Username: \n");
-	String username = reader.readLine();
-	System.out.println("Password: \n");
-	String password = reader.readLine();
-	User user = userManager.checkPassword(username, password);
-	//We need to check if the username and password match with a user that is stored in the database
-	if(user == null) {//sera null si no hay match entre el username y la password con un user ya almacenado
-		System.out.println("Wrong credentials, please try again \n");
+	private static void newUser() throws Exception {
+		System.out.println("Please, type the new user information \n");
+		System.out.println("Username: \n");
+		String username = reader.readLine();
+		System.out.println("Password: \n");
+		String password = reader.readLine();
+		// Create the password's hash
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] hash = md.digest();
+		// Show all the roles and let the user choose one
+		List<Role> roles = userManager.getRoles();
+		for (Role role : roles) {
+			System.out.println(role);
+		}
+		System.out.println("Type the chosen role id: \n");
+		int roleId = Integer.parseInt(reader.readLine());
+		// get the chosen role from the database
+		Role chosenRole = userManager.getRole(roleId);
+		// Create the user and store it in the database
+		User user = new User(username, hash, chosenRole);
+		userManager.createUser(user);
 	}
-	else if(user.getRole().getRole().equalsIgnoreCase("treatment creator")){
-		System.out.println("Welcome, treatment creator \n");
-		treatmentCreatorMenu();
-	}
-	else if(user.getRole().getRole().equalsIgnoreCase("medical personnel")) {
-		System.out.println("Welcome, medical personnel \n");
-		medicalPersonnelMenu();
-	}
-    else if(user.getRole().getRole().equalsIgnoreCase("medical personnel boss")) {
-    	System.out.println("Welcome, medical personnel boss \n");
-		medicalPersonnelBossMenu();
-	}
-	else {
-		System.out.println("Invalid role. \n");
-	}
-}
 
+	private static void login() throws Exception {
+		System.out.println("Please input your credentials: \n");
+		System.out.println("Username: \n");
+		String username = reader.readLine();
+		System.out.println("Password: \n");
+		String password = reader.readLine();
+		User user = userManager.checkPassword(username, password);
+		// We need to check if the username and password match with a user that is
+		// stored in the database
+		if (user == null) {// sera null si no hay match entre el username y la password con un user ya
+							// almacenado
+			System.out.println("Wrong credentials, please try again \n");
+		} else if (user.getRole().getRole().equalsIgnoreCase("treatment creator")) {
+			System.out.println("Welcome, treatment creator \n");
+			treatmentCreatorMenu();
+		} else if (user.getRole().getRole().equalsIgnoreCase("medical personnel")) {
+			System.out.println("Welcome, medical personnel \n");
+			medicalPersonnelMenu();
+		} else if (user.getRole().getRole().equalsIgnoreCase("medical personnel boss")) {
+			System.out.println("Welcome, medical personnel boss \n");
+			medicalPersonnelBossMenu();
+		} else {
+			System.out.println("Invalid role. \n");
+		}
+	}
 
 	private static void treatmentCreatorMenu() throws Exception {
 		int exitTreatmentCreatorMenu = 0;
@@ -482,7 +480,8 @@ private static void login() throws Exception{
 			searchMenu();
 			System.out.println("3. Search by Pathology Id \n");
 			System.out.println("4. Generate XML");
-			System.out.println("5. Exit \n");
+			System.out.println("5. Admit Medical Personnel through XML");
+			System.out.println("6. Exit \n");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -516,6 +515,9 @@ private static void login() throws Exception{
 				generateXMLMedicalPersonnel(medicalPersonnelId);
 
 			case 5:
+				admitMedicalPersonnelXML();
+				break;
+			case 6:
 				System.out.println("5. Medical Personnel operations terminated \n");
 				exitSubmenu1MedicalPersonnel = 1;
 				break;
@@ -525,6 +527,22 @@ private static void login() throws Exception{
 			}
 		}
 
+	}
+
+	public static void admitMedicalPersonnelXML() throws Exception {
+		// Create JAXB Context
+		JAXBContext context = (JAXBContext) JAXBContext.newInstance(MedicalPersonnel.class);
+		// Get the unmarshaller
+		Unmarshaller unmarshal = context.createUnmarshaller();
+		//Unmarshall the dog from a file
+		System.out.println("ype the file name for the XML document (expected in the xmls folder):");
+		String fileName = reader.readLine();
+		File file = new File("./xmls/" + fileName);
+		MedicalPersonnel medicalPersonnel = (MedicalPersonnel) unmarshal.unmarshal(file);
+		//Print the Medical Personnel
+		System.out.println("Added to the database: " + medicalPersonnel);
+		medicalPersonnelManager.add(medicalPersonnel);
+		
 	}
 
 	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception {
@@ -1781,7 +1799,6 @@ private static void login() throws Exception{
 
 	}
 
-
 	private static void generateXMLPatient(int patientId) throws JAXBException {
 		Patient patient = patientManager.searchPatientById(patientId);
 		// Create a JAXB Context
@@ -1796,6 +1813,5 @@ private static void login() throws Exception{
 		// Marshall the dog to the screen
 		marshal.marshal(patient, System.out);
 
+	}
 }
-}
-
