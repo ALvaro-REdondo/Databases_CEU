@@ -33,13 +33,13 @@ public class MedicalPersonnel_JPA implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pathologyId")
-	private Pathology pathology;
+	private Pathology_JPA pathology;
 	
 	public MedicalPersonnel_JPA() {
 		super();
 	}
 
-	public MedicalPersonnel_JPA(Integer id, String name, String department, String position, Pathology pathology) {
+	public MedicalPersonnel_JPA(Integer id, String name, String department, String position, Pathology_JPA pathology) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -48,7 +48,7 @@ public class MedicalPersonnel_JPA implements Serializable{
 		this.pathology = pathology;
 	}
 
-	public MedicalPersonnel_JPA(String name, String department, String position, Pathology pathology) {
+	public MedicalPersonnel_JPA(String name, String department, String position, Pathology_JPA pathology) {
 		super();
 		this.name = name;
 		this.department = department;
@@ -80,11 +80,12 @@ public class MedicalPersonnel_JPA implements Serializable{
 	public void setPosition(String position) {
 		this.position = position;
 	}	
-	public Pathology getPathology() {
+
+	public Pathology_JPA getPathology() {
 		return pathology;
 	}
 
-	public void setPathology(Pathology pathology) {
+	public void setPathology(Pathology_JPA pathology) {
 		this.pathology = pathology;
 	}
 

@@ -40,7 +40,7 @@ public class Allergy_JPA implements Serializable{
 		super();
 		this.allergy = allergy;
 		this.degree = degree;
-		this.clinicalHistories = clinicalHistories;
+		this.clinicalHistories = new ArrayList<ClinicalHistory_JPA>();
 	}
 
 	public Allergy_JPA(Integer id, String allergy, Integer degree, List<ClinicalHistory_JPA> clinicalHistories) {
@@ -48,7 +48,7 @@ public class Allergy_JPA implements Serializable{
 		this.id = id;
 		this.allergy = allergy;
 		this.degree = degree;
-		this.clinicalHistories = clinicalHistories;
+		this.clinicalHistories = new ArrayList<ClinicalHistory_JPA>();
 	}
 
 	public Integer getId() {
@@ -73,7 +73,7 @@ public class Allergy_JPA implements Serializable{
 		return clinicalHistories;
 	}
 	public void setClinicalHistories(List<ClinicalHistory_JPA> clinicalHistories) {
-		this.clinicalHistories = clinicalHistories;
+		this.clinicalHistories = new ArrayList<ClinicalHistory_JPA>();
 	}
 	@Override
 	public int hashCode() {
@@ -98,14 +98,11 @@ public class Allergy_JPA implements Serializable{
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Allergy_JPA [id=" + id + ", allergy=" + allergy + ", degree=" + degree + "]";
+		return "Allergy_JPA [id=" + id + ", allergy=" + allergy + ", degree=" + degree + ", clinicalHistories="
+				+ clinicalHistories + "]";
 	}
-	
-	
-
-	
-	
 	
 }
