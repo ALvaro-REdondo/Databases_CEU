@@ -2,6 +2,8 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.*;
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Allergy implements Serializable{
 
 	/**

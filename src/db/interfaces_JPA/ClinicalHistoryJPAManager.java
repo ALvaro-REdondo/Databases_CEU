@@ -1,4 +1,4 @@
-package db.interfaces;
+package db.interfaces_JPA;
 
 import java.sql.Date;
 import java.util.List;
@@ -14,5 +14,5 @@ public interface ClinicalHistoryJPAManager {
 	public ClinicalHistory_JPA getClinicalHistory(int id);
 	public List<ClinicalHistory_JPA> getClinicalHistories(); 
 	public void deleteClinicalHistory(ClinicalHistory_JPA clinicalHistory);
-	public void updateClinicalHistory(int id, Date newDoe, Date newDod, String newBloodType, String newExtraInfo);
+	public void updateClinicalHistory(ClinicalHistory_JPA clinicalHistory);
 }

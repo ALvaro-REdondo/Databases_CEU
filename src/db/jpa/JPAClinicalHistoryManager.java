@@ -1,4 +1,4 @@
-package db.interfaces;
+package db.jpa;
 
 import java.sql.Date;
 import java.util.List;
@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import db.interfaces_JPA.ClinicalHistoryJPAManager;
 import pojos.Patient;
 import pojos.JPA.Allergy_JPA;
 import pojos.JPA.ClinicalHistory_JPA;
@@ -60,15 +61,15 @@ public class JPAClinicalHistoryManager implements ClinicalHistoryJPAManager {
 	}
 	
 	@Override
-	public void updateClinicalHistory(int id, Date newDoe, Date newDod, String newBloodType, String newExtraInfo) {
+	public void updateClinicalHistory(ClinicalHistory_JPA clinicalHistory) {
 		Query q = em.createNativeQuery("SELECT * FROM ClinicalHistory WHERE id = ?", ClinicalHistory_JPA.class);
-		q.setParameter(1, id);
-		ClinicalHistory_JPA clinicalHistory = (ClinicalHistory_JPA) q.getSingleResult();
+		q.setParameter(1, clinicalHistory.getId());
+		ClinicalHistory_JPA clinicalHistoryToUpdate = (ClinicalHistory_JPA) q.getSingleResult();
 		em.getTransaction().begin();
-		clinicalHistory.setDoe(newDoe);
-		clinicalHistory.setDod(newDod);
-		clinicalHistory.setBloodType(newBloodType);
-		clinicalHistory.setExtraInfo(newExtraInfo);
+		clinicalHistory.setDoe(clinicalHistory.getDoe());
+		clinicalHistory.setDod(clinicalHistory.getDod());
+		clinicalHistory.setBloodType(clinicalHistory.getBloodType());
+		clinicalHistory.setExtraInfo(clinicalHistory.getExtraInfo());
 		em.getTransaction().commit();
 	}
 
