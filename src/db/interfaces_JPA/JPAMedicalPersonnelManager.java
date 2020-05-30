@@ -1,4 +1,4 @@
-package db.interfaces;
+package db.interfaces_JPA;
 
 import java.util.List;
 
@@ -6,17 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import pojos.MedicalPersonnel;
 import pojos.JPA.MedicalPersonnel_JPA;
 
 public class JPAMedicalPersonnelManager implements MedicalPersonnelJPAManager {
-	
-	private EntityManager em;	
+
+private EntityManager em;	
 	
 	@Override
 	public void connect() {
 		// Get the entity manager
-		em = Persistence.createEntityManagerFactory("").createEntityManager();
+		em = Persistence.createEntityManagerFactory("Clinical_trials_provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys = ON").executeUpdate();
 		em.getTransaction().commit();
@@ -72,5 +71,5 @@ public class JPAMedicalPersonnelManager implements MedicalPersonnelJPAManager {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 }

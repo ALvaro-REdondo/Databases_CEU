@@ -1,13 +1,12 @@
-package db.interfaces;
+package db.interfaces_JPA;
 
 import java.util.List;
 
+import pojos.JPA.Pathology_JPA;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import pojos.JPA.MedicalPersonnel_JPA;
-import pojos.JPA.Pathology_JPA;
 
 public class JPAPathologyManager implements PathologyJPAManager {
 	
@@ -17,7 +16,7 @@ public class JPAPathologyManager implements PathologyJPAManager {
 	public void connect() {
 		
 		// Get the entity manager
-		em = Persistence.createEntityManagerFactory("").createEntityManager();
+		em = Persistence.createEntityManagerFactory("Clinical_trials_provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys = ON").executeUpdate();
 		em.getTransaction().commit();
