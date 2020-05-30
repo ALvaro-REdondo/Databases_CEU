@@ -1,7 +1,11 @@
 package pojos;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.*;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="symptom")
+@XmlType(propOrder = {"name","manifestation"})
 public class Symptom implements Serializable{
 
 	/**
@@ -10,6 +14,7 @@ public class Symptom implements Serializable{
 	private static final long serialVersionUID = -2054544053127653172L;
 	
 	private Integer id;
+	@XmlAttribute
 	private String manifestation;
 	
 	

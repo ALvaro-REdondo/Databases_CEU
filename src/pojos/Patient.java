@@ -2,6 +2,13 @@ package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import javax.xml.bind.annotation.*;
+
+import xml.utils.SQLDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="patient")
+@XmlType(propOrder = {"name","gender","state","dob","pathology_id","clinicalhistory_id"})
 
 public class Patient implements Serializable{
 	
@@ -12,12 +19,19 @@ public class Patient implements Serializable{
 	private static final long serialVersionUID = -6669027231906981776L;
 	
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlELelment
 	private String gender;
+	@XmlELelment
 	private String state;
+	@XmlJavaTypAdapter(SQLDateAdapter.class)
 	private Date dob;
+	@XmlELelment
 	private Integer pathology_id;
+	@XmlELelment
 	private Integer clinicalhistory_id;
+	
 	
 	
 	

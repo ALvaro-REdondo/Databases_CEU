@@ -11,4 +11,5 @@ public interface PatientJPAManager {
 	public Patient_JPA getPatient(int id);
 	public List<Patient_JPA> getPatient();
 	public void delete (Patient_JPA patient);
+	public void update (Patient_JPA patient);
 }
