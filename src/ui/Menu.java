@@ -1723,6 +1723,15 @@ public class Menu {
 		Patient patient = patientManager.searchPatientById(patientId);
 		// Create a JAXB Context
 		JAXBContext context = JAXBContext.newInstance(Patient.class);
+		//Get the marshaller
+		Marshaller marshal = context.createMarshaller();
+		//Pretty formating
+		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		//Marshall the dog to a file
+		File file = new File("./xmls/Output-Patient");
+		marshal.marshal(Patient, file);
+		//Marshall the dog to the screen
+		marshal.marshal(Patient, System.out);
 		
 		
 		
