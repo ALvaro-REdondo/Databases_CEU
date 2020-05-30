@@ -1,26 +1,25 @@
 package ui;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-<<<<<<< HEAD
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 import pojos.*;
-
-
-=======
 import org.eclipse.persistence.jaxb.*;
-
-import pojos.*;
-
->>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 import pojos_users.Role;
 import pojos_users.User;
 
 import db.interfaces.*;
+import db.interfaces_JPA.UserManager;
+import db.jpa.JPAUserManager;
 import db.sqlite.*;
 
 //this is our menu.
@@ -34,6 +33,7 @@ public class Menu {
 	private static TreatmentManager treatmentManager;
 	private static AllergyManager allergyManager;
 	private static ClinicalHistoryManager clinicalHistoryManager;
+	private static UserManager userManager;
 
 	// for parsing dates
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -44,7 +44,6 @@ public class Menu {
 
 		dbManager = new SQLiteManager();
 		dbManager.connect();
-		dbManager.connect();
 		patientManager = dbManager.getPatientManager();
 		symptomManager = dbManager.getSymptomManager();
 		pathologyManager = dbManager.getPathologyManager();
@@ -52,42 +51,107 @@ public class Menu {
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
 		treatmentManager = dbManager.getTreatmentManager();
-
+		userManager = new JPAUserManager();
+		userManager.connect();
 		dbManager.createTables();
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		// Print welcome screen
 		int menuKey = 0;
-		while (menuKey == 0) {
-			System.out.println("Hi! \n");
-			System.out.println("What is your role? \n");
-			System.out.println("1. Treatment creator \n");
-			System.out.println("2. Medical personnel \n");
-			System.out.println("3. Medical personnel boss \n");
-			System.out.println("4. Exit the menu \n");
 
-			int choice = Integer.parseInt(reader.readLine());
+		System.out.println("Hi! \n");
+		System.out.println("What do you want to do? \n");
+		System.out.println("1. Create a new Role \n");
+		System.out.println("2. Create a new User \n");
+		System.out.println("3. Login \n");
+		System.out.println("4. Exit the menu \n");
 
-			switch (choice) {
+		int choice = Integer.parseInt(reader.readLine());
 
-			case 1:
-				treatmentCreatorMenu();
-				break;
-			case 2:
-				medicalPersonnelMenu();
-				break;
-			case 3:
-				medicalPersonnelBossMenu();
-				break;
-			case 4:
-				System.out.println("See you soon! \n");
-				menuKey = 1;
-				break;
-			default:
-				break;
-			}
+		switch (choice) {
+
+		case 1:// Create a new Role
+			newRole();
+			break;
+		case 2:// Create a new User
+			newUser();
+			break;
+		case 3:// Login
+			login();
+			break;
+		case 4:// Exit
+			System.out.println("See you soon! \n");
+			menuKey = 1;
+			dbManager.disconnect();
+			userManager.disconnect();
+			break;
+		default:
+			break;
 		}
 	}
+
+
+private static void newRole() throws Exception{
+	System.out.println("Please, type the new role information \n");
+	System.out.println("Role name: \n");
+	String roleName = reader.readLine();
+	Role role = new Role(roleName);
+	System.out.println(role);
+	userManager.createRole(role);
+}
+
+private static void newUser() throws Exception{
+	System.out.println("Please, type the new user information \n");
+	System.out.println("Username: \n");
+	String username = reader.readLine();
+	System.out.println("Password: \n");
+	String password = reader.readLine();
+	//Create the password's hash
+	MessageDigest md = MessageDigest.getInstance("MD5");
+	md.update(password.getBytes()); 
+	byte[] hash = md.digest();
+	//Show all the roles and let the user choose one 
+	List<Role> roles = userManager.getRoles();
+    for (Role role : roles) {
+		System.out.println(role);
+	}
+    System.out.println("Type the chosen role id: \n");
+    int roleId = Integer.parseInt(reader.readLine());
+    //get the chosen role from the database
+    Role chosenRole = userManager.getRole(roleId);
+    //Create the user and store it in the database
+    User user = new User(username, hash, chosenRole);
+    userManager.createUser(user);
+}
+
+private static void login() throws Exception{
+	System.out.println("Please input your credentials: \n");
+	System.out.println("Username: \n");
+	String username = reader.readLine();
+	System.out.println("Password: \n");
+	String password = reader.readLine();
+	User user = userManager.checkPassword(username, password);
+	//We need to check if the username and password match with a user that is stored in the database
+	if(user == null) {//sera null si no hay match entre el username y la password con un user ya almacenado
+		System.out.println("Wrong credentials, please try again \n");
+	}
+	else if(user.getRole().getRole().equalsIgnoreCase("treatment creator")){
+		System.out.println("Welcome, treatment creator \n");
+		treatmentCreatorMenu();
+	}
+	else if(user.getRole().getRole().equalsIgnoreCase("medical personnel")) {
+		System.out.println("Welcome, medical personnel \n");
+		medicalPersonnelMenu();
+	}
+    else if(user.getRole().getRole().equalsIgnoreCase("medical personnel boss")) {
+    	System.out.println("Welcome, medical personnel boss \n");
+		medicalPersonnelBossMenu();
+	}
+	else {
+		System.out.println("Invalid role. \n");
+	}
+}
+
 
 	private static void treatmentCreatorMenu() throws Exception {
 		int exitTreatmentCreatorMenu = 0;
@@ -443,14 +507,14 @@ public class Menu {
 				System.out.println("3. Search Medical Personnel by Pathology Id \n");
 				searchMedicalPersonnelByPathologyId();
 				break;
-				
-			case 4: 
-				
+
+			case 4:
+
 				System.out.println("4. Generate XML");
-				
+
 				System.out.println("Write Medical Personnel Id: ");
 				int medicalPersonnelId = Integer.parseInt(reader.readLine());
-				
+
 				generateXMLMedicalPersonnel(medicalPersonnelId);
 
 			case 5:
@@ -464,22 +528,22 @@ public class Menu {
 		}
 
 	}
-	
-	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception{
-		
+
+	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception {
+
 		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
-		//Create JAXB Context
-		JAXBContext context = JAXBContext.newInstance(MedicalPersonnel.class);
-		//Get the marshaller
+		// Create JAXB Context
+		JAXBContext context = (JAXBContext) JAXBContext.newInstance(MedicalPersonnel.class);
+		// Get the marshaller
 		Marshaller marshal = context.createMarshaller();
-		//Pretty formating
+		// Pretty formating
 		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		//Marshall the dog to a file
+		// Marshall the dog to a file
 		File file = new File("./xmls/Output-MedicalPersonnel");
 		marshal.marshal(medicalPersonnel, file);
-		//Marshall the dog to the screen
+		// Marshall the dog to the screen
 		marshal.marshal(medicalPersonnel, System.out);
-		
+
 	}
 
 	private static void medicalPersonnelMenu() throws Exception {
@@ -1718,23 +1782,21 @@ public class Menu {
 		}
 
 	}
-	
-	private static void generateXMLPatient (int patientId) {
+
+	private static void generateXMLPatient(int patientId) throws JAXBException {
 		Patient patient = patientManager.searchPatientById(patientId);
 		// Create a JAXB Context
-		JAXBContext context = JAXBContext.newInstance(Patient.class);
-		//Get the marshaller
+		JAXBContext context = (JAXBContext) JAXBContext.newInstance(Patient.class);
+		// Get the marshaller
 		Marshaller marshal = context.createMarshaller();
-		//Pretty formating
+		// Pretty formating
 		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		//Marshall the dog to a file
+		// Marshall the dog to a file
 		File file = new File("./xmls/Output-Patient");
-		marshal.marshal(Patient, file);
-		//Marshall the dog to the screen
-		marshal.marshal(Patient, System.out);
-		
-		
-		
+		marshal.marshal(patient, file);
+		// Marshall the dog to the screen
+		marshal.marshal(patient, System.out);
+
 	}
 
 }
