@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.eclipse.persistence.jaxb.*;
+
 import pojos.*;
 
 import pojos_users.Role;
@@ -239,7 +241,7 @@ public class Menu {
 				searchPathologyByName();
 				break;
 
-			case 3:
+			case 4:
 
 				System.out.println("3. Exit");
 				exitSubmenu2Pathology = 1;
@@ -411,7 +413,8 @@ public class Menu {
 
 			searchMenu();
 			System.out.println("3. Search by Pathology Id \n");
-			System.out.println("4. Exit \n");
+			System.out.println("4. Generate XML");
+			System.out.println("5. Exit \n");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -434,9 +437,18 @@ public class Menu {
 				System.out.println("3. Search Medical Personnel by Pathology Id \n");
 				searchMedicalPersonnelByPathologyId();
 				break;
+				
+			case 4: 
+				
+				System.out.println("4. Generate XML");
+				
+				System.out.println("Write Medical Personnel Id: ");
+				int medicalPersonnelId = Integer.parseInt(reader.readLine());
+				
+				generateXMLMedicalPersonnel(medicalPersonnelId);
 
-			case 4:
-				System.out.println("Medical Personnel operations terminated \n");
+			case 5:
+				System.out.println("5. Medical Personnel operations terminated \n");
 				exitSubmenu1MedicalPersonnel = 1;
 				break;
 			default:
@@ -445,6 +457,23 @@ public class Menu {
 			}
 		}
 
+	}
+	
+	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception{
+		
+		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
+		//Create JAXB Context
+		JAXBContext context = JAXBContext.newInstance(MedicalPersonnel.class);
+		//Get the marshaller
+		Marshaller marshal = context.createMarshaller();
+		//Pretty formating
+		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		//Marshall the dog to a file
+		File file = new File("./xmls/Output-MedicalPersonnel");
+		marshal.marshal(medicalPersonnel, file);
+		//Marshall the dog to the screen
+		marshal.marshal(medicalPersonnel, System.out);
+		
 	}
 
 	private static void medicalPersonnelMenu() throws Exception {
