@@ -3,7 +3,6 @@ package xml.utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Date;
-
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class SQLDateAdapter extends XmlAdapter<String, Date> {
