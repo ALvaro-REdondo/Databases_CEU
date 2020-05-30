@@ -17,7 +17,7 @@ public class JPAAllergyManager implements AllergyJPAManager {
 	public void connect() {
 		// HAY QUE CAMBIAR LO DE COMPANY-PROVIDER
 		// REALMENTE NO SE SI TENGO QUE HACER LO DE CONNECT Y DISCONNECT
-		em = Persistence.createEntityManagerFactory("company-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("allergy").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
@@ -48,10 +48,6 @@ public class JPAAllergyManager implements AllergyJPAManager {
 		Query q = em.createNativeQuery("SELECT * FROM Allergy", Allergy_JPA.class);
 		List<Allergy_JPA> allergies = (List<Allergy_JPA>) q.getResultList();
 		return allergies;
-	}
-	
-	
-	//ESTO DE AQUI YA ME LO ESTOY INVENTANDO
-	
+	}	
 
 }

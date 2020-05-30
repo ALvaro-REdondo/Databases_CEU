@@ -11,6 +11,4 @@ public interface AllergyJPAManager {
 	public void createAllergy(Allergy_JPA allergy);
 	public Allergy_JPA getAllergy(int id);
 	public List<Allergy_JPA> getAllergies();
-	
-	//ESTO YA ME LO ESTOY INVENTANDO
 }
