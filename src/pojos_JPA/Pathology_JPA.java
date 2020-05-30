@@ -156,5 +156,7 @@ public class Pathology_JPA implements Serializable{
 				+ ", treatment=" + treatment + ", patients=" + patients + ", medicalPersonnels=" + medicalPersonnels
 				+ "]";
 	}
+
+	
 	
 }
