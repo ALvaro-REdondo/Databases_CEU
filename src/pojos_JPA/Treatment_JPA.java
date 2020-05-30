@@ -24,11 +24,11 @@ public class Treatment_JPA implements Serializable{
 	private String medication;
 	private String description;
 	@OneToMany(mappedBy="Treatment")
-	private List<Pathology> pathologies;
+	private List<Pathology_JPA> pathologies;
 	
 	public Treatment_JPA() {
 		super();
-		this.pathologies = new ArrayList<Pathology>();
+		this.pathologies = new ArrayList<Pathology_JPA>();
 	}
 	
 	public Treatment_JPA(Integer id, String name, String medication, String description, List<Pathology> pathologies) {
@@ -37,7 +37,7 @@ public class Treatment_JPA implements Serializable{
 		this.name = name;
 		this.medication = medication;
 		this.description = description;
-		this.pathologies = new ArrayList<Pathology>();
+		this.pathologies = new ArrayList<Pathology_JPA>();
 	}
 
 	public Treatment_JPA(String name, String medication, String description, List<Pathology> pathologies) {
@@ -45,7 +45,7 @@ public class Treatment_JPA implements Serializable{
 		this.name = name;
 		this.medication = medication;
 		this.description = description;
-		this.pathologies = new ArrayList<Pathology>();
+		this.pathologies = new ArrayList<Pathology_JPA>();
 	}
 
 	public Integer getId() {
@@ -80,12 +80,12 @@ public class Treatment_JPA implements Serializable{
 		this.description = description;
 	}
 
-	public List<Pathology> getPathologies() {
+	public List<Pathology_JPA> getPathologies() {
 		return pathologies;
 	}
 
-	public void setPathologies(List<Pathology> pathologies) {
-		this.pathologies = new ArrayList<Pathology>();
+	public void setPathologies(List<Pathology_JPA> pathologies) {
+		this.pathologies = new ArrayList<Pathology_JPA>();
 	}
 
 	@Override

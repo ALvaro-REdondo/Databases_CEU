@@ -40,11 +40,11 @@ public class Patient_JPA implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "pathology_id")
-	private Pathology pathology;
+	private Pathology_JPA pathology;
 	
 	@OneToOne (fetch=FetchType.LAZY)
 	@JoinColumn(name="clinicalhistory_id")
-	private ClinicalHistory clinicalHistory;
+	private ClinicalHistory_JPA clinicalHistory;
 	
 	public Patient_JPA() {
 		super();
@@ -52,8 +52,8 @@ public class Patient_JPA implements Serializable{
 	}
 
 	
-	public Patient_JPA(Integer id, String name, String gender, String state, Date dob, Pathology pathology,
-			ClinicalHistory clinicalHistory) {
+	public Patient_JPA(Integer id, String name, String gender, String state, Date dob, Pathology_JPA pathology,
+			ClinicalHistory_JPA clinicalHistory) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -66,8 +66,8 @@ public class Patient_JPA implements Serializable{
 	
 	
 
-	public Patient_JPA( String name, String gender, String state, Date dob, Pathology pathology,
-			ClinicalHistory clinicalHistory) {
+	public Patient_JPA( String name, String gender, String state, Date dob, Pathology_JPA pathology,
+			ClinicalHistory_JPA clinicalHistory) {
 		super();
 		this.name = name;
 		this.gender = gender;
@@ -118,21 +118,21 @@ public class Patient_JPA implements Serializable{
 		this.dob = dob;
 	}
 
-	public Pathology getPathology() {
+	public Pathology_JPA getPathology() {
 		return pathology;
 	}
 
-	public void setPathology(Pathology pathology) {
+	public void setPathology(Pathology_JPA pathology) {
 		this.pathology = pathology;
 	}
 	
 
 
-	public ClinicalHistory getClinicalHistory() {
+	public ClinicalHistory_JPA getClinicalHistory() {
 		return clinicalHistory;
 	}
 
-	public void setClinicalHistory(ClinicalHistory clinicalHistory) {
+	public void setClinicalHistory(ClinicalHistory_JPA clinicalHistory) {
 		this.clinicalHistory = clinicalHistory;
 	}
 
