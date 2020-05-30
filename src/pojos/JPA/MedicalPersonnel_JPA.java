@@ -30,6 +30,7 @@ public class MedicalPersonnel_JPA implements Serializable{
 	private String name;
 	private String department;
 	private String position;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pathologyId")
 	private Pathology pathology;

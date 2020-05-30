@@ -63,6 +63,20 @@ public class Patient_JPA implements Serializable{
 		this.pathology = pathology;
 		this.clinicalHistory = clinicalHistory;
 	}
+	
+	
+
+	public Patient_JPA( String name, String gender, String state, Date dob, Pathology pathology,
+			ClinicalHistory clinicalHistory) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.state = state;
+		this.dob = dob;
+		this.pathology = pathology;
+		this.clinicalHistory = clinicalHistory;
+	}
+
 
 	public Integer getId() {
 		return id;

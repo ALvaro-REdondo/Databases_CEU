@@ -45,6 +45,15 @@ public class Symptom_JPA implements Serializable{
 		super();
 	}
 
+	
+
+	public Symptom_JPA(Integer id, String manifestation) {
+		super();
+		this.id = id;
+		this.manifestation = manifestation;
+	}
+
+
 
 	public Symptom_JPA( String manifestation) {
 		super();
