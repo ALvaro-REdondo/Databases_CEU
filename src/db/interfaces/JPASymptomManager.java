@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import pojos.Patient;
 import pojos.Symptom;
+import pojos.JPA.Symptom_JPA;
 
 public class JPASymptomManager implements SymptomJPAManager {
 	
@@ -28,7 +29,7 @@ public class JPASymptomManager implements SymptomJPAManager {
 	}
 
 	@Override
-	public void createSymptom(Symptom symptom) {
+	public void createSymptom(Symptom_JPA symptom) {
 		em.getTransaction().begin();
 		em.persist(symptom);
 		em.getTransaction().commit();
@@ -36,17 +37,17 @@ public class JPASymptomManager implements SymptomJPAManager {
 	}
 
 	@Override
-	public Symptom getSymptom(int id) {
-		Query q=em.createNativeQuery("SELECT * FROM symptom WHERE id = ?",Patient.class);
+	public Symptom_JPA getSymptom(int id) {
+		Query q=em.createNativeQuery("SELECT * FROM symptom WHERE id = ?",Symptom_JPA.class);
 		q.setParameter(1,id);
-		Symptom symptom = (Symptom)q.getSingleResult();
+		Symptom_JPA symptom = (Symptom_JPA)q.getSingleResult();
 		return symptom;
 	}
 
 	@Override
-	public List<Symptom> getSymptoms() {
+	public List<Symptom_JPA> getSymptoms() {
 		Query q = em.createNativeQuery("SELECT * FROM symptom", Symptom.class);
-		List<Symptom> symptoms = (List<Symptom>)q.getResultList();
+		List<Symptom_JPA> symptoms = (List<Symptom_JPA>)q.getResultList();
 		return symptoms;
 	}
 
