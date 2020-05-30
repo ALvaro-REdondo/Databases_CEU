@@ -8,6 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import pojos.*;
+<<<<<<< HEAD
+=======
+import pojos_users.Role;
+import pojos_users.User;
+>>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 import db.interfaces.*;
 import db.sqlite.*;
 

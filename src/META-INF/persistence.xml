@@ -6,7 +6,7 @@
 	<!-- Persistence Provider -->
 	<!-- RESOURCE-LOCAL: Application-managed transactions -->
 	<!-- JTA: Container-managed transactions -->
-	<persistence-unit name="Clinical_trials_provider" transaction-type="RESOURCE_LOCAL"> <!--Para nosotro seria, clinical trials provider  -->
+	<persistence-unit name="Clinicaltrials-provider" transaction-type="RESOURCE_LOCAL"> <!--Para nosotro seria, clinical trials provider  -->
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->
@@ -17,13 +17,13 @@
 		<class>pojos_JPA.Patient_JPA</class>
 		<class>pojos_JPA.Symptom_JPA</class>
 		<class>pojos_JPA.Treatment_JPA</class>
-		<class>pojos_users.UserA</class>
+		<class>pojos_users.User</class>
 		<class>pojos_users.Role</class>
  
 		<properties>	
 			<!-- Connection properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
-		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/company.db" /> <!-- aqui lo cambio por clinicaltrials.db -->
+		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/Clinicaltrials.db" /> <!-- aqui lo cambio por clinicaltrials.db -->
 			<!-- Fill if we need user and password -->
 			<property name="javax.persistence.jdbc.user" value="" />
 			<property name="javax.persistence.jdbc.password" value="" />
