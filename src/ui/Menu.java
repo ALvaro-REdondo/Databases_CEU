@@ -8,10 +8,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-
 import pojos.*;
 import org.eclipse.persistence.jaxb.*;
 import pojos_users.Role;
@@ -22,7 +20,7 @@ import db.interfaces_JPA.UserManager;
 import db.jpa.JPAUserManager;
 import db.sqlite.*;
 
-//this is our menu.
+//this is our menu:)
 public class Menu {
 	// DB Managers
 	private static DBManager dbManager;
@@ -1783,6 +1781,7 @@ private static void login() throws Exception{
 
 	}
 
+
 	private static void generateXMLPatient(int patientId) throws JAXBException {
 		Patient patient = patientManager.searchPatientById(patientId);
 		// Create a JAXB Context
@@ -1797,6 +1796,6 @@ private static void login() throws Exception{
 		// Marshall the dog to the screen
 		marshal.marshal(patient, System.out);
 
-	}
-
 }
+}
+
