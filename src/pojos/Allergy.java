@@ -2,6 +2,11 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "allergy")
+@XmlType(propOrder = {"allergy", "degree"})
 public class Allergy implements Serializable{
 
 	/**
@@ -9,8 +14,11 @@ public class Allergy implements Serializable{
 	 */
 	private static final long serialVersionUID = 230505548360698610L;
 	
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String allergy;
+	@XmlElement
 	private Integer degree;
 	
 	

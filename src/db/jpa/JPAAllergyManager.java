@@ -1,4 +1,4 @@
-package db.interfaces;
+package db.jpa;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import db.interfaces_JPA.AllergyJPAManager;
 import pojos.Allergy;
 import pojos.JPA.Allergy_JPA;
 

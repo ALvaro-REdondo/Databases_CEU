@@ -3,6 +3,11 @@ package pojos;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "clinicalHistory")
+@XmlType(propOrder = {"doe", "dod", "bloodType", "extraInfo", "allergyId"})
 public class ClinicalHistory implements Serializable{
 
 	/**
@@ -10,11 +15,17 @@ public class ClinicalHistory implements Serializable{
 	 */
 	private static final long serialVersionUID = 3334006632519187423L;
 	
+	@XmlTransient
 	private Integer id;
+	@XmlJavatypeadapter(SQLDateAdapter.class)
 	private Date doe;
+	@XmlJavatypeadapter(SQLDateAdapter.class)
 	private Date dod;
+	@XmlElement
 	private String bloodType;
+	@XmlElement
 	private String extraInfo;
+	@XmlElement
 	private Integer allergyId;
 	
 	

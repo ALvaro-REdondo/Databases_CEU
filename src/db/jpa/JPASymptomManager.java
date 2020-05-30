@@ -1,4 +1,4 @@
-package db.interfaces;
+package db.jpa;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import db.interfaces_JPA.SymptomJPAManager;
 import pojos.Patient;
 import pojos.Symptom;
 import pojos.JPA.Symptom_JPA;
@@ -16,7 +17,7 @@ public class JPASymptomManager implements SymptomJPAManager {
 
 	@Override
 	public void connect() {
-		em = Persistence.createEntityManagerFactory("symptom").createEntityManager();
+		em = Persistence.createEntityManagerFactory("Clinical_trials_provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
