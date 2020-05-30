@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import pojos.*;
-import pojos.users.Role;
-import pojos.users.User;
+import pojos_users.Role;
+import pojos_users.User;
 import db.interfaces.*;
 import db.interfaces_JPA.UserManager;
 import db.jpa.JPAUserManager;

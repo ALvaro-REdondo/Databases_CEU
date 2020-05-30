@@ -15,7 +15,7 @@ public class JPAPatientManager implements PatientJPAManager {
 	private EntityManager em;
 	@Override
 	public void connect() {
-		em = Persistence.createEntityManagerFactory("Clinical_trials_provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("Clinicaltrials-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
