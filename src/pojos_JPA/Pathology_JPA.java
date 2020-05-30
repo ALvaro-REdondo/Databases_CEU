@@ -40,40 +40,40 @@ public class Pathology_JPA implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "treatmentId")
-	private Treatment treatment;
+	private Treatment_JPA treatment;
 	
 	@OneToMany(mappedBy="Pathology")
-	private List<Patient> patients;
+	private List<Patient_JPA> patients;
 	
 	@OneToMany(mappedBy="MedicalPersonnel")
-	private List<MedicalPersonnel> medicalPersonnels;
+	private List<MedicalPersonnel_JPA> medicalPersonnels;
 		
 	public Pathology_JPA() {
 		super();
-		this.patients = new ArrayList<Patient>();
-		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
+		this.patients = new ArrayList<Patient_JPA>();
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
 	}
 
-	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Treatment treatment,
-			List<Patient> patients, List<MedicalPersonnel> medicalPersonnels) {
+	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Treatment_JPA treatment,
+			List<Patient_JPA> patients, List<MedicalPersonnel_JPA> medicalPersonnels) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatment = treatment;
-		this.patients = new ArrayList<Patient>();
-		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
+		this.patients = new ArrayList<Patient_JPA>();
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
 	}
 
-	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment treatment, List<Patient> patients, List<MedicalPersonnel> medicalPersonnels) {
+	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment_JPA treatment, List<Patient_JPA> patients, List<MedicalPersonnel_JPA> medicalPersonnels) {
 		super();
 		this.name = name;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatment = treatment;
-		this.patients = new ArrayList<Patient>();
-		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
+		this.patients = new ArrayList<Patient_JPA>();
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
 	}
 
 	public Integer getId() {
@@ -101,28 +101,29 @@ public class Pathology_JPA implements Serializable{
 		this.endingDate = endingDate;
 	}
 	
-	public Treatment getTreatment() {
+	
+	public Treatment_JPA getTreatment() {
 		return treatment;
 	}
 
-	public void setTreatment(Treatment treatment) {
+	public void setTreatment(Treatment_JPA treatment) {
 		this.treatment = treatment;
 	}
 
-	public List<Patient> getPatients() {
+	public List<Patient_JPA> getPatients() {
 		return patients;
 	}
 
-	public void setPatients(List<Patient> patients) {
-		this.patients = new ArrayList<Patient>();
+	public void setPatients(List<Patient_JPA> patients) {
+		this.patients = new ArrayList<Patient_JPA>();
 	}
 
-	public List<MedicalPersonnel> getMedicalPersonnels() {
+	public List<MedicalPersonnel_JPA> getMedicalPersonnels() {
 		return medicalPersonnels;
 	}
 
-	public void setMedicalPersonnels(List<MedicalPersonnel> medicalPersonnels) {
-		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
+	public void setMedicalPersonnels(List<MedicalPersonnel_JPA> medicalPersonnels) {
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
 	}
 
 	@Override
@@ -155,5 +156,7 @@ public class Pathology_JPA implements Serializable{
 				+ ", treatment=" + treatment + ", patients=" + patients + ", medicalPersonnels=" + medicalPersonnels
 				+ "]";
 	}
+
+	
 	
 }
