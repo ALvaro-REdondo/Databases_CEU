@@ -2,8 +2,8 @@ package pojos;
 
 import java.io.Serializable;
 
-public class MedicalPersonnel implements Serializable{
-	
+public class MedicalPersonnel implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -14,9 +14,7 @@ public class MedicalPersonnel implements Serializable{
 	private String department;
 	private String position;
 	private Integer pathologyId;
-	
-	
-	
+
 	public MedicalPersonnel(Integer id, String name, String department, String position, Integer pathologyId) {
 		super();
 		this.id = id;
@@ -35,7 +33,7 @@ public class MedicalPersonnel implements Serializable{
 	}
 
 	public MedicalPersonnel() {
-		
+
 		super();
 	}
 
@@ -109,7 +107,5 @@ public class MedicalPersonnel implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }

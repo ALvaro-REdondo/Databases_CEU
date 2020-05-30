@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class Pathology implements Serializable{
+public class Pathology implements Serializable {
 
 	/**
 	 * 
@@ -16,8 +16,7 @@ public class Pathology implements Serializable{
 	private Date startDate;
 	private Date endingDate;
 	private Integer treatmentId;
-	
-	
+
 	public Pathology(Integer id, String name, Date startDate, Date endingDate, Integer treatmentId) {
 		super();
 		this.id = id;
@@ -27,8 +26,8 @@ public class Pathology implements Serializable{
 		this.treatmentId = treatmentId;
 	}
 
-	//he creado constructor con todas las variables	
-	
+	// he creado constructor con todas las variables
+
 	public Pathology(String name, Date startDate, Date endingDate, Integer treatmentId) {
 		super();
 		this.name = name;
@@ -37,21 +36,22 @@ public class Pathology implements Serializable{
 		this.treatmentId = treatmentId;
 	}
 
-	//el constructor no tiene id
-	
+	// el constructor no tiene id
+
 	public Pathology(String name, Date startDate, Integer treatmentId) {
 		super();
 		this.name = name;
 		this.startDate = startDate;
 		this.treatmentId = treatmentId;
 	}
-	
-	//el constructor no tiene ending date porque es opcional. puede ser null. lo mismo ocurre con duration.
+
+	// el constructor no tiene ending date porque es opcional. puede ser null. lo
+	// mismo ocurre con duration.
 
 	public Pathology() {
-		
+
 		super();
-		
+
 	}
 
 	public Integer getId() {
@@ -85,7 +85,7 @@ public class Pathology implements Serializable{
 	public void setEndingDate(Date endingDate) {
 		this.endingDate = endingDate;
 	}
-	
+
 	public int getTreatmentId() {
 		return treatmentId;
 	}
@@ -96,8 +96,8 @@ public class Pathology implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Pathology [id=" + id + ", name=" + name + ", startDate=" + startDate
-				+ ", endingDate=" + endingDate + ", treatmentId=" + treatmentId + "]";
+		return "Pathology [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endingDate=" + endingDate
+				+ ", treatmentId=" + treatmentId + "]";
 	}
 
 	@Override
@@ -124,5 +124,5 @@ public class Pathology implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
