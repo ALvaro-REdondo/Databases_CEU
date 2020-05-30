@@ -7,8 +7,7 @@ import pojos.Allergy;
 public interface AllergyManager {
 
 	public void add(Allergy allergy);
-	public List<Allergy> searchAllergyById(Integer id);
 	public List<Allergy> searchAllergyByName(String allergy);
-	public Allergy getAllergy(int allergyId);
+	public Allergy searchAllergyById(int allergyId);
 	public List<Allergy> showAllergies();
 }

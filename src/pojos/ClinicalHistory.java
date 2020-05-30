@@ -15,24 +15,27 @@ public class ClinicalHistory implements Serializable{
 	private Date dod;
 	private String bloodType;
 	private String extraInfo;
+	private Integer allergyId;
 	
 	
 	
-	public ClinicalHistory(Integer id, Date doe, Date dod, String bloodType, String extraInfo) {
+	public ClinicalHistory(Integer id, Date doe, Date dod, String bloodType, String extraInfo, Integer allergyId) {
 		super();
 		this.id = id;
 		this.doe = doe;
 		this.dod = dod;
 		this.bloodType = bloodType;
 		this.extraInfo = extraInfo;
+		this.allergyId = allergyId;
 	}
 
-	public ClinicalHistory(Date doe, Date dod, String bloodType, String extraInfo) {
+	public ClinicalHistory(Date doe, Date dod, String bloodType, String extraInfo, Integer allergyId) {
 		super();
 		this.doe = doe;
 		this.dod = dod;
 		this.bloodType = bloodType;
 		this.extraInfo = extraInfo;
+		this.allergyId = allergyId;
 	}
 
 	public ClinicalHistory() {
@@ -79,10 +82,20 @@ public class ClinicalHistory implements Serializable{
 		this.extraInfo = extraInfo;
 	}
 
+	
+	public Integer getAllergyId() {
+		return allergyId;
+	}
+
+	public void setAllergyId(Integer allergyId) {
+		this.allergyId = allergyId;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ClinicalHistory [id=" + id + ", doe=" + doe + ", dod=" + dod + ", bloodType=" + bloodType
-				+ ", extraInfo=" + extraInfo + "]";
+				+ ", extraInfo=" + extraInfo + ", allergyId=" + allergyId + "]";
 	}
 
 	@Override
