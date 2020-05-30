@@ -1754,8 +1754,7 @@ public class Menu {
 
 	private static void deleteClinicalHistory(int clinicalHistoryToDeleteId) throws Exception {
 		// first I get the clinical history
-		ClinicalHistory clinicalHistoryToDelete = clinicalHistoryManager
-				.searchClinicalHistoryById(clinicalHistoryToDeleteId);
+		ClinicalHistory clinicalHistoryToDelete = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryToDeleteId);
 
 		clinicalHistoryManager.delete(clinicalHistoryToDelete);
 	}
