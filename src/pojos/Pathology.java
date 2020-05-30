@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import xml.utils.SQLDateAdapter;
 
+//this annotation indicates this class is going to be turned into an XML later
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "pathology")
 @XmlType(propOrder = {"name", "startDate", "endingDate","treatmentId"})
@@ -18,10 +19,14 @@ public class Pathology implements Serializable {
 	 */
 	private static final long serialVersionUID = 1289491893153664835L;
 
+	//XmlTransient because it is not going to be stored, it will be ignored by XML
+	//we do this because it only interests the Data Base
 	@XmlTransient
 	private Integer id;
 	@XmlAttribute
 	private String name;
+	//XML recognizes text, integers and floats, but not dates, so they have to be transformed
+	//we specify the class that will do this transformation
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date startDate;
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)

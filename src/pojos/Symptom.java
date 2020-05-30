@@ -3,6 +3,7 @@ package pojos;
 import java.io.Serializable;
 import javax.xml.bind.annotation.*;
 
+//this annotation indicates this class is going to be turned into an XML later
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="symptom")
 @XmlType(propOrder = {"name","manifestation"})
@@ -13,6 +14,9 @@ public class Symptom implements Serializable{
 	 */
 	private static final long serialVersionUID = -2054544053127653172L;
 	
+	//XmlTransient because it is not going to be stored, it will be ignored by XML
+	//we do this because it only interests the Data Base
+	@XmlTransient
 	private Integer id;
 	@XmlAttribute
 	private String manifestation;

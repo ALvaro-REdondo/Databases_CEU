@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.*;
 
-
+//this annotation indicates this class is going to be turned into an XML later
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "treatment")
 @XmlType(propOrder = {"name", "medication", "description"})
@@ -14,7 +14,10 @@ public class Treatment implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 9161173435855282694L;
-    @XmlTransient
+    
+	//XmlTransient because it is not going to be stored, it will be ignored by XML
+	//we do this because it only interests the Data Base
+	@XmlTransient
 	private Integer id;
 	@XmlAttribute
 	private String name;
