@@ -1551,9 +1551,12 @@ public class Menu {
 
 		System.out.println("Extra information: \n");
 		String extraInfo = reader.readLine();
+		
+		System.out.println("Allergy id: \n");
+		int allergyId = Integer.parseInt(reader.readLine());
 
 		ClinicalHistory clinicalHistory = new ClinicalHistory(Date.valueOf(doe), Date.valueOf(dod), bloodType,
-				extraInfo);
+				extraInfo, allergyId);
 		clinicalHistoryManager.add(clinicalHistory);
 	}
 
@@ -1597,7 +1600,7 @@ public class Menu {
 		System.out.println("Actual blood type: " + toBeModified.getBloodType());
 		System.out.println("Type the new blood type or press enter to leave it as is:");
 		String newBloodType = reader.readLine();
-		// if the user does not type anything, the doe stays the same
+		// if the user does not type anything, the bloodType stays the same
 		if (newBloodType.equals("")) {
 			newBloodType = toBeModified.getBloodType();
 		}
@@ -1605,12 +1608,27 @@ public class Menu {
 		System.out.println("Actual extra information: " + toBeModified.getExtraInfo());
 		System.out.println("Type the new extra information or press enter to leave it as is:");
 		String newExtraInfo = reader.readLine();
-		// if the user does not type anything, the doe stays the same
+		// if the user does not type anything, the extraInfo stays the same
 		if (newExtraInfo.equals("")) {
 			newExtraInfo = toBeModified.getExtraInfo();
 		}
+		
+		System.out.println("Actual allergy id: " + toBeModified.getExtraInfo());
+		System.out.println("Type the new allergy id or press enter to leave it as is:");
+		String newAllergyId = reader.readLine();
+		int intNewAllergyId = 0;
+		// if the user does not type anything, the allergyId stays the same
+		if (newAllergyId.equals("")) {
 
-		ClinicalHistory updatedClinicalHistory = new ClinicalHistory(newDoe, newDod, newBloodType, newExtraInfo);
+			intNewAllergyId = toBeModified.getAllergyId();
+
+		} else {
+
+			intNewAllergyId = Integer.parseInt(newAllergyId);
+
+		}
+
+		ClinicalHistory updatedClinicalHistory = new ClinicalHistory(newDoe, newDod, newBloodType, newExtraInfo, intNewAllergyId);
 		clinicalHistoryManager.update(updatedClinicalHistory);
 	}
 
@@ -1643,13 +1661,7 @@ public class Menu {
 		System.out.println("Allergy id: \n");
 		int id = Integer.parseInt(reader.readLine());
 
-		List<Allergy> allergies = allergyManager.searchAllergyById(id);
-
-		for (Allergy allergy : allergies) {
-
-			System.out.println(allergy);
-
-		}
+		Allergy allergy = allergyManager.searchAllergyById(id);
 	}
 
 	private static void searchAllergyByName() throws Exception {

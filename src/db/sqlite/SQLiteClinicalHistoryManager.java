@@ -24,12 +24,13 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public void add(ClinicalHistory clinicalHistory) {
 		try {
 			String sql = "INSERT INTO ClinicalHistory (doe, dod, "
-					+ "bloodType, extraInfo) VALUES (?, ?, ?, ?);";
+					+ "bloodType, extraInfo, allergyId) VALUES (?, ?, ?, ?, ?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setDate(1, clinicalHistory.getDoe());
 			prep.setDate(2, clinicalHistory.getDod()); //EL NO HA PUESTO ESTA FECHA EN SU PERRO, NO SE SI HAY QUE DEJARLA O NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 			prep.setString(3, clinicalHistory.getBloodType());
 			prep.setString(4, clinicalHistory.getExtraInfo());
+			prep.setInt(5, clinicalHistory.getAllergyId());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -41,13 +42,14 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public void update(ClinicalHistory clinicalHistory) {
 		try {
 			//update every aspect of a particular clinical history
-			String sql = " UPDATE ClinicalHistory SET doe=?, dod=?, bloodType=?, extraInfo=? WHERE id=?"; 
+			String sql = " UPDATE ClinicalHistory SET doe=?, dod=?, bloodType=?, extraInfo=?, allergyId=? WHERE id=?"; 
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setDate(1, clinicalHistory.getDoe());
 			s.setDate(2, clinicalHistory.getDod());
 			s.setString(3, clinicalHistory.getBloodType());
 			s.setString(4, clinicalHistory.getExtraInfo());
 			s.setInt(5, clinicalHistory.getId());
+			s.setInt(6, clinicalHistory.getAllergyId());
 			s.executeUpdate();
 			s.close();
 			
@@ -90,8 +92,9 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 			Date dod = rs.getDate("dod");
 			String bloodType = rs.getString("bloodType");
 			String extraInfo = rs.getString("extraInfo");
+			int allergyId = rs.getInt("allergyId");
 			
-			clinicalHistory = new ClinicalHistory(id, doe, dod, bloodType, extraInfo);
+			clinicalHistory = new ClinicalHistory(id, doe, dod, bloodType, extraInfo, allergyId);
 			
 		} catch(SQLException e) {	
 			e.printStackTrace();	
