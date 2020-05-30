@@ -28,7 +28,7 @@ public class Treatment_JPA implements Serializable{
 	
 	public Treatment_JPA() {
 		super();
-		this.pathologies=new ArrayList<Pathology>();
+		this.pathologies = new ArrayList<Pathology>();
 	}
 	
 	public Treatment_JPA(Integer id, String name, String medication, String description, List<Pathology> pathologies) {
@@ -37,7 +37,7 @@ public class Treatment_JPA implements Serializable{
 		this.name = name;
 		this.medication = medication;
 		this.description = description;
-		this.pathologies = pathologies;
+		this.pathologies = new ArrayList<Pathology>();
 	}
 
 	public Treatment_JPA(String name, String medication, String description, List<Pathology> pathologies) {
@@ -45,7 +45,7 @@ public class Treatment_JPA implements Serializable{
 		this.name = name;
 		this.medication = medication;
 		this.description = description;
-		this.pathologies = pathologies;
+		this.pathologies = new ArrayList<Pathology>();
 	}
 
 	public Integer getId() {
@@ -85,7 +85,7 @@ public class Treatment_JPA implements Serializable{
 	}
 
 	public void setPathologies(List<Pathology> pathologies) {
-		this.pathologies = pathologies;
+		this.pathologies = new ArrayList<Pathology>();
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import pojos.MedicalPersonnel;
 import pojos.Pathology;
 import pojos.Patient;
 import pojos.Treatment;
@@ -43,14 +44,18 @@ public class Pathology_JPA implements Serializable{
 	
 	@OneToMany(mappedBy="Pathology")
 	private List<Patient> patients;
+	
+	@OneToMany(mappedBy="MedicalPersonnel")
+	private List<MedicalPersonnel> medicalPersonnels;
 		
 	public Pathology_JPA() {
 		super();
 		this.patients = new ArrayList<Patient>();
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
 	}
 
 	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Treatment treatment,
-			List<Patient> patients) {
+			List<Patient> patients, List<MedicalPersonnel> medicalPersonnels) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,15 +63,17 @@ public class Pathology_JPA implements Serializable{
 		this.endingDate = endingDate;
 		this.treatment = treatment;
 		this.patients = new ArrayList<Patient>();
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
 	}
 
-	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment treatment, List<Patient> patients) {
+	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment treatment, List<Patient> patients, List<MedicalPersonnel> medicalPersonnels) {
 		super();
 		this.name = name;
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatment = treatment;
 		this.patients = new ArrayList<Patient>();
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
 	}
 
 	public Integer getId() {
@@ -110,6 +117,14 @@ public class Pathology_JPA implements Serializable{
 		this.patients = new ArrayList<Patient>();
 	}
 
+	public List<MedicalPersonnel> getMedicalPersonnels() {
+		return medicalPersonnels;
+	}
+
+	public void setMedicalPersonnels(List<MedicalPersonnel> medicalPersonnels) {
+		this.medicalPersonnels = new ArrayList<MedicalPersonnel>();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -137,7 +152,8 @@ public class Pathology_JPA implements Serializable{
 	@Override
 	public String toString() {
 		return "Pathology_JPA [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endingDate=" + endingDate
-				+ ", treatment=" + treatment + ", patients=" + patients + "]";
+				+ ", treatment=" + treatment + ", patients=" + patients + ", medicalPersonnels=" + medicalPersonnels
+				+ "]";
 	}
 	
 }
