@@ -2,11 +2,11 @@ package pojos;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-
+@XmlRootElement(name = "treatment")
+@XmlType(propOrder = {"name", "department", "position", "pathologyId"})
 public class MedicalPersonnel implements Serializable {
 
 	/**
@@ -14,10 +14,15 @@ public class MedicalPersonnel implements Serializable {
 	 */
 	private static final long serialVersionUID = -4865330136642653318L;
 
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String department;
+	@XmlElement
 	private String position;
+	@XmlElement
 	private Integer pathologyId;
 
 	public MedicalPersonnel(Integer id, String name, String department, String position, Integer pathologyId) {

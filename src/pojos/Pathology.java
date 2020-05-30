@@ -3,7 +3,14 @@ package pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import xml.utils.SQLDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "pathology")
+@XmlType(propOrder = {"name", "startDate", "endingDate","treatmentId"})
 public class Pathology implements Serializable {
 
 	/**
@@ -11,10 +18,15 @@ public class Pathology implements Serializable {
 	 */
 	private static final long serialVersionUID = 1289491893153664835L;
 
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date startDate;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date endingDate;
+	@XmlElement
 	private Integer treatmentId;
 
 	public Pathology(Integer id, String name, Date startDate, Date endingDate, Integer treatmentId) {
