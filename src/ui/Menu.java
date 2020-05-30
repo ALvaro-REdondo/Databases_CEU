@@ -1831,6 +1831,6 @@ public class Menu {
 		System.out.println(patient);
 		// insert the patient
 		patientManager.add(patient);
-
+		//finish
 		
 }
