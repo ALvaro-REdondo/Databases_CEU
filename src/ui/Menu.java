@@ -7,16 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-<<<<<<< HEAD
-import pojos.*;
-
-
-=======
 import org.eclipse.persistence.jaxb.*;
 
 import pojos.*;
 
->>>>>>> branch 'master' of https://github.com/ALvaro-REdondo/Databases_CEU
 import pojos_users.Role;
 import pojos_users.User;
 
@@ -1717,24 +1711,6 @@ public class Menu {
 			System.out.println(allergy);
 		}
 
-	}
-	
-	private static void generateXMLPatient (int patientId) {
-		Patient patient = patientManager.searchPatientById(patientId);
-		// Create a JAXB Context
-		JAXBContext context = JAXBContext.newInstance(Patient.class);
-		//Get the marshaller
-		Marshaller marshal = context.createMarshaller();
-		//Pretty formating
-		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		//Marshall the dog to a file
-		File file = new File("./xmls/Output-Patient");
-		marshal.marshal(Patient, file);
-		//Marshall the dog to the screen
-		marshal.marshal(Patient, System.out);
-		
-		
-		
 	}
 
 }
