@@ -1,4 +1,4 @@
-package db.interfaces;
+package db.interfaces_JPA;
 
 import java.util.List;
 import javax.persistence.*;
