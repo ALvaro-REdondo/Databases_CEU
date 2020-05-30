@@ -11,6 +11,8 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import pojos.*;
+
+import org.eclipse.persistence.internal.oxm.Unmarshaller;
 import org.eclipse.persistence.jaxb.*;
 import pojos_users.Role;
 import pojos_users.User;
@@ -1797,5 +1799,22 @@ private static void login() throws Exception{
 		marshal.marshal(patient, System.out);
 
 }
+	private static void admitPatientXML() throws Exception {
+		// Create JAXBCOntext
+		JAXBContext context = (JAXBContext) JAXBContext.newInstance(Patient.class);
+		// Get the unmarshaller
+		Unmarshaller unmarshal = context.createUnmarshaller();
+		// Unmarshall dog from a file
+		System.out.println("Type the filename for the XML document:");
+		STring filename=reader.readLine();
+		File file = new File("./xmls/"+ filename);
+		Patient patient = (Patient)unmarshal.unmarshal(file);
+		// print the patient
+		System.out.println(patient);
+		// insert the patient
+		patientManager.add(patient);
+
+		
+	}
 }
 
