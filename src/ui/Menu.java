@@ -1781,8 +1781,8 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Allergy id: \n");
 		int id = Integer.parseInt(reader.readLine());
-
 		Allergy allergy = allergyManager.searchAllergyById(id);
+		System.out.println(allergy);
 	}
 
 	private static void searchAllergyByName() throws Exception {
