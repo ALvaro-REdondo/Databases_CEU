@@ -161,16 +161,14 @@ public class SQLiteManager implements DBManager {
 
 	@Override
 	 public int getLastId() {
-		
-		int id =0;
+		int id=0;	
+		try {
 			String query = "SELECT last_insert_rowid() AS lastId";
 			PreparedStatement p =c.prepareStatement(query);
 			ResultSet rs = p.executeQuery();
-			id = rs.getInt("lasId");
-		try {
-			
+			id = rs.getInt("lastId");
 		} catch(SQLException ex) {
-			return null;
+			ex.printStackTrace();
 		}
 		return id;
 	}
