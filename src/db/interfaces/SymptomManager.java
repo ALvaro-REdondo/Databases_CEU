@@ -8,7 +8,7 @@ public interface SymptomManager {
 	
 	
 			public void add(Symptom symptom);
-			public List<Symptom> searchASymptomByManifestation(String manifestation);
+			public List<Symptom> searchSymptomByManifestation(String manifestation);
 			public Symptom searchSymptomById(int symptomId);
 			public List<Symptom> showSymptoms();
 

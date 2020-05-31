@@ -34,7 +34,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 	
 
 	@Override
-	public List<Symptom> searchASymptomByManifestation(String manifestation) {
+	public List<Symptom> searchSymptomByManifestation(String manifestation) {
 		List<Symptom> symptomsList= new ArrayList<Symptom>();
 		try {
 			String sql ="SELECT * FROM symptom WHERE manifestation LIKE ?";

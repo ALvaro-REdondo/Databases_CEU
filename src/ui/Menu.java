@@ -1246,7 +1246,7 @@ public class Menu {
 		String manifestation = reader.readLine();
 
 		// para buscar en la base de datos:
-		List<Symptom> symptoms = symptomManager.searchASymptomByManifestation(manifestation);
+		List<Symptom> symptoms = symptomManager.searchSymptomByManifestation(manifestation);
 
 		// para mostrar por pantalla:
 		for (Symptom symptom : symptoms) {
