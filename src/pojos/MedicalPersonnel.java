@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 
 //this annotation indicates this class is going to be turned into an XML later
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "treatment")
+@XmlRootElement(name = "medicalPersonnel")
 @XmlType(propOrder = {"name", "department", "position", "pathologyId"})
 public class MedicalPersonnel implements Serializable {
 
