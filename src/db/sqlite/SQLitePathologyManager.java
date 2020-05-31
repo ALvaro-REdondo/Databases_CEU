@@ -6,6 +6,8 @@ import java.util.List;
 import db.interfaces.PathologyManager;
 import pojos.MedicalPersonnel;
 import pojos.Pathology;
+import pojos.Symptom;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -96,15 +98,21 @@ public class SQLitePathologyManager implements PathologyManager {
 		Pathology newPathology = null;
 		
 		try {
+		// get the pathology and the symptoms of the pathology
+		String sql = "SELECT * FROM Pathology AS P JOIN Pathology-Symptom AS ps ON p.id = ps.pathology_id"
+				+"JOIN Symptom AS s ON ps.symptom_id = s.idWHERE p.id = ?";
 		
-		String sql = "SELECT * FROM Pathology WHERE id = ?";
 		PreparedStatement p = c.prepareStatement(sql);
 		
 		p.setInt(1, pathologyId);
 		
 		ResultSet rs = p.executeQuery();
-		rs.next();
+		List<Symptom> symptoms = new ArrayList<Symptom>();
+		boolean pathologyCreated = false;
+		while(rs.next()) {
 			
+			if(!pathologyCreated) {
+				// First get the pathology info
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			Date startDate = rs.getDate("startDate");
@@ -112,7 +120,15 @@ public class SQLitePathologyManager implements PathologyManager {
 			int treatmentId = rs.getInt("treatmentId");
 		
 			newPathology = new Pathology(id, name, startDate, endingDate, treatmentId);
-		
+			pathologyCreated = true;
+			}
+			// get the symptoms info
+			int symptomId = rs.getInt("id");
+			String symptomManifestation = rs.getString("manifestation");
+			Symptom newSymptom = new Symptom (symptomId,symptomManifestation);
+			symptoms.add(newSymptom);
+		}
+		newPathology.setSymptoms(symptoms);
 		}catch(SQLException e) {
 			
 			e.printStackTrace();
