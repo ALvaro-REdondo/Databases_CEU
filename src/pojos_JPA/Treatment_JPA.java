@@ -85,7 +85,7 @@ public class Treatment_JPA implements Serializable{
 	}
 
 	public void setPathologies(List<Pathology_JPA> pathologies) {
-		this.pathologies = new ArrayList<Pathology_JPA>();
+		this.pathologies = pathologies;
 	}
 
 	@Override
