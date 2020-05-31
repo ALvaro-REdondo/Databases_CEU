@@ -26,8 +26,8 @@ public class Xml2Html {
 	}
 
 	public static void main(String[] args) {
-		String path = System.getProperty("user.dir");
-		simpleTransform(path + "/src/xmls/abraham.xml", path + "/src/xmls/PatientStyle.xslt", path + "/src/xmls/Patient.html");
+		//String path = System.getProperty("user.dir");
+		simpleTransform("./xmls/abraham.xml", "./xmls/patientStyle.xslt", "./xmls/Patient.html");
 
 	}
 }

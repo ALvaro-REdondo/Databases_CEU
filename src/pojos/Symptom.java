@@ -37,7 +37,7 @@ public class Symptom implements Serializable{
 	public Symptom(String manifestation) {
 		super();
 		this.manifestation=manifestation;
-		this.pathologies = new ArrayList<Pathology>()
+		this.pathologies = new ArrayList<Pathology>();
 	}
 
 

@@ -11,7 +11,8 @@ public interface SymptomManager {
 			public List<Symptom> searchSymptomByManifestation(String manifestation);
 			public Symptom searchSymptomById(int symptomId);
 			public List<Symptom> showSymptoms();
-
+			public void give(int pathologyId, int symptomId); 
+			
 	}
 
 
