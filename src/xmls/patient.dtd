@@ -1,6 +1,6 @@
 <!DOCTYPE patient [
     <!ELEMENT patient (gender, state, dob, pathology_id, clinicalhistory_id)>
-    <!ATTLIST name CDATA #REQUIRED>
+    <!ATTLIST patient name CDATA #REQUIRED>
     <!ELEMENT gender (#PCDATA)>
     <!ELEMENT state (#PCDATA)>
     <!ELEMENT dob (#PCDATA)>
