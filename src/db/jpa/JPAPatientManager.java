@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import db.interfaces.PatientJPAManager;
+import db.interfaces_JPA.PatientJPAManager;
 import pojos.Patient;
 import pojos_JPA.Patient_JPA;
 
