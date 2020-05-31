@@ -42,21 +42,21 @@ public class Pathology_JPA implements Serializable{
 	@OneToMany(mappedBy="Pathology")
 	private List<Patient_JPA> patients;
 	
-	@OneToMany(mappedBy="MedicalPersonnel")
+	@OneToMany(mappedBy="Pathology")
 	private List<MedicalPersonnel_JPA> medicalPersonnels;
 		
 	@ManyToMany
-	@JoinTable(name="Pathology-Symptom",
+	@JoinTable(name="Pathology_Symptom",
 	joinColumns={@JoinColumn(name ="symptom_id",referencedColumnName="id")},
 	inverseJoinColumns={@JoinColumn(name= "pathology_id", referencedColumnName ="id")})
 	
-	private List<Symptom_JPA> symptoms;
+	private List<Symptom_JPA> Pathology_Symptom;
 
 	public Pathology_JPA() {
 		super();
 		this.patients = new ArrayList<Patient_JPA>();
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
-		this.symptoms = new ArrayList<Symptom_JPA>();
+		this.Pathology_Symptom = new ArrayList<Symptom_JPA>();
 	}
 
 	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Treatment_JPA treatment,
@@ -69,7 +69,7 @@ public class Pathology_JPA implements Serializable{
 		this.treatment = treatment;
 		this.patients = new ArrayList<Patient_JPA>();
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
-		this.symptoms = new ArrayList<Symptom_JPA>();
+		this.Pathology_Symptom = new ArrayList<Symptom_JPA>();
 	}
 
 	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment_JPA treatment, List<Patient_JPA> patients, List<MedicalPersonnel_JPA> medicalPersonnels) {
@@ -80,7 +80,7 @@ public class Pathology_JPA implements Serializable{
 		this.treatment = treatment;
 		this.patients = new ArrayList<Patient_JPA>();
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
-		this.symptoms = new ArrayList<Symptom_JPA>();
+		this.Pathology_Symptom = new ArrayList<Symptom_JPA>();
 	}
 
 	public Integer getId() {
@@ -130,17 +130,18 @@ public class Pathology_JPA implements Serializable{
 	}
 
 	public void setMedicalPersonnels(List<MedicalPersonnel_JPA> medicalPersonnels) {
-		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
+		this.medicalPersonnels = medicalPersonnels;
 	}
 	
 	
 
-	public List<Symptom_JPA> getSymptoms() {
-		return symptoms;
+	public List<Symptom_JPA> getPathology_Symptom() {
+		return Pathology_Symptom;
 	}
 
-	public void setSymptoms(List<Symptom_JPA> symptoms) {
-		this.symptoms = symptoms;
+	public void setPathology_Symptom(List<Symptom_JPA> Pathology_Symptom) {
+		this.Pathology_Symptom = Pathology_Symptom;
+		
 	}
 
 	@Override
@@ -172,8 +173,5 @@ public class Pathology_JPA implements Serializable{
 		return "Pathology_JPA [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endingDate=" + endingDate
 				+ ", treatment=" + treatment + ", patients=" + patients + ", medicalPersonnels=" + medicalPersonnels
 				+ "]";
-	}
-
-	
-	
+	}	
 }

@@ -359,8 +359,10 @@ public class Menu {
 			System.out.println("4. Patient \n");
 
 			searchMenu();
-			System.out.println("3. Search by pathology id");
-			System.out.println("4. Exit");
+			System.out.println("3. Search by pathology id \n");
+			System.out.println("4. Generate a XML file of a patient \n");
+			System.out.println("5. Load a Patient using XML \n");
+			System.out.println("6. Exit");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -380,6 +382,15 @@ public class Menu {
 				searchPatientByPathologyId();
 				break;
 			case 4:
+				patientManager.showPatients();
+				System.out.println("Select the id of the patient you want to turn into an XML file \n");
+				Integer id = Integer.parseInt(reader.readLine());
+				generateXMLPatient(id);
+				break;
+			case 5:
+				admitPatientXML();
+				break;
+			case 6:
 				System.out.println("Patient operations terminated \n");
 				exitSubmenu4Patient = 1;
 				break;
@@ -402,7 +413,7 @@ public class Menu {
 
 			switch (choice) {
 
-			case 1:			
+			case 1:
 				searchAllergyById();
 				break;
 
@@ -482,14 +493,11 @@ public class Menu {
 				break;
 
 			case 4:
-
-				System.out.println("4. Generate XML");
-
-				System.out.println("Write Medical Personnel Id: ");
+				medicalPersonnelManager.showMedicalPersonnel();
+				System.out.println("Write the medical personnel's id you want to select \n");
 				int medicalPersonnelId = Integer.parseInt(reader.readLine());
-
 				generateXMLMedicalPersonnel(medicalPersonnelId);
-
+				break;
 			case 5:
 				admitMedicalPersonnelXML();
 				break;
@@ -801,7 +809,9 @@ public class Menu {
 			System.out.println("2. Update \n");
 			System.out.println("3. Check \n");
 			System.out.println("4. Delete \n");
-			System.out.println("5. Exit \n");
+			System.out.println("5.Generate XML file \n");
+			System.out.println("6. Load XML file \n");
+			System.out.println("7. Exit \n");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -843,8 +853,16 @@ public class Menu {
 				int patientid = Integer.parseInt(reader.readLine());
 				deletePatient(patientid);
 				break;
-
 			case 5:
+				patientManager.showPatients();
+				System.out.println("Select the id of the patient you want to turn into an XML file \n");
+				Integer id2 = Integer.parseInt(reader.readLine());
+				generateXMLPatient(id2);
+				break;
+			case 6:
+				admitPatientXML();
+				break;
+			case 7:
 				System.out.println("Patient operations terminated \n");
 				exitSubmenu3Patient = 1;
 				break;
@@ -990,7 +1008,9 @@ public class Menu {
 
 			searchMenu();
 			System.out.println("3. Search by Pathology Id \n");
-			System.out.println("4. Exit");
+			System.out.println("4. Generate an XML file of a medical personnel \n");
+			System.out.println("5. Load a medical personnel from an XML file \n");
+			System.out.println("6. Exit");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -1016,12 +1036,20 @@ public class Menu {
 
 				searchMedicalPersonnelByPathologyId();
 				break;
-
 			case 4:
+				medicalPersonnelManager.showMedicalPersonnel();
+				System.out.println("Select the id of the medical personnel you want to turn into an XML file \n");
+				Integer id = Integer.parseInt(reader.readLine());
+				generateXMLMedicalPersonnel(id);
+				break;
+			case 5:
+				admitMedicalPersonnelXML();
+				break;
+			case 6:
 
-				System.out.println("4. Exit");
+				System.out.println("6. Exit");
 				exitSubmenu7MedicalPersonnel = 1;
-
+				break;
 			default:
 				break;
 			}
@@ -1242,12 +1270,12 @@ public class Menu {
 		Pathology pathology = new Pathology(name, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
 
 		pathologyManager.add(pathology);
-		
-		// we give the option of adding the related symptoms 
-		
+
+		// we give the option of adding the related symptoms
+
 		System.out.println("Do you what to add the symptoms?(Y/N)");
 		String s = reader.readLine();
-		if(s.equalsIgnoreCase("Y")) {
+		if (s.equalsIgnoreCase("Y")) {
 			giveSymptom(dbManager.getLastId());
 		}
 
@@ -1371,7 +1399,9 @@ public class Menu {
 			System.out.println("2. Update Medical Personnel\n");
 			System.out.println("3. Check Medical Personnel \n");
 			System.out.println("4. Delete Medical Personnel \n");
-			System.out.println("5. Exit");
+			System.out.println("5. Generate a XML file of a medical personnel \n");
+			System.out.println("6. Load a XML file of a medical personnel \n");
+			System.out.println("7. Exit");
 
 			int choice = Integer.parseInt(reader.readLine());
 
@@ -1454,8 +1484,16 @@ public class Menu {
 				deleteMedicalPersonnel(medicalPersonnel_Id);
 
 				break;
-
 			case 5:
+				medicalPersonnelManager.showMedicalPersonnel();
+				System.out.println("Write the medical personnel's id you want to select \n");
+				int medicalPersonnelId2 = Integer.parseInt(reader.readLine());
+				generateXMLMedicalPersonnel(medicalPersonnelId2);
+				break;
+			case 6:
+				admitMedicalPersonnelXML();
+				break;
+			case 7:
 
 				System.out.println("5. Exit");
 				subMenu2MedicalPersonnel = 1;
@@ -1877,20 +1915,20 @@ public class Menu {
 		patientManager.add(patient);
 		// finish
 	}
-	
-	private static void giveSymptom (int pathologyId) throws Exception{
-		
+
+	private static void giveSymptom(int pathologyId) throws Exception {
+
 		// show all the symptoms
-		List<Symptom> symptoms =symptomManager.showSymptoms();
+		List<Symptom> symptoms = symptomManager.showSymptoms();
 		for (Symptom symptom : symptoms) {
 			System.out.println(symptom);
 		}
-		
+
 		System.out.println("Enter de symptom id:");
 		int symptomId = Integer.parseInt(reader.readLine());
-		
+
 		// assign medicine to the pathology
 		symptomManager.give(pathologyId, symptomId);
-		
+
 	}
 }

@@ -24,10 +24,9 @@ public class Xml2Html {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void main(String[] args) {
-		//String path = System.getProperty("user.dir");
-		simpleTransform("./xmls/abraham.xml", "./xmls/patientStyle.xslt", "./xmls/Patient.html");
-
+		String path = System.getProperty("user.dir");
+		simpleTransform(path + "/src/xmls/abraham.xml",path + "/src/xmls/patientStyle.xslt",path + "/src/xmls/Patient.html");
 	}
 }
