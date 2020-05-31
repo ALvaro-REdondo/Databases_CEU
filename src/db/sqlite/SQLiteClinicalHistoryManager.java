@@ -10,8 +10,6 @@ import java.util.List;
 
 import db.interfaces.ClinicalHistoryManager;
 import pojos.ClinicalHistory;
-import pojos.Symptom;
-import pojos.Treatment;
 
 public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 
@@ -28,8 +26,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 					+ "bloodType, extraInfo, allergyId) VALUES (?, ?, ?, ?, ?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setDate(1, clinicalHistory.getDoe());
-			prep.setDate(2, clinicalHistory.getDod()); // EL NO HA PUESTO ESTA FECHA EN SU PERRO, NO SE SI HAY QUE
-														// DEJARLA O NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+			prep.setDate(2, clinicalHistory.getDod());
 			prep.setString(3, clinicalHistory.getBloodType());
 			prep.setString(4, clinicalHistory.getExtraInfo());
 			prep.setInt(5, clinicalHistory.getAllergyId());
