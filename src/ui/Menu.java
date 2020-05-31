@@ -1403,7 +1403,7 @@ public class Menu {
 			System.out.println("3. Check Medical Personnel \n");
 			System.out.println("4. Delete Medical Personnel \n");
 			System.out.println("5. Generate a XML file of a medical personnel \n");
-			System.out.println("6. Load a XML file of a medical personnel \n");
+			System.out.println("6. Load an XML file of a medical personnel \n");
 			System.out.println("7. Exit");
 
 			int choice = Integer.parseInt(reader.readLine());
@@ -1444,9 +1444,9 @@ public class Menu {
 				break;
 			case 5:
 				medicalPersonnelManager.showMedicalPersonnel();
-				System.out.println("Write the medical personnel's id you want to select \n");
-				int medicalPersonnelId2 = Integer.parseInt(reader.readLine());
-				generateXMLMedicalPersonnel(medicalPersonnelId2);
+				System.out.println("Select the id of the medical personnel you want to turn into an XML file \n");
+				Integer id = Integer.parseInt(reader.readLine());
+				generateXMLMedicalPersonnel(id);
 				break;
 			case 6:
 				admitMedicalPersonnelXML();

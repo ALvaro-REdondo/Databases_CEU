@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>db/Clinicaltrials.db</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Downloads/Clinicaltrials.db</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
