@@ -1,0 +1,10 @@
+<!DOCTYPE medicalPersonnel[
+	<!ELEMENT medicalPersonnel(department,position,pathologyId)>
+	<!ATTLST name CDATA #REQUIRED>
+	<!ELEMENT department (#PCDATA)>
+	<!ELEMENT position (#PCDATA)>
+	<!ELEMENT pathologyId (#PCDATA)>
+	
+
+
+]>
