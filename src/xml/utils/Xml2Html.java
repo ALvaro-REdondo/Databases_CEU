@@ -26,7 +26,8 @@ public class Xml2Html {
 	}
 
 	public static void main(String[] args) {
-		simpleTransform("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
+		String path = System.getProperty("user.dir");
+		simpleTransform(path + "/src/xmls/abraham.xml", path + "/src/xmls/PatientStyle.xslt", path + "/src/xmls/Patient.html");
 
 	}
 }
