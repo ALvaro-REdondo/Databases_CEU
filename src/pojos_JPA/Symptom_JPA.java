@@ -31,7 +31,7 @@ public class Symptom_JPA implements Serializable{
 	
 	
 	
-	@ManyToMany (mappedBy = "Pathology-Symptom")
+	@ManyToMany (mappedBy = "Pathology_Symptom")
 	private List<Pathology_JPA> pathologies;
 	
 	

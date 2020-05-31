@@ -34,7 +34,7 @@ public class ClinicalHistory_JPA implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AllergyId")
 	private Allergy_JPA allergy;
-	@OneToOne(mappedBy = "patient")
+	@OneToOne(mappedBy = "ClinicalHistory")
 	private Patient_JPA patient;
 	
 	
