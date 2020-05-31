@@ -1195,10 +1195,10 @@ public class Menu {
 
 		System.out.print("Insert the pathology id: ");
 		int pathologyId = Integer.parseInt(reader.readLine());
-		// para buscar en la base de datos:
+		//This is to look for the patient in the data base
 		if (patientManager.searchPatientByPathologyId(pathologyId) != null) {
 			List<Patient> patients = patientManager.searchPatientByPathologyId(pathologyId);
-			// para mostrar por pantalla
+			// Shows in the screen
 			for (Patient patient : patients) {
 				System.out.println(patient);
 			}
@@ -1217,16 +1217,14 @@ public class Menu {
 		Symptom symptom = new Symptom(manifestation);
 		// symptom added
 
-		// para insertar en base de datos:
 		symptomManager.add(symptom);
-		// symptom inserted :)
+		// symptom inserted 
 	}
 
 	private static void searchSymptomById() throws Exception {
 		System.out.print("Insert the id: ");
 		int id = Integer.parseInt(reader.readLine());
-
-		// para buscar en la base de datos:
+		
 		if (symptomManager.searchSymptomById(id) != null) {
 			Symptom symptom = symptomManager.searchSymptomById(id);
 			System.out.println(symptom);
@@ -1239,9 +1237,8 @@ public class Menu {
 		System.out.print("Insert the manifestation: ");
 		String manifestation = reader.readLine();
 		if (symptomManager.searchSymptomByManifestation(manifestation) != null) {
-			// para buscar en la base de datos:
 			List<Symptom> symptoms = symptomManager.searchSymptomByManifestation(manifestation);
-			// para mostrar por pantalla:
+
 			for (Symptom symptom : symptoms) {
 				System.out.println(symptom);
 			}
@@ -1300,14 +1297,14 @@ public class Menu {
 
 				System.out.println("1. Pathology \n");
 
-				medicalPersonnelBossSubMenu1Pathology(); // Menu para pathology
+				medicalPersonnelBossSubMenu1Pathology(); 
 				break;
 
 			case 2:
 
 				System.out.println("2. Medical Personnel \n");
 
-				medicalPersonnelBossSubMenu2MedicalPersonnel(); // Menu para medical personnel
+				medicalPersonnelBossSubMenu2MedicalPersonnel(); 
 				break;
 			case 3:
 				System.out.println("See you soon, Boss! \n");
@@ -1319,7 +1316,7 @@ public class Menu {
 		}
 	}
 
-	private static void medicalPersonnelBossSubMenu1Pathology() throws Exception { // Pathology
+	private static void medicalPersonnelBossSubMenu1Pathology() throws Exception { 
 
 		System.out.println("1. Pathology");
 
@@ -1389,7 +1386,7 @@ public class Menu {
 		}
 	}
 
-	private static void medicalPersonnelBossSubMenu2MedicalPersonnel() throws Exception { // Medical Personnel
+	private static void medicalPersonnelBossSubMenu2MedicalPersonnel() throws Exception { 
 
 		System.out.println("2. Medical Personnel \n");
 
@@ -1431,6 +1428,51 @@ public class Menu {
 			case 3:
 
 				System.out.println("3. Check Medical Personnel \n");
+				
+				int exitSubmenu3MedicalPersonnel = 0;
+				while (exitSubmenu3MedicalPersonnel == 0) {
+				System.out.println("1. Search Medical Personnel by Id\n");
+				System.out.println("2. Search Medical Personnel by Name \n");
+				System.out.println("3. Search Medical Personnel by Pathology Id");
+				System.out.println("4. Exit \n");
+				System.out.println("Choose an option: ");
+				int choice2 = Integer.parseInt(reader.readLine());
+				
+				switch (choice) {
+
+				case 1:
+
+					System.out.println("1. Search Medical Personnel by Id \n");
+
+					searchMedicalPersonnelById();
+					break;
+
+				case 2:
+
+					System.out.println("2. Search Medical Personnel by Name \n");
+
+					searchMedicalPersonnelByName();
+					break;
+					
+				case 3: 
+					
+					System.out.println("3. Search Medical Personnel by Pathology Id");
+					
+					searchMedicalPersonnelByPathologyId();
+					break;
+
+				case 4:
+
+					System.out.println("3. Exit");
+					exitSubmenu3MedicalPersonnel = 1;
+					break;
+
+				default:
+					break;
+				}
+				
+				}
+				
 
 				break;
 			case 4:
