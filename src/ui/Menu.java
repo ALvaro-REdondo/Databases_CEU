@@ -22,6 +22,7 @@ import db.interfaces.PatientManager;
 import db.interfaces.SymptomManager;
 import db.interfaces.TreatmentManager;
 import db.interfaces_JPA.UserManager;
+import db.jpa.JPAUserManager;
 import db.sqlite.SQLiteManager;
 import pojos.Allergy;
 import pojos.ClinicalHistory;
@@ -62,8 +63,8 @@ public class Menu {
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
 		treatmentManager = dbManager.getTreatmentManager();
-		//userManager = new JPAUserManager();
-		//userManager.connect();
+		userManager = new JPAUserManager();
+		userManager.connect();
 		dbManager.createTables();
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
@@ -82,9 +83,7 @@ public class Menu {
 		switch (choice) {
 
 		case 1:// Create a new Role
-			//newRole();
-			admitMedicalPersonnelXML();
-			admitPatientXML();
+			newRole();
 			break;
 		case 2:// Create a new User
 			newUser();
@@ -547,16 +546,16 @@ public class Menu {
 		javax.xml.bind.JAXBContext context = JAXBContext.newInstance(MedicalPersonnel.class);
 		// Get the unmarshaller
 		Unmarshaller unmarshal = context.createUnmarshaller();
-		//Unmarshall the dog from a file
+		// Unmarshall the dog from a file
 		System.out.println("Type the file name for the XML document (expected in the xmls folder):");
 		String path = System.getProperty("user.dir");
 		String fileName = reader.readLine();
 		File file = new File(path + "/src/xmls/" + fileName + ".xml");
 		MedicalPersonnel medicalPersonnel = (MedicalPersonnel) unmarshal.unmarshal(file);
-		//Print the Medical Personnel
+		// Print the Medical Personnel
 		System.out.println("Added to the database: " + medicalPersonnel);
 		medicalPersonnelManager.add(medicalPersonnel);
-		
+
 	}
 
 	public static void generateXMLMedicalPersonnel(int medicalPersonnelId) throws Exception {
@@ -610,7 +609,7 @@ public class Menu {
 				medicalPersonnelSubMenu4ClinicalHistory();
 				break;
 			case 5:
-				medicalPersonnelSubMenu5();
+				medicalPersonnelSubMenu5Allergy();
 				break;
 			case 6:
 				medicalPersonnelSubMenu6Symptom();
@@ -936,7 +935,7 @@ public class Menu {
 		}
 	}
 
-	private static void medicalPersonnelSubMenu5() throws Exception {
+	private static void medicalPersonnelSubMenu5Allergy() throws Exception {
 		int exitSubmenu5MedicalPersonnel = 0;
 		while (exitSubmenu5MedicalPersonnel == 0) {
 			System.out.println("Select action \n");
@@ -1112,10 +1111,12 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 
 		// para buscar en la base de datos:
-		Patient patient = patientManager.searchPatientById(id);
-
-		System.out.println(patient);
-
+		if (patientManager.searchPatientById(id) != null) {
+			Patient patient = patientManager.searchPatientById(id);
+			System.out.println(patient);
+		} else {
+			System.out.println("The patient does not exist \n");
+		}
 	}
 
 	private static void searchPatientByName() throws Exception {
@@ -1124,13 +1125,15 @@ public class Menu {
 		String name = reader.readLine();
 
 		// para buscar en la base de datos:
-		List<Patient> patients = patientManager.searchPatientByName(name);
-
-		// para mistrar por pantalla
-		for (Patient patient : patients) {
-			System.out.println(patient);
+		if (patientManager.searchPatientByName(name) != null) {
+			List<Patient> patients = patientManager.searchPatientByName(name);
+			// para mistrar por pantalla
+			for (Patient patient : patients) {
+				System.out.println(patient);
+			}
+		} else {
+			System.out.println("The patient does not exist \n");
 		}
-
 	}
 
 	private static void deletePatient(int patientId) throws Exception {
@@ -1206,13 +1209,15 @@ public class Menu {
 		System.out.print("Insert the pathology id: ");
 		int pathologyId = Integer.parseInt(reader.readLine());
 		// para buscar en la base de datos:
-		List<Patient> patients = patientManager.searchPatientByPathologyId(pathologyId);
-
-		// para mistrar por pantalla
-		for (Patient patient : patients) {
-			System.out.println(patient);
+		if (patientManager.searchPatientByPathologyId(pathologyId) != null) {
+			List<Patient> patients = patientManager.searchPatientByPathologyId(pathologyId);
+			// para mostrar por pantalla
+			for (Patient patient : patients) {
+				System.out.println(patient);
+			}
+		} else {
+			System.out.println("The patient does not exist \n");
 		}
-
 	}
 
 	private static void addSymptom() throws Exception {
@@ -1235,24 +1240,27 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 
 		// para buscar en la base de datos:
-		Symptom symptom = symptomManager.searchSymptomById(id);
-
-		System.out.println(symptom);
-
+		if (symptomManager.searchSymptomById(id) != null) {
+			Symptom symptom = symptomManager.searchSymptomById(id);
+			System.out.println(symptom);
+		} else {
+			System.out.println("The symptom does not exist \n");
+		}
 	}
 
 	private static void searchSymptomByManifestation() throws Exception {
 		System.out.print("Insert the manifestation: ");
 		String manifestation = reader.readLine();
-
-		// para buscar en la base de datos:
-		List<Symptom> symptoms = symptomManager.searchSymptomByManifestation(manifestation);
-
-		// para mostrar por pantalla:
-		for (Symptom symptom : symptoms) {
-			System.out.println(symptom);
+		if (symptomManager.searchSymptomByManifestation(manifestation) != null) {
+			// para buscar en la base de datos:
+			List<Symptom> symptoms = symptomManager.searchSymptomByManifestation(manifestation);
+			// para mostrar por pantalla:
+			for (Symptom symptom : symptoms) {
+				System.out.println(symptom);
+			}
+		} else {
+			System.out.println("The symptom does not exist \n");
 		}
-
 	}
 
 	private static void addPathology() throws Exception {
@@ -1269,7 +1277,8 @@ public class Menu {
 		System.out.print("Ending Date (yyyy-MM-dd): \n");
 		String endingdate = reader.readLine();
 		LocalDate endingDate = LocalDate.parse(endingdate, formatter);
-		//We use a LocalDate because depending on where you are on the globe, the date might vary.
+		// We use a LocalDate because depending on where you are on the globe, the date
+		// might vary.
 
 		System.out.print("Treatment id: \n");
 		int treatmentId = Integer.parseInt(reader.readLine());
@@ -1361,11 +1370,12 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Id: \n");
 		int id = Integer.parseInt(reader.readLine());
-
-		Pathology pathology = pathologyManager.searchPathologyById(id);
-
-		System.out.println(pathology);
-
+		if (pathologyManager.searchPathologyById(id) != null) {
+			Pathology pathology = pathologyManager.searchPathologyById(id);
+			System.out.println(pathology);
+		} else {
+			System.out.println("The pathology does not exist \n");
+		}
 	}
 
 	private static void searchPathologyByName() throws Exception {
@@ -1373,16 +1383,15 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		String name = reader.readLine();
-
-		List<Pathology> pathologies = pathologyManager.searchPathologyByName(name);
-		//Different pathologies may have the same name 
-
-		for (Pathology pathology : pathologies) {
-
-			System.out.println(pathology);
-
+		if (pathologyManager.searchPathologyByName(name) != null) {
+			List<Pathology> pathologies = pathologyManager.searchPathologyByName(name);
+			// Different pathologies may have the same name
+			for (Pathology pathology : pathologies) {
+				System.out.println(pathology);
+			}
+		} else {
+			System.out.println("The pathology does not exist \n");
 		}
-
 	}
 
 	private static void medicalPersonnelBossSubMenu2MedicalPersonnel() throws Exception { // Medical Personnel
@@ -1455,26 +1464,29 @@ public class Menu {
 
 		System.out.println("Instert the id: \n");
 		int id = Integer.parseInt(reader.readLine());
-
-		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(id);
-
-		System.out.println(medicalPersonnel);
-
+		if (medicalPersonnelManager.searchMedicalPersonnelById(id) != null) {
+			MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(id);
+			System.out.println(medicalPersonnel);
+		} else {
+			System.out.println("The medical personnel does not exist \n");
+		}
 	}
 
 	private static void searchMedicalPersonnelByName() throws Exception {
 
 		System.out.println("Insert the name: \n");
 		String name = reader.readLine();
-		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByName(name);
-
-		// we search in our database for all the treatments which have the same name as
-		// the one specified
-
-		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
-			System.out.println(medicalPersonnel);
+		if (medicalPersonnelManager.searchMedicalPersonnelByName(name) != null) {
+			List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager.searchMedicalPersonnelByName(name);
+			// we search in our database for all the treatments which have the same name as
+			// the one specified
+			// we show the treatments who matched the required name
+			for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+				System.out.println(medicalPersonnel);
+			}
+		} else {
+			System.out.println("The medical personnel does not exist \n");
 		}
-		// we show the treatments who matched the required name
 	}
 
 	private static void searchMedicalPersonnelByPathologyId() throws Exception {
@@ -1482,16 +1494,15 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Pathology id: \n");
 		int pathologyId = Integer.parseInt(reader.readLine());
-
-		List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager
-				.searchMedicalPersonnelByPathologyId(pathologyId);
-
-		for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
-
-			System.out.println(medicalPersonnel);
-
+		if (medicalPersonnelManager.searchMedicalPersonnelByPathologyId(pathologyId) != null) {
+			List<MedicalPersonnel> medicalPersonnels = medicalPersonnelManager
+					.searchMedicalPersonnelByPathologyId(pathologyId);
+			for (MedicalPersonnel medicalPersonnel : medicalPersonnels) {
+				System.out.println(medicalPersonnel);
+			}
+		} else {
+			System.out.println("The medical personnel does not exist \n");
 		}
-
 	}
 
 	private static void addMedicalPersonnel() throws Exception {
@@ -1702,11 +1713,12 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Clinical History id: \n");
 		int clinicalHistoryId = Integer.parseInt(reader.readLine());
-
-		ClinicalHistory clinicalHistoryFound = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryId);
-
-		System.out.println(clinicalHistoryFound);
-
+		if (clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryId) != null) {
+			ClinicalHistory clinicalHistoryFound = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryId);
+			System.out.println(clinicalHistoryFound);
+		} else {
+			System.out.println("The clinical history does not exist \n");
+		}
 	}
 
 	private static void updateClinicalHistory(int clinicalHistoryToUpdateId) throws Exception {
@@ -1773,7 +1785,8 @@ public class Menu {
 
 	private static void deleteClinicalHistory(int clinicalHistoryToDeleteId) throws Exception {
 		// first I get the clinical history
-		ClinicalHistory clinicalHistoryToDelete = clinicalHistoryManager.searchClinicalHistoryById(clinicalHistoryToDeleteId);
+		ClinicalHistory clinicalHistoryToDelete = clinicalHistoryManager
+				.searchClinicalHistoryById(clinicalHistoryToDeleteId);
 
 		clinicalHistoryManager.delete(clinicalHistoryToDelete);
 	}
@@ -1796,8 +1809,12 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Allergy id: \n");
 		int id = Integer.parseInt(reader.readLine());
-		Allergy allergy = allergyManager.searchAllergyById(id);
-		System.out.println(allergy);
+		if (allergyManager.searchAllergyById(id) != null) {
+			Allergy allergy = allergyManager.searchAllergyById(id);
+			System.out.println(allergy);
+		} else {
+			System.out.println("The allergy does not exist \n");
+		}
 	}
 
 	private static void searchAllergyByName() throws Exception {
@@ -1805,14 +1822,14 @@ public class Menu {
 		System.out.println("Type! \n");
 		System.out.println("Name: \n");
 		String name = reader.readLine();
-
-		List<Allergy> allergies = allergyManager.searchAllergyByName(name);
-
-		for (Allergy allergy : allergies) {
-
-			System.out.println(allergy);
+		if (allergyManager.searchAllergyByName(name) != null) {
+			List<Allergy> allergies = allergyManager.searchAllergyByName(name);
+			for (Allergy allergy : allergies) {
+				System.out.println(allergy);
+			}
+		} else {
+			System.out.println("The allergy does not exist \n");
 		}
-
 	}
 
 	private static void generateXMLPatient(int patientId) throws Exception {
@@ -1834,25 +1851,21 @@ public class Menu {
 
 	}
 
-private static void admitPatientXML() throws Exception {
-    // Create JAXBCOntext
-    javax.xml.bind.JAXBContext context = JAXBContext.newInstance(Patient.class);
-    // Get the unmarshaller
-    Unmarshaller unmarshal = context.createUnmarshaller();
-    // Unmarshall dog from a file
-    String path = System.getProperty("user.dir");
-    System.out.println("Type the filename for the XML document:");
-    String fileName=reader.readLine();
-    File file = new File(path + "/src/xmls/"+ fileName + ".xml");
-    Patient patient = (Patient)unmarshal.unmarshal(file);
-    // print the patient
-    System.out.println(patient);
-    // insert the patient
-    patientManager.add(patient);
-    //finish
+	private static void admitPatientXML() throws Exception {
+		// Create JAXBCOntext
+		javax.xml.bind.JAXBContext context = JAXBContext.newInstance(Patient.class);
+		// Get the unmarshaller
+		Unmarshaller unmarshal = context.createUnmarshaller();
+		// Unmarshall dog from a file
+		String path = System.getProperty("user.dir");
+		System.out.println("Type the filename for the XML document:");
+		String fileName = reader.readLine();
+		File file = new File(path + "/src/xmls/" + fileName + ".xml");
+		Patient patient = (Patient) unmarshal.unmarshal(file);
+		// print the patient
+		System.out.println(patient);
+		// insert the patient
+		patientManager.add(patient);
+		// finish
 	}
 }
-
-
-
-
