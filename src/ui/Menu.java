@@ -8,21 +8,32 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import pojos.*;
+import org.eclipse.persistence.jaxb.JAXBContext;
 
-import org.eclipse.persistence.internal.oxm.Unmarshaller;
-import org.eclipse.persistence.jaxb.*;
+import db.interfaces.AllergyManager;
+import db.interfaces.ClinicalHistoryManager;
+import db.interfaces.DBManager;
+import db.interfaces.MedicalPersonnelManager;
+import db.interfaces.PathologyManager;
+import db.interfaces.PatientManager;
+import db.interfaces.SymptomManager;
+import db.interfaces.TreatmentManager;
+import db.interfaces_JPA.UserManager;
+import db.sqlite.SQLiteManager;
+import pojos.Allergy;
+import pojos.ClinicalHistory;
+import pojos.MedicalPersonnel;
+import pojos.Pathology;
+import pojos.Patient;
+import pojos.Symptom;
+import pojos.Treatment;
 import pojos_users.Role;
 import pojos_users.User;
-
-import db.interfaces.*;
-import db.interfaces_JPA.UserManager;
-import db.jpa.JPAUserManager;
-import db.sqlite.*;
 
 //this is our menu:)
 public class Menu {
@@ -74,9 +85,7 @@ public class Menu {
 
 		case 1:// Create a new Role
 			//newRole();
-			System.out.println("dame el puto id");
-			generateXMLMedicalPersonnel(Integer.parseInt(reader.readLine()));
-			break;
+			admitMedicalPersonnelXML();
 		case 2:// Create a new User
 			newUser();
 			break;
@@ -535,11 +544,11 @@ public class Menu {
 
 	public static void admitMedicalPersonnelXML() throws Exception {
 		// Create JAXB Context
-		JAXBContext context = (JAXBContext) JAXBContext.newInstance(MedicalPersonnel.class);
+		javax.xml.bind.JAXBContext context = JAXBContext.newInstance(MedicalPersonnel.class);
 		// Get the unmarshaller
 		Unmarshaller unmarshal = context.createUnmarshaller();
 		//Unmarshall the dog from a file
-		System.out.println("ype the file name for the XML document (expected in the xmls folder):");
+		System.out.println("Type the file name for the XML document (expected in the xmls folder):");
 		String fileName = reader.readLine();
 		File file = new File("./xmls/" + fileName);
 		MedicalPersonnel medicalPersonnel = (MedicalPersonnel) unmarshal.unmarshal(file);
@@ -1819,22 +1828,25 @@ public class Menu {
 		marshal.marshal(patient, System.out);
 
 	}
+
+private static void admitPatientXML() throws Exception {
+    // Create JAXBCOntext
+    javax.xml.bind.JAXBContext context = JAXBContext.newInstance(Patient.class);
+    // Get the unmarshaller
+    Unmarshaller unmarshal = context.createUnmarshaller();
+    // Unmarshall dog from a file
+    System.out.println("Type the filename for the XML document:");
+    String filename=reader.readLine();
+    File file = new File("./xmls/"+ filename);
+    Patient patient = (Patient)unmarshal.unmarshal(file);
+    // print the patient
+    System.out.println(patient);
+    // insert the patient
+    patientManager.add(patient);
+    //finish
+	}
 }
 
-	private static void admitPatientXML() throws Exception {
-		// Create JAXBCOntext
-		JAXBContext context = (JAXBContext) JAXBContext.newInstance(Patient.class);
-		// Get the unmarshaller
-		Unmarshaller unmarshal = context.createUnmarshaller();
-		// Unmarshall dog from a file
-		System.out.println("Type the filename for the XML document:");
-		STring filename=reader.readLine();
-		File file = new File("./xmls/"+ filename);
-		Patient patient = (Patient)unmarshal.unmarshal(file);
-		// print the patient
-		System.out.println(patient);
-		// insert the patient
-		patientManager.add(patient);
-		//finish
-		
-}
+
+
+
