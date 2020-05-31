@@ -1,10 +1,13 @@
 package pojos_JPA;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -27,14 +30,12 @@ public class Symptom_JPA implements Serializable{
 	private String manifestation;
 	
 	
-	/* relationship con nahia not idea if its ok
-	@ManyToMany
-	@JoinTable(name="  "
-		joinColumns{@JoinColumn(name ="symptom_id",referencedColumnName="id")}
-		inverseJoinColumns{@JoinColumn(name= "pathology_id". referencedColumnName="id")}
-		)
-	private List <Pathology> "name";
-	*/
+	
+	@ManyToMany (mappedBy = "Pathology-Symptom")
+	private List<Pathology_JPA> pathologies;
+	
+	
+	
 	
 	public Symptom_JPA() {
 		super();
@@ -46,6 +47,7 @@ public class Symptom_JPA implements Serializable{
 		super();
 		this.id = id;
 		this.manifestation = manifestation;
+		this.pathologies= new ArrayList<Pathology_JPA>();
 	}
 
 
@@ -53,9 +55,23 @@ public class Symptom_JPA implements Serializable{
 	public Symptom_JPA( String manifestation) {
 		super();
 		this.manifestation = manifestation;
+		this.pathologies= new ArrayList<Pathology_JPA>();
+		
 	}
 
 	
+
+	public List<Pathology_JPA> getPathologies() {
+		return pathologies;
+	}
+
+
+
+	public void setPathologies(List<Pathology_JPA> pathologies) {
+		this.pathologies = pathologies;
+	}
+
+
 
 	public Integer getId() {
 		return id;

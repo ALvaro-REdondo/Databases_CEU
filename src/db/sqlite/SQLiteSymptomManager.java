@@ -36,7 +36,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 	@Override
 	public void add(Symptom symptom) {
 		try {
-			String sql = "INSERT INTO symptom ( manifestation)" + " VALUES (?)";
+			String sql = "INSERT INTO Symptom ( manifestation)" + " VALUES (?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, symptom.getManifestation());
 			prep.executeUpdate();
@@ -50,7 +50,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 	public List<Symptom> searchSymptomByManifestation(String manifestation) {
 		List<Symptom> symptomsList= new ArrayList<Symptom>();
 		try {
-			String sql = "SELECT * FROM symptom WHERE manifestation LIKE ?";
+			String sql = "SELECT * FROM Symptom WHERE manifestation LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + manifestation + "%");
 			ResultSet rs = prep.executeQuery();
@@ -74,7 +74,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 
 		try {
 
-			String sql = "SELECT * FROM symptom WHERE id=?";
+			String sql = "SELECT * FROM Symptom WHERE id=?";
 			PreparedStatement g = c.prepareStatement(sql);
 			g.setInt(1, SymptomId);
 			ResultSet rs = g.executeQuery();
@@ -99,7 +99,7 @@ public class SQLiteSymptomManager implements SymptomManager {
 		List<Symptom> symptomsList = new ArrayList<Symptom>();
 
 		try {
-			String sql = "SELECT * FROM symptom";
+			String sql = "SELECT * FROM Symptom";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 

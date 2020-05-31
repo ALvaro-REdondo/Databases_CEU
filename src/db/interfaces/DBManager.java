@@ -13,4 +13,5 @@ public interface DBManager {
 	public AllergyManager getAllergyManager();
 	public PatientManager getPatientManager();
 	public MedicalPersonnelManager getMedicalPersonnelManager();
+	public int getLastId();
 }

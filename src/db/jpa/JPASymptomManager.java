@@ -10,6 +10,7 @@ import db.interfaces_JPA.SymptomJPAManager;
 import pojos.Patient;
 import pojos.Symptom;
 import pojos_JPA.Symptom_JPA;
+import pojos_JPA.Treatment_JPA;
 
 public class JPASymptomManager implements SymptomJPAManager {
 	
@@ -38,8 +39,8 @@ public class JPASymptomManager implements SymptomJPAManager {
 	}
 
 	@Override
-	public Symptom_JPA getSymptom(int id) {
-		Query q=em.createNativeQuery("SELECT * FROM symptom WHERE id = ?",Symptom_JPA.class);
+	public Symptom_JPA searchSymptomById(int id) {
+		Query q=em.createNativeQuery("SELECT * FROM Symptom WHERE id = ?",Symptom_JPA.class);
 		q.setParameter(1,id);
 		Symptom_JPA symptom = (Symptom_JPA)q.getSingleResult();
 		return symptom;
@@ -47,8 +48,16 @@ public class JPASymptomManager implements SymptomJPAManager {
 
 	@Override
 	public List<Symptom_JPA> getSymptoms() {
-		Query q = em.createNativeQuery("SELECT * FROM symptom", Symptom.class);
+		Query q = em.createNativeQuery("SELECT * FROM Symptom", Symptom_JPA.class);
 		List<Symptom_JPA> symptoms = (List<Symptom_JPA>)q.getResultList();
+		return symptoms;
+	}
+	
+	@Override
+	public List<Symptom_JPA> searchSymptomByName(String name) {
+		Query q = em.createNativeQuery("SELECT * FROM Symptom WHERE name LIKE ?", Symptom_JPA.class);
+		q.setParameter(1, "%" + name + "%");
+		List<Symptom_JPA> symptoms = (List<Symptom_JPA>) q.getResultList();
 		return symptoms;
 	}
 

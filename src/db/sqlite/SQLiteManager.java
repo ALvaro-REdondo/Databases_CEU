@@ -2,6 +2,8 @@ package db.sqlite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -157,4 +159,17 @@ public class SQLiteManager implements DBManager {
 		return medicalPersonnel;
 	}
 
+	@Override
+	 public int getLastId() {
+		int id=0;	
+		try {
+			String query = "SELECT last_insert_rowid() AS lastId";
+			PreparedStatement p =c.prepareStatement(query);
+			ResultSet rs = p.executeQuery();
+			id = rs.getInt("lastId");
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		return id;
+	}
 }

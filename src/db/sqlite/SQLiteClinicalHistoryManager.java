@@ -5,9 +5,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import db.interfaces.ClinicalHistoryManager;
 import pojos.ClinicalHistory;
+import pojos.Symptom;
+import pojos.Treatment;
 
 public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 
@@ -98,6 +102,33 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 			return null;
 		}
 		return clinicalHistory;
+	}
+
+	@Override
+	public List<ClinicalHistory> showClinicalHistories() {
+		List<ClinicalHistory> ClinicalHistoriesList = new ArrayList<ClinicalHistory>();
+
+		try {
+			String sql = "SELECT * FROM ClinicalHistory";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				Date dateOfEntry = rs.getDate("doe");
+				Date dateOfDischarge = rs.getDate("dod");
+				String bloodType = rs.getString("bloodType");
+				String extraInfo = rs.getString("extraInfo");
+				Integer allergyId = rs.getInt("allergyId");
+				ClinicalHistory read = new ClinicalHistory(id, dateOfEntry, dateOfDischarge, bloodType, extraInfo, allergyId);
+				ClinicalHistoriesList.add(read);
+
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+
+		return ClinicalHistoriesList;
 	}
 
 }

@@ -37,7 +37,7 @@ public class Pathology implements Serializable {
 	@XmlElement
 	private Integer treatmentId;
 	@XmlElement (name = "symptom")
-	@XmlElementWrapper(name="medicines")
+	@XmlElementWrapper(name="symptoms")
 	private List<Symptom> symptoms;
 	
 

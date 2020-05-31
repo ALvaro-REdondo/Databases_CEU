@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import db.interfaces_JPA.AllergyJPAManager;
 import pojos.Allergy;
 import pojos_JPA.Allergy_JPA;
+import pojos_JPA.MedicalPersonnel_JPA;
 
 public class JPAAllergyManager implements AllergyJPAManager {
 
@@ -37,7 +38,7 @@ public class JPAAllergyManager implements AllergyJPAManager {
 	}
 
 	@Override
-	public Allergy_JPA getAllergy(int id) {
+	public Allergy_JPA searchAllergyById(int id) {
 		Query q = em.createNativeQuery("SELECT * FROM Allergy WHERE id = ?", Allergy_JPA.class);
 		q.setParameter(1, id);
 		Allergy_JPA allergy = (Allergy_JPA) q.getSingleResult();
@@ -47,6 +48,14 @@ public class JPAAllergyManager implements AllergyJPAManager {
 	@Override
 	public List<Allergy_JPA> getAllergies() {
 		Query q = em.createNativeQuery("SELECT * FROM Allergy", Allergy_JPA.class);
+		List<Allergy_JPA> allergies = (List<Allergy_JPA>) q.getResultList();
+		return allergies;
+	}
+
+	@Override
+	public List<Allergy_JPA> searchAllergiesByName(String name) {
+		Query q = em.createNativeQuery("SELECT * FROM Allergy WHERE name LIKE ?", Allergy_JPA.class);
+		q.setParameter(1, "%" + name + "%");
 		List<Allergy_JPA> allergies = (List<Allergy_JPA>) q.getResultList();
 		return allergies;
 	}	

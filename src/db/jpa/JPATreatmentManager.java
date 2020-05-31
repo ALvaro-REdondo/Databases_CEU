@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import db.interfaces_JPA.TreatmentManagerJPA;
+import pojos_JPA.Symptom_JPA;
 import pojos_JPA.Treatment_JPA;
 
 
@@ -63,6 +64,13 @@ public class JPATreatmentManager implements TreatmentManagerJPA{
 		Query q = em.createNativeQuery("SELECT * FROM Treatment WHERE name LIKE ?", Treatment_JPA.class);
 		q.setParameter(1, "%" + name + "%");
 		List<Treatment_JPA> treatments = (List<Treatment_JPA>) q.getResultList();
+		return treatments;
+	}
+
+	@Override
+	public List<Treatment_JPA> getTreatments() {
+		Query q = em.createNativeQuery("SELECT * FROM Treatment", Treatment_JPA.class);
+		List<Treatment_JPA> treatments = (List<Treatment_JPA>)q.getResultList();
 		return treatments;
 	}
 

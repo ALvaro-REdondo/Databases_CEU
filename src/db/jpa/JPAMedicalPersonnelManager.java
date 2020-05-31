@@ -40,7 +40,7 @@ private EntityManager em;
 	}
 
 	@Override
-	public MedicalPersonnel_JPA getMedicalPersonnel(int id) {
+	public MedicalPersonnel_JPA searchMedicalPersonnelById(int id) {
 
 		Query q = em.createNativeQuery("SELECT * FROM MedicalPersonnel WHERE id = ?", MedicalPersonnel_JPA.class);
 		q.setParameter(1, id);
@@ -76,8 +76,16 @@ private EntityManager em;
 		medicalPersonnelToUpdate.setName(medicalPersonnel.getName());
 		medicalPersonnelToUpdate.setDepartment(medicalPersonnel.getDepartment());
 		medicalPersonnelToUpdate.setPosition(medicalPersonnel.getPosition());
-		//medicalPersonnelToUpdate.setPathology(medicalPersonnel.getPathology());
+		medicalPersonnelToUpdate.setPathology(medicalPersonnel.getPathology());
+		em.getTransaction().commit();
+	}
 
+	@Override
+	public List<MedicalPersonnel_JPA> searchMedicalPersonnelByName(String name) {
+		Query q = em.createNativeQuery("SELECT * FROM MedicalPersonnel WHERE name LIKE ?", MedicalPersonnel_JPA.class);
+		q.setParameter(1, "%" + name + "%");
+		List<MedicalPersonnel_JPA> medicalPersonnels = (List<MedicalPersonnel_JPA>) q.getResultList();
+		return medicalPersonnels;
 	}
 
 }
