@@ -1,6 +1,9 @@
 package pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.*;
 
 //this annotation indicates this class is going to be turned into an XML later
@@ -20,17 +23,21 @@ public class Symptom implements Serializable{
 	private Integer id;
 	@XmlAttribute
 	private String manifestation;
+	@XmlTransient
+	private List<Pathology> pathologies;
 	
 	
 	public Symptom(Integer id, String manifestation) {
 		super();
 		this.id = id;
 		this.manifestation = manifestation;
+		this.pathologies = new ArrayList<Pathology>();
 	}
 	
 	public Symptom(String manifestation) {
 		super();
 		this.manifestation=manifestation;
+		this.pathologies = new ArrayList<Pathology>()
 	}
 
 
@@ -51,13 +58,22 @@ public class Symptom implements Serializable{
 	public void setManifestation(String manifestation) {
 		this.manifestation = manifestation;
 	}
+	
 
+	public List<Pathology> getPathologies() {
+		return pathologies;
+	}
+
+	public void setPathologies(List<Pathology> pathologies) {
+		this.pathologies = pathologies;
+	}
+
+	
 
 	@Override
 	public String toString() {
-		return "Symptom [id=" + id + ", manifestation=" + manifestation + "]";
+		return "Symptom [id=" + id + ", manifestation=" + manifestation +  "]";
 	}
-
 
 	@Override
 	public int hashCode() {

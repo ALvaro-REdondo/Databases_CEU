@@ -26,7 +26,8 @@ public class Xml2Html2MedicalPersonnel {
 	}
 
 	public static void main(String[] args) {
-		simpleTransform("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
+		String path = System.getProperty("user.dir");
+		simpleTransform(path + "/src/xmls/Input-MedicalPersonnel.xml", path + "/src/xmls/medicalPersonnelStyle.xslt", path + "/src/xmls/medicalPersonnel.html");
 
 	}
 }
