@@ -5,12 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import db.interfaces.ClinicalHistoryManager;
 import pojos.ClinicalHistory;
-import pojos.MedicalPersonnel;
 
 public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 
@@ -19,7 +16,7 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	public SQLiteClinicalHistoryManager(Connection c) {
 		this.c = c;
 	}
-	
+
 	@Override
 	public void add(ClinicalHistory clinicalHistory) {
 		try {
@@ -27,7 +24,8 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 					+ "bloodType, extraInfo, allergyId) VALUES (?, ?, ?, ?, ?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setDate(1, clinicalHistory.getDoe());
-			prep.setDate(2, clinicalHistory.getDod()); //EL NO HA PUESTO ESTA FECHA EN SU PERRO, NO SE SI HAY QUE DEJARLA O NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+			prep.setDate(2, clinicalHistory.getDod()); // EL NO HA PUESTO ESTA FECHA EN SU PERRO, NO SE SI HAY QUE
+														// DEJARLA O NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 			prep.setString(3, clinicalHistory.getBloodType());
 			prep.setString(4, clinicalHistory.getExtraInfo());
 			prep.setInt(5, clinicalHistory.getAllergyId());
@@ -37,12 +35,12 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void update(ClinicalHistory clinicalHistory) {
 		try {
-			//update every aspect of a particular clinical history
-			String sql = " UPDATE ClinicalHistory SET doe=?, dod=?, bloodType=?, extraInfo=?, allergyId=? WHERE id=?"; 
+			// update every aspect of a particular clinical history
+			String sql = " UPDATE ClinicalHistory SET doe=?, dod=?, bloodType=?, extraInfo=?, allergyId=? WHERE id=?";
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setDate(1, clinicalHistory.getDoe());
 			s.setDate(2, clinicalHistory.getDod());
@@ -52,23 +50,23 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 			s.setInt(6, clinicalHistory.getAllergyId());
 			s.executeUpdate();
 			s.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
+
 	}
 
 	@Override
 	public void delete(ClinicalHistory clinicalHistory) {
 		try {
-			//delete a particular clinical history
-			String sql = "DELETE FROM ClinicalHistory WHERE id=?"; 
+			// delete a particular clinical history
+			String sql = "DELETE FROM ClinicalHistory WHERE id=?";
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setInt(1, clinicalHistory.getId());
 			s.executeUpdate();
 			s.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,31 +74,30 @@ public class SQLiteClinicalHistoryManager implements ClinicalHistoryManager {
 	}
 
 	public ClinicalHistory searchClinicalHistoryById(int clinicalHistoryId) {
-		
+
 		ClinicalHistory clinicalHistory = null;
-		
+
 		try {
-			
+
 			String sql = "SELECT * FROM ClinicalHistory WHERE id=?";
 			PreparedStatement g = c.prepareStatement(sql);
-			g.setInt(1,  clinicalHistoryId);
+			g.setInt(1, clinicalHistoryId);
 			ResultSet rs = g.executeQuery();
 			rs.next();
-			
+
 			int id = rs.getInt("id");
 			Date doe = rs.getDate("doe");
 			Date dod = rs.getDate("dod");
 			String bloodType = rs.getString("bloodType");
 			String extraInfo = rs.getString("extraInfo");
 			int allergyId = rs.getInt("allergyId");
-			
+
 			clinicalHistory = new ClinicalHistory(id, doe, dod, bloodType, extraInfo, allergyId);
-			
-		} catch(SQLException e) {	
-			e.printStackTrace();	
+
+		} catch (SQLException e) {
+			return null;
 		}
 		return clinicalHistory;
 	}
-	
-	
+
 }
