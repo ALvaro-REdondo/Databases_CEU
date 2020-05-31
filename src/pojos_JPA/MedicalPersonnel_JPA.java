@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-import pojos.Pathology;
-
 @Entity
 @Table(name = "MedicalPersonnel")
 public class MedicalPersonnel_JPA implements Serializable{

@@ -1,6 +1,16 @@
 
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
+<!DOCTYPE patient [
+    <!ELEMENT patient (gender, state, dob, pathology_id, clinicalhistory_id)>
+    <!ATTLIST patient name CDATA #REQUIRED>
+    <!ELEMENT gender (#PCDATA)>
+    <!ELEMENT state (#PCDATA)>
+    <!ELEMENT dob (#PCDATA)>
+    <!ELEMENT pathology_id (#PCDATA)>
+    <!ELEMENT clinicalhistory_id (#PCDATA)>
+]>
+
 <patient name="pablo">
     <gender>macho_iberico</gender>
     <state>me quiero morir vota a vox rojo de mierda</state>
