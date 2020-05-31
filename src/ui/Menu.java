@@ -336,7 +336,7 @@ public class Menu {
 	private static void treatmentCreatorSubMenu3ClinicalHistory() throws Exception {
 		int exitSubmenu3ClinicalHistory = 0;
 		while (exitSubmenu3ClinicalHistory == 0) {
-			System.out.println("1.Check clinical histories \n");
+			System.out.println("1.Check clinical history \n");
 			System.out.println("2. Exit \n");
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -395,12 +395,6 @@ public class Menu {
 		int exitSubmenu5Allergy = 0;
 		while (exitSubmenu5Allergy == 0) {
 
-			System.out.println("Select action \n");
-
-			System.out.println("1. Search \n");
-			System.out.println("2. Check \n");
-			System.out.println("3. Exit \n");
-
 			searchMenu();
 			System.out.println("3. Exit");
 
@@ -408,35 +402,11 @@ public class Menu {
 
 			switch (choice) {
 
-			case 1:
-				searchMenu();
-				int choiceSearch = Integer.parseInt(reader.readLine());
-				while (choiceSearch != 1 || choiceSearch != 3) {
-					System.out.println("Select a valid option, please");
-				}
-				if (choiceSearch == 1) {
-					searchAllergyById();
-				}
-				if (choiceSearch == 2) {
-					searchAllergyByName();
-				}
+			case 1:			
 				searchAllergyById();
-
 				break;
 
 			case 2:
-				searchMenu();
-				int choice4 = Integer.parseInt(reader.readLine());
-				while (choice4 != 1 && choice4 != 2) {
-					System.out.println("Select a valid option, please");
-					choice4 = Integer.parseInt(reader.readLine());
-				}
-				if (choice4 == 1) {
-					searchAllergyById();
-				}
-				if (choice4 == 2) {
-					searchAllergyByName();
-				}
 				searchAllergyByName();
 				break;
 			case 3:
@@ -500,20 +470,14 @@ public class Menu {
 			switch (choice) {
 
 			case 1:
-
-				System.out.println("1. Search Medical Personnel by Id \n");
 				searchMedicalPersonnelById();
 				break;
 
 			case 2:
-
-				System.out.println("2. Search Medical Personnel by Name \n");
 				searchMedicalPersonnelByName();
 				break;
 
 			case 3:
-
-				System.out.println("3. Search Medical Personnel by Pathology Id \n");
 				searchMedicalPersonnelByPathologyId();
 				break;
 
@@ -711,19 +675,14 @@ public class Menu {
 					switch (choice2) {
 
 					case 1:
-
-						System.out.println("1. Search Pathology By Id \n");
 						searchPathologyById();
 						break;
 
 					case 2:
-
-						System.out.println("Search Pathology By Name \n");
 						searchPathologyByName();
 						break;
 
 					case 3:
-
 						System.out.println("3. Exit \n");
 						exitSubmenu2Treatment2 = 1;
 						break;
