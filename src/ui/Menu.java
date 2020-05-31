@@ -1245,6 +1245,14 @@ public class Menu {
 		Pathology pathology = new Pathology(name, Date.valueOf(startDate), Date.valueOf(endingDate), treatmentId);
 
 		pathologyManager.add(pathology);
+		
+		// we give the option of adding the related symptoms 
+		
+		System.out.println("Do you what to add the symptoms?(Y/N)");
+		String s = reader.readLine();
+		if(s.equalsIgnoreCase("Y")) {
+			giveSymptom(dbManager.getLastId());
+		}
 
 	}
 
@@ -1826,5 +1834,21 @@ public class Menu {
 		// insert the patient
 		patientManager.add(patient);
 		// finish
+	}
+	
+	private static void giveSymptom (int pathologyId) throws Exception{
+		
+		// show all the symptoms
+		List<Symptom> symptoms =symptomManager.showSymptoms();
+		for (Symptom symptom : symptoms) {
+			System.out.println(symptom);
+		}
+		
+		System.out.println("Enter de symptom id:");
+		int symptomId = Integer.parseInt(reader.readLine());
+		
+		// assign medicine to the pathology
+		symptomManager.give(pathologyId, symptomId);
+		
 	}
 }

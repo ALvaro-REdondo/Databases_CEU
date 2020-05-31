@@ -93,6 +93,7 @@ public class SQLiteTreatmentManager implements TreatmentManager {
 		return treatmentsList;
 	}
 
+	@Override
 	public List<Treatment> showTreatments() {
 
 		List<Treatment> treatmentsList = new ArrayList<Treatment>();

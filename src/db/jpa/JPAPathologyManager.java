@@ -7,6 +7,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import db.interfaces_JPA.*;
 import pojos_JPA.Pathology_JPA;
+import pojos_JPA.Treatment_JPA;
 
 
 public class JPAPathologyManager implements PathologyJPAManager {
@@ -41,22 +42,18 @@ public class JPAPathologyManager implements PathologyJPAManager {
 	}
 
 	@Override
-	public Pathology_JPA getPathology(int id) {
-
+	public Pathology_JPA searchPathologyById(int id) {
 		Query q = em.createNativeQuery("SELECT * FROM Pathology WHERE id = ?", Pathology_JPA.class);
 		q.setParameter(1, id);
 		Pathology_JPA pathology = (Pathology_JPA) q.getSingleResult();
 		return pathology;
-		
 	}
 
 	@Override
 	public List<Pathology_JPA> getPathologies() {
-
 		Query q = em.createNativeQuery("SELECT * FROM Pathology", Pathology_JPA.class);
 		List<Pathology_JPA> pathologies = (List<Pathology_JPA>) q.getResultList();
 		return pathologies;
-		
 	}
 
 	@Override
@@ -71,8 +68,25 @@ public class JPAPathologyManager implements PathologyJPAManager {
 
 	@Override
 	public void updatePathology(Pathology_JPA pathology) {
-		// TODO Auto-generated method stub
+		Query q = em.createNativeQuery("SELECT * FROM Pathology WHERE id = ?", Pathology_JPA.class);
+		q.setParameter(1, pathology.getId());
+		Pathology_JPA toUpdate = (Pathology_JPA) q.getSingleResult();
+		em.getTransaction().begin();
+		toUpdate.setName(pathology.getName());
+		toUpdate.setStartDate(pathology.getStartDate());
+		toUpdate.setEndingDate(pathology.getEndingDate());
+		toUpdate.setTreatment(pathology.getTreatment());
+		toUpdate.setPatients(pathology.getPatients());
+		toUpdate.setMedicalPersonnels(pathology.getMedicalPersonnels());
+		em.getTransaction().commit();
+	}
 
+	@Override
+	public List<Pathology_JPA> SearchPathologyByName(String name) {
+		Query q = em.createNativeQuery("SELECT * FROM Pathology WHERE name LIKE ?", Pathology_JPA.class);
+		q.setParameter(1, "%" + name + "%");
+		List<Pathology_JPA> pathologies = (List<Pathology_JPA>) q.getResultList();
+		return pathologies;
 	}
 
 }

@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,10 +45,18 @@ public class Pathology_JPA implements Serializable{
 	@OneToMany(mappedBy="MedicalPersonnel")
 	private List<MedicalPersonnel_JPA> medicalPersonnels;
 		
+	@ManyToMany
+	@JoinTable(name="Pathology-Symptom",
+	joinColumns={@JoinColumn(name ="symptom_id",referencedColumnName="id")},
+	inverseJoinColumns={@JoinColumn(name= "pathology_id", referencedColumnName ="id")})
+	
+	private List<Symptom_JPA> symptoms;
+
 	public Pathology_JPA() {
 		super();
 		this.patients = new ArrayList<Patient_JPA>();
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
+		this.symptoms = new ArrayList<Symptom_JPA>();
 	}
 
 	public Pathology_JPA(Integer id, String name, Date startDate, Date endingDate, Treatment_JPA treatment,
@@ -59,6 +69,7 @@ public class Pathology_JPA implements Serializable{
 		this.treatment = treatment;
 		this.patients = new ArrayList<Patient_JPA>();
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
+		this.symptoms = new ArrayList<Symptom_JPA>();
 	}
 
 	public Pathology_JPA(String name, Date startDate, Date endingDate, Treatment_JPA treatment, List<Patient_JPA> patients, List<MedicalPersonnel_JPA> medicalPersonnels) {
@@ -69,6 +80,7 @@ public class Pathology_JPA implements Serializable{
 		this.treatment = treatment;
 		this.patients = new ArrayList<Patient_JPA>();
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
+		this.symptoms = new ArrayList<Symptom_JPA>();
 	}
 
 	public Integer getId() {
@@ -119,6 +131,16 @@ public class Pathology_JPA implements Serializable{
 
 	public void setMedicalPersonnels(List<MedicalPersonnel_JPA> medicalPersonnels) {
 		this.medicalPersonnels = new ArrayList<MedicalPersonnel_JPA>();
+	}
+	
+	
+
+	public List<Symptom_JPA> getSymptoms() {
+		return symptoms;
+	}
+
+	public void setSymptoms(List<Symptom_JPA> symptoms) {
+		this.symptoms = symptoms;
 	}
 
 	@Override
