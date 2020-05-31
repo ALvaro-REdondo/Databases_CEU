@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import db.interfaces_JPA.PatientJPAManager;
 import pojos.Patient;
 import pojos_JPA.Patient_JPA;
+import pojos_JPA.Treatment_JPA;
 
 public class JPAPatientManager implements PatientJPAManager {
 	
@@ -36,8 +37,8 @@ public class JPAPatientManager implements PatientJPAManager {
 	}
 
 	@Override
-	public Patient_JPA getPatient(int id) {
-		Query q=em.createNativeQuery("SELECT * FROM Patient WHERE id = ?",Patient.class);
+	public Patient_JPA searchPatientById(int id) {
+		Query q=em.createNativeQuery("SELECT * FROM Patient WHERE id = ?",Patient_JPA.class);
 		q.setParameter(1,id);
 		Patient_JPA patient = (Patient_JPA)q.getSingleResult();
 		return patient;
@@ -45,8 +46,8 @@ public class JPAPatientManager implements PatientJPAManager {
 	}
 
 	@Override
-	public List<Patient_JPA> getPatient() {
-		Query q = em.createNativeQuery("SELECT * FROM Patient", Patient.class);
+	public List<Patient_JPA> getPatients() {
+		Query q = em.createNativeQuery("SELECT * FROM Patient", Patient_JPA.class);
 		List<Patient_JPA> patients = (List<Patient_JPA>)q.getResultList();
 		return patients;
 	}
@@ -68,10 +69,17 @@ public class JPAPatientManager implements PatientJPAManager {
 		patientToUpdate.setGender(patient.getGender());
 		patientToUpdate.setState(patient.getState());
 		patientToUpdate.setDob(patient.getDob());
-		
 		em.getTransaction().commit();
 		
 		
+	}
+
+	@Override
+	public List<Patient_JPA> searchPatientByName(String name) {
+		Query q = em.createNativeQuery("SELECT * FROM Patient WHERE name LIKE ?", Patient_JPA.class);
+		q.setParameter(1, "%" + name + "%");
+		List<Patient_JPA> patients = (List<Patient_JPA>) q.getResultList();
+		return patients;
 	}
 	
 

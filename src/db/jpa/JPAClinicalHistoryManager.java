@@ -11,6 +11,7 @@ import db.interfaces_JPA.ClinicalHistoryJPAManager;
 import pojos.Patient;
 import pojos_JPA.Allergy_JPA;
 import pojos_JPA.ClinicalHistory_JPA;
+import pojos_JPA.MedicalPersonnel_JPA;
 
 public class JPAClinicalHistoryManager implements ClinicalHistoryJPAManager {
 
@@ -39,7 +40,7 @@ public class JPAClinicalHistoryManager implements ClinicalHistoryJPAManager {
 	}
 
 	@Override
-	public ClinicalHistory_JPA getClinicalHistory(int id) {
+	public ClinicalHistory_JPA searchClinicalHistoryById(int id) {
 		Query q = em.createNativeQuery("SELECT * FROM ClinicalHistory WHERE id = ?", ClinicalHistory_JPA.class);
 		q.setParameter(1, id);
 		ClinicalHistory_JPA clinicalHistory = (ClinicalHistory_JPA) q.getSingleResult();
@@ -48,7 +49,7 @@ public class JPAClinicalHistoryManager implements ClinicalHistoryJPAManager {
 
 	@Override
 	public List<ClinicalHistory_JPA> getClinicalHistories() {
-		Query q = em.createNativeQuery("SELECT * FROM Clinical History", ClinicalHistory_JPA.class);
+		Query q = em.createNativeQuery("SELECT * FROM ClinicalHistory", ClinicalHistory_JPA.class);
 		List<ClinicalHistory_JPA> clinicalHistory = (List<ClinicalHistory_JPA>) q.getResultList();
 		return clinicalHistory;		
 	}
@@ -71,6 +72,14 @@ public class JPAClinicalHistoryManager implements ClinicalHistoryJPAManager {
 		clinicalHistory.setBloodType(clinicalHistory.getBloodType());
 		clinicalHistory.setExtraInfo(clinicalHistory.getExtraInfo());
 		em.getTransaction().commit();
+	}
+
+	@Override
+	public List<ClinicalHistory_JPA> SearchClinicalHistoryByName(String name) {
+		Query q = em.createNativeQuery("SELECT * FROM ClinicalHistory WHERE name LIKE ?",ClinicalHistory_JPA.class);
+		q.setParameter(1, "%" + name + "%");
+		List<ClinicalHistory_JPA> clinicalHistories = (List<ClinicalHistory_JPA>) q.getResultList();
+		return clinicalHistories;
 	}
 
 }

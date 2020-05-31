@@ -9,8 +9,8 @@ public interface SymptomJPAManager {
 	public void connect();
 	public void disconnect();
 	public void createSymptom(Symptom_JPA symptom);
-	public Symptom_JPA getSymptom(int id);
+	public Symptom_JPA searchSymptomById(int id);
 	public List<Symptom_JPA> getSymptoms();
-	
+	public List<Symptom_JPA> searchSymptomByName(String name);
 
 }
