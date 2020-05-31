@@ -85,7 +85,8 @@ public class Menu {
 
 		case 1:// Create a new Role
 			//newRole();
-			admitMedicalPersonnelXML();
+			//admitMedicalPersonnelXML();
+			generateXMLMedicalPersonnel(1);
 		case 2:// Create a new User
 			newUser();
 			break;
@@ -562,7 +563,7 @@ public class Menu {
 
 		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
 		// Create JAXB Context
-		JAXBContext context = (JAXBContext) JAXBContext.newInstance(MedicalPersonnel.class);
+		javax.xml.bind.JAXBContext context =  JAXBContext.newInstance(MedicalPersonnel.class);
 		// Get the marshaller
 		Marshaller marshal = context.createMarshaller();
 		// Pretty formating
