@@ -992,11 +992,11 @@ public class Menu {
 				break;
 
 			case 2:
-				System.out.println("Search by id:");
-				System.out.println("Search by manifestation:");
+				System.out.println("1. Search by id \n");
+				System.out.println("2. Search by manifestation \n");
 				int option;
 				do {
-					System.out.println("choose an option:");
+					System.out.println("Choose an option:\n");
 					option = Integer.parseInt(reader.readLine());
 				} while (option > 2 || option <= 0);
 

@@ -73,7 +73,7 @@ public class Allergy_JPA implements Serializable{
 		return clinicalHistories;
 	}
 	public void setClinicalHistories(List<ClinicalHistory_JPA> clinicalHistories) {
-		this.clinicalHistories = new ArrayList<ClinicalHistory_JPA>();
+		this.clinicalHistories = clinicalHistories;
 	}
 	@Override
 	public int hashCode() {
