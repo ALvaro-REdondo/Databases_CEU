@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<treatment name="perra_de_nahia">
+    <department>mp</department>
+    <position>profesor</position>
+    <pathologyId>1</pathologyId>
+</treatment>

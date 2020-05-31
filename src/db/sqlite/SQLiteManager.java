@@ -69,38 +69,39 @@ public class SQLiteManager implements DBManager {
 		Statement stmt1;
 		try {
 			stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE ClinicalHistory "
-					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					   + " doe     DATE     NOT NULL, "
-					   + " dod  DATE, "
-					   + " bloodType TEXT NOT NULL, "
-					   + " extraInfo TEXT)";
-			stmt1.executeUpdate(sql1);
-			stmt1 = c.createStatement();
-			String sql2 = "CREATE TABLE Symptom "
+			String sql1 = "CREATE TABLE Symptom "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " manifestation     TEXT     NOT NULL)";
-			stmt1.executeUpdate(sql2);
+			stmt1.executeUpdate(sql1);
 			stmt1 = c.createStatement();
-			String sql3 = "CREATE TABLE Treatment "
+			String sql2 = "CREATE TABLE Treatment "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " medication  TEXT	 NOT NULL, "
 					   + " description TEXT )";
-			stmt1.executeUpdate(sql3);
+			stmt1.executeUpdate(sql2);
 			stmt1 = c.createStatement();
-			String sql4 = "CREATE TABLE Pathology "
+			String sql3 = "CREATE TABLE Pathology "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " name     TEXT     NOT NULL, "
 					   + " startDate DATE NOT NULL, "
 					   + " endingDate DATE, "
 					   + " treatmentId INTEGER REFERENCES Treatment(id))";
-			stmt1.executeUpdate(sql4);
+			stmt1.executeUpdate(sql3);
 			stmt1 = c.createStatement();
-			String sql5 = "CREATE TABLE Allergy "
+			String sql4 = "CREATE TABLE Allergy "
 					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					   + " allergy     TEXT     NOT NULL, "
 					   + " degree  INTEGER	 NOT NULL )";
+			stmt1.executeUpdate(sql4);
+			stmt1 = c.createStatement();
+			String sql5 = "CREATE TABLE ClinicalHistory "
+					   + "(id       INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					   + " doe     DATE     NOT NULL, "
+					   + " dod  DATE, "
+					   + " bloodType TEXT NOT NULL, "
+					   + " extraInfo TEXT, " 
+					   + " allergyId INTEGER REFERENCES Allergy(id))";
 			stmt1.executeUpdate(sql5);
 			stmt1 = c.createStatement();
 			String sql6 = "CREATE TABLE Patient "

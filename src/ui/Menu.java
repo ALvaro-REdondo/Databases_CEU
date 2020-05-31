@@ -9,11 +9,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 
-import org.eclipse.persistence.jaxb.JAXBContext;
+//import org.eclipse.persistence.jaxb.JAXBContext;
 
 import db.interfaces.AllergyManager;
 import db.interfaces.ClinicalHistoryManager;
@@ -85,8 +83,9 @@ public class Menu {
 
 		case 1:// Create a new Role
 			//newRole();
-			//admitMedicalPersonnelXML();
-			generateXMLMedicalPersonnel(1);
+			admitMedicalPersonnelXML();
+			admitPatientXML();
+			break;
 		case 2:// Create a new User
 			newUser();
 			break;
@@ -550,8 +549,9 @@ public class Menu {
 		Unmarshaller unmarshal = context.createUnmarshaller();
 		//Unmarshall the dog from a file
 		System.out.println("Type the file name for the XML document (expected in the xmls folder):");
+		String path = System.getProperty("user.dir");
 		String fileName = reader.readLine();
-		File file = new File("./xmls/" + fileName);
+		File file = new File(path + "/src/xmls/" + fileName + ".xml");
 		MedicalPersonnel medicalPersonnel = (MedicalPersonnel) unmarshal.unmarshal(file);
 		//Print the Medical Personnel
 		System.out.println("Added to the database: " + medicalPersonnel);
@@ -563,13 +563,16 @@ public class Menu {
 
 		MedicalPersonnel medicalPersonnel = medicalPersonnelManager.searchMedicalPersonnelById(medicalPersonnelId);
 		// Create JAXB Context
-		javax.xml.bind.JAXBContext context =  JAXBContext.newInstance(MedicalPersonnel.class);
+		JAXBContext context = JAXBContext.newInstance(MedicalPersonnel.class);
 		// Get the marshaller
 		Marshaller marshal = context.createMarshaller();
 		// Pretty formating
 		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		// Marshall the dog to a file
-		File file = new File("./xmls/Output-MedicalPersonnel");
+		String path = System.getProperty("user.dir");
+		System.out.println("Please, input the name for your XML file \n");
+		String fileName = reader.readLine();
+		File file = new File(path + "/src/xmls/" + fileName + ".xml");
 		marshal.marshal(medicalPersonnel, file);
 		// Marshall the dog to the screen
 		marshal.marshal(medicalPersonnel, System.out);
@@ -1787,8 +1790,6 @@ public class Menu {
 
 		Allergy allergy = new Allergy(allergyName, degree);
 		allergyManager.add(allergy);
-
-		System.out.println(allergy);
 	}
 
 	private static void searchAllergyById() throws Exception {
@@ -1814,7 +1815,7 @@ public class Menu {
 
 	}
 
-	private static void generateXMLPatient(int patientId) throws JAXBException {
+	private static void generateXMLPatient(int patientId) throws Exception {
 		Patient patient = patientManager.searchPatientById(patientId);
 		// Create a JAXB Context
 		JAXBContext context = (JAXBContext) JAXBContext.newInstance(Patient.class);
@@ -1823,7 +1824,10 @@ public class Menu {
 		// Pretty formating
 		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		// Marshall the dog to a file
-		File file = new File("./xmls/Output-Patient");
+		String path = System.getProperty("user.dir");
+		System.out.println("Please, input the name for your XML file \n");
+		String fileName = reader.readLine();
+		File file = new File(path + "/src/xmls/" + fileName + ".xml");
 		marshal.marshal(patient, file);
 		// Marshall the dog to the screen
 		marshal.marshal(patient, System.out);
@@ -1836,9 +1840,10 @@ private static void admitPatientXML() throws Exception {
     // Get the unmarshaller
     Unmarshaller unmarshal = context.createUnmarshaller();
     // Unmarshall dog from a file
+    String path = System.getProperty("user.dir");
     System.out.println("Type the filename for the XML document:");
-    String filename=reader.readLine();
-    File file = new File("./xmls/"+ filename);
+    String fileName=reader.readLine();
+    File file = new File(path + "/src/xmls/"+ fileName + ".xml");
     Patient patient = (Patient)unmarshal.unmarshal(file);
     // print the patient
     System.out.println(patient);
