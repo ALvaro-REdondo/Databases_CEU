@@ -1251,9 +1251,9 @@ public class Menu {
 	private static void searchSymptomByManifestation() throws Exception {
 		System.out.print("Insert the manifestation: ");
 		String manifestation = reader.readLine();
-		if (symptomManager.searchASymptomByManifestation(manifestation) != null) {
+		if (symptomManager.searchSymptomByManifestation(manifestation) != null) {
 			// para buscar en la base de datos:
-			List<Symptom> symptoms = symptomManager.searchASymptomByManifestation(manifestation);
+			List<Symptom> symptoms = symptomManager.searchSymptomByManifestation(manifestation);
 			// para mostrar por pantalla:
 			for (Symptom symptom : symptoms) {
 				System.out.println(symptom);

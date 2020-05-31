@@ -3,6 +3,9 @@ package pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -33,6 +36,10 @@ public class Pathology implements Serializable {
 	private Date endingDate;
 	@XmlElement
 	private Integer treatmentId;
+	@XmlElement (name = "symptom")
+	@XmlElementWrapper(name="medicines")
+	private List<Symptom> symptoms;
+	
 
 	public Pathology(Integer id, String name, Date startDate, Date endingDate, Integer treatmentId) {
 		super();
@@ -41,6 +48,7 @@ public class Pathology implements Serializable {
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatmentId = treatmentId;
+		this.symptoms = new ArrayList<Symptom>();
 	}
 
 	// he creado constructor con todas las variables
@@ -51,6 +59,7 @@ public class Pathology implements Serializable {
 		this.startDate = startDate;
 		this.endingDate = endingDate;
 		this.treatmentId = treatmentId;
+		this.symptoms = new ArrayList<Symptom>();
 	}
 
 	// el constructor no tiene id
@@ -60,10 +69,13 @@ public class Pathology implements Serializable {
 		this.name = name;
 		this.startDate = startDate;
 		this.treatmentId = treatmentId;
+		this.symptoms = new ArrayList<Symptom>();
 	}
 
 	// el constructor no tiene ending date porque es opcional. puede ser null. lo
 	// mismo ocurre con duration.
+	
+	
 
 	public Pathology() {
 
@@ -110,11 +122,27 @@ public class Pathology implements Serializable {
 	public void setEndingDate(Integer treatmentId) {
 		this.treatmentId = treatmentId;
 	}
+	
+	
+
+	public List<Symptom> getSymptoms() {
+		return symptoms;
+	}
+
+	public void setSymptoms(List<Symptom> symptoms) {
+		this.symptoms = symptoms;
+	}
+
+	public void setTreatmentId(Integer treatmentId) {
+		this.treatmentId = treatmentId;
+	}
+
+	
 
 	@Override
 	public String toString() {
 		return "Pathology [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endingDate=" + endingDate
-				+ ", treatmentId=" + treatmentId + "]";
+				+ ", treatmentId=" + treatmentId + ", symptoms=" + symptoms + "]";
 	}
 
 	@Override

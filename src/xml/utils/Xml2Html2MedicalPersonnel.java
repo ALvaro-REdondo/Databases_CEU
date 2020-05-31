@@ -7,7 +7,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-public class Xml2Html {
+public class Xml2Html2MedicalPersonnel {
 	
 	/**
 	 * Simple transformation method. You can use it in your project.
@@ -26,8 +26,8 @@ public class Xml2Html {
 	}
 
 	public static void main(String[] args) {
-		//String path = System.getProperty("user.dir");
-		simpleTransform("./xmls/abraham.xml", "./xmls/patientStyle.xslt", "./xmls/Patient.html");
+		String path = System.getProperty("user.dir");
+		simpleTransform(path + "/src/xmls/Input-MedicalPersonnel.xml", path + "/src/xmls/medicalPersonnelStyle.xslt", path + "/src/xmls/medicalPersonnel.html");
 
 	}
 }

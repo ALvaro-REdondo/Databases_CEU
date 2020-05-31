@@ -101,6 +101,11 @@ public class SQLiteManager implements DBManager {
 					+ " name     TEXT     NOT NULL, " + " department  TEXT	 NOT NULL, " + " position TEXT NOT NULL, "
 					+ " pathology_id INTEGER REFERENCES Pathology(id))";
 			stmt1.executeUpdate(sql7);
+			stmt1 = c.createStatement();
+			String sql8 = "CREATE TABLE Pathology-Symptom "
+					   + "(  pathology_id INTEGER REFERENCES Pathology(id) ,"
+					   + "  symptom_id INTEGER  REFERENCES Symptom(id))";
+			stmt1.executeUpdate(sql8);
 			stmt1.close();
 		} catch (SQLException e) {
 			if (e.getMessage().contains("already exists")) {

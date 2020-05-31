@@ -18,6 +18,22 @@ public class SQLiteSymptomManager implements SymptomManager {
 	}
 
 	@Override
+	public void give(int pathologyId, int symptomId) {
+		//Link a pathology with a symptom
+		try {
+			String sql = "INSERT INTO Pathology-Symptom (pathology_id, symptom_id) "
+							+ "VALUES (?,?);";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, pathologyId);
+			prep.setInt(2, symptomId);
+			prep.executeUpdate();
+			prep.close();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
 	public void add(Symptom symptom) {
 		try {
 			String sql = "INSERT INTO symptom ( manifestation)" + " VALUES (?)";
@@ -31,8 +47,8 @@ public class SQLiteSymptomManager implements SymptomManager {
 	}
 
 	@Override
-	public List<Symptom> searchASymptomByManifestation(String manifestation) {
-		List<Symptom> symptomsList = new ArrayList<Symptom>();
+	public List<Symptom> searchSymptomByManifestation(String manifestation) {
+		List<Symptom> symptomsList= new ArrayList<Symptom>();
 		try {
 			String sql = "SELECT * FROM symptom WHERE manifestation LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
