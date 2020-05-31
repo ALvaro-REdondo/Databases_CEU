@@ -22,6 +22,7 @@ import db.interfaces.PatientManager;
 import db.interfaces.SymptomManager;
 import db.interfaces.TreatmentManager;
 import db.interfaces_JPA.UserManager;
+import db.jpa.JPAUserManager;
 import db.sqlite.SQLiteManager;
 import pojos.Allergy;
 import pojos.ClinicalHistory;
@@ -62,8 +63,8 @@ public class Menu {
 		allergyManager = dbManager.getAllergyManager();
 		clinicalHistoryManager = dbManager.getClinicalHistoryManager();
 		treatmentManager = dbManager.getTreatmentManager();
-		//userManager = new JPAUserManager();
-		//userManager.connect();
+		userManager = new JPAUserManager();
+		userManager.connect();
 		dbManager.createTables();
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
@@ -82,9 +83,7 @@ public class Menu {
 		switch (choice) {
 
 		case 1:// Create a new Role
-			//newRole();
-			admitMedicalPersonnelXML();
-			admitPatientXML();
+			newRole();
 			break;
 		case 2:// Create a new User
 			newUser();
